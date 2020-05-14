@@ -9,9 +9,9 @@ build:
     - pwd
     - ls -l
     - mkdir -p UserCode/VJJSkimmer
-    - find -maxdepth 1 -mindepth 1 -not -name VJJSkimmer -exec mv {} UserCode/VJJSkimmer/ \;
-    - SCRAM_ARCH=slc7_amd64_gcc820 /cvmfs/cms.cern.ch/common/scramv1 project CMSSW CMSSW_10_2_13
-    - mv UserCode/VJJSkimmer CMSSW_10_2_13/src/
+    - find -maxdepth 1 -mindepth 1 -not -name UserCode -exec mv {} UserCode/VJJSkimmer/ \;
+    - SCRAM_ARCH=slc7_amd64_gcc700 /cvmfs/cms.cern.ch/common/scramv1 project CMSSW CMSSW_10_2_13
+    - mv UserCode CMSSW_10_2_13/src/
     - cd CMSSW_10_2_13/src
     - eval `/cvmfs/cms.cern.ch/common/scramv1 runtime -sh`
     - /cvmfs/cms.cern.ch/common/scram b -j 8
