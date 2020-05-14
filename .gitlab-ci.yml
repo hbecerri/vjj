@@ -20,7 +20,7 @@ build:
     paths:
       - CMSSW_10_2_13
 
-check-tabs:
+list-contents:
   stage: test
   tags:
     - docker
@@ -29,5 +29,4 @@ check-tabs:
     - pwd
     - ls -l
     - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
-    - ls -l
-    - echo '! grep -rnP "\t" * | grep "\.py"' | bash
+    - ls -ltrR
