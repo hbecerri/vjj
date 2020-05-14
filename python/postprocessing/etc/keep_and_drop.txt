@@ -1,0 +1,18 @@
+# drop all at start
+drop * 
+# pileup weights
+keep puWeight*
+# L1 prefire
+keep PrefireWeight*
+# gen tree specifics
+keep genvjj*
+drop genvjj_trigWgt*
+drop genvjj_effWgt*
+drop genvjj_qglqWgt*
+drop genvjj_qglgWgt*
+drop genvjj_*_qgl
+# reco tree specifics
+keep vjj*
+drop vjj_nwgt
+drop vjj_wgt
+

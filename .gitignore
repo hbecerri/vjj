@@ -1,0 +1,7 @@
+*.pyc
+__pycache__
+*.so
+*.d
+*.pcm
+__init__.py
+*~

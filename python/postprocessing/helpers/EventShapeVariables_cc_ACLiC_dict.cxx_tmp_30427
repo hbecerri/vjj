@@ -1,0 +1,221 @@
+// Do NOT change. Changes will be lost next time file is generated
+
+#define R__DICTIONARY_FILENAME dIafsdIcerndOchdIworkdIpdIpsilvadISMPmI19mI005dICMSSW_10_2_13dIsrcdIVBFGammadIHaNaNanoAnalyzerdIpythondIpostprocessingdIhelpersdIEventShapeVariables_cc_ACLiC_dict
+
+/*******************************************************************/
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#define G__DICTIONARY
+#include "RConfig.h"
+#include "TClass.h"
+#include "TDictAttributeMap.h"
+#include "TInterpreter.h"
+#include "TROOT.h"
+#include "TBuffer.h"
+#include "TMemberInspector.h"
+#include "TInterpreter.h"
+#include "TVirtualMutex.h"
+#include "TError.h"
+
+#ifndef G__ROOT
+#define G__ROOT
+#endif
+
+#include "RtypesImp.h"
+#include "TIsAProxy.h"
+#include "TFileMergeInfo.h"
+#include <algorithm>
+#include "TCollectionProxyInfo.h"
+/*******************************************************************/
+
+#include "TDataMember.h"
+
+// Since CINT ignores the std namespace, we need to do so in this file.
+namespace std {} using namespace std;
+
+// Header files passed as explicit arguments
+#include "/afs/cern.ch/work/p/psilva/SMP-19-005/CMSSW_10_2_13/src/VBFGamma/HaNaNanoAnalyzer/python/postprocessing/helpers/EventShapeVariables.cc"
+
+// Header files passed via #pragma extra_include
+
+namespace ROOT {
+   static TClass *EventShapeVariables_Dictionary();
+   static void EventShapeVariables_TClassManip(TClass*);
+   static void *new_EventShapeVariables(void *p = 0);
+   static void *newArray_EventShapeVariables(Long_t size, void *p);
+   static void delete_EventShapeVariables(void *p);
+   static void deleteArray_EventShapeVariables(void *p);
+   static void destruct_EventShapeVariables(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::EventShapeVariables*)
+   {
+      ::EventShapeVariables *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::EventShapeVariables));
+      static ::ROOT::TGenericClassInfo 
+         instance("EventShapeVariables", "python/postprocessing/helpers/EventShapeVariables.h", 29,
+                  typeid(::EventShapeVariables), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &EventShapeVariables_Dictionary, isa_proxy, 4,
+                  sizeof(::EventShapeVariables) );
+      instance.SetNew(&new_EventShapeVariables);
+      instance.SetNewArray(&newArray_EventShapeVariables);
+      instance.SetDelete(&delete_EventShapeVariables);
+      instance.SetDeleteArray(&deleteArray_EventShapeVariables);
+      instance.SetDestructor(&destruct_EventShapeVariables);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::EventShapeVariables*)
+   {
+      return GenerateInitInstanceLocal((::EventShapeVariables*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::EventShapeVariables*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *EventShapeVariables_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::EventShapeVariables*)0x0)->GetClass();
+      EventShapeVariables_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void EventShapeVariables_TClassManip(TClass* theClass){
+      theClass->CreateAttributeMap();
+      TDictAttributeMap* attrMap( theClass->GetAttributeMap() );
+      attrMap->AddProperty("file_name","/afs/cern.ch/work/p/psilva/SMP-19-005/CMSSW_10_2_13/src/VBFGamma/HaNaNanoAnalyzer/python/postprocessing/helpers/EventShapeVariables.h");
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_EventShapeVariables(void *p) {
+      return  p ? new(p) ::EventShapeVariables : new ::EventShapeVariables;
+   }
+   static void *newArray_EventShapeVariables(Long_t nElements, void *p) {
+      return p ? new(p) ::EventShapeVariables[nElements] : new ::EventShapeVariables[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_EventShapeVariables(void *p) {
+      delete ((::EventShapeVariables*)p);
+   }
+   static void deleteArray_EventShapeVariables(void *p) {
+      delete [] ((::EventShapeVariables*)p);
+   }
+   static void destruct_EventShapeVariables(void *p) {
+      typedef ::EventShapeVariables current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::EventShapeVariables
+
+namespace ROOT {
+   static TClass *vectorlEdoublegR_Dictionary();
+   static void vectorlEdoublegR_TClassManip(TClass*);
+   static void *new_vectorlEdoublegR(void *p = 0);
+   static void *newArray_vectorlEdoublegR(Long_t size, void *p);
+   static void delete_vectorlEdoublegR(void *p);
+   static void deleteArray_vectorlEdoublegR(void *p);
+   static void destruct_vectorlEdoublegR(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const vector<double>*)
+   {
+      vector<double> *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<double>));
+      static ::ROOT::TGenericClassInfo 
+         instance("vector<double>", -2, "vector", 216,
+                  typeid(vector<double>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &vectorlEdoublegR_Dictionary, isa_proxy, 0,
+                  sizeof(vector<double>) );
+      instance.SetNew(&new_vectorlEdoublegR);
+      instance.SetNewArray(&newArray_vectorlEdoublegR);
+      instance.SetDelete(&delete_vectorlEdoublegR);
+      instance.SetDeleteArray(&deleteArray_vectorlEdoublegR);
+      instance.SetDestructor(&destruct_vectorlEdoublegR);
+      instance.AdoptCollectionProxyInfo(TCollectionProxyInfo::Generate(TCollectionProxyInfo::Pushback< vector<double> >()));
+      return &instance;
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const vector<double>*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *vectorlEdoublegR_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const vector<double>*)0x0)->GetClass();
+      vectorlEdoublegR_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void vectorlEdoublegR_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_vectorlEdoublegR(void *p) {
+      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<double> : new vector<double>;
+   }
+   static void *newArray_vectorlEdoublegR(Long_t nElements, void *p) {
+      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<double>[nElements] : new vector<double>[nElements];
+   }
+   // Wrapper around operator delete
+   static void delete_vectorlEdoublegR(void *p) {
+      delete ((vector<double>*)p);
+   }
+   static void deleteArray_vectorlEdoublegR(void *p) {
+      delete [] ((vector<double>*)p);
+   }
+   static void destruct_vectorlEdoublegR(void *p) {
+      typedef vector<double> current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class vector<double>
+
+namespace ROOT {
+   static TClass *vectorlETLorentzVectorgR_Dictionary();
+   static void vectorlETLorentzVectorgR_TClassManip(TClass*);
+   static void *new_vectorlETLorentzVectorgR(void *p = 0);
+   static void *newArray_vectorlETLorentzVectorgR(Long_t size, void *p);
+   static void delete_vectorlETLorentzVectorgR(void *p);
+   static void deleteArray_vectorlETLorentzVectorgR(void *p);
+   static void destruct_vectorlETLorentzVectorgR(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const vector<TLorentzVector>*)
+   {
+      vector<TLorentzVector> *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<TLorentzVector>));
+      static ::ROOT::TGenericClassInfo 
+         instance("vector<TLorentzVector>", -2, "vector", 216,
+                  typeid(vector<TLorentzVector>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &vectorlETLorentzVectorgR_Dictionary, isa_proxy, 0,
+                  sizeof(vector<TLorentzVector>) );
+      instance.SetNew(&new_vectorlETLorentzVectorgR);
+      instance.SetNewArray(&newArray_vectorlETLorentzVectorgR);
+      instance.SetDelete(&delete_vectorlETLorentzVectorgR);
+      instance.SetDeleteArray(&deleteArray_vectorlETLorentzVectorgR);
+      instance.SetDestructor(&destruct_vectorlETLorentzVectorgR);
+      instance.AdoptCollectionProxyInfo(TCollectionProxyInfo::Generate(TCollectionProxyInfo::Pushback< vector<TLorentzVector> >()));
+      return &instance;
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const vector<TLorentzVector>*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+   // Dictionary for non-ClassDef classes
+   static TClass *vectorlETLorentzVectorgR_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const vector<TLorentzVector>*)0x0)->GetClass();
+      vectorlETLorentzVectorgR_TClassManip(theClass);
+   return theClass;
+   }
+
+   static void vectorlETLorentzVectorgR_TClassManip(TClass* ){
+   }
+
+} // end of namespace ROOT
+
+namespace ROOT {
+   // Wrappers around operator new
+   static void *new_vectorlETLorentzVectorgR(void *p) {
+      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) 

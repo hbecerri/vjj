@@ -1,0 +1,33 @@
+image: gitlab-registry.cern.ch/ci-tools/ci-worker:cc7
+
+build:
+  stage: build
+  tags:
+    - docker
+    - cvmfs
+  script:
+    - pwd
+    - ls -l
+    - mkdir -p UserCode/VJJSkimmer
+    - find -maxdepth 1 -mindepth 1 -not -name VJJSkimmer -exec mv {} UserCode/VJJSkimmer/ \;
+    - SCRAM_ARCH=slc7_amd64_gcc820 /cvmfs/cms.cern.ch/common/scramv1 project CMSSW CMSSW_10_2_13
+    - mv UserCode/VJJSkimmer CMSSW_10_2_13/src/
+    - cd CMSSW_10_2_13/src
+    - eval `/cvmfs/cms.cern.ch/common/scramv1 runtime -sh`
+    - /cvmfs/cms.cern.ch/common/scram b -j 8
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - CMSSW_10_2_13
+
+check-tabs:
+  stage: test
+  tags:
+    - docker
+    - cvmfs
+  script:
+    - pwd
+    - ls -l
+    - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
+    - ls -l
+    - echo '! grep -rnP "\t" * | grep "\.py"' | bash
