@@ -52,3 +52,20 @@ python python/postprocessing/vjj_postproc.py \
        -i root://cms-xrd-global.cern.ch//store/mc/RunIIFall17NanoAODv6/GJets_Mjj-500_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/NANOAODSIM/PU2017_12Apr2018_Nano25Oct2019_102X_mc2017_realistic_v7-v1/260000/45CA9950-BD37-374A-8604-AC35C9446A0F.root \
        -N 5000
 ```
+
+
+## Instructions for continuous integration
+
+A basic set of scripts are run everytime the code is pushed to gitlab. These test are defined in `.gitlab-ci.yml`. 
+Special instructions are given below on how to prepare the final validation based on the comparison of the cutflow histograms.
+
+1 the first step is to define the directory to be used as reference for the continuous integration and the samples to be copied over in `python/postprocessing/etc/testDatasets.py`
+1 run locally `python/postprocessing/vjj_basetests.py` to prepare the continuous integration directory. The script will copy over the samples and prepare a summary pickle file with the cutflow expected using the current snapshot of the code. See below for an example of how to run
+1 update .gitlab-ci.yml if needed for the command to run automatically in gitlab
+
+The `vjj_basetests.py` can be run locally with:
+```
+python python/postprocessing/etc/testDatasets.py --prepare 2016,data 2016,mc 2017,data 2017,mc 2018,data 2018,mc
+```
+Omitting the `--prepare` option will simply run the skims and compare the cutflows with the ones stored by default
+ 

@@ -1,0 +1,4 @@
+# drop all (for CI we check the cutflow histo only)
+drop *
+
+

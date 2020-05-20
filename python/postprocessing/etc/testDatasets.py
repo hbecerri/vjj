@@ -2,6 +2,8 @@
 
 import os
 
+_testCIDir='/eos/cms/store/cmst3/group/top/SMP-19-005/CMSSW_10_2_13'
+
 _testDatasets={
     (2018,'data') : '/store/data/Run2018C/EGamma/NANOAOD/Nano25Oct2019-v1/40000/36E1B766-8D23-9C43-A06E-771AB4FCE27D.root',
     (2018,'mc')   : '/store/mc/RunIIAutumn18NanoAODv6/GJets_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/NANOAODSIM/Nano25Oct2019_102X_upgrade2018_realistic_v20-v1/70000/F203F88E-4E04-ED48-8B71-610B696C894E.root',
@@ -10,6 +12,9 @@ _testDatasets={
     (2016,'data') : '/store/data/Run2016G/SinglePhoton/NANOAOD/Nano25Oct2019-v1/40000/E51BF2EE-295E-C540-9A21-B3EE11B3A70D.root',
     (2016,'mc')   : '/store/mc/RunIISummer16NanoAODv6/GJets_Mjj-500_SM_5f_TuneCUETP8M1_EWK_13TeV-madgraph-pythia8/NANOAODSIM/Nano25Oct2019_102X_mcRun2_asymptotic_v7-v1/270000/6DCCCEA5-082C-8849-85F1-CE698EB2778F.root',
 }
+
+def getTestCIDir():
+    return _testCIDir
 
 def getTestDataset(year,isData,fromLocalCIDir=None):
 

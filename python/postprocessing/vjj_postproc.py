@@ -12,7 +12,7 @@ from UserCode.VJJSkimmer.postprocessing.modules.MuonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.ElectronSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.PhotonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.JetSelector import *
-from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset
+from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset, getTestCIDir
 
 def defineModules(year,isData):
 
@@ -99,12 +99,11 @@ def main():
                       default=None)
     parser.add_option('-f', '--firstEntry', dest='firstEntry',   help='first entry to process [%default]', type=int,
                       default=0)
+    parser.add_option('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory [%default]',  default=getTestCIDir(), type='string')
     (opt, args) = parser.parse_args()
 
     if opt.inputFiles == "auto":
-        opt.inputFiles = [getTestDataset(opt.year, 
-                                         opt.isData, 
-                                         fromLocalCIDir='/eos/cms/store/cmst3/group/top/SMP-19-005/CMSSW_10_2_13')]
+        opt.inputFiles = [getTestDataset(opt.year, opt.isData, fromLocalCIDir=opt.localCIDir)]
     else:
         opt.inputFiles=opt.inputFiles.split(',')
 
