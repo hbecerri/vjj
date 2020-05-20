@@ -1,25 +1,28 @@
 from ScaleFactorBase import *
+from ObjectSelectorBase import *
 
-class MuonSelector(ScaleFactorBase):
+class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4):
+        super(ScaleFactorBase, self).__init__()
+        super(ObjectSelectorBase, self).__init__()
+        self.init() #init scale factor object
+        self.setParams(2, dofilter=False) #set parameters for object selection
+
         self.era = era
         self.min_pt = min_pt
         self.max_eta = max_eta
         self.min_dr2vetoObjs   = dr2vetoObjs
         self.indices=[]
 
-        #scale factors for electron objects
-        ScaleFactorBase.__init__(self)
-
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/MuonPOG
         baseSFDir='${CMSSW_BASE}/src/UserCode/VJJSkimmer/python/postprocessing/etc/'
         muSFSources={
             2016:{
-                'id'     : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ID.root'),  'NUM_TightID_DEN_genTracks_pt_abseta'),
-                'id_gh'  : (os.path.join(baseSFDir,'2016_RunGH_SF_ISO.root'),    'NUM_TightID_DEN_genTracks_pt_abseta'),
-                'iso'    : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
-                'iso_gh' : (os.path.join(baseSFDir,'2016_RunGH_SF_ISO.root'),    'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
+                'id'     : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ID.root'),  'NUM_TightID_DEN_genTracks_eta_pt'),
+                'id_gh'  : (os.path.join(baseSFDir,'2016_RunGH_SF_ID.root'),    'NUM_TightID_DEN_genTracks_eta_pt'),
+                'iso'    : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt'),
+                'iso_gh' : (os.path.join(baseSFDir,'2016_RunGH_SF_ISO.root'),    'NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt'),
 
               },
             2017:{
@@ -27,7 +30,7 @@ class MuonSelector(ScaleFactorBase):
                 'iso' : (os.path.join(baseSFDir,'RunBCDEF_SF_ISO_syst.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
                 },
             2018:{
-                'id'       : (os.path.join(baseSFDir,'RunABCD_SF_ID.root'),  'NUM_TightID_DEN_genTracks_pt_abseta'),
+                'id'       : (os.path.join(baseSFDir,'RunABCD_SF_ID.root'),  'NUM_TightID_DEN_TrackerMuons_pt_abseta'),
                 'iso'      : (os.path.join(baseSFDir,'RunABCD_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
                 }        
         }    
@@ -38,15 +41,17 @@ class MuonSelector(ScaleFactorBase):
 
         pass
 
-    def __call__(self, muons, vetoObjs):
-        self.indices=[i for i,mu in enumerate(muons) if self.isGood(mu,vetoObjs)]
-        return self.indices
+    def collection_name(self):
+        return "Muon"
 
-    def isGood(self, mu, vetoObjs):
+    def obj_name(self):
+        return "mu"
+
+    def isGood(self, mu):
 
         if mu.pt < self.min_pt : return False
         if abs( mu.eta ) > self.max_eta : return False
-        min_dr = min([obj.DeltaR(mu) for obj in vetoObjs] or [2*self.min_dr2vetoObjs])
+        min_dr = self.mindr_toVetoObjs( mu )
         if min_dr < self.min_dr2vetoObjs : return False
 
         hasId=mu.tightId
@@ -64,31 +69,33 @@ class MuonSelector(ScaleFactorBase):
         SFs={'id':[],'iso':[]}
         for m in muons:
 
-            abseta=abs(m.eta)
             for k in SFs:
-                sfVal=self.evalSF(k, objAttrs=[m.pt,abseta]) 
-
                 #average by luminosity in 2016
                 if self.era==2016:
-                    sfValGH=self.evalSF(k+'_gh', objAttrs=[m.pt,abseta]) 
+                    sfVal=self.evalSF(k, objAttrs=[m.eta, m.pt]) 
+
+                    sfValGH=self.evalSF(k+'_gh', objAttrs=[m.eta,m.pt]) 
                     w=16551.4/(16551.4+19323.4)
                     sfVal=(w*sfVal[0]+(1-w)*sfValGH[0],
                            np.sqrt( (w*sfVal[1])**2 + ((1-w)*sfValGH[1])**2 ) )
+
+                else:
+                    sfVal=self.evalSF(k, objAttrs=[m.pt,abs(m.eta)]) 
 
                 SFs[k].append( sfVal )
 
         #combine scale factors 
         if combined:
+            selSFs = []
             for k in SFs:
-                selSFs=[x for x in SFs[k] if x]
-                SFs[k] = [self.combineScaleFactors(selSFs)]
+                selSFs.extend([x for x in SFs[k] if x])
+            SFs = self.combineScaleFactors(selSFs)
+            ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
+            return ret
+
 
         return SFs
 
-
-    def fillBranches(self):
-        pass
-                
-    def makeBranches(self, out):
-        pass
-
+muonSelector2016 = lambda : MuonSelector(2016)
+muonSelector2017 = lambda : MuonSelector(2017)
+muonSelector2018 = lambda : MuonSelector(2018)
