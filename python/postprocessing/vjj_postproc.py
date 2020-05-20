@@ -42,24 +42,9 @@ def defineModules(year,isData):
 
     return modules
 
+def vjj_postproc(opt,args):
 
-def main():
-
-    #parse command line
-    usage = 'usage: %prog [options]'
-    parser = optparse.OptionParser(usage)
-    parser.add_option('-y', '--year',       dest='year',   help='year [%default]',  default=2017,  type=int)
-    parser.add_option(      '--isData',     dest='isData', help='data? [%default]', default=False, action='store_true')
-    parser.add_option('-i', '--inputfiles', dest='inputFiles',   help='input [%default]', type='string',
-                      default='45CA9950-BD37-374A-8604-AC35C9446A0F.root')
-    parser.add_option('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop [%default]', type='string',
-                      default='python/postprocessing/etc/keep_and_drop.txt')
-    parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int,
-                      default=None)
-    parser.add_option('-f', '--firstEntry', dest='firstEntry',   help='first entry to process [%default]', type=int,
-                      default=0)
-    (opt, args) = parser.parse_args()
-
+    """ build the command to run based on the options """
 
     #start by defining modules to run
     modules=defineModules(opt.year,opt.isData)
@@ -82,5 +67,26 @@ def main():
 
 
 
+def main():
+
+    #parse command line
+    usage = 'usage: %prog [options]'
+    parser = optparse.OptionParser(usage)
+    parser.add_option('-y', '--year',       dest='year',   help='year [%default]',  default=2017,  type=int)
+    parser.add_option(      '--isData',     dest='isData', help='data? [%default]', default=False, action='store_true')
+    parser.add_option('-i', '--inputfiles', dest='inputFiles',   help='input [%default]', type='string',
+                      default='45CA9950-BD37-374A-8604-AC35C9446A0F.root')
+    parser.add_option('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop [%default]', type='string',
+                      default='python/postprocessing/etc/keep_and_drop.txt')
+    parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int,
+                      default=None)
+    parser.add_option('-f', '--firstEntry', dest='firstEntry',   help='first entry to process [%default]', type=int,
+                      default=0)
+    (opt, args) = parser.parse_args()
+
+    vjj_postproc(opt,args)
+
+
 if __name__ == "__main__":
+
     main()
