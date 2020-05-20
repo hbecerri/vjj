@@ -43,7 +43,7 @@ def defineModules(year,isData):
                                      jetmapname="L1prefiring_jetpt_2016BtoH",
                                      photonroot="L1prefiring_photonpt_2016BtoH.root",
                                      photonmapname="L1prefiring_photonpt_2016BtoH.root") )
-            modules.extend( [MuonSelector2016(), ElectronSelector2016(), PhotonSelector2016(), JetSelector2016() ])
+            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ])
             modules.append( vjjSkimmer2016mc() )
         if year==2017:
             modules.append( puAutoWeight_2017() )
@@ -51,22 +51,22 @@ def defineModules(year,isData):
                                      jetmapname="L1prefiring_jetpt_2017BtoF",
                                      photonroot="L1prefiring_photonpt_2017BtoF.root",
                                      photonmapname="L1prefiring_photonpt_2017BtoF") )
-            modules.extend( [MuonSelector2017(), ElectronSelector2017(), PhotonSelector2017(), JetSelector2017() ])
+            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ])
             modules.append( vjjSkimmer2017mc() )
         if year==2018:
             modules.append( puAutoWeight_2018() )
-            modules.extend( [MuonSelector2018(), ElectronSelector2018(), PhotonSelector2018(), JetSelector2018() ])
+            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018() ])
             modules.append( vjjSkimmer2018mc() )
 
     else:
         if year==2016:
-            modules.extend( [MuonSelector2016(), ElectronSelector2016(), PhotonSelector2016(), JetSelector2016() ])
+            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ])
             modules.append( vjjSkimmer2016data() )
         if year==2017:
-            modules.extend( [MuonSelector2017(), ElectronSelector2017(), PhotonSelector2017(), JetSelector2017() ])
+            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ])
             modules.append( vjjSkimmer2017data() )
         if year==2018:
-            modules.extend( [MuonSelector2018(), ElectronSelector2018(), PhotonSelector2018(), JetSelector2018() ])
+            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018() ])
             modules.append( vjjSkimmer2018data() )
 
     return modules
@@ -80,7 +80,7 @@ def main():
     parser.add_option('-y', '--year',       dest='year',   help='year [%default]',  default=2017,  type=int)
     parser.add_option(      '--isData',     dest='isData', help='data? [%default]', default=False, action='store_true')
     parser.add_option('-i', '--inputfiles', dest='inputFiles',   help='input [%default]', type='string',
-                      default='TestInputFile')
+                      default='auto')
     parser.add_option('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop [%default]', type='string',
                       default='python/postprocessing/etc/keep_and_drop.txt')
     parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int,
@@ -89,10 +89,10 @@ def main():
                       default=0)
     (opt, args) = parser.parse_args()
 
-    if opt.inputFiles == "TestInputFile":
+    if opt.inputFiles == "auto":
         opt.inputFiles = testFiles( opt.year , opt.isData )
         print( opt.inputFiles )
-    #start by defining modules to run
+    #start by defining modules3 to run
     modules=defineModules(opt.year,opt.isData)
 
     #call post processor

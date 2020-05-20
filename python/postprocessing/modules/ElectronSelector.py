@@ -85,6 +85,6 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
 
         return SFs
 
-ElectronSelector2016 = lambda : ElectronSelector(2016)
-ElectronSelector2017 = lambda : ElectronSelector(2017)
-ElectronSelector2018 = lambda : ElectronSelector(2018)
+electronSelector2016 = lambda : ElectronSelector(2016)
+electronSelector2017 = lambda : ElectronSelector(2017)
+electronSelector2018 = lambda : ElectronSelector(2018)

@@ -96,6 +96,6 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
         return SFs
 
-MuonSelector2016 = lambda : MuonSelector(2016)
-MuonSelector2017 = lambda : MuonSelector(2017)
-MuonSelector2018 = lambda : MuonSelector(2018)
+muonSelector2016 = lambda : MuonSelector(2016)
+muonSelector2017 = lambda : MuonSelector(2017)
+muonSelector2018 = lambda : MuonSelector(2018)

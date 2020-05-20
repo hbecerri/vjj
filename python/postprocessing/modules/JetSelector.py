@@ -10,7 +10,7 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
-        self.setParams(2 , vetoObjs , dofilter=True) #set parameters for object selection
+        self.setParams(2 , vetoObjs , dofilter=False) #set parameters for object selection
 
         self.era               = era
         self.min_pt            = min_pt
@@ -131,6 +131,6 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
         return SFs
 
         
-JetSelector2016 = lambda : JetSelector(2016)
-JetSelector2017 = lambda : JetSelector(2017)
-JetSelector2018 = lambda : JetSelector(2018)
+jetSelector2016 = lambda : JetSelector(2016)
+jetSelector2017 = lambda : JetSelector(2017)
+jetSelector2018 = lambda : JetSelector(2018)

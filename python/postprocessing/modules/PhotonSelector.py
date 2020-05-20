@@ -108,6 +108,6 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         return SFs
 
 
-PhotonSelector2016 = lambda : PhotonSelector(2016)
-PhotonSelector2017 = lambda : PhotonSelector(2017)
-PhotonSelector2018 = lambda : PhotonSelector(2018)
+photonSelector2016 = lambda : PhotonSelector(2016)
+photonSelector2017 = lambda : PhotonSelector(2017)
+photonSelector2018 = lambda : PhotonSelector(2018)

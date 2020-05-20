@@ -223,9 +223,8 @@ class VJJSelector(Module):
         """reco-level specific analysis"""
 
         self.vjjEvent.resetOutVars()
-        wgt = 1 if hasattr(event,'Generator_weight') and getattr(event , 'Generator_weight') > 0 else -1
 
-        self.histos['cutflow'].Fill(0 , wgt)
+        self.histos['cutflow'].Fill(0)
 
         #start possible event categories by checking the triggers that fired
         trig_cats=[]
@@ -255,7 +254,7 @@ class VJJSelector(Module):
         if bosonArbitration is None:
             return False
         fsCat,arbTrigCats,boson=bosonArbitration
-        self.histos['cutflow'].Fill(1 , wgt)
+        self.histos['cutflow'].Fill(1)
 
         #jet selection
         all_jets = Collection(event, "Jet")
@@ -272,8 +271,8 @@ class VJJSelector(Module):
         #fill scale factors
         if isGoodV2J:
 
-            self.histos['cutflow'].Fill(2 , wgt)
-            if len(trig_cats)>0 : self.histos['cutflow'].Fill(3 , wgt)
+            self.histos['cutflow'].Fill(2)
+            if len(trig_cats)>0 : self.histos['cutflow'].Fill(3)
 
             wgt_dict={}
 
