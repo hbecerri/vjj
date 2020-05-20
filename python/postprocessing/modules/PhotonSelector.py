@@ -1,18 +1,21 @@
 from ScaleFactorBase import *
+from ObjectSelectorBase import *
 
-class PhotonSelector(ScaleFactorBase):
+class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     """ Applies standard photon selections, returning a list of indices of good photons """
 
-    def __init__(self , era, min_pt=75., max_eta=2.4, dr2vetoObjs=0.4):
+    def __init__(self , era, min_pt=75., max_eta=2.4, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")]):
+        super(ScaleFactorBase, self).__init__()
+        super(ObjectSelectorBase, self).__init__()
+        self.init() #init scale factor object
+        self.setParams(1 , vetoObjs , dofilter=False) #set parameters for object selection
+
         self.era = era
         self.min_pt = min_pt
         self.max_eta = max_eta
         self.min_dr2vetoObjs = dr2vetoObjs
         self.indices=[]
-
-        #scale factors for photon objects
-        ScaleFactorBase.__init__(self)
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
         #no need for reconstructed efficiency (assumed to be 100% for superclusters)
@@ -34,28 +37,31 @@ class PhotonSelector(ScaleFactorBase):
             self.addSFFromSource(k,url,obj)
 
 
-    def __call__(self, photons , vetoObjs):
-        self.indices=[i for i,a in enumerate(photons) if self.isGood(a,vetoObjs)]
-        return self.indices
+    def collection_name(self):
+        return "Photon"
 
-    def isGood(self, photon, vetoObjs):
+    def obj_name(self):
+        return "photon"
+
+    def isGood(self, photon):
 
         if photon.pt < self.min_pt : return False
         absEta=abs( photon.eta )
         if absEta > self.max_eta : return False
         if absEta> 1.4442 and absEta<1.5660 : return False #EB->EE transition
         
-        min_dr = min([obj.DeltaR(photon) for obj in vetoObjs] or [2*self.min_dr2vetoObjs])
+        min_dr = self.mindr_toVetoObjs(photon)
         if min_dr < self.min_dr2vetoObjs : return False
 
         #id+iso requirement (tight id is the 3rd bit)
         hasId=False
         if self.era == 2016:
-            hasId=((photon.cutBasedV1Bitmap>>2)&0x1)
+            #hasId=((photon.cutBasedBitmap>>2)&0x1) #  Fall17V2 for 2016 is not available in NanoAODv6
+            hasId=((photon.cutBased17Bitmap>>2) & 0x1)
         elif self.era == 2017:
-            hasId=((photon.cutBasedV1Bitmap>>2)&0x1)
+            hasId=((photon.cutBasedBitmap>>2)&0x1)
         elif self.era == 2018:
-            hasId=((photon.cutBasedV1Bitmap>>2)&0x1)
+            hasId=((photon.cutBasedBitmap>>2)&0x1)
         if not hasId : return False
 
         #additional requirements
@@ -66,20 +72,22 @@ class PhotonSelector(ScaleFactorBase):
 
         return True
 
-    def fillSFs(self,photons,mjj=0,combined=True):
+    def fillSFs(self,photons,combined=True):
 
         """evaluates the scale factors for a collection of photons """
 
-        SFs={'trig_ajj':[],'trig_highpta':[],'id':[],'pxseed':[]}
+        #SFs={'trig_ajj':[],'trig_highpta':[],'id':[],'pxseed':[]}
+        #,mjj=0
+        SFs={'id':[],'pxseed':[]}
         for p in photons:
 
             abseta=abs(p.eta)
-            SFs['trig_ajj'].append(     
-                self.evalSF('trig_ajj', objAttrs=[p.pt,mjj]) 
-            )
-            SFs['trig_highpta'].append( 
-                self.evalSF('trig_highpta', objAttrs=[p.pt]) 
-            )
+            # SFs['trig_ajj'].append(     
+            #     self.evalSF('trig_ajj', objAttrs=[p.pt,mjj]) 
+            # )
+            # SFs['trig_highpta'].append( 
+            #     self.evalSF('trig_highpta', objAttrs=[p.pt]) 
+            # )
             SFs['id'].append(  
                 self.evalSF('id', objAttrs=[p.eta,p.pt]) 
             )
@@ -89,15 +97,17 @@ class PhotonSelector(ScaleFactorBase):
 
         #combine scale factors 
         if combined:
+            selSFs = []
             for k in SFs:
-                selSFs=[x for x in SFs[k] if x]
-                SFs[k] = [self.combineScaleFactors(selSFs)]
+                selSFs.extend( [x for x in SFs[k] if x] )
+            SFs = self.combineScaleFactors(selSFs)
+            ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
+            return ret
+
             
         return SFs
 
-            
-    def fillBranches(self):
-        pass
-                
-    def makeBranches(self, out):
-        pass
+
+photonSelector2016 = lambda : PhotonSelector(2016)
+photonSelector2017 = lambda : PhotonSelector(2017)
+photonSelector2018 = lambda : PhotonSelector(2018)
