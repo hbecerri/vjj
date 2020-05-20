@@ -127,13 +127,15 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'lead_phi',     tagJets[0].phi)
         self.out.fillBranch(self.pfix+'lead_m',       tagJets[0].mass)
         self.out.fillBranch(self.pfix+'lead_dr2v',    tagJets[0].DeltaR(v))
-        self.out.fillBranch(self.pfix+'lead_flav',    tagJets[0].partonFlavour)
+        if hasattr(tagJets[0],'partonFlavour'):
+            self.out.fillBranch(self.pfix+'lead_flav',    tagJets[0].partonFlavour)
         self.out.fillBranch(self.pfix+'sublead_pt',   tagJets[1].pt)
         self.out.fillBranch(self.pfix+'sublead_eta',  tagJets[1].eta)
         self.out.fillBranch(self.pfix+'sublead_phi',  tagJets[1].phi)
         self.out.fillBranch(self.pfix+'sublead_m',    tagJets[1].mass)
         self.out.fillBranch(self.pfix+'sublead_dr2v', tagJets[1].DeltaR(v))
-        self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)
+        if hasattr(tagJets[1],'partonFlavour'):
+            self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)
 
         #reco-level only variables
         try:
