@@ -3,21 +3,30 @@ import os
 import errno
 import numpy as np    
 
-class ScaleFactorBase:
-
+class ScaleFactorBase(object):
     """ wraps the general procedure to read ROOT objects or others storing scale factors to apply in an analysis """
 
     def __init__(self):
-        self.sf_dict={}        
+        self.sf_dict={}
+        pass
+        
+    def init(self):
+        self.sf_dict={}
 
-    def addSFObject(self,tag,obj):
+    def addSFObject(self,tag,obj , stat = None , syst = None):
 
         """ adds an object directory  """
 
-        self.sf_dict[tag]=obj
+        self.sf_dict[tag]={'main':obj, 'stat':stat , 'syst':syst}
         if obj.InheritsFrom('TH1'):
             self.extrapolateToNullBins(obj)
             obj.SetDirectory(0)
+        if stat and stat.InheritsFrom('TH1'):
+            self.extrapolateToNullBins(stat)
+            stat.SetDirectory(0)
+        if syst and syst.InheritsFrom('TH1'):
+            self.extrapolateToNullBins(syst)
+            syst.SetDirectory(0)
 
     def extrapolateToNullBins(self,h):
 
@@ -57,7 +66,11 @@ class ScaleFactorBase:
             raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), url)
 
         fIn=ROOT.TFile.Open(url)
-        self.addSFObject(tag,fIn.Get(obj))
+        sfObj = fIn.Get(obj)
+        statObj = fIn.Get( obj + "_stat" )
+        systObj = fIn.Get( obj + "_syst" )
+        #print tag, url , obj, sfObj, statObj, systObj
+        self.addSFObject(tag, sfObj, statObj, systObj)
         fIn.Close()
         
     def evalSF(self,tag,objAttrs):
@@ -71,7 +84,7 @@ class ScaleFactorBase:
             return None
 
         sfVal=None
-        sfObj=self.sf_dict[tag]
+        sfObj=self.sf_dict[tag]['main']
         if sfObj.InheritsFrom('TH1'):
 
             hdxf=0.5*sfObj.GetXaxis().GetBinWidth(1)
@@ -86,10 +99,14 @@ class ScaleFactorBase:
                 ybin = sfObj.GetYaxis().FindBin(
                     max(sfObj.GetYaxis().GetXmin()+hdyf,min(sfObj.GetYaxis().GetXmax()-hdyl,objAttrs[1]))
                 )
-                sfVal=(sfObj.GetBinContent(xbin,ybin),sfObj.GetBinError(xbin,ybin))
 
-            else:
-                sfVal=(sfObj.GetBinContent(xbin),sfObj.GetBinError(xbin))
+                xbin = sfObj.GetBin( xbin , ybin )
+
+            
+            val = sfObj.GetBinContent(xbin)
+            stat_err = self.sf_dict[tag]['stat'].GetBinContent( xbin )-val if self.sf_dict[tag]['stat'] else sfObj.GetBinError(xbin)
+            syst_err = self.sf_dict[tag]['syst'].GetBinContent( xbin )-val if self.sf_dict[tag]['syst'] else 0.0
+            sfVal=(val, np.sqrt( stat_err**2 + syst_err**2 ) )
         else:
             sfVal=(sfObj.Eval(*objAttrs),0. )
           

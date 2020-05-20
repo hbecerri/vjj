@@ -1,5 +1,9 @@
 # drop all at start
-drop * 
+drop *
+keep Electron*
+keep Muon*
+keep Photon*
+keep Jet* 
 # pileup weights
 keep puWeight*
 # L1 prefire

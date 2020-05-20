@@ -1,19 +1,22 @@
 from ScaleFactorBase import *
+from ObjectSelectorBase import *
 
-class ElectronSelector(ScaleFactorBase):
+class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
 
     """ Applies standard electron selections, returning a list of indices of good photons """
 
-    def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4):
+    def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4 , vetoObjs = [("Muon", "mu")]):
+        super(ScaleFactorBase, self).__init__()
+        super(ObjectSelectorBase, self).__init__()
+        self.init() #init scale factor object
+        self.setParams(2 , vetoObjs , dofilter=False) #set parameters for object selection
+
         self.era = era
         self.min_pt = min_pt
         self.max_eta = max_eta
         self.min_dr2vetoObjs = dr2vetoObjs
         self.indices=[]
         
-        #scale factors for electron objects
-        ScaleFactorBase.__init__(self)
-
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
         baseSFDir='${CMSSW_BASE}/src/UserCode/VJJSkimmer/python/postprocessing/etc/'
         eleSFSources={
@@ -34,15 +37,13 @@ class ElectronSelector(ScaleFactorBase):
             url,obj=eleSFSources[self.era][k]
             self.addSFFromSource(k,url,obj)
 
-    def __call__(self, electrons, vetoObjs, returnIndices=True):
-        self.indices=[i for i,ele in enumerate(electrons) if self.isGood(ele,vetoObjs)]
+    def collection_name(self):
+        return "Electron"
 
-        if not returnIndices:
-            return [electrons[i] for i in self.indices]
+    def obj_name(self):
+        return "ele"
 
-        return self.indices
-
-    def isGood(self, ele, vetoObjs):
+    def isGood(self, ele):
 
         """checks if electron passes standard selection"""
         
@@ -50,7 +51,7 @@ class ElectronSelector(ScaleFactorBase):
         absEta=abs( ele.eta )
         if absEta > self.max_eta : return False
         if absEta> 1.4442 and absEta<1.5660 : return False #EB->EE transition
-        min_dr = min([obj.DeltaR(ele) for obj in vetoObjs] or [2*self.min_dr2vetoObjs])
+        min_dr = self.mindr_toVetoObjs(ele) 
         if min_dr < self.min_dr2vetoObjs : return False
 
         #id requirement
@@ -74,15 +75,16 @@ class ElectronSelector(ScaleFactorBase):
 
         #combine scale factors 
         if combined:
+            selSFs = []
             for k in SFs:
-                selSFs=[x for x in SFs[k] if x]
-                SFs[k] = [self.combineScaleFactors(selSFs)]
+                selSFs.extend( [x for x in SFs[k] if x] )
+            SFs = self.combineScaleFactors(selSFs)
+            ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
+            return ret
             
+
         return SFs
 
-            
-    def fillBranches(self):
-        pass
-                
-    def makeBranches(self, out):
-        pass
+ElectronSelector2016 = lambda : ElectronSelector(2016)
+ElectronSelector2017 = lambda : ElectronSelector(2017)
+ElectronSelector2018 = lambda : ElectronSelector(2018)

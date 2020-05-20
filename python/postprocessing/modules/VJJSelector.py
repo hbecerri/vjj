@@ -4,10 +4,6 @@ import os
 import copy
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-from JetSelector import *
-from PhotonSelector import *
-from ElectronSelector import *
-from MuonSelector import *
 from VJJEvent import VJJEvent,_defaultVjjCfg,_defaultGenVjjCfg
 import numpy as np
 
@@ -19,10 +15,6 @@ class VJJSelector(Module):
 
         self.isData           = isData
         self.era              = era
-        self.jetSelector      = JetSelector(era)
-        self.photonSelector   = PhotonSelector(era)
-        self.electronSelector = ElectronSelector(era)
-        self.muonSelector     = MuonSelector(era)
         self.vjjEvent         = VJJEvent(cfg=_defaultVjjCfg)
         self.gen_vjjEvent     = None 
         if not isData:
@@ -231,7 +223,9 @@ class VJJSelector(Module):
         """reco-level specific analysis"""
 
         self.vjjEvent.resetOutVars()
-        self.histos['cutflow'].Fill(0)
+        wgt = 1 if hasattr(event,'Generator_weight') and getattr(event , 'Generator_weight') > 0 else -1
+
+        self.histos['cutflow'].Fill(0 , wgt)
 
         #start possible event categories by checking the triggers that fired
         trig_cats=[]
@@ -241,36 +235,31 @@ class VJJSelector(Module):
             trig_cats.append(cat)
         if self.isData and len(trig_cats)==0 : return False
 
-        vetoObjs=[]
-
         #select base objects for boson construction
         all_muons      = Collection(event, "Muon")
-        good_muonsIdx  = self.muonSelector(all_muons,vetoObjs)
+        good_muonsIdx  = event.vjj_mus
         good_muons     = [all_muons[i] for i in good_muonsIdx]
-        vetoObjs      += good_muons
 
         all_electrons     = Collection(event, "Electron")
-        good_electronsIdx = self.electronSelector(all_electrons,vetoObjs)
+        good_electronsIdx = event.vjj_eles
         good_electrons    = [all_electrons[i] for i in good_electronsIdx]
-        vetoObjs         += good_electrons
 
         all_photons     = Collection(event, "Photon")
-        good_photonsIdx = self.photonSelector(all_photons,vetoObjs)
+        good_photonsIdx = event.vjj_photons
         good_photons    = []
         if len(good_photonsIdx)>0:
             good_photons = [ all_photons[ good_photonsIdx[0] ] ]
-            vetoObjs    += good_photons
 
         #call boson candidate arbitration
         bosonArbitration = self.arbitrateBosonCandidate(good_photons,good_muons,good_electrons,trig_cats)        
         if bosonArbitration is None:
             return False
         fsCat,arbTrigCats,boson=bosonArbitration
-        self.histos['cutflow'].Fill(1)
+        self.histos['cutflow'].Fill(1 , wgt)
 
         #jet selection
         all_jets = Collection(event, "Jet")
-        jetsIdx  =  self.jetSelector( all_jets ,vetoObjs)
+        jetsIdx  =  event.vjj_jets
         jets     = [all_jets[i] for i in jetsIdx]
 
         #analyze v+2j event candidate
@@ -283,32 +272,27 @@ class VJJSelector(Module):
         #fill scale factors
         if isGoodV2J:
 
-            self.histos['cutflow'].Fill(2)
-            if len(trig_cats)>0 : self.histos['cutflow'].Fill(3)
+            self.histos['cutflow'].Fill(2 , wgt)
+            if len(trig_cats)>0 : self.histos['cutflow'].Fill(3 , wgt)
 
             wgt_dict={}
 
             #photon efficiency
             if fsCat==22:
 
-                SFs        = self.photonSelector.fillSFs([good_photons[0]],mjj=getattr(event,'vjj_jj_m'))           
-
-                selSFs     = [SFs[k][0] for k in ['id','pxseed'] if SFs[k][0]]
-                finalSelSF = self.photonSelector.combineScaleFactors(selSFs)
-
-                trigWgt = SFs['trig_ajj'][0] if SFs['trig_ajj'][0] else (1.,0.)
+                trigWgt = (1.,0.)
                 wgt_dict['trigWgt']   = trigWgt[0]
                 wgt_dict['trigWgtUp'] = trigWgt[0]+trigWgt[1]
                 wgt_dict['trigWgtDn'] = trigWgt[0]-trigWgt[1]
 
-                trigWgt = SFs['trig_highpta'][0] if SFs['trig_highpta'][0] else (1.,0.)
+                trigWgt = (1.,0.)
                 wgt_dict['trigHighPtWgt']   = trigWgt[0]
                 wgt_dict['trigHighPtWgtUp'] = trigWgt[0]+trigWgt[1]
                 wgt_dict['trigHighPtWgtDn'] = trigWgt[0]-trigWgt[1]
 
-                wgt_dict['effWgt']   = finalSelSF[0]
-                wgt_dict['effWgtUp'] = finalSelSF[0]+finalSelSF[1]
-                wgt_dict['effWgtDn'] = finalSelSF[0]-finalSelSF[1]
+                wgt_dict['effWgt']   = event.vjj_photon_effWgt
+                wgt_dict['effWgtUp'] = event.vjj_photon_effWgtUp
+                wgt_dict['effWgtDn'] = event.vjj_photon_effWgtDn
 
             #dilepton efficiency
             if fsCat==11*11 or fsCat==13*13:
@@ -319,25 +303,13 @@ class VJJSelector(Module):
                 wgt_dict['trigHighPtWgtUp']=1
                 wgt_dict['trigHighPtWgtDn']=1
 
-                if fsCat==11*11:
-                    SFs = self.electronSelector.fillSFs(good_electrons[0:2]) 
-                    selSFs = [SFs[k][0] for k in SFs if SFs[k][0]]
-                    finalSelSF = self.electronSelector.combineScaleFactors(selSFs)
-                else:
-                    SFs = self.muonSelector.fillSFs(good_muons[0:2]) 
-                    selSFs = [SFs[k][0] for k in SFs if SFs[k][0]]
-                    finalSelSF = self.muonSelector.combineScaleFactors(selSFs)
-
-                wgt_dict['effWgt']   = finalSelSF[0]
-                wgt_dict['effWgtUp'] = finalSelSF[0]+finalSelSF[1]
-                wgt_dict['effWgtDn'] = finalSelSF[0]-finalSelSF[1]
+                wgt_dict['effWgt']   = getattr( event , "vjj_{0}_effWgt".format( 'mu' if fsCat == 13*13 else "ele" ) )
+                wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}_effWgtUp".format( 'mu' if fsCat == 13*13 else "ele" ) )
+                wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}_effWgtDn".format( 'mu' if fsCat == 13*13 else "ele" ) )
 
             #quark gluon discriminator weights (tag jets only)
-            jetSFs=self.jetSelector.fillSFs([jets[0],jets[1]])
-            for key in jetSFs:
-                prod =  jetSFs[key][0][0] if jetSFs[key][0] else 1.
-                prod *= jetSFs[key][1][0] if jetSFs[key][1] else 1.
-                wgt_dict[key] = prod
+            wgt_dict['qglgWgt'] = event.vjj_qglgWgt_jets
+            wgt_dict['qglqWgt'] = event.vjj_qglqWgt_jets
 
             self.vjjEvent.fillWeightBranches(wgt_dict)
 
