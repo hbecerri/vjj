@@ -23,6 +23,7 @@ cd -
 git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools
 cd PhysicsTools/NanoAODTools
 scram b
+cd -
 
 #SMP-19-005 framework (if ssh does not work for you switch to https)
 git clone ssh://git@gitlab.cern.ch:7999/cms-ewkvjj/vjjskimmer.git UserCode/VJJSkimmer
