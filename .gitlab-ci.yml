@@ -38,6 +38,8 @@ test-selection:
     - docker
     - cvmfs
   script:
+    - echo "${KRB_PASSWORD}" | kinit ${KRB_USERNAME}@CERN.CH
+    - klist
     - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
     - eval `/cvmfs/cms.cern.ch/common/scramv1 runtime -sh`
     - python python/postprocessing/vjj_basetests.py 2016,data 2016,mc 2017,data 2017,mc 2018,data 2018,mc
