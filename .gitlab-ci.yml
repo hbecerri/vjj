@@ -38,6 +38,7 @@ test-selection:
     - docker
     - cvmfs
   script:
+    - echo ${KRB_USERNAME}
     - echo "${KRB_PASSWORD}" | kinit ${KRB_USERNAME}@CERN.CH
     - klist
     - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
