@@ -42,7 +42,9 @@ test-selection:
     - cvmfs
   script:
     - mkdir -p ~/.ssh
-    - echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
+    - cat ~/.ssh/known_hosts
+    - cat ~/.ssh/config
+    #- echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
     - echo -e "Host *\n\tGSSAPIDelegateCredentials yes\n\tGSSAPITrustDNS yes\n\n" > ~/.ssh/config
     - echo ${KRB_USERNAME}
     - echo "${KRB_PASSWORD}" | kinit ${KRB_USERNAME}@CERN.CH
