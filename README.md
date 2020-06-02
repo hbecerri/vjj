@@ -59,13 +59,16 @@ python python/postprocessing/vjj_postproc.py \
 A basic set of scripts are run everytime the code is pushed to gitlab. These test are defined in `.gitlab-ci.yml`. 
 Special instructions are given below on how to prepare the final validation based on the comparison of the cutflow histograms.
 
-1 the first step is to define the directory to be used as reference for the continuous integration and the samples to be copied over in `python/postprocessing/etc/testDatasets.py`
-1 run locally `python/postprocessing/vjj_basetests.py` to prepare the continuous integration directory. The script will copy over the samples and prepare a summary pickle file with the cutflow expected using the current snapshot of the code. See below for an example of how to run
-1 update .gitlab-ci.yml if needed for the command to run automatically in gitlab
+1. the first step is to define the directory to be used as reference for the continuous integration and the samples to be copied over in `python/postprocessing/etc/testDatasets.py`
+1. run locally `python/postprocessing/vjj_basetests.py` to prepare the continuous integration directory. The script will. copy over the samples and prepare a summary pickle file with the cutflow expected using the current snapshot of the code. See below for an example of how to run
+1. update .gitlab-ci.yml if needed for the command to run automatically in gitlab
 
-The `vjj_basetests.py` can be run locally with:
+The `vjj_basetests.py` script can be run locally with:
+
 ```
-python python/postprocessing/etc/testDatasets.py --prepare 2016,data 2016,mc 2017,data 2017,mc 2018,data 2018,mc
+python python/postprocessing/vjj_basetests.py --prepare 2016,data 2016,mc 2017,data 2017,mc 2018,data 2018,mc
 ```
-Omitting the `--prepare` option will simply run the skims and compare the cutflows with the ones stored by default
+
+Omitting the `--prepare` option will simply run the skims and compare the cutflows with the ones stored by default.
+Note: you may need to start a proxy before running the `prepare` step.
  

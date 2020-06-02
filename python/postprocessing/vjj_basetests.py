@@ -8,7 +8,7 @@ import pickle
 from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset,getTestCIDir
 
 
-def runTestCodeCommand(year,dstype,maxEntries):
+def runTestCodeCommand(year,dstype,maxEntries,localCIDir=None):
 
     """ run skim """
 
@@ -16,6 +16,9 @@ def runTestCodeCommand(year,dstype,maxEntries):
     cmd  = 'python python/postprocessing/vjj_postproc.py'
     cmd += ' -i auto -y {0} -N {1} {2}'.format(year,maxEntries,isDataFlag)
     cmd += ' -k python/postprocessing/etc/keep_and_drop_ci.txt'
+    if localCIDir:
+        cmd += ' --localCIDir {0}'.format(localCIDir)
+    print(cmd)
     os.system(cmd)
 
 
@@ -23,11 +26,13 @@ def prepareCIDir(opt,args,rootxd = "root://cms-xrd-global.cern.ch/"):
 
     """prepares the test directory holding the files to run on """
 
-    os.system('mkdir -p ' + opt.localCIDir)
+    if not opt.skipCopy:
+        print('Creating',opt.localCIDir)
+        os.system('mkdir ' + opt.localCIDir)
 
-    if not 'X509_USER_PROXY' in os.environ:
-        print('No user proxy in environment. Starting one now')
-        os.system('voms-proxy-init --voms cms')
+        if not 'X509_USER_PROXY' in os.environ:
+            print('No user proxy in environment. Starting one now')
+            os.system('voms-proxy-init --voms cms')
 
     cutflows={}
     for a in args:
@@ -38,7 +43,8 @@ def prepareCIDir(opt,args,rootxd = "root://cms-xrd-global.cern.ch/"):
         
         #copy locally
         oname='{0}/{1}'.format(opt.localCIDir,os.path.basename(url))
-        os.system('xrdcp {0}/{1} {2}'.format(rootxd,url,oname))
+        if not opt.skipCopy:
+            os.system('xrdcp {0}/{1} {2}'.format(rootxd,url,oname))
         
         #run skim
         runTestCodeCommand(year=year,dstype=dstype,maxEntries=opt.maxEntries)
@@ -75,7 +81,7 @@ def validate(opt,args):
         year,dstype=a.split(',')
         year=int(year)
         k=(year,dstype)
-        runTestCodeCommand(year=year,dstype=dstype,maxEntries=opt.maxEntries)
+        runTestCodeCommand(year=year,dstype=dstype,maxEntries=opt.maxEntries,localCIDir=opt.localCIDir)
 
         #compute differences in the cutflow
         fname=getTestDataset(year,True if dstype=='data' else False,fromLocalCIDir=opt.localCIDir)
@@ -107,6 +113,7 @@ def main():
     parser = optparse.OptionParser(usage)
     parser.add_option('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory [%default]',  default=getTestCIDir(), type='string')
     parser.add_option(      '--prepare',    dest='prepare',  help='prepare test input directory? [%default]', default=False, action='store_true')
+    parser.add_option(      '--skipCopy',   dest='skipCopy',  help='skip copy to EOS? [%default]', default=False, action='store_true')
     parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int, default=5000)  
     (opt, args) = parser.parse_args()
 

@@ -2,7 +2,8 @@
 
 import os
 
-_testCIDir='/eos/cms/store/cmst3/group/top/SMP-19-005/CMSSW_10_2_13'
+#this directory should have edit permissions for all members of the e-group
+_testCIDir='/eos/user/c/cmsewvjj/data/CMSSW_10_2_13'
 
 _testDatasets={
     (2018,'data') : '/store/data/Run2018C/EGamma/NANOAOD/Nano25Oct2019-v1/40000/36E1B766-8D23-9C43-A06E-771AB4FCE27D.root',
