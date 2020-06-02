@@ -1,6 +1,7 @@
 image: gitlab-registry.cern.ch/ci-tools/ci-worker:cc7
 
 variables:
+  CMSSW_REL=CMSSW_10_2_13
   SSH_SERVER_HOSTKEYS: lxplus ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAxDFr+wqtWq0sDCGO2LfsMKVwmhsdXC9TYCVq6HoEBEOXFUgc/3Kf2NooJTgHRQ9h7ZEhx8vdZgoy2+XTwJvqYzx9epIC/gC/ts2z47TvK+FAAkpci5V/5zc9pu8fEYCEwrP+FgF7d3k2ivmZ95Mi/Hhmd9xzxAdps6bpJN19EA0=
 
 build:
@@ -13,16 +14,16 @@ build:
     - ls -l
     - mkdir -p UserCode/VJJSkimmer
     - find -maxdepth 1 -mindepth 1 -not -name UserCode -exec mv {} UserCode/VJJSkimmer/ \;
-    - SCRAM_ARCH=slc7_amd64_gcc700 /cvmfs/cms.cern.ch/common/scramv1 project CMSSW CMSSW_10_2_13
-    - mv UserCode CMSSW_10_2_13/src/
-    - cd CMSSW_10_2_13/src
+    - SCRAM_ARCH=slc7_amd64_gcc700 /cvmfs/cms.cern.ch/common/scramv1 project CMSSW $CMSSW_REL
+    - mv UserCode $CMSSW_REL/src/
+    - cd $CMSSW_REL/src
     - eval `/cvmfs/cms.cern.ch/common/scramv1 runtime -sh`
     - git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools
     - /cvmfs/cms.cern.ch/common/scram b -j 8
   artifacts:
     expire_in: 1 day
     paths:
-      - CMSSW_10_2_13
+      - $CMSSW_REL
 
 list-contents:
   stage: test
@@ -32,7 +33,7 @@ list-contents:
   script:
     - pwd
     - ls -l
-    - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
+    - cd $CMSSW_REL/src/UserCode/VJJSkimmer
     - ls -ltrR
 
 test-selection:
@@ -42,17 +43,15 @@ test-selection:
     - cvmfs
   script:
     - mkdir -p ~/.ssh
-    - cat ~/.ssh/known_hosts
-    - cat ~/.ssh/config
     #- echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
     - echo -e "Host *\n\tGSSAPIDelegateCredentials yes\n\tGSSAPITrustDNS yes\n\n" > ~/.ssh/config
     - echo ${KRB_USERNAME}
     - echo "${KRB_PASSWORD}" | kinit ${KRB_USERNAME}@CERN.CH
     - klist
-    - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
+    - cd $CMSSW_REL/src/UserCode/VJJSkimmer
     - eval `/cvmfs/cms.cern.ch/common/scramv1 runtime -sh`
     - mkdir data
-    - scp ${KRB_USERNAME}@lxplus:/eos/user/c/cmsewvjj/data/CMSSW_10_2_13/*.* ./data
+    - scp ${KRB_USERNAME}@lxplus:/eos/user/c/cmsewvjj/data/$CMSSW_REL/*.* ./data
     - ls -ltrh ./data
     - python python/postprocessing/vjj_basetests.py 2016,data 2016,mc 2017,data 2017,mc 2018,data 2018,mc --localCIDir data/
   artifacts:
