@@ -1,8 +1,5 @@
 image: gitlab-registry.cern.ch/ci-tools/ci-worker:cc7
 
-variables:
-  SSH_SERVER_HOSTKEYS: lxplus ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAxDFr+wqtWq0sDCGO2LfsMKVwmhsdXC9TYCVq6HoEBEOXFUgc/3Kf2NooJTgHRQ9h7ZEhx8vdZgoy2+XTwJvqYzx9epIC/gC/ts2z47TvK+FAAkpci5V/5zc9pu8fEYCEwrP+FgF7d3k2ivmZ95Mi/Hhmd9xzxAdps6bpJN19EA0=
-
 build:
   stage: build
   tags:
@@ -42,7 +39,6 @@ test-selection:
     - cvmfs
   script:
     - mkdir -p ~/.ssh
-    #- echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
     - echo -e "Host *\n\tGSSAPIDelegateCredentials yes\n\tGSSAPITrustDNS yes\n\n" > ~/.ssh/config
     - echo ${KRB_USERNAME}
     - echo "${KRB_PASSWORD}" | kinit ${KRB_USERNAME}@CERN.CH
