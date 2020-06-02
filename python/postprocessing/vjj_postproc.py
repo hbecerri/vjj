@@ -12,27 +12,14 @@ from UserCode.VJJSkimmer.postprocessing.modules.MuonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.ElectronSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.PhotonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.JetSelector import *
-
-def testFiles(year, isData):
-    rootxd = "root://cms-xrd-global.cern.ch/"
-    if isData:
-        if year == 2018:
-            file = '/store/data/Run2018C/EGamma/NANOAOD/Nano25Oct2019-v1/40000/36E1B766-8D23-9C43-A06E-771AB4FCE27D.root'
-        elif year == 2017:
-            file = '/store/data/Run2017F/SinglePhoton/NANOAOD/Nano25Oct2019-v1/20000/EE1D34F5-77E3-2C4F-82A2-B42101279278.root'
-        elif year==2016:
-            file = '/store/data/Run2016G/SinglePhoton/NANOAOD/Nano25Oct2019-v1/40000/E51BF2EE-295E-C540-9A21-B3EE11B3A70D.root'
-    else:
-        if year == 2018:
-            file = '/store/mc/RunIIAutumn18NanoAODv6/GJets_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/NANOAODSIM/Nano25Oct2019_102X_upgrade2018_realistic_v20-v1/70000/F203F88E-4E04-ED48-8B71-610B696C894E.root'
-        elif year == 2017:
-            file = '/store/mc/RunIIFall17NanoAODv6/GJets_SM_5f_TuneCUETP8M1_EWKFOR17DATA_13TeV-madgraphMLM-pythia8/NANOAODSIM/PU2017_12Apr2018_Nano25Oct2019_ext_102X_mc2017_realistic_v7-v1/230000/1D712E02-0EED-7041-A17A-858A01783DA5.root'
-        elif year==2016:
-            file = '/store/mc/RunIISummer16NanoAODv6/GJets_Mjj-500_SM_5f_TuneCUETP8M1_EWK_13TeV-madgraph-pythia8/NANOAODSIM/Nano25Oct2019_102X_mcRun2_asymptotic_v7-v1/270000/6DCCCEA5-082C-8849-85F1-CE698EB2778F.root'
-
-    return rootxd + file
+from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset, getTestCIDir
 
 def defineModules(year,isData):
+
+    """
+    configures the modules to be run depending on the year and whether is data or MC
+    returns a list of modules
+    """
 
     modules=[]
     if not isData:
@@ -42,7 +29,7 @@ def defineModules(year,isData):
             modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2016BtoH.root",
                                      jetmapname="L1prefiring_jetpt_2016BtoH",
                                      photonroot="L1prefiring_photonpt_2016BtoH.root",
-                                     photonmapname="L1prefiring_photonpt_2016BtoH.root") )
+                                     photonmapname="L1prefiring_photonpt_2016BtoH") )
             modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ])
             modules.append( vjjSkimmer2016mc() )
         if year==2017:
@@ -72,32 +59,16 @@ def defineModules(year,isData):
     return modules
 
 
-def main():
+def vjj_postproc(opt,args):
+    
+    """steers the VJJ analysis"""
 
-    #parse command line
-    usage = 'usage: %prog [options]'
-    parser = optparse.OptionParser(usage)
-    parser.add_option('-y', '--year',       dest='year',   help='year [%default]',  default=2017,  type=int)
-    parser.add_option(      '--isData',     dest='isData', help='data? [%default]', default=False, action='store_true')
-    parser.add_option('-i', '--inputfiles', dest='inputFiles',   help='input [%default]', type='string',
-                      default='auto')
-    parser.add_option('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop [%default]', type='string',
-                      default='python/postprocessing/etc/keep_and_drop.txt')
-    parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int,
-                      default=None)
-    parser.add_option('-f', '--firstEntry', dest='firstEntry',   help='first entry to process [%default]', type=int,
-                      default=0)
-    (opt, args) = parser.parse_args()
-
-    if opt.inputFiles == "auto":
-        opt.inputFiles = testFiles( opt.year , opt.isData )
-        print( opt.inputFiles )
     #start by defining modules3 to run
     modules=defineModules(opt.year,opt.isData)
 
     #call post processor
     p=PostProcessor(outputDir=".",
-                    inputFiles=opt.inputFiles.split(','),
+                    inputFiles=opt.inputFiles,
                     cut=None,
                     branchsel=None,
                     modules=modules,
@@ -113,5 +84,32 @@ def main():
 
 
 
+def main():
+
+    #parse command line
+    usage = 'usage: %prog [options]'
+    parser = optparse.OptionParser(usage)
+    parser.add_option('-y', '--year',       dest='year',   help='year [%default]',  default=2017,  type=int)
+    parser.add_option(      '--isData',     dest='isData', help='data? [%default]', default=False, action='store_true')
+    parser.add_option('-i', '--inputfiles', dest='inputFiles',   help='input [%default]', type='string',
+                      default='auto')
+    parser.add_option('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop [%default]', type='string',
+                      default='python/postprocessing/etc/keep_and_drop.txt')
+    parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int,
+                      default=None)
+    parser.add_option('-f', '--firstEntry', dest='firstEntry',   help='first entry to process [%default]', type=int,
+                      default=0)
+    parser.add_option('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory [%default]',  default=getTestCIDir(), type='string')
+    (opt, args) = parser.parse_args()
+
+    if opt.inputFiles == "auto":
+        opt.inputFiles = [getTestDataset(opt.year, opt.isData, fromLocalCIDir=opt.localCIDir)]
+    else:
+        opt.inputFiles=opt.inputFiles.split(',')
+
+    vjj_postproc(opt,args)
+
+
 if __name__ == "__main__":
+
     main()
