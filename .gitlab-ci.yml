@@ -14,6 +14,7 @@ build:
     - mv UserCode CMSSW_10_2_13/src/
     - cd CMSSW_10_2_13/src
     - eval `/cvmfs/cms.cern.ch/common/scramv1 runtime -sh`
+    - git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools
     - /cvmfs/cms.cern.ch/common/scram b -j 8
   artifacts:
     expire_in: 1 day
@@ -30,3 +31,25 @@ list-contents:
     - ls -l
     - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
     - ls -ltrR
+
+test-selection:
+  stage: test
+  tags:
+    - docker
+    - cvmfs
+  script:
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tGSSAPIDelegateCredentials yes\n\tGSSAPITrustDNS yes\n\n" > ~/.ssh/config
+    - echo ${KRB_USERNAME}
+    - echo "${KRB_PASSWORD}" | kinit ${KRB_USERNAME}@CERN.CH
+    - klist
+    - cd CMSSW_10_2_13/src/UserCode/VJJSkimmer
+    - eval `/cvmfs/cms.cern.ch/common/scramv1 runtime -sh`
+    - mkdir data
+    - scp -o StrictHostKeyChecking=no ${KRB_USERNAME}@lxplus:/eos/user/c/cmsewvjj/data/CMSSW_10_2_13/*.* ./data
+    - ls -ltrh ./data
+    - python python/postprocessing/vjj_basetests.py 2016,data 2016,mc 2017,data 2017,mc 2018,data 2018,mc --localCIDir data/
+    - cat report.json
+  artifacts:
+    paths:
+      - ${HOME}/CMSSW_10_2_13/src/UserCode/VJJSkimmer/report.json
