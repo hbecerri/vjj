@@ -63,7 +63,7 @@ class ScaleFactorBase(object):
 
         url=ROOT.gSystem.ExpandPathName(url)
         if not os.path.isfile(url) : 
-            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), url)
+            raise IOError(errno.ENOENT, os.strerror(errno.ENOENT), url)
 
         fIn=ROOT.TFile.Open(url)
         sfObj = fIn.Get(obj)

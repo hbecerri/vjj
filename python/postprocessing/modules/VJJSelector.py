@@ -6,6 +6,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from VJJEvent import VJJEvent,_defaultVjjCfg,_defaultGenVjjCfg
 import numpy as np
+from TriggerLists import UpdateTriggerList
 
 class VJJSelector(Module):
 
@@ -37,13 +38,26 @@ class VJJSelector(Module):
                    'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL','HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'],
                    'mm'      : ['HLT_IsoMu24']}
         }
+        for year in self.trigList:
+            self.trigList[ year ]['others'] = UpdateTriggerList( year , self.trigList[year] )
+            
+        print(self.trigList)
 
         #category codes
         self.finalStates={'a':22,'ee':11*11,'mm':13*13}
 
-        #compile auxiliary C++ code
-        script_dir="${CMSSW_BASE}/src/UserCode/VJJSkimmer/python/postprocessing/helpers/"
-        ROOT.gROOT.ProcessLine(".L {0}/EventShapeVariables.cc++".format(script_dir))
+        #Try to load module via python dictionaries
+        try:
+            ROOT.gSystem.Load("libUserCodeVJJSkimmer")
+            dummy = ROOT.EventShapeVariables
+        #Load it via ROOT ACLIC. NB: this creates the object file in the CMSSW directory,
+        #causing problems if many jobs are working from the same CMSSW directory
+        except Exception as e:
+            print "Could not load module via python, trying via ROOT", e
+            if "/EventShapeVariables_cc.so" not in ROOT.gSystem.GetLibraries():
+                print "Load C++ Worker"
+                ROOT.gROOT.ProcessLine(".L %s/src/UserCode/VJJSkimmer/src/EventShapeVariables.cc++" % os.environ['CMSSW_BASE'])
+            dummy = ROOT.EventShapeVariables
             
     def beginJob(self):
         pass

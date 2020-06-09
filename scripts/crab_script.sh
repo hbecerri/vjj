@@ -23,6 +23,8 @@ mv module $CMSSW_BASE/module
 mv python $CMSSW_BASE/python
 
 fi
+
+ls -l $CMSSW_BASE/*
 echo $@
 echo Found Proxy in: $X509_USER_PROXY
 python -c "from UserCode.VJJSkimmer.postprocessing.vjj_postproc import *; main()" $@

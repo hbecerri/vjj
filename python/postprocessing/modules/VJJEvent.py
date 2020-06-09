@@ -50,7 +50,7 @@ class VJJEvent:
                   'htsoft','centhtsoft']:            
             outv=self.pfix+v
             self.outvars.append(outv)
-            self.out.branch(outv,'F' , limitedPrecision=True)
+            self.out.branch(outv,'F' , limitedPrecision=False)
 
         #reco only
         if not isGen:
@@ -58,7 +58,7 @@ class VJJEvent:
             for v in self.photonExtra:
                 outv=self.pfix+'a_'+v
                 self.outvars.append(outv)
-                self.out.branch(outv,'F', limitedPrecision=True)
+                self.out.branch(outv,'F', limitedPrecision=False)
 
         # integer variables
         for v in ['nwgt', 'fs', 'trig', 'nextraj','ncentj', 'lead_flav', 'sublead_flav']:
@@ -67,7 +67,7 @@ class VJJEvent:
             self.out.branch(outv,'I')
 
         #arrays
-        self.out.branch(self.pfix+"wgt", "F", lenVar="nwgt" ,  limitedPrecision=True)
+        self.out.branch(self.pfix+"wgt", "F", lenVar="nwgt" ,  limitedPrecision=False)
 
 
     def resetOutVars(self):

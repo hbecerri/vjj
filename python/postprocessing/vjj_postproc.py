@@ -127,7 +127,7 @@ def main():
     crab = False
     if opt.inputFiles == "auto":
         opt.inputFiles = [getTestDataset(opt.year, opt.isData, fromLocalCIDir=opt.localCIDir)]
-    if opt.inputFiles == "crab":
+    elif opt.inputFiles == "crab":
         import PhysicsTools.NanoAODTools.postprocessing.framework.crabhelper as nano_crab
         opt.inputFiles = nano_crab.inputFiles()
         crab = True

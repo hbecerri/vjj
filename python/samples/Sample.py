@@ -20,17 +20,52 @@ class SampleNameParser:
         self.regexps.append( re.compile( r'.*(?P<pmx>new_pmx).*' )  )
         self.regexps.append( re.compile( r'.*(?P<backup>backup).*' )  )
         self.regexps.append( re.compile( r'.*(?P<ps>[^_]*PS[^_/]*).*' )  )
-    
-    def parse(self, sample):
+
+    def parse(self , sample):
         ret = [ re.match( sample ) for re in self.regexps ]
         info = {}
         for regexp in [ r for r in ret if r ]:
             for group, value in regexp.groupdict().items():
                 info[group] = value
-        return ret, info
+        
+        return ret , info
 
 
 class Sample:
+    def __init__(self , ds , parser = None):
+        self.ds = ds
+        self.parser = parser if parser else SampleNameParser()
+        self.regexp_results , self.info = self.parser.parse( ds ) 
+
+    def isData(self):
+        return self.info.get('isData' , False) != False
+
+    def year(self):
+        return 2000 + int( self.info['year'] )
+    
+    def tune(self):
+        return self.info.get('tune' , 'noTune' )
+
+    def makeUniqueName(self):
+        uName = self.ds.split('/')[1]
+        if self.isData():
+            uName = "{0}_{1}_{2}".format( uName , self.year() , self.info.get('era') )
+        else:
+            uName = "{0}_{1}".format( uName , self.year() )
+            if 'pmx' in self.info :
+                uName += "_pmx"
+            if 'ext' in self.info :
+                uName += '_ext{0}'.format( self.info['ext'] )
+            if 'backup' in self.info :
+                uName += '_backup'
+            if 'ps' in self.info:
+                uName += '_' + self.info['ps']
+        if 'version' in self.info:
+            uName += '_v' + self.info['version']
+
+        return uName
+
+class SampleList:
     def __init__(self , name , xsections , ds_res , binning=None ):
         self.binning = binning
         self.name = name
