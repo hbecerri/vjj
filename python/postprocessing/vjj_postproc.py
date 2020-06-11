@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 import os, sys
 import ROOT
-import optparse
+import argparse
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 from importlib import import_module
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
@@ -13,6 +13,8 @@ from UserCode.VJJSkimmer.postprocessing.modules.ElectronSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.PhotonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.JetSelector import *
 from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset, getTestCIDir
+from UserCode.VJJSkimmer.samples.Sample import *
+
 
 def defineModules(year,isData):
 
@@ -59,12 +61,18 @@ def defineModules(year,isData):
     return modules
 
 
-def vjj_postproc(opt,args):
+def vjj_postproc(opt, crab = False):
     
     """steers the VJJ analysis"""
 
     #start by defining modules3 to run
     modules=defineModules(opt.year,opt.isData)
+
+    fwkJobReport=False
+    haddFileName = None
+    if crab:
+        fwkJobReport=True
+        haddFileName = 'out.root'
 
     #call post processor
     p=PostProcessor(outputDir=".",
@@ -74,11 +82,12 @@ def vjj_postproc(opt,args):
                     modules=modules,
                     provenance=True,
                     justcount=False,
-                    fwkJobReport=False,
+                    fwkJobReport=fwkJobReport,
                     noOut=False,
                     outputbranchsel = opt.keep_and_drop,
                     maxEntries=opt.maxEntries,
-                    firstEntry=opt.firstEntry)
+                    firstEntry=opt.firstEntry,
+                    haddFileName = haddFileName)
 
     p.run()
 
@@ -87,27 +96,45 @@ def vjj_postproc(opt,args):
 def main():
 
     #parse command line
-    usage = 'usage: %prog [options]'
-    parser = optparse.OptionParser(usage)
-    parser.add_option('-y', '--year',       dest='year',   help='year [%default]',  default=2017,  type=int)
-    parser.add_option(      '--isData',     dest='isData', help='data? [%default]', default=False, action='store_true')
-    parser.add_option('-i', '--inputfiles', dest='inputFiles',   help='input [%default]', type='string',
-                      default='auto')
-    parser.add_option('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop [%default]', type='string',
-                      default='python/postprocessing/etc/keep_and_drop.txt')
-    parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int,
-                      default=None)
-    parser.add_option('-f', '--firstEntry', dest='firstEntry',   help='first entry to process [%default]', type=int,
-                      default=0)
-    parser.add_option('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory [%default]',  default=getTestCIDir(), type='string')
-    (opt, args) = parser.parse_args()
+    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-y', '--year',       dest='year',   help='year',  default=2017,  type=int)
+    parser.add_argument(      '--isData',     dest='isData', help='data?', default=False, action='store_true')
+    parser.add_argument('-i', '--inputfiles', dest='inputFiles',   help='input, should be set to crab to run on GRID', type=str,
+                        default='auto')
+    parser.add_argument('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop', type=str,
+                        default='{0}/python/UserCode/VJJSkimmer/postprocessing/etc/keep_and_drop.txt'.format( os.getenv('CMSSW_BASE' , '.') ) )
+    parser.add_argument('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process', type=int,
+                        default=None)
+    parser.add_argument('-f', '--firstEntry', dest='firstEntry',   help='first entry to process', type=int,
+                        default=0)
+    parser.add_argument('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory',  default=getTestCIDir(), type=str)
+    parser.add_argument('-D', '--dataSet',     dest='dataSet',   help='dataset name to run on, setting it overrides "year" and "data" values.',  default=None, type=str)
 
+    opt, unknownargs = parser.parse_known_args() #job number is passed by crab as the first argument and shouldn't be parsed here
+
+
+    if opt.dataSet:
+        s = SampleNameParser()
+        _, info = s.parse( opt.dataSet )
+        if 'year' in info.keys():
+            opt.year = 2000 + int( info[ 'year' ] )
+            opt.isData = 'isData' in info.keys()
+            print( 'dataset name is {0}'.format( opt.dataSet ) )
+            print( 'year, isData are set from the dataset name to {0} and {1}'.format( opt.year , opt.isData ) )
+        else:
+            raise ValueError( 'dataSet name seems inconsistent: {0}'.format( opt.dataSet ) )
+
+    crab = False
     if opt.inputFiles == "auto":
         opt.inputFiles = [getTestDataset(opt.year, opt.isData, fromLocalCIDir=opt.localCIDir)]
+    elif opt.inputFiles == "crab":
+        import PhysicsTools.NanoAODTools.postprocessing.framework.crabhelper as nano_crab
+        opt.inputFiles = nano_crab.inputFiles()
+        crab = True
     else:
         opt.inputFiles=opt.inputFiles.split(',')
 
-    vjj_postproc(opt,args)
+    vjj_postproc(opt , crab)
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
         #no need for reconstructed efficiency (assumed to be 100% for superclusters)
-        baseSFDir='${CMSSW_BASE}/src/UserCode/VJJSkimmer/python/postprocessing/etc/'
+        baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         photonSFSources={
             2016:{
                 'id'     : (os.path.join(baseSFDir,'Fall17V2_2016_Tight_photons.root'),          'EGamma_SF2D'),

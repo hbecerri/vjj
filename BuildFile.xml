@@ -1,0 +1,5 @@
+<use name="root"/>
+<use name="hepmc"/>
+<export>
+  <lib   name="1"/>
+</export>

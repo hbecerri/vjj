@@ -18,7 +18,7 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
         self.indices=[]
         
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
-        baseSFDir='${CMSSW_BASE}/src/UserCode/VJJSkimmer/python/postprocessing/etc/'
+        baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         eleSFSources={
             2016:{
                 'rec'    : (os.path.join(baseSFDir,'EGM2D_BtoH_GT20GeV_RecoSF_Legacy2016.root'),    'EGamma_SF2D'),

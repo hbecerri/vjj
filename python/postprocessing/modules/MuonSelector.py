@@ -16,7 +16,7 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/MuonPOG
-        baseSFDir='${CMSSW_BASE}/src/UserCode/VJJSkimmer/python/postprocessing/etc/'
+        baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         muSFSources={
             2016:{
                 'id'     : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ID.root'),  'NUM_TightID_DEN_genTracks_eta_pt'),
