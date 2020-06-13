@@ -56,12 +56,12 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         #id+iso requirement (tight id is the 3rd bit)
         hasId=False
         if self.era == 2016:
-            #hasId=((photon.cutBasedBitmap>>2)&0x1) #  Fall17V2 for 2016 is not available in NanoAODv6
-            hasId=((photon.cutBased17Bitmap>>2) & 0x1)
+            hasId=((photon.cutBased>>2)&0x1)
+            #hasId=((photon.cutBased17Bitmap>>2) & 0x1)
         elif self.era == 2017:
-            hasId=((photon.cutBasedBitmap>>2)&0x1)
+            hasId=((photon.cutBased>>2)&0x1)
         elif self.era == 2018:
-            hasId=((photon.cutBasedBitmap>>2)&0x1)
+            hasId=((photon.cutBased>>2)&0x1)
         if not hasId : return False
 
         #additional requirements
