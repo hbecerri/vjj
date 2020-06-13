@@ -112,7 +112,7 @@ def main():
     usage = 'usage: %prog [options]'
     parser = optparse.OptionParser(usage)
     parser.add_option('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory [%default]',  default=getTestCIDir(), type='string')
-    parser.add_option(      '--prepare',    dest='prepare',  help='prepare test input directory? [%default]', default=True, action='store_true')
+    parser.add_option(      '--prepare',    dest='prepare',  help='prepare test input directory? [%default]', default=False, action='store_true')
     parser.add_option(      '--skipCopy',   dest='skipCopy',  help='skip copy to EOS? [%default]', default=False, action='store_true')
     parser.add_option('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process [%default]', type=int, default=5000)  
     (opt, args) = parser.parse_args()
