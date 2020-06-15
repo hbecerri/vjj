@@ -1,3 +1,4 @@
+import subprocess
 import re
 from xml.etree.ElementTree import ElementTree, Element, SubElement, Comment, tostring
 
@@ -29,8 +30,7 @@ class SampleNameParser:
                 info[group] = value
         
         return ret , info
-
-
+    
 class Sample:
     def __init__(self , ds , parser = None):
         self.ds = ds
@@ -65,14 +65,32 @@ class Sample:
 
         return uName
 
+    def GetParent(self):
+        if not hasattr( self , 'parents' ):
+            process = subprocess.Popen( [ '/cvmfs/cms.cern.ch/common/dasgoclient', "-query=parent dataset={0}".format(self.ds) ], stdout=subprocess.PIPE)
+            self.parents = []
+            while True:
+                output = process.stdout.readline()
+                if output == '' and process.poll() is not None:
+                    break
+                if output:
+                    s = output.strip()
+                    self.parents.append( s )
+        if len(self.parents) == 1:
+            return Sample( self.parents[0] )
+        else:
+            print( 'here is the list of found parents for {0} : {1}'.format( self.ds , self.parents ) )
+            return None
+                   
+
 class SampleList:
-    def __init__(self , name , xsections , ds_res , binning=None ):
+    def __init__(self , name , xsections , ds_res , binning=None  , Filter = []):
         self.binning = binning
         self.name = name
         self.xsections = xsections
         self.ds_res = [ re.compile( ds_re ) for ds_re in ds_res ]
         self.parser = SampleNameParser()
-
+        self.filter = Filter
         self.datasets = {}
         
 
@@ -91,7 +109,10 @@ class SampleList:
         return -1
 
     def add_sample(self , sample):
+        if any( [ a in sample for a in self.filter ] ):
+            return
         match = [ ds_re.match( sample ) for ds_re in self.ds_res ]
+        additional_info = []
         if any(match):
             self.datasets[ sample ] = {}
             additional_info, _ = self.parser.parse( sample )
@@ -126,7 +147,9 @@ class SampleList:
 
     def write_html(self , root):
         sample = SubElement( root , "li" )
-        SubElement(sample , 'h1').text = self.name
+        lnk = SubElement(sample , 'a' )
+        SubElement(lnk , 'h1').text = self.name
+        lnk.set('name' , self.name )
         years_el = SubElement( sample , 'ol' )
         years_el.set( 'class' , "w3-display-container")
         byYear = self.available_bins( 'year' )
@@ -153,7 +176,7 @@ class SampleList:
                 bins_el = SubElement( year_el , 'ol' )
                 for bin_val in sorted(binned_samples.keys()):
                     bin_el = SubElement( bins_el , 'li' )
-                    bin_el.text = self.binning + ':' + bin_val
+                    bin_el.text = self.binning + ':' + str(bin_val)
                     dss = binned_samples[bin_val]
                     dss_el = SubElement( bin_el , 'ol' )
                     dss_el.set( 'class',"w3-ul w3-hoverable" )
