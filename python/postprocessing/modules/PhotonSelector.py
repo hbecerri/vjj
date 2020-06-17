@@ -5,7 +5,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     """ Applies standard photon selections, returning a list of indices of good photons """
 
-    def __init__(self , era, min_pt=75., max_eta=2.4, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")]):
+    def __init__(self , era, apply_id = True , min_pt=70., max_eta=2.4, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")]):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
@@ -14,6 +14,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         self.era = era
         self.min_pt = min_pt
         self.max_eta = max_eta
+        self.apply_id = apply_id
         self.min_dr2vetoObjs = dr2vetoObjs
         self.indices=[]
 
@@ -41,7 +42,10 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         return "Photon"
 
     def obj_name(self):
-        return "photon"
+        if self.apply_id:
+            return "photon"
+        else:
+            return 'loosePhoton'
 
     def isGood(self, photon):
 
@@ -62,7 +66,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
             hasId=((photon.cutBased>>2)&0x1)
         elif self.era == 2018:
             hasId=((photon.cutBased>>2)&0x1)
-        if not hasId : return False
+        if not hasId and self.apply_id : return False
 
         #additional requirements
         #ele_veto = photon.electronVeto
@@ -111,3 +115,6 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 photonSelector2016 = lambda : PhotonSelector(2016)
 photonSelector2017 = lambda : PhotonSelector(2017)
 photonSelector2018 = lambda : PhotonSelector(2018)
+loosePhotonSelector2016 = lambda : PhotonSelector(2016 , apply_id=False)
+loosePhotonSelector2017 = lambda : PhotonSelector(2017 , apply_id=False)
+loosePhotonSelector2018 = lambda : PhotonSelector(2018 , apply_id=False)

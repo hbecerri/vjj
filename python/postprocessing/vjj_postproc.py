@@ -16,12 +16,14 @@ from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset, 
 from UserCode.VJJSkimmer.samples.Sample import *
 
 
-def defineModules(year,isData):
+def defineModules(year,isData,isSignal):
 
     """
     configures the modules to be run depending on the year and whether is data or MC
     returns a list of modules
     """
+    if isData and isSignal:
+        raise ValueError('isData and isSignal can not be True at the same time')
 
     modules=[]
     if not isData:
@@ -32,30 +34,30 @@ def defineModules(year,isData):
                                      jetmapname="L1prefiring_jetpt_2016BtoH",
                                      photonroot="L1prefiring_photonpt_2016BtoH.root",
                                      photonmapname="L1prefiring_photonpt_2016BtoH") )
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ])
-            modules.append( vjjSkimmer2016mc() )
+            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() , loosePhotonSelector2016() ])
+            modules.append( vjjSkimmer2016mc(signal=isSignal) )
         if year==2017:
             modules.append( puAutoWeight_2017() )
             modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2017BtoF.root",
                                      jetmapname="L1prefiring_jetpt_2017BtoF",
                                      photonroot="L1prefiring_photonpt_2017BtoF.root",
                                      photonmapname="L1prefiring_photonpt_2017BtoF") )
-            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ])
-            modules.append( vjjSkimmer2017mc() )
+            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() , loosePhotonSelector2017() ])
+            modules.append( vjjSkimmer2017mc(signal=isSignal) )
         if year==2018:
             modules.append( puAutoWeight_2018() )
-            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018() ])
-            modules.append( vjjSkimmer2018mc() )
+            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018() , loosePhotonSelector2018()])
+            modules.append( vjjSkimmer2018mc(signal=isSignal) )
 
     else:
         if year==2016:
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ])
+            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() , loosePhotonSelector2016()])
             modules.append( vjjSkimmer2016data() )
         if year==2017:
-            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ])
+            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() , loosePhotonSelector2017()])
             modules.append( vjjSkimmer2017data() )
         if year==2018:
-            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018() ])
+            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018() , loosePhotonSelector2018()])
             modules.append( vjjSkimmer2018data() )
 
     return modules
@@ -66,7 +68,7 @@ def vjj_postproc(opt, crab = False):
     """steers the VJJ analysis"""
 
     #start by defining modules3 to run
-    modules=defineModules(opt.year,opt.isData)
+    modules=defineModules(opt.year,opt.isData, opt.isSignal)
 
     fwkJobReport=False
     haddFileName = None
@@ -99,6 +101,7 @@ def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-y', '--year',       dest='year',   help='year',  default=2017,  type=int)
     parser.add_argument(      '--isData',     dest='isData', help='data?', default=False, action='store_true')
+    parser.add_argument(      '--isSignal',   dest='isSignal', help='signal?', default=False, action='store_true')
     parser.add_argument('-i', '--inputfiles', dest='inputFiles',   help='input, should be set to crab to run on GRID', type=str,
                         default='auto')
     parser.add_argument('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop', type=str,

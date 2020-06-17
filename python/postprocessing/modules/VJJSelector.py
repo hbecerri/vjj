@@ -4,18 +4,19 @@ import os
 import copy
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-from VJJEvent import VJJEvent,_defaultVjjCfg,_defaultGenVjjCfg
+from VJJEvent import VJJEvent,_defaultVjjCfg,_defaultGenVjjCfg,_defaultVjjSkimCfg
 import numpy as np
-from TriggerLists import UpdateTriggerList
+from TriggerLists import defineTriggerList
 
 class VJJSelector(Module):
 
     """Implements a generic V+2j selection for VBF X studies"""
 
-    def __init__(self, isData, era):
+    def __init__(self, isData, era, bypassSelFilters=False):
 
         self.isData           = isData
         self.era              = era
+        self.bypassSelFilters = bypassSelFilters
         self.vjjEvent         = VJJEvent(cfg=_defaultVjjCfg)
         self.gen_vjjEvent     = None 
         if not isData:
@@ -23,35 +24,19 @@ class VJJSelector(Module):
  
         self.histos={}
 
-        #triggers of interest
-        self.trigList={
-            2016: {'ajj'     : ['HLT_Photon75_R9Id90_HE10_Iso40_EBOnly_VBF'],
-                   'highpta' : ['HLT_Photon175'],
-                   'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'],
-                   'mm'      : ['HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ','HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ','HLT_IsoMu24','HLT_IsoTkMu24']},
-            2017: {'ajj'     : ['HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3'],
-                   'highpta' : ['HLT_Photon200'],
-                   'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL','HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'],
-                   'mm'      : ['HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ','HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8','HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8','HLT_IsoMu27']},
-            2018: {'ajj'     : ['HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3'],
-                   'highpta' : ['HLT_Photon200'],
-                   'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL','HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'],
-                   'mm'      : ['HLT_IsoMu24']}
-        }
-        for year in self.trigList:
-            self.trigList[ year ]['others'] = UpdateTriggerList( year , self.trigList[year] )
-            
-        print(self.trigList)
+        #get trigger list for this year
+        self.trig_dict,self.ctrl_trig_dict = defineTriggerList(self.era)
+        print('Will use the following set of triggers',self.trig_dict, self.ctrl_trig_dict)
 
         #category codes
-        self.finalStates={'a':22,'ee':11*11,'mm':13*13}
+        self.finalStates={'a':22,'ee':11*11,'mm':13*13, 'fake_a':-22}
 
         #Try to load module via python dictionaries
         try:
             ROOT.gSystem.Load("libUserCodeVJJSkimmer")
             dummy = ROOT.EventShapeVariables
-        #Load it via ROOT ACLIC. NB: this creates the object file in the CMSSW directory,
-        #causing problems if many jobs are working from the same CMSSW directory
+            #Load it via ROOT ACLIC. NB: this creates the object file in the CMSSW directory,
+            #causing problems if many jobs are working from the same CMSSW directory
         except Exception as e:
             print "Could not load module via python, trying via ROOT", e
             if "/EventShapeVariables_cc.so" not in ROOT.gSystem.GetLibraries():
@@ -78,6 +63,7 @@ class VJJSelector(Module):
         #define output tree
         self.out = wrappedOutputTree
         self.vjjEvent.makeBranches( self.out )
+        self.out.branch('vjj_passSkim','O')
         self.out.branch('vjj_isGood','O')
 
         if self.gen_vjjEvent:
@@ -94,7 +80,7 @@ class VJJSelector(Module):
             h.Sumw2()
             h.Write()
 
-    def arbitrateBosonCandidate(self,good_photons,good_muons,good_electrons,trig_cats=None):
+    def arbitrateBosonCandidate(self,good_photons,good_muons,good_electrons,trig_cats=None , loose_photons = [] , ctrl_trig_cats = None):
 
         """ 
         arbitrates the boson candidate choice and 
@@ -124,11 +110,22 @@ class VJJSelector(Module):
             isHighPtA = 1 if (trig_cats and trig_cats.count('highpta')>0) else 0
             return 22,[isAjj,isHighPtA],good_photons[0].p4()
 
+        if len(loose_photons)>0:
+            #trigger categories are not re-inforced for the photon case
+            #so that trigger efficiency can be measured
+            isAjj     = 1 if (trig_cats and ctrl_trig_cats.count('ajj')>0)     else 0
+            isHighPtA = 1 if (trig_cats and ctrl_trig_cats.count('highpta')>0) else 0
+            return -22,[isAjj,isHighPtA],loose_photons[0].p4()
+
+
         return None
 
     def analyze(self, event):
 
-        """process event, return True (go to next module) or False (fail, go to next event)"""
+        """
+        process event, return True (go to next module) or False (fail, go to next event)
+        in case self.bypassSelFilters is configured as True, it will always accept the event
+        """
 
         isGoodForReco=self.reco_analyze(event)
         self.out.fillBranch('vjj_isGood',isGoodForReco)
@@ -138,7 +135,10 @@ class VJJSelector(Module):
             isGoodForGen=self.gen_analyze(event)
             self.out.fillBranch('genvjj_isGood',isGoodForGen)
         
-        return  isGoodForReco or isGoodForGen 
+        if self.bypassSelFilters:
+            return True
+
+        return isGoodForReco or isGoodForGen 
 
 
     def gen_analyze(self,event):
@@ -209,7 +209,7 @@ class VJJSelector(Module):
         self.out.fillBranch('genvjj_hasPromptPhoton',True if len(good_photons)>0 else False)
 
         #call boson candidate arbitration
-        trig_cats=['mm','ee','ajj','highpta']
+        trig_cats=['mm','ee','ajj','highpta','control']
         bosonArbitration = self.arbitrateBosonCandidate(good_photons,good_muons,good_elecs,trig_cats)
         if bosonArbitration is None:
             return False
@@ -242,11 +242,14 @@ class VJJSelector(Module):
 
         #start possible event categories by checking the triggers that fired
         trig_cats=[]
-        for cat,tlist in self.trigList[self.era].items():
+        ctrl_trig_cats = []
+        for cat,tlist in self.trig_dict.items():
             tbits=[ getattr(event,t) if hasattr(event,t) else False for t in tlist ]
             if tbits.count(1)==0: continue
             trig_cats.append(cat)
-        if self.isData and len(trig_cats)==0 : return False
+            if any( [ getattr(event,t) if hasattr(event,t) else False for t in self.ctrl_trig_dict[cat] ] ):
+                ctrl_trig_cats.append( cat )
+        if len(trig_cats)==0 and len(ctrl_trig_cats) == 0 : return False
 
         #select base objects for boson construction
         all_muons      = Collection(event, "Muon")
@@ -259,12 +262,16 @@ class VJJSelector(Module):
 
         all_photons     = Collection(event, "Photon")
         good_photonsIdx = event.vjj_photons
+        loose_photonsIdx = event.vjj_loosePhotons
         good_photons    = []
         if len(good_photonsIdx)>0:
             good_photons = [ all_photons[ good_photonsIdx[0] ] ]
+        loose_photons = []
+        if len(loose_photonsIdx)>0:
+            loose_photons = [ all_photons[ loose_photonsIdx[0] ] ]
 
         #call boson candidate arbitration
-        bosonArbitration = self.arbitrateBosonCandidate(good_photons,good_muons,good_electrons,trig_cats)        
+        bosonArbitration = self.arbitrateBosonCandidate(good_photons,good_muons,good_electrons,trig_cats , loose_photons , ctrl_trig_cats)
         if bosonArbitration is None:
             return False
         fsCat,arbTrigCats,boson=bosonArbitration
@@ -331,10 +338,9 @@ class VJJSelector(Module):
 
         
 # define modules using the syntax 'name = lambda : constructor' to avoid having them loaded when not needed
-vjjSkimmer2016data = lambda : VJJSelector(True , 2016) 
-vjjSkimmer2016mc   = lambda : VJJSelector(False , 2016) 
-vjjSkimmer2017data = lambda : VJJSelector(True , 2017) 
-vjjSkimmer2017mc   = lambda : VJJSelector(False , 2017) 
-vjjSkimmer2018data = lambda : VJJSelector(True , 2018) 
-vjjSkimmer2018mc   = lambda : VJJSelector(False , 2018) 
-
+vjjSkimmer2016data   = lambda : VJJSelector(True , 2016) 
+vjjSkimmer2016mc     = lambda signal=False: VJJSelector(False , 2016 , bypassSelFilters=signal) 
+vjjSkimmer2017data   = lambda : VJJSelector(True , 2017) 
+vjjSkimmer2017mc     = lambda signal=False: VJJSelector(False , 2017, bypassSelFilters=signal) 
+vjjSkimmer2018data   = lambda : VJJSelector(True , 2018) 
+vjjSkimmer2018mc     = lambda signal=False: VJJSelector(False , 2018 , bypassSelFilters=signal) 
