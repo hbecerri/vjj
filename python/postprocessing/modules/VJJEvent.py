@@ -1,6 +1,11 @@
 import ROOT
 import copy
 
+
+_defaultVjjSkimCfg={'min_leptonPt':20,
+                    'min_photonPt':70,
+                    'min_jetPt':20}
+
 _defaultVjjCfg={'max_jetEta':4.7,
                 'min_jetPt':20,
                 'min_jetdr2v':0.4,
@@ -41,8 +46,8 @@ class VJJEvent:
                   'v_pt', 'v_eta', 'v_phi', 'v_m', 'v_ystar', 
                   'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v',
                   'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v',
-                  'j_maxEta','j_minEta',
-                  'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_seta',
+                  'j_maxAbsEta','j_minAbsEta',
+                  'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
                   'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m',
                   'vjj_scalarht', 'vjj_isotropy', 'vjj_circularity', 'vjj_sphericity', 'vjj_aplanarity', 
                   'vjj_C', 'vjj_D',
@@ -155,16 +160,17 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'jj_dr2v', jj.DeltaR(v))
         jj_scalarht=tagJets[0].pt+tagJets[1].pt
         self.out.fillBranch(self.pfix+'jj_scalarht',jj_scalarht)
-        etaList=[abs(tagJets[0].eta),abs(tagJets[1].eta)]
+        etaList=[tagJets[0].eta,tagJets[1].eta]
         maxEta=max(etaList)
         minEta=min(etaList)
-        self.out.fillBranch(self.pfix+'j_maxEta',maxEta)
-        self.out.fillBranch(self.pfix+'j_minEta',minEta)
-        self.out.fillBranch(self.pfix+'jj_deta',(maxEta-minEta))
-        jj_seta=(maxEta+minEta)
-        self.out.fillBranch(self.pfix+'jj_seta',jj_seta)
+        etaAbsList=[abs(x) for x in etaList]
+        self.out.fillBranch(self.pfix+'j_maxAbsEta',max(etaAbsList))
+        self.out.fillBranch(self.pfix+'j_minAbsEta',min(etaAbsList))
+        jj_sumabseta=sum(etaAbsList)
+        self.out.fillBranch(self.pfix+'jj_deta',abs(maxEta-minEta))
+        self.out.fillBranch(self.pfix+'jj_sumabseta',jj_sumabseta)
         self.out.fillBranch(self.pfix+'jj_dphi',tagJets[0].p4().DeltaPhi( tagJets[1].p4() ))
-        self.out.fillBranch(self.pfix+'v_ystar',veta-0.5*jj_seta)
+        self.out.fillBranch(self.pfix+'v_ystar',veta-0.5*jj.Eta() )
         
         #hard process object candidates
         vjj=v+jj;
@@ -190,10 +196,12 @@ class VJJEvent:
         extraJets=[j for j in cleanJets if not j in tagJets]
         nextraj,ncentj=len(extraJets),0
         htsoft,centhtsoft=0.,0.
+        minEtaStar=minEta+0.2
+        maxEtaStar=maxEta-0.2
         for j in extraJets:
             htsoft+=j.pt
-            if abs(j.eta)<minEta+0.2 : continue
-            if abs(j.eta)>maxEta+0.2 : continue
+            if j.eta<minEtaStar : continue
+            if j.eta>maxEtaStar : continue
             ncentj+=1
             centhtsoft+=j.pt
             if ncentj>1 : continue
@@ -201,7 +209,7 @@ class VJJEvent:
             self.out.fillBranch(self.pfix+'centj_eta',j.eta)
             self.out.fillBranch(self.pfix+'centj_phi',j.phi)
             self.out.fillBranch(self.pfix+'centj_m',  j.mass)
-            self.out.fillBranch(self.pfix+'centj_ystar',j.eta-0.5*jj_seta)
+            self.out.fillBranch(self.pfix+'centj_ystar',j.eta-0.5*jj.Eta() )
             self.out.fillBranch(self.pfix+'centj_dr2v',j.DeltaR(v))
         
         self.out.fillBranch(self.pfix+'ncentj',ncentj)

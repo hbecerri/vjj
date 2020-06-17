@@ -84,7 +84,7 @@ class Sample:
                    
 
 class SampleList:
-    def __init__(self , name , xsections , ds_res , binning=None  , Filter = []):
+    def __init__(self , name , xsections , ds_res , binning=None  , Filter = [] , signal = False):
         self.binning = binning
         self.name = name
         self.xsections = xsections
@@ -92,6 +92,7 @@ class SampleList:
         self.parser = SampleNameParser()
         self.filter = Filter
         self.datasets = {}
+        self.signal = signal
         
 
     def xsection( self , dataset ):
@@ -114,7 +115,7 @@ class SampleList:
         match = [ ds_re.match( sample ) for ds_re in self.ds_res ]
         additional_info = []
         if any(match):
-            self.datasets[ sample ] = {}
+            self.datasets[ sample ] = {'signal':self.signal}
             additional_info, _ = self.parser.parse( sample )
             for m in [ mm for mm in match+additional_info if mm ]:
                 for group,value in m.groupdict().items():
