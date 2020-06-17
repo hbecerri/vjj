@@ -4,7 +4,9 @@ import copy
 
 _defaultVjjSkimCfg={'min_leptonPt':20,
                     'min_photonPt':70,
-                    'min_jetPt':20}
+                    'max_photonEta':2.4,
+                    'min_jetPt':25,
+                    'max_jetEta':4.7}
 
 _defaultVjjCfg={'max_jetEta':4.7,
                 'min_jetPt':20,
@@ -110,7 +112,7 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'trig', trigWord)
 
         self.out.fillBranch(self.pfix+'fs',   fsCat)
-        if fsCat<=0 : return False
+        if fsCat==0 : return False
 
         #boson selection (base variables)
         self.out.fillBranch(self.pfix+'v_pt',v.Pt())

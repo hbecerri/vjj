@@ -1,11 +1,12 @@
 from ScaleFactorBase import *
 from ObjectSelectorBase import *
+from VJJEvent import _defaultVjjSkimCfg
 
 class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     """ Applies standard photon selections, returning a list of indices of good photons """
 
-    def __init__(self , era, apply_id = True , min_pt=70., max_eta=2.4, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")]):
+    def __init__(self , era, min_pt, max_eta, apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")]):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
@@ -112,9 +113,9 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         return SFs
 
 
-photonSelector2016 = lambda : PhotonSelector(2016)
-photonSelector2017 = lambda : PhotonSelector(2017)
-photonSelector2018 = lambda : PhotonSelector(2018)
-loosePhotonSelector2016 = lambda : PhotonSelector(2016 , apply_id=False)
-loosePhotonSelector2017 = lambda : PhotonSelector(2017 , apply_id=False)
-loosePhotonSelector2018 = lambda : PhotonSelector(2018 , apply_id=False)
+photonSelector2016 = lambda : PhotonSelector(2016, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
+photonSelector2017 = lambda : PhotonSelector(2017, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
+photonSelector2018 = lambda : PhotonSelector(2018, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
+loosePhotonSelector2016 = lambda : PhotonSelector(2016 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
+loosePhotonSelector2017 = lambda : PhotonSelector(2017 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
+loosePhotonSelector2018 = lambda : PhotonSelector(2018 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
