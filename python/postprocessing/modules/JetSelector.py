@@ -1,12 +1,13 @@
 from ScaleFactorBase import *
 from ObjectSelectorBase import *
 import numpy as np
+from VJJEvent import _defaultVjjSkimCfg
 
 class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
 
     """ Applies standard jet selections, returning a list of indices of good jets """
 
-    def __init__(self , era, min_pt=20, max_eta=4.7, dr2vetoObjs=0.4, applyPUid=True, applyEraAdHocCuts=True , vetoObjs = [("Muon", "mu"), ("Electron", "ele"), ("Photon", "photon")] ):
+    def __init__(self , era, min_pt, max_eta, dr2vetoObjs=0.4, applyPUid=True, apply_id=True, applyEraAdHocCuts=True , vetoObjs = [("Muon", "mu"), ("Electron", "ele"), ("Photon", "photon")] ):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
@@ -17,6 +18,9 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
         self.max_eta           = max_eta
         self.min_dr2vetoObjs   = dr2vetoObjs
         self.applyPUid         = applyPUid
+        self.apply_id          = apply_id
+        if not apply_id:
+            self.applyPUid     = False
         self.applyEraAdHocCuts = applyEraAdHocCuts
         self.indices           = []
 
@@ -30,10 +34,13 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
         return "Jet"
 
     def obj_name(self):
-        return "jet"
+        if self.apply_id:
+            return 'jet'
+        else:
+            return "looseJet"
 
     def weight_names(self):
-        return ["vjj_qglqWgt_jets" , "vjj_qglgWgt_jets"]
+        return ["vjj_qglqWgt_{0}s".format(self.obj_name()) , "vjj_qglgWgt_{0}s".format( self.obj_name() )]
 
     def isGood(self,jet):
 
@@ -69,6 +76,9 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
         #jet id: loose + tightLepVeto (these are run-dependent, see below)
         looseID=(jet.jetId & 1)
         tightLepVeto=((jet.jetId>>2) & 1)
+        if not self.apply_id:
+            looseID = True
+            tightLepVeto = True
 
         #era-dependent (optional)
         if self.applyEraAdHocCuts :
@@ -125,12 +135,12 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
             ret = {}
             for k in SFs:
                 selSFs=[x for x in SFs[k] if x]
-                ret["vjj_{0}_jets".format(k)] = np.prod( selSFs )
+                ret["vjj_{0}_{1}s".format( k, self.obj_name() )] = np.prod( selSFs )
             return ret
 
         return SFs
 
         
-jetSelector2016 = lambda : JetSelector(2016)
-jetSelector2017 = lambda : JetSelector(2017)
-jetSelector2018 = lambda : JetSelector(2018)
+jetSelector2016 = lambda apply_id=True : JetSelector(2016,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
+jetSelector2017 = lambda apply_id=True : JetSelector(2017,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
+jetSelector2018 = lambda apply_id=True : JetSelector(2018,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
