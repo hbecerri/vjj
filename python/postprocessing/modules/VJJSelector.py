@@ -57,7 +57,7 @@ class VJJSelector(Module):
         #book aux histos (wgtSum is instantiated on the fly, first time weights are read)
         self.histos={
             'nwgts'   : ROOT.TH1D("nwgts",  ";Number of weights;",3,0,3),
-            'cutflow' : ROOT.TH1F('cutflow',';Selection step; Events',4,0,4)
+            'cutflow' : ROOT.TH1F('cutflow',';Selection step; Events',8,-4,4)
         }
 
         #define output tree
@@ -113,8 +113,8 @@ class VJJSelector(Module):
         if len(loose_photons)>0:
             #trigger categories are not re-inforced for the photon case
             #so that trigger efficiency can be measured
-            isAjj     = 1 if (trig_cats and ctrl_trig_cats.count('ajj')>0)     else 0
-            isHighPtA = 1 if (trig_cats and ctrl_trig_cats.count('highpta')>0) else 0
+            isAjj     = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('ajj')>0)     else 0
+            isHighPtA = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('highpta')>0) else 0
             return -22,[isAjj,isHighPtA],loose_photons[0].p4()
 
 
@@ -138,14 +138,28 @@ class VJJSelector(Module):
         if self.bypassSelFilters:
             return True
 
-        return isGoodForReco or isGoodForGen 
+        if isGoodForGen or isGoodForReco:
+            return True
+
+        nLooseJets    = len(event.vjj_looseJets)
+        if nLooseJets < 2:
+            return False
+
+
+        if self.pass_photon_triggers:
+            nLoosePhotons = len(event.vjj_loosePhotons)
+            if nLoosePhotons==0:
+                return False
+
+        return True
+
 
 
     def gen_analyze(self,event):
 
         """generator-level specific analysis"""
 
-        if self.isData : return True
+        if self.isData : return False
 
         self.gen_vjjEvent.resetOutVars()
 
@@ -209,7 +223,7 @@ class VJJSelector(Module):
         self.out.fillBranch('genvjj_hasPromptPhoton',True if len(good_photons)>0 else False)
 
         #call boson candidate arbitration
-        trig_cats=['mm','ee','ajj','highpta','control']
+        trig_cats=['mm','ee','ajj','highpta']
         bosonArbitration = self.arbitrateBosonCandidate(good_photons,good_muons,good_elecs,trig_cats)
         if bosonArbitration is None:
             return False
@@ -243,6 +257,7 @@ class VJJSelector(Module):
         #start possible event categories by checking the triggers that fired
         trig_cats=[]
         ctrl_trig_cats = []
+        self.pass_photon_triggers = False
         for cat,tlist in self.trig_dict.items():
             tbits=[ getattr(event,t) if hasattr(event,t) else False for t in tlist ]
             if tbits.count(1)==0: continue
@@ -250,6 +265,7 @@ class VJJSelector(Module):
             if any( [ getattr(event,t) if hasattr(event,t) else False for t in self.ctrl_trig_dict[cat] ] ):
                 ctrl_trig_cats.append( cat )
         if len(trig_cats)==0 and len(ctrl_trig_cats) == 0 : return False
+        self.pass_photon_triggers = any( [ t in trig_cats+ctrl_trig_cats for t in ['ajj' , 'highpta'] ] )
 
         #select base objects for boson construction
         all_muons      = Collection(event, "Muon")
@@ -275,7 +291,7 @@ class VJJSelector(Module):
         if bosonArbitration is None:
             return False
         fsCat,arbTrigCats,boson=bosonArbitration
-        self.histos['cutflow'].Fill(1)
+        self.histos['cutflow'].Fill(np.sign(fsCat)*1)
 
         #jet selection
         all_jets = Collection(event, "Jet")
@@ -288,12 +304,14 @@ class VJJSelector(Module):
         #add additional variables
         if fsCat==22:
             self.vjjEvent.fillPhotonExtraBranches(good_photons[0])
+        if fsCat == -22:
+            self.vjjEvent.fillPhotonExtraBranches(loose_photons[0])
 
         #fill scale factors
         if isGoodV2J:
 
-            self.histos['cutflow'].Fill(2)
-            if len(trig_cats)>0 : self.histos['cutflow'].Fill(3)
+            self.histos['cutflow'].Fill(np.sign(fsCat)*2)
+            if len(trig_cats)>0 : self.histos['cutflow'].Fill(np.sign(fsCat)*3)
 
             wgt_dict={}
 
@@ -334,7 +352,7 @@ class VJJSelector(Module):
             self.vjjEvent.fillWeightBranches(wgt_dict)
 
         #all done here
-        return isGoodV2J
+        return True
 
         
 # define modules using the syntax 'name = lambda : constructor' to avoid having them loaded when not needed

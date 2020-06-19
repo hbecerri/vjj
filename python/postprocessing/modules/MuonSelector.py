@@ -1,5 +1,6 @@
 from ScaleFactorBase import *
 from ObjectSelectorBase import *
+from VJJEvent import _defaultVjjSkimCfg
 
 class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
