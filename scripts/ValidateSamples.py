@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
-from Manager import *
-from Sample import *
+from UserCode.VJJSkimmer.samples.Manager import *
+from UserCode.VJJSkimmer.samples.Sample import *
 import json
 import sys
 import subprocess
@@ -109,5 +109,6 @@ def makeListOfParents():
         else:
             print("\#please find parent of {0}".format( ds ) )
         
-makeListOfParents()
+#makeListOfParents()
+#A file called MINIAOD.lst is already created and is available in the python/samples/lists directory
 

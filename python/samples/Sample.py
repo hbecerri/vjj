@@ -84,30 +84,15 @@ class Sample:
                    
 
 class SampleList:
-    def __init__(self , name , xsections , ds_res , binning=None  , Filter = [] , signal = False):
+    def __init__(self , name  , ds_res , binning=None  , Filter = [] , signal = False):
         self.binning = binning
         self.name = name
-        self.xsections = xsections
         self.ds_res = [ re.compile( ds_re ) for ds_re in ds_res ]
         self.parser = SampleNameParser()
         self.filter = Filter
         self.datasets = {}
         self.signal = signal
         
-
-    def xsection( self , dataset ):
-        if type( self.xsections ) in [int, float] :
-            return self.xsections
-
-        ds_info = self.datasets.get( dataset , {} )
-        if ds_info == {}:
-            #print( "dataset {0} is not found in sample {1}".format( dataset , self.name ) )
-            return -1
-        for i, val in self.xsections.items():
-            if ds_info[i[0]] == i[1]:
-                return val
-        #print( "dataset {0} does not have cross section information {1} , {2}".format( dataset , self.xsections , ds_info ) )
-        return -1
 
     def add_sample(self , sample):
         if any( [ a in sample for a in self.filter ] ):
@@ -120,10 +105,35 @@ class SampleList:
             for m in [ mm for mm in match+additional_info if mm ]:
                 for group,value in m.groupdict().items():
                     self.datasets[sample][group] = value
+    def get_binValue(self, ds):
+        if self.binning:
+            if self.binning in self.datasets[ds]:
+                return '{0} : {1}'.format( self.binning , self.datasets[ds][self.binning] )
+            else:
+                return '{0} : {1}'.format( self.binning , 'None' )
+        else:
+            return None
 
     def from_list(self , file ):
         for l in file:
             self.add_sample( l )
+
+
+    def find_dsgroup( self , dataset , binning = None ):
+        if not dataset in self.datasets:
+            print( '{0} is not in {1}'.format( dataset , self.name )) 
+            return []
+        info = self.datasets[dataset]
+        if not binning:
+            binning = self.binning
+        binname = info.get( binning , 'none' )
+        year = info.get( 'year' )
+        return self.filter_datasets( year , binname , binning)
+
+    def filter_datasets(self, year , binvalue , binning  = None):
+        ds_byYear = self.byYear( year )
+        all_bins = self.available_bins( binning , ds_byYear )
+        return all_bins[binvalue] 
 
     def available_bins(self , binning=None , dslist = None):
         if not binning:

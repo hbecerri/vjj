@@ -41,25 +41,33 @@ def FinalSummary( wd , ds , outLFNDirBase ):
     else:
         allfiles = ["{0}/{1}/{2}/{3}/0000/out_{4}.root".format( outLFNDirBase , s_name , job_name , job_time , job_id ) for job_id in finishds+failds+others]
 
-    ret = {'total':0 , 'files':{}}
+    ret = {'total':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0}}
     for f in allfiles:
+        ret['filestat']['nFile'] += 1
         if os.path.exists( f ):
             try:
                 fo = ROOT.TFile.Open( f )
             except:
                 ret['files'][f] = 'error while openning the file'
+                ret['filestat']['nFilesWithError'] += 1
             if fo :
                 cutflow = fo.Get('cutflow') if s.isData() else fo.Get('wgtSum')
                 if cutflow:
-                    ret['files'][f] = cutflow.GetBinContent(1)
-                    ret['total'] += cutflow.GetBinContent(1)
+                    bin_zero = cutflow.FindBin( 0.5 )
+                    yields = cutflow.GetBinContent( bin_zero )
+                    ret['files'][f] = yields
+                    ret['total'] += yields
+                    ret['filestat']['nOkFiles'] += 1
                 else:
                     ret['files'][f] = 'no wgtSum/cutflow histo available'
+                    ret['filestat']['nFilesWithNoHisto'] += 1
                 fo.Close()
             else:
                 ret['files'][f] = 'file is None'
+                ret['filestat']['nNoneFiles'] += 1
         else:
             ret['files'][f] = 'does not exist'
+            ret['filestat']['nNotExisting'] += 1
 
     return ret
         
@@ -183,11 +191,12 @@ def main():
     elif opt.action == 'makecampaignfile':
         outjs = {}
         for ds,info in samples.all_datasets():
-            if not ds in ['/EGamma/Run2018D-02Apr2020-v1/NANOAOD' , '/GJets_Mjj-500_SM_5f_TuneCP5_INTERFERENCE_13TeV-madgraph-pythia8/RunIIAutumn18NanoAODv7-Nano02Apr2020_102X_upgrade2018_realistic_v21-v1/NANOAODSIM' ]:
-                continue
+            print('get information for ds {0}'.format( ds ) )
             s = Sample(ds)
             outjs[ds] = FinalSummary( '{0}_{1}/crab_{2}'.format(  opt.workarea , s.year() , s.makeUniqueName() )  , ds , opt.outLFNDirBase )
-        json.dumps( outjs ,  open('campaign.json' , 'w') )
+        #print outjs
+        with open('campaign.json' , 'w') as f :
+            json.dump( outjs ,  f )
 
     if opt.runcommands:
         print('running commands by this script is not implemented yet')

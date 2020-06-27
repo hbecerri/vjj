@@ -1,0 +1,8 @@
+executable            = /afs/cern.ch/work/h/hbakhshi/VBFGamma/CMSSW_10_6_2/src/genproductions/test/calculateXSectionAndFilterEfficiency/calculateXSectionAndFilterEfficiency.sh
+arguments             = -l $(ProcId)
+output                = output/$(ProcId).out
+error                 = output/$(ProcId).err
+log                   = output/$(ClusterId).log
++JobFlavour           = "tomorrow"
+requirements          = (OpSysAndVer =?= "CentOS7")
+queue 210
