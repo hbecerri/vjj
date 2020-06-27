@@ -12,7 +12,7 @@ config.Data.inputDBS = 'global'
 config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 1
 
-config.Data.outLFNDirBase = '/store/user/hbakhshi/SMP19005/June/'
+config.Data.outLFNDirBase = '/store/group/cmst3/group/top/SMP-19-005/june2020/'
 config.Data.publication = False
 config.section_("Site")
 config.Site.storageSite = "T2_CH_CERN"

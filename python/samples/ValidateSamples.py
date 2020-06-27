@@ -99,3 +99,15 @@ def UpdateList( old_file , new_str , new_file ):
 #UpdateList( 'NanoAODv6_v2.lst' , '02Apr2020' , 'NanoAODv7.lst' )
 #The produced list may contain several non related samples, specially for 2017, samples where their grand parents doesn't contain PU2017 are not reliable and should be removed
 
+def makeListOfParents():
+    parser = SampleNameParser()
+    for ds,_ in currentSampleList.all_datasets():
+        s = Sample(ds , parser)
+        parent = s.GetParent()
+        if parent:
+            print(parent.ds)
+        else:
+            print("\#please find parent of {0}".format( ds ) )
+        
+makeListOfParents()
+

@@ -171,17 +171,17 @@ class VJJSelector(Module):
         for i in range( npswgts ):
             wgts.append( wgts[0]*np.divide(event.PSWeight[i],event.PSWeight[0]) )
 
-        nscalewgts=getattr(event, 'nLHEScaleWeight', 0)
+        nscalewgts=getattr(event, 'nLHEScaleWeight', 0) if hasattr( event , 'nLHEScaleWeight' ) else 0
         self.histos['nwgts'].SetBinContent(2,nscalewgts)
         for i in range( nscalewgts ):
             wgts.append( wgts[0]*np.divide(event.LHEScaleWeight[i],event.LHEScaleWeight[0]) )
 
-        nlherwgwgts=getattr(event, 'nLHEReweightingWeight', 0)
+        nlherwgwgts=getattr(event, 'nLHEReweightingWeight', 0) if hasattr( event , 'nLHEReweightingWeight' ) else 0
         self.histos['nwgts'].SetBinContent(3,nlherwgwgts)
         for i in range( nlherwgwgts ):
             wgts.append( wgts[0]*np.divide(event.LHEReweightingWeight[i],event.LHEReweightingWeight[0]) )
 
-        npdfwgts=getattr(event,'nLHEPdfWeight',0 )
+        npdfwgts=getattr(event,'nLHEPdfWeight',0 ) if hasattr( event , 'nLHEPdfWeight' ) else 0
         self.histos['nwgts'].SetBinContent(4,npdfwgts)
         for i in range( npdfwgts ):
             wgts.append( wgts[0]*np.divide(event.LHEPdfWeight[i],event.LHEPdfWeight[0]) )

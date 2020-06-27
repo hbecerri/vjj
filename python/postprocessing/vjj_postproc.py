@@ -13,8 +13,8 @@ from UserCode.VJJSkimmer.postprocessing.modules.ElectronSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.PhotonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.JetSelector import *
 from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset, getTestCIDir
-from UserCode.VJJSkimmer.samples.Sample import *
-
+from UserCode.VJJSkimmer.samples.Sample import SampleNameParser
+from UserCode.VJJSkimmer.samples.Manager import currentSampleList as samples
 
 def defineModules(year,isData,isSignal):
 
@@ -111,7 +111,7 @@ def main():
     parser.add_argument('-f', '--firstEntry', dest='firstEntry',   help='first entry to process', type=int,
                         default=0)
     parser.add_argument('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory',  default=getTestCIDir(), type=str)
-    parser.add_argument('-D', '--dataSet',     dest='dataSet',   help='dataset name to run on, setting it overrides "year" and "data" values.',  default=None, type=str)
+    parser.add_argument('-D', '--dataSet',     dest='dataSet',   help='dataset name to run on, setting it overrides "year", "data" and "isSignal" values.',  default=None, type=str)
 
     opt, unknownargs = parser.parse_known_args() #job number is passed by crab as the first argument and shouldn't be parsed here
 
@@ -122,8 +122,9 @@ def main():
         if 'year' in info.keys():
             opt.year = 2000 + int( info[ 'year' ] )
             opt.isData = 'isData' in info.keys()
+            opt.isSignal = samples.is_signal( opt.dataSet )
             print( 'dataset name is {0}'.format( opt.dataSet ) )
-            print( 'year, isData are set from the dataset name to {0} and {1}'.format( opt.year , opt.isData ) )
+            print( 'year, isData and isSignal are set from the dataset name to {0}, {1} and {2}'.format( opt.year , opt.isData , opt.isSignal ) )
         else:
             raise ValueError( 'dataSet name seems inconsistent: {0}'.format( opt.dataSet ) )
 

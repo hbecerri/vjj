@@ -73,6 +73,14 @@ class Manager:
             for ds,info in sample.datasets.items():
                 yield ds,info
 
+    def is_signal(self, ds1):
+        for ds,info in self.all_datasets():
+            if ds == ds1:
+                #print('is_signal', info['signal'])
+                return info['signal']
+
+        return False
+
     def write_txt(self, outfname):
         lst = set( [a for a,_ in self.all_datasets() ] )
         with open(outfname , 'w' ) as f:
@@ -85,3 +93,8 @@ class Manager:
 #a = Manager( 'NanoAODv7_v2.lst' )
 #a.write_html()
 #a.write_txt( 'NanoAODv7_v2.lst' )
+import os
+dir=os.path.dirname(os.path.abspath(__file__))
+samplesV6 = lambda : Manager(dir+'/NanoAODv6.lst')
+samplesV7 = lambda : Manager(dir+'/NanoAODv7.lst')
+currentSampleList = samplesV7()
