@@ -4,6 +4,6 @@ __pycache__
 *.d
 *.pcm
 *ACLiC_dict*
-__init__.py
+__init__.pyc
 *~
 crab*
