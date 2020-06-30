@@ -84,7 +84,7 @@ class Sample:
                    
 
 class SampleList:
-    def __init__(self , name  , ds_res , binning=None  , Filter = [] , signal = False):
+    def __init__(self , name  , ds_res , binning=None  , Filter = [] , signal = False , color=None):
         self.binning = binning
         self.name = name
         self.ds_res = [ re.compile( ds_re ) for ds_re in ds_res ]
@@ -92,7 +92,11 @@ class SampleList:
         self.filter = Filter
         self.datasets = {}
         self.signal = signal
-        
+        self.color = color
+        if not self.color:
+            import random
+            self.color = random.randrange(50)
+            print( 'color for sample {0} chosen randomely: {1}'.format( name , self.color ) )
 
     def add_sample(self , sample):
         if any( [ a in sample for a in self.filter ] ):
@@ -105,6 +109,17 @@ class SampleList:
             for m in [ mm for mm in match+additional_info if mm ]:
                 for group,value in m.groupdict().items():
                     self.datasets[sample][group] = value
+
+            if self.binning:
+                if self.binning in self.datasets[sample].keys():
+                    pass
+                else:
+                    self.datasets[sample][self.binning] = 'None'
+
+    def sub_samples(self):
+        for ds in self.datasets:
+            yield Sample(ds , self.parser)
+
     def get_binValue(self, ds):
         if self.binning:
             if self.binning in self.datasets[ds]:

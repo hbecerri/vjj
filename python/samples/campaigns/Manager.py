@@ -9,7 +9,11 @@ from xml.etree.ElementTree import ElementTree, Element, SubElement, Comment, tos
 class Manager():
     def __init__(self, file):
         self.filename = file
-        with open(file) as f:
+        try:
+            __dir=os.path.dirname(os.path.abspath(__file__))
+        except:
+            __dir = os.getcwd()
+        with open('{0}/{1}'.format( __dir , file) ) as f:
             self.js = json.load( f )
 
         isJsonModified = False
@@ -27,7 +31,7 @@ class Manager():
                 isJsonModified = True
 
             if s.isData():
-                xsection = -1
+                xsection = 0
             else:
                 xsection = xsec[parent]
             ntotal = self.js[ds]['total']
@@ -46,10 +50,26 @@ class Manager():
 
         if isJsonModified:
             print('writing json file')
-            with open(file , 'w') as f:
+            with open('{0}/{1}'.format( __dir , file) , 'w') as f:
                 json.dump( self.js , f )
 
+    def get_files_byyear(self , year , just_ok_files = False):
+        for ds,info in self.samples.all_datasets():
+            if info['year']==year:
+                for f,info in self.js[ds]['files'].items():
+                    if just_ok_files:
+                        if type( info ) == str:
+                            continue
+                    yield os.path.abspath(f)
+
     def get_xsection(self, ds):
+        s = Sample(ds)
+        if s.isData():
+            return 0
+        else:
+            return xsec[ self.js[ds]['parent'] ]
+
+    def get_xsection_avg(self, ds):
         try:
             return np.mean( self.LinkedSamples[ds]['xsecs'] )
         except:
@@ -70,6 +90,18 @@ class Manager():
             return 1
         else:
             return lumi*self.get_xsection(ds)/self.get_nTotal(ds)
+
+    def fileInfo(self , f):
+        f = os.path.abspath( f )
+        for year in self.AllInfo:
+            for sample in self.AllInfo[year]:
+                for binval in self.AllInfo[year][sample]:
+                    for ds in self.AllInfo[year][sample][binval]['samples']:
+                        if f in [os.path.abspath(fff) for fff in self.js[ds]['files']]:
+                            s = Sample(ds)
+                            return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_nTotal(ds) , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample}
+
+        raise NameError('no dataset found for file:{0}'.format( f ))
 
     def write_html(self):
         html = Element("html")
@@ -114,7 +146,14 @@ class Manager():
                     for sample in samples_ys:
                         sample_li = SubElement( bin_ol , 'li')
                         sample_li.text = sample
-                    
+                        
+                        div_ds = SubElement( sample_li , 'div')
+                        lo_ds = SubElement( div_ds , 'ul')
+                        for ds_file_prop in ["nFilesWithNoHisto", "nFile", "nOkFiles", "nFilesWithError", "nNotExisting", "nNoneFiles"]:
+                            SubElement( lo_ds , 'li' ).text = '{0} : {1}'.format( ds_file_prop , self.js[ sample ]["filestat"][ds_file_prop] )
+                        lo_ds_files = SubElement( div_ds , 'ul')
+                        for file_ds,file_ds_stat in self.js[sample]['files'].items():
+                            SubElement( lo_ds_files , 'li' ).text = '{0} : {1}'.format( file_ds , file_ds_stat ) 
                 else:
                     s_lst = SubElement( s_bins , 'ol' )
                     
@@ -133,11 +172,18 @@ class Manager():
                             sample_li = SubElement( bin_ol , 'li')
                             sample_li.text = sample
 
+                            div_ds = SubElement( sample_li , 'div')
+                            lo_ds = SubElement( div_ds , 'ul')
+                            for ds_file_prop in ["nFilesWithNoHisto", "nFile", "nOkFiles", "nFilesWithError", "nNotExisting", "nNoneFiles"]:
+                                SubElement( lo_ds , 'li' ).text = '{0} : {1}'.format( ds_file_prop , self.js[ sample ]["filestat"][ds_file_prop] )
+                            lo_ds_files = SubElement( div_ds , 'ul')
+                            for file_ds,file_ds_stat in self.js[sample]['files'].items():
+                                SubElement( lo_ds_files , 'li' ).text = '{0} : {1}'.format( file_ds , file_ds_stat ) 
 
         tree = ElementTree(html)        
         tree.write( '{0}/src/UserCode/VJJPlotter/web/Campaigns/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.filename.split('.')[0] ) )
 
     
 
-a = Manager('june2020')
-a.write_html()
+#a = Manager('june2020')
+#a.write_html()
