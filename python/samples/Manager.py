@@ -4,7 +4,7 @@ from xml.etree.ElementTree import ElementTree, Element, SubElement, Comment, tos
 
 class Manager:
 
-    def __init__(self , lst , update_html=True):
+    def __init__(self , lst , update_html=False):
         self.all_samples = {}
         self.all_samples[ '00DoubleEGData' ] = SampleList( "DoubleEGData"  , ['/DoubleEG/.*' , '/EGamma/.*' ] , 'era' , color=1)
         self.all_samples[ '01PhotonData' ] = SampleList( "PhotonData"  , ['/SinglePhoton/.*' , '/EGamma/.*'] , 'era' , color=1)
