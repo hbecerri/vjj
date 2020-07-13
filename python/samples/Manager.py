@@ -1,6 +1,10 @@
 import os
 from Sample import SampleList
 from xml.etree.ElementTree import ElementTree, Element, SubElement, Comment, tostring
+import json
+
+import os
+__dir=os.path.dirname(os.path.abspath(__file__))
 
 class Manager:
 
@@ -112,8 +116,6 @@ class Manager:
 #a = Manager( 'NanoAODv7_v2.lst' )
 #a.write_html()
 #a.write_txt( 'NanoAODv7_v2.lst' )
-import os
-__dir=os.path.dirname(os.path.abspath(__file__))
 samplesV6 = lambda : Manager(__dir+'/lists/NanoAODv6.lst')
 samplesV7 = lambda : Manager(__dir+'/lists/NanoAODv7.lst')
 currentSampleList = samplesV7()

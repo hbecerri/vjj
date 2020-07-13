@@ -61,7 +61,7 @@ class ObjectSelectorBase( Module ):
 
 
         self.objects = Collection( event , self.collection_name() )
-        self.good_objectsIdx = [ i for i,obj in enumerate( self.objects ) if self.isGood( obj ) ]
+        self.good_objectsIdx = [ i for i,obj in enumerate( self.objects ) if self.isGood( obj ) and i<250 ]
 
         self.out.fillBranch( self.idx_branchName , self.good_objectsIdx )
         

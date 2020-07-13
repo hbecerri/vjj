@@ -59,15 +59,17 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         if min_dr < self.min_dr2vetoObjs : return False
 
         #id+iso requirement (tight id is the 3rd bit)
-        hasId=False
-        if self.era == 2016:
-            hasId=((photon.cutBased>>2)&0x1)
-            #hasId=((photon.cutBased17Bitmap>>2) & 0x1)
-        elif self.era == 2017:
-            hasId=((photon.cutBased>>2)&0x1)
-        elif self.era == 2018:
-            hasId=((photon.cutBased>>2)&0x1)
-        if not hasId and self.apply_id : return False
+        # if self.era == 2016:
+        #     hasId=((photon.cutBased17Bitmap>>2) & 0x1)
+        # elif self.era == 2017:
+        #     hasId=((photon.cutBased>>2)&0x1)
+        # elif self.era == 2018:
+        #     hasId=((photon.cutBased>>2)&0x1)
+        if self.apply_id:
+            hasId= False
+            hasId= photon.cutBased == 3
+            if not hasId:
+                return False
 
         #additional requirements
         #ele_veto = photon.electronVeto

@@ -53,6 +53,24 @@ class Manager():
             with open('{0}/{1}'.format( __dir , file) , 'w') as f:
                 json.dump( self.js , f )
 
+
+
+    def get_dataset_info(self, ds , just_ok_files = True):
+        for year in self.AllInfo:
+            for sample in self.AllInfo[year]:
+                for binval in self.AllInfo[year][sample]:
+                    for ds_ in self.AllInfo[year][sample][binval]['samples']:
+                        s = Sample(ds_)
+                        if ds == ds_ or ds == s.makeUniqueName():
+                            files = []
+                            for f,info in self.js[ds]['files'].items():
+                                if just_ok_files:
+                                    if type( info ) == str:
+                                        continue
+                                files.append( os.path.abspath(f) )
+                            return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_nTotal(ds) , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample , 'files':files}
+        return None
+
     def get_files_byyear(self , year , just_ok_files = False):
         for ds,info in self.samples.all_datasets():
             if info['year']==year:

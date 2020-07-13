@@ -1,1 +1,1472 @@
-{"/GJets_HT-40To100_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "7423490", "xsec": 18580.0, "unit": "pb", "err": 6.172, "negweightfraction": "8.217e-06 +- 6.711e-14"}, "/WJetsToLNu_Pt-400To600_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "951713", "xsec": 2.635, "unit": "pb", "err": 0.005339, "negweightfraction": "3.085e-01 +- 8.188e-05"}, "/DYJetsToLL_M-50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "490508", "xsec": 6.983, "unit": "pb", "err": 0.009447, "negweightfraction": "2.257e-03 +- 1.932e-08"}, "/DYJetsToLL_M-50_HT-600to800_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "49422", "xsec": 1.754, "unit": "pb", "err": 0.007486, "negweightfraction": "2.145e-03 +- 4.463e-07"}, "/WGToLNuG_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "5373836", "xsec": 464.8, "unit": "pb", "err": 0.1539, "negweightfraction": "1.061e-05 +- 1.452e-13"}, "/WJetsToQQ_HT600to800_qc19_3j_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "2016043", "xsec": 59.48, "unit": "pb", "err": 0.03805, "negweightfraction": "2.177e-03 +- 3.499e-09"}, "/GJets_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {"nevents": "80800", "xsec": 32.84, "unit": "pb", "err": 0.02111, "negweightfraction": "1.151e-03 +- 8.022e-08"}, "/WJetsToQQ_HT400to600_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "3375160", "xsec": 315.0, "unit": "pb", "err": 0.1524, "negweightfraction": "1.047e-03 +- 6.759e-10"}, "/GJets_Mjj-500_SM_5f_TuneCP5_INTERFERENCE_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "984000", "xsec": 0.6295, "unit": "pb", "err": 0.0004871, "negweightfraction": "2.829e-01 +- 6.900e-05"}, "/DY3JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "145017", "xsec": 102.0, "unit": "pb", "err": 0.2599, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToQQ_HT400to600_qc19_3j_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "5450480", "xsec": 270.1, "unit": "pb", "err": 0.1048, "negweightfraction": "1.581e-03 +- 1.071e-09"}, "/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {"nevents": "1149467", "xsec": 111.9, "unit": "pb", "err": 0.1005, "negweightfraction": "7.577e-04 +- 7.016e-10"}, "/DYJetsToLL_M-50_HT-800to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "2673066", "xsec": 0.6236, "unit": "pb", "err": 0.0003671, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_SM_5f_TuneCUETP8M1_INTERFERENCEFOR17DATA_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "664400", "xsec": 20.34, "unit": "pb", "err": 0.006679, "negweightfraction": "2.993e-01 +- 9.297e-05"}, "/WJetsToLNu_Pt-250To400_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "1001250", "xsec": 21.83, "unit": "pb", "err": 0.04483, "negweightfraction": "3.156e-01 +- 8.261e-05"}, "/DYJetsToLL_M-50_HT-2500toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "399492", "xsec": 0.003659, "unit": "pb", "err": 5.548e-06, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_Pt-1000To2000_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 0.02094, "unit": "pb", "err": 8.569e-05, "negweightfraction": "1.506e-02 +- 3.758e-07"}, "/DYJetsToLL_M-50_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "3114980", "xsec": 0.8048, "unit": "pb", "err": 0.0004359, "negweightfraction": "4.056e-03 +- 9.745e-09"}, "/DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext2-v3/MINIAODSIM": {"nevents": "1889314", "xsec": 6.988, "unit": "pb", "err": 0.004807, "negweightfraction": "1.395e-03 +- 1.827e-09"}, "/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {"nevents": "51002", "xsec": 307.9, "unit": "pb", "err": 1.257, "negweightfraction": "5.294e-04 +- 5.392e-08"}, "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "6965651", "xsec": 986.6, "unit": "pb", "err": 2.25, "negweightfraction": "2.739e-01 +- 2.423e-05"}, "/QCD_Pt-50to80_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": null, "xsec": 2199000.0, "unit": "pb", "err": 1299.0, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "7349825", "xsec": 8626.0, "unit": "pb", "err": 2.923, "negweightfraction": "1.078e-04 +- 5.381e-12"}, "/GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "10000178", "xsec": 2304.0, "unit": "pb", "err": 0.6897, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-600ToInf_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {"nevents": "3635103", "xsec": 85.1, "unit": "pb", "err": 0.0425, "negweightfraction": "9.243e-04 +- 5.162e-10"}, "/QCD_Pt-300toInf_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 1216.0, "unit": "pb", "err": 0.424, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCH3_13TeV-madgraph-herwig7_corrected/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 0.07805, "unit": "pb", "err": 0.0, "negweightfraction": "7.614e-04 +- 4.479e-10"}, "/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "1677313", "xsec": 43.88, "unit": "pb", "err": 0.03294, "negweightfraction": "9.652e-04 +- 1.074e-09"}, "/WJetsToLNu_Pt-250To400_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext4-v2/MINIAODSIM": {"nevents": "10000018", "xsec": 22.55, "unit": "pb", "err": 0.01465, "negweightfraction": "3.156e-01 +- 2.605e-05"}, "/DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v7/MINIAODSIM": {"nevents": "4084138", "xsec": 6.976, "unit": "pb", "err": 0.003265, "negweightfraction": "1.396e-03 +- 1.034e-09"}, "/EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "272000", "xsec": 1.7, "unit": "pb", "err": 0.0008505, "negweightfraction": "1.945e-03 +- 1.737e-08"}, "/QCD_Pt-30to50_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 6416000.0, "unit": "pb", "err": 2179.0, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/QCD_Pt-80to120_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": null, "xsec": 415500.0, "unit": "pb", "err": 123.8, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-600ToInf_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "3289629", "xsec": 85.23, "unit": "pb", "err": 0.0448, "negweightfraction": "1.762e-03 +- 1.848e-09"}, "/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {"nevents": "5821698", "xsec": 306.6, "unit": "pb", "err": 0.1173, "negweightfraction": "5.306e-04 +- 1.268e-10"}, "/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_v3_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {"nevents": "3254536", "xsec": 875.6, "unit": "pb", "err": 0.4084, "negweightfraction": "3.607e-04 +- 8.563e-11"}, "/GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "2616911", "xsec": 93.43, "unit": "pb", "err": 0.05538, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToLNu_Pt-600ToInf_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "989482", "xsec": 0.4102, "unit": "pb", "err": 0.0007805, "negweightfraction": "2.997e-01 +- 7.619e-05"}, "/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "962195", "xsec": 41.04, "unit": "pb", "err": 0.04009, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_Mjj-500_SM_5f_TuneCUETP8M1_INTERFERENCE_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "995200", "xsec": 0.6502, "unit": "pb", "err": 0.0004279, "negweightfraction": "2.906e-01 +- 7.133e-05"}, "/AJJ_EWK_TuneCUETP8M1_13TeV_amcatnlo-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "4850200", "xsec": 6.275, "unit": "pb", "err": 0.04389, "negweightfraction": "3.392e-01 +- 4.248e-05"}, "/GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "2463946", "xsec": 93.51, "unit": "pb", "err": 0.05712, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/QCD_Pt-80to120_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 415700.0, "unit": "pb", "err": 123.9, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYToLL_1J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "10000074", "xsec": 885.9, "unit": "pb", "err": 1.943, "negweightfraction": "2.726e-01 +- 2.005e-05"}, "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "6779142", "xsec": 687.1, "unit": "pb", "err": 0.5174, "negweightfraction": "4.013e-03 +- 6.204e-09"}, "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCUETP8M1_PSweights_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "996600", "xsec": 0.0465, "unit": "pb", "err": 9.034e-06, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_Pt-650ToInf_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": null, "xsec": 0.3343, "unit": "pb", "err": 0.0008495, "negweightfraction": "3.036e-01 +- 5.488e-05"}, "/QCD_Pt-15to20_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 1324000.0, "unit": "pb", "err": 456.8, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "5131873", "xsec": 9235.0, "unit": "pb", "err": 3.806, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_Pt-200To500_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 70.15, "unit": "pb", "err": 0.2971, "negweightfraction": "1.066e-02 +- 2.488e-07"}, "/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "6621835", "xsec": 48.68, "unit": "pb", "err": 0.01777, "negweightfraction": "1.362e-03 +- 7.342e-10"}, "/WJetsToLNu_Pt-400To600_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "1948286", "xsec": 3.59, "unit": "pb", "err": 0.007304, "negweightfraction": "2.919e-01 +- 5.139e-05"}, "/DYJetsToLL_M-50_HT-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "2606169", "xsec": 147.5, "unit": "pb", "err": 0.0867, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/TTJets_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "10000038", "xsec": 746.0, "unit": "pb", "err": 2.25, "negweightfraction": "3.270e-01 +- 2.775e-05"}, "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {"nevents": "3723079", "xsec": 749.5, "unit": "pb", "err": 2.128, "negweightfraction": "3.104e-01 +- 4.149e-05"}, "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "6243208", "xsec": 687.1, "unit": "pb", "err": 0.5174, "negweightfraction": "4.035e-03 +- 6.512e-09"}, "/GJets_Pt-20To100_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 136700.0, "unit": "pb", "err": 199.1, "negweightfraction": "1.867e-02 +- 6.274e-07"}, "/GJets_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "6588786", "xsec": 2194.0, "unit": "pb", "err": 0.7988, "negweightfraction": "3.426e-04 +- 5.038e-11"}, "/TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "3733029", "xsec": 4.215, "unit": "pb", "err": 0.009121, "negweightfraction": "3.038e-01 +- 3.987e-05"}, "/QCD_Pt-20to30_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 5555000.0, "unit": "pb", "err": 1820.0, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_SM_5f_TuneCH3_EWK_13TeV-madgraph-herwig7/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 32.89, "unit": "pb", "err": 0.0, "negweightfraction": "1.441e-03 +- 3.887e-09"}, "/DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": null, "xsec": 87.74, "unit": "pb", "err": 0.02571, "negweightfraction": "2.327e-04 +- 2.139e-11"}, "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM": {"nevents": "2899024", "xsec": 6526.0, "unit": "pb", "err": 11.47, "negweightfraction": "1.613e-01 +- 1.400e-05"}, "/WJetsToLNu_Pt-100To250_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "6480537", "xsec": 771.8, "unit": "pb", "err": 1.535, "negweightfraction": "3.148e-01 +- 3.223e-05"}, "/QCD_Pt-170to300_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 16550.0, "unit": "pb", "err": 8.369, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToLNu_Pt-250To400_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "4324691", "xsec": 28.04, "unit": "pb", "err": 0.05382, "negweightfraction": "3.048e-01 +- 3.726e-05"}, "/EWK_LLJJ_MLL-50_MJJ-120_TuneCH3_PSweights_13TeV-madgraph-herwig7_corrected/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": null, "xsec": 1.051, "unit": "pb", "err": 0.0, "negweightfraction": "8.862e-04 +- 4.943e-10"}, "/DYJetsToLL_M-50_HT-400to600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "1070454", "xsec": 5.675, "unit": "pb", "err": 0.005273, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "6985000", "xsec": 687.1, "unit": "pb", "err": 0.5174, "negweightfraction": "4.046e-03 +- 6.190e-09"}, "/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "2707750", "xsec": 111.8, "unit": "pb", "err": 0.06546, "negweightfraction": "5.152e-04 +- 1.895e-10"}, "/": {"nevents": null, "xsec": null, "unit": null, "err": null, "negweightfraction": null}, "/DYJetsToLL_M-50_HT-800to1200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "2915934", "xsec": 0.8099, "unit": "pb", "err": 0.0004518, "negweightfraction": "2.592e-03 +- 4.093e-09"}, "/GJets_Pt-100To200_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 1032.0, "unit": "pb", "err": 3.217, "negweightfraction": "1.095e-02 +- 2.259e-07"}, "/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "6285303", "xsec": 306.4, "unit": "pb", "err": 0.1133, "negweightfraction": "3.631e-04 +- 5.492e-11"}, "/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "7274356", "xsec": 875.3, "unit": "pb", "err": 0.2749, "negweightfraction": "3.275e-04 +- 4.195e-11"}, "/QCD_Pt-80to120_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 366400.0, "unit": "pb", "err": 118.5, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToLNu_Pt-100To250_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "9944879", "xsec": 626.4, "unit": "pb", "err": 0.4215, "negweightfraction": "3.194e-01 +- 2.669e-05"}, "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "3025193", "xsec": 727.0, "unit": "pb", "err": 2.108, "negweightfraction": "3.134e-01 +- 4.682e-05"}, "/WJetsToLNu_Pt-50To100_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": null, "unit": null, "err": null, "negweightfraction": null}, "/QCD_Pt-300toInf_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 1100.0, "unit": "pb", "err": 0.6101, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "6399010", "xsec": 160.9, "unit": "pb", "err": 0.05893, "negweightfraction": "7.940e-04 +- 2.598e-10"}, "/GJets_Mjj-500_SM_5f_TuneCUETP8M1_EWK_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "1996500", "xsec": 4.781, "unit": "pb", "err": 0.001108, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "6759626", "xsec": 5333.0, "unit": "pb", "err": 5.805, "negweightfraction": "9.816e-02 +- 3.521e-06"}, "/GJets_SM_5f_TuneCUETP8M1_INTERFERENCE_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "988000", "xsec": 20.69, "unit": "pb", "err": 0.00653, "negweightfraction": "3.014e-01 +- 7.712e-05"}, "/QCD_Pt-50to80_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 2198000.0, "unit": "pb", "err": 664.5, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-40To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "454900", "xsec": 20880.0, "unit": "pb", "err": 28.24, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_Pt-250To400_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": null, "xsec": 33.44, "unit": "pb", "err": 0.05453, "negweightfraction": "2.897e-01 +- 5.261e-05"}, "/WJetsToLNu_Pt-100To250_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4471477", "xsec": 772.0, "unit": "pb", "err": 1.588, "negweightfraction": "3.147e-01 +- 3.880e-05"}, "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext2-v1/MINIAODSIM": {"nevents": "10000120", "xsec": 5927.0, "unit": "pb", "err": 9.21, "negweightfraction": "1.652e-01 +- 7.888e-06"}, "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "13882", "xsec": 5276.0, "unit": "pb", "err": 33.77, "negweightfraction": "1.441e-04 +- 1.468e-08"}, "/QCD_Pt-20to30_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": null, "unit": null, "err": null, "negweightfraction": null}, "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCP5_PSweights_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "992000", "xsec": 0.04917, "unit": "pb", "err": 1.138e-05, "negweightfraction": "1.458e-03 +- 3.273e-09"}, "/WGToLNuG_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4546682", "xsec": 464.9, "unit": "pb", "err": 0.1673, "negweightfraction": "1.848e-05 +- 5.527e-13"}, "/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_v2_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "4328648", "xsec": 43.99, "unit": "pb", "err": 0.02056, "negweightfraction": "1.258e-03 +- 8.023e-10"}, "/DYJetsToLL_M-50_HT-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "3416105", "xsec": 148.8, "unit": "pb", "err": 0.0764, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "74038", "xsec": 0.1941, "unit": "pb", "err": 0.0006827, "negweightfraction": "3.890e-03 +- 4.111e-07"}, "/TTGJets_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "4870911", "xsec": 3.772, "unit": "pb", "err": 0.009507, "negweightfraction": "3.380e-01 +- 4.214e-05"}, "/DYToLL_0J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM": {"nevents": "10000150", "xsec": 4756.0, "unit": "pb", "err": 5.858, "negweightfraction": "9.125e-02 +- 2.510e-06"}, "/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "8541013", "xsec": 876.7, "unit": "pb", "err": 0.2521, "negweightfraction": "3.775e-04 +- 5.213e-11"}, "/DYJetsToLL_M-50_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "4818674", "xsec": 1.744, "unit": "pb", "err": 0.000756, "negweightfraction": "2.984e-03 +- 4.053e-09"}, "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "9238400", "xsec": 687.1, "unit": "pb", "err": 0.5174, "negweightfraction": "4.026e-03 +- 5.354e-09"}, "/GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "4972282", "xsec": 9245.0, "unit": "pb", "err": 3.871, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_Pt-500To1000_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 0.9904, "unit": "pb", "err": 0.004075, "negweightfraction": "1.138e-02 +- 2.487e-07"}, "/DYJetsToLL_M-50_HT-100to200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "325526", "xsec": 160.6, "unit": "pb", "err": 0.2606, "negweightfraction": "5.437e-04 +- 3.632e-09"}, "/LLJJ_INT_SM_5f_LO_TuneCP5_PSweights_13TeV_madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "494000", "xsec": 0.1546, "unit": "pb", "err": 0.0002995, "negweightfraction": "3.857e-01 +- 1.686e-04"}, "/WJetsToLNu_Pt-400To600_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "988234", "xsec": 2.736, "unit": "pb", "err": 0.005472, "negweightfraction": "3.095e-01 +- 8.042e-05"}, "/EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_PSweights_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "3530700", "xsec": 1.7, "unit": "pb", "err": 0.0002266, "negweightfraction": "1.943e-03 +- 2.036e-09"}, "/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "424411", "xsec": 0.003513, "unit": "pb", "err": 5.263e-06, "negweightfraction": "1.327e-02 +- 4.261e-07"}, "/WJetsToQQ_HT-800toInf_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4065889", "xsec": 34.73, "unit": "pb", "err": 0.01546, "negweightfraction": "3.298e-03 +- 5.529e-09"}, "/QCD_Pt-50to80_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 1987000.0, "unit": "pb", "err": 726.5, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/QCD_Pt-170to300_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 18800.0, "unit": "pb", "err": 5.571, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "10000067", "xsec": 2303.0, "unit": "pb", "err": 0.6896, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYToLL_2J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "10000051", "xsec": 341.5, "unit": "pb", "err": 0.3508, "negweightfraction": "3.546e-01 +- 3.194e-05"}, "/WJetsToLNu_Pt-250To400_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM": {"nevents": "1000132", "xsec": 21.81, "unit": "pb", "err": 0.0448, "negweightfraction": "3.154e-01 +- 8.242e-05"}, "/ZGTo2LG_PtG-130_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "868323", "xsec": 0.1585, "unit": "pb", "err": 0.0002468, "negweightfraction": "2.593e-01 +- 6.239e-05"}, "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneEEC5_13TeV-madgraph-herwigpp_corrected/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "2995145", "xsec": 0.0741, "unit": "pb", "err": 6.965e-06, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/QCD_Pt-30to50_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": null, "xsec": 6959000.0, "unit": "pb", "err": 2623.0, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": "401161", "xsec": 0.003476, "unit": "pb", "err": 5.443e-06, "negweightfraction": "2.138e-02 +- 1.042e-06"}, "/EWK_LLJJ_MLL-50_MJJ-120_TuneCH3_PSweights_13TeV-madgraph-herwig7_corrected/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 1.048, "unit": "pb", "err": 0.0, "negweightfraction": "8.698e-04 +- 5.042e-10"}, "/TTGJets_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "1185239", "xsec": 3.759, "unit": "pb", "err": 0.01135, "negweightfraction": "3.385e-01 +- 8.567e-05"}, "/GJets_Pt-2000To5000_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 7.451e-05, "unit": "pb", "err": 4.507e-07, "negweightfraction": "1.231e-01 +- 2.600e-05"}, "/ZGTo2LG_PtG-130_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "754311", "xsec": 0.1599, "unit": "pb", "err": 0.0003593, "negweightfraction": "2.373e-01 +- 5.670e-05"}, "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "5762890", "xsec": 368.7, "unit": "pb", "err": 1.51, "negweightfraction": "3.483e-01 +- 4.081e-05"}, "/DYJetsToLL_M-50_HT-40to70_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "5555310", "xsec": 311.1, "unit": "pb", "err": 0.1164, "negweightfraction": "3.685e-04 +- 5.975e-11"}, "/DiPhotonJetsBox_M40_80-Sherpa/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": null, "xsec": 310.1, "unit": "pb", "err": 0.0808, "negweightfraction": "1.023e-04 +- 7.624e-12"}, "/GJets_Mjj-500_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "560000", "xsec": 4.935, "unit": "pb", "err": 0.001929, "negweightfraction": "2.638e-03 +- 1.922e-08"}, "/GJets_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "3850619", "xsec": 257.7, "unit": "pb", "err": 0.1242, "negweightfraction": "3.940e-04 +- 9.304e-11"}, "/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "623182", "xsec": 48.66, "unit": "pb", "err": 0.05781, "negweightfraction": "8.633e-04 +- 1.979e-09"}, "/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "5748466", "xsec": 111.9, "unit": "pb", "err": 0.04493, "negweightfraction": "7.218e-04 +- 2.315e-10"}, "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext2-v2/MINIAODSIM": {"nevents": "10000191", "xsec": 4925.0, "unit": "pb", "err": 1.264, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToQQ_HT400to600_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4194781", "xsec": 315.2, "unit": "pb", "err": 0.1369, "negweightfraction": "1.531e-03 +- 1.179e-09"}, "/EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "1363700", "xsec": 1.713, "unit": "pb", "err": 0.0003436, "negweightfraction": "2.025e-03 +- 3.957e-09"}, "/ZGTo2LG_PtG-130_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "3345009", "xsec": 0.1599, "unit": "pb", "err": 0.0002915, "negweightfraction": "2.375e-01 +- 2.695e-05"}, "/GJets_HT-40To100_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {"nevents": "4754796", "xsec": 18620.0, "unit": "pb", "err": 7.702, "negweightfraction": "1.346e-05 +- 2.764e-13"}, "/QCD_Pt-20to30_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 4914000.0, "unit": "pb", "err": 1722.0, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_SM_5f_TuneCUETP8M1_EWK_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "1993700", "xsec": 29.76, "unit": "pb", "err": 0.003586, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCH3_13TeV-madgraph-herwig7_corrected/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 0.07819, "unit": "pb", "err": 0.0, "negweightfraction": "7.448e-04 +- 4.228e-10"}, "/GJets_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "3265735", "xsec": 32.72, "unit": "pb", "err": 0.003195, "negweightfraction": "1.219e-03 +- 8.347e-10"}, "/WJetsToLNu_Pt-600ToInf_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "985127", "xsec": 0.4117, "unit": "pb", "err": 0.0007814, "negweightfraction": "2.988e-01 +- 7.540e-05"}, "/QCD_Pt-120to170_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 66500.0, "unit": "pb", "err": 22.95, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "5765101", "xsec": 964.7, "unit": "pb", "err": 2.228, "negweightfraction": "2.760e-01 +- 2.699e-05"}, "/GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "1070654", "xsec": 275.4, "unit": "pb", "err": 0.2542, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_Mjj-500_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {"nevents": "1994000", "xsec": 4.95, "unit": "pb", "err": 0.001118, "negweightfraction": "2.669e-03 +- 5.804e-09"}, "/DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 82.83, "unit": "pb", "err": 0.03393, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-1200to2500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "596079", "xsec": 0.1512, "unit": "pb", "err": 0.0001884, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "997561", "xsec": 6549.0, "unit": "pb", "err": 13.34, "negweightfraction": "1.610e-01 +- 2.381e-05"}, "/WGToLNuG_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "2147532", "xsec": 377.1, "unit": "pb", "err": 0.2048, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {"nevents": "1043658", "xsec": 48.43, "unit": "pb", "err": 0.04454, "negweightfraction": "1.301e-03 +- 3.257e-09"}, "/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "6621160", "xsec": 40.92, "unit": "pb", "err": 0.01524, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-4cores5k_102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "6280824", "xsec": 8608.0, "unit": "pb", "err": 3.162, "negweightfraction": "6.464e-05 +- 2.452e-12"}, "/DY4JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "4197868", "xsec": 54.46, "unit": "pb", "err": 0.026, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/EWK_LLJJ_MLL-50_MJJ-120_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "838800", "xsec": 1.61, "unit": "pb", "err": 0.0004825, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/TTJets_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "10000045", "xsec": 747.1, "unit": "pb", "err": 2.254, "negweightfraction": "3.270e-01 +- 2.774e-05"}, "/DY2JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "10000064", "xsec": 334.4, "unit": "pb", "err": 0.09846, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/AJJ_EWK_TuneCP5_13TeV_amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4703000", "xsec": 6.096, "unit": "pb", "err": 0.04543, "negweightfraction": "3.433e-01 +- 4.406e-05"}, "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "6388211", "xsec": 361.9, "unit": "pb", "err": 1.476, "negweightfraction": "3.499e-01 +- 3.906e-05"}, "/DYJetsToLL_M-50_HT-70to100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "9691660", "xsec": 170.4, "unit": "pb", "err": 0.05046, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/QCD_Pt-30to50_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 6955000.0, "unit": "pb", "err": 3135.0, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToLNu_Pt-600ToInf_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "1989303", "xsec": 0.5491, "unit": "pb", "err": 0.001057, "negweightfraction": "2.907e-01 +- 5.053e-05"}, "/GJets_Pt-5To50_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": null, "xsec": 18070000.0, "unit": "pb", "err": 4791.0, "negweightfraction": "2.538e-01 +- 1.761e-05"}, "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": null, "xsec": null, "unit": null, "err": null, "negweightfraction": null}, "/DYToLL_1J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM": {"nevents": "10000139", "xsec": 885.6, "unit": "pb", "err": 1.943, "negweightfraction": "2.729e-01 +- 2.008e-05"}, "/GJets_Pt-50To100_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": null, "xsec": 20440.0, "unit": "pb", "err": 8.22, "negweightfraction": "2.402e-01 +- 1.590e-05"}, "/QCD_Pt-30to50_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {"nevents": null, "xsec": null, "unit": null, "err": null, "negweightfraction": null}, "/DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 87.24, "unit": "pb", "err": 0.02188, "negweightfraction": "3.053e-04 +- 3.902e-11"}, "/QCD_Pt-50to80_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 1986000.0, "unit": "pb", "err": 657.4, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "625286", "xsec": 0.1927, "unit": "pb", "err": 0.0002346, "negweightfraction": "6.869e-03 +- 8.952e-08"}, "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "7140272", "xsec": 5324.0, "unit": "pb", "err": 5.792, "negweightfraction": "9.832e-02 +- 3.435e-06"}, "/DY1JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "10000098", "xsec": 1012.0, "unit": "pb", "err": 0.2732, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/QCD_Pt-120to170_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": null, "xsec": 76050.0, "unit": "pb", "err": 22.51, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "2529729", "xsec": 274.6, "unit": "pb", "err": 0.1649, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToQQ_HT-800toInf_qc19_3j_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "5490987", "xsec": 30.22, "unit": "pb", "err": 0.01176, "negweightfraction": "3.289e-03 +- 4.705e-09"}, "/WJetsToLNu_Pt-600ToInf_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "1950016", "xsec": 0.5487, "unit": "pb", "err": 0.001061, "negweightfraction": "2.906e-01 +- 5.101e-05"}, "/WJetsToQQ_HT600to800_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4266353", "xsec": 68.6, "unit": "pb", "err": 0.02964, "negweightfraction": "2.129e-03 +- 2.300e-09"}, "/AJJ_EWK_TuneCP5_13TeV_amcatnlo-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "5052000", "xsec": 6.096, "unit": "pb", "err": 0.04543, "negweightfraction": "3.433e-01 +- 4.250e-05"}, "/WJetsToQQ_HT600to800_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "3314192", "xsec": 68.6, "unit": "pb", "err": 0.03358, "negweightfraction": "1.435e-03 +- 1.137e-09"}, "/DYJetsToLL_M-50_HT-70to100_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "74133", "xsec": 146.9, "unit": "pb", "err": 0.4901, "negweightfraction": "6.205e-04 +- 2.650e-08"}, "/TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4536155", "xsec": 4.116, "unit": "pb", "err": 0.008805, "negweightfraction": "3.056e-01 +- 3.654e-05"}, "/QCD_Pt-170to300_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": null, "unit": null, "err": null, "negweightfraction": null}, "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {"nevents": "7916468", "xsec": 5347.0, "unit": "pb", "err": 1.426, "negweightfraction": "4.302e-04 +- 6.605e-11"}, "/GJets_Pt-100To250_13TeV_sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": null, "xsec": 1704.0, "unit": "pb", "err": 7.959, "negweightfraction": "2.618e-01 +- 2.038e-04"}, "/GJets_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "4646958", "xsec": 258.3, "unit": "pb", "err": 0.1133, "negweightfraction": "7.349e-04 +- 2.639e-10"}, "/DYJetsToLL_M-50_HT-600to800_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "229218", "xsec": 1.356, "unit": "pb", "err": 0.002727, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-70to100_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "5610075", "xsec": 146.6, "unit": "pb", "err": 0.05623, "negweightfraction": "4.216e-04 +- 8.295e-11"}, "/LLJJ_INT_SM_5f_LO_TuneCP5_PSweights_13TeV_madgraph-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "498200", "xsec": 0.1496, "unit": "pb", "err": 0.0002424, "negweightfraction": "3.878e-01 +- 1.707e-04"}, "/WJetsToLNu_Pt-100To250_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "10000149", "xsec": 626.1, "unit": "pb", "err": 0.4199, "negweightfraction": "3.193e-01 +- 2.661e-05"}, "/GJets_SM_5f_TuneCP5_INTERFERENCE_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "979000", "xsec": 20.68, "unit": "pb", "err": 0.005397, "negweightfraction": "2.973e-01 +- 7.505e-05"}, "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {"nevents": "9082538", "xsec": 6504.0, "unit": "pb", "err": 10.71, "negweightfraction": "1.610e-01 +- 7.880e-06"}, "/EWK_LLJJ_MLL-50_MJJ-120_TuneEEC5_13TeV-madgraph-herwigpp_corrected/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "2798348", "xsec": 0.9836, "unit": "pb", "err": 0.0001262, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_HT-400to600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "1933021", "xsec": 5.685, "unit": "pb", "err": 0.00393, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/QCD_Pt-80to120_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 366500.0, "unit": "pb", "err": 144.9, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/LLJJ_INT_SM_5f_LO_TuneCP5_PSweights_13TeV_madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "500000", "xsec": 0.1555, "unit": "pb", "err": 0.0002591, "negweightfraction": "3.853e-01 +- 1.704e-04"}, "/WJetsToLNu_Pt-250To400_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "3217973", "xsec": 28.0, "unit": "pb", "err": 0.05574, "negweightfraction": "3.048e-01 +- 4.319e-05"}, "/QCD_Pt-15to20_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {"nevents": null, "xsec": 1324000.0, "unit": "pb", "err": 485.8, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToLNu_Pt-50To100_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "7310523", "xsec": 3575.0, "unit": "pb", "err": 7.581, "negweightfraction": "3.149e-01 +- 3.036e-05"}, "/QCD_Pt-120to170_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {"nevents": null, "xsec": 66520.0, "unit": "pb", "err": 27.2, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/WJetsToLNu_Pt-400To600_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "1967802", "xsec": 3.59, "unit": "pb", "err": 0.007294, "negweightfraction": "2.923e-01 +- 5.131e-05"}, "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "6769253", "xsec": 5344.0, "unit": "pb", "err": 1.541, "negweightfraction": "4.308e-04 +- 7.697e-11"}, "/QCD_Pt-300toInf_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": null, "xsec": 1099.0, "unit": "pb", "err": 0.6125, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DiPhotonJetsBox_M40_80-Sherpa/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": null, "xsec": 310.2, "unit": "pb", "err": 0.09257, "negweightfraction": "9.381e-05 +- 4.670e-12"}, "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM": {"nevents": "3453677", "xsec": 749.3, "unit": "pb", "err": 2.14, "negweightfraction": "3.103e-01 +- 4.303e-05"}, "/GJets_SM_5f_TuneEE5C_EWK_13TeV-madgraph-herwigpp/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "993232", "xsec": 32.78, "unit": "pb", "err": 0.005287, "negweightfraction": "1.145e-03 +- 1.675e-09"}, "/GJets_Mjj-500_SM_5f_TuneCP5_INTERFERENCE_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "974600", "xsec": 0.6245, "unit": "pb", "err": 0.0003801, "negweightfraction": "2.843e-01 +- 6.948e-05"}, "/GJets_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "5876162", "xsec": 2190.0, "unit": "pb", "err": 0.845, "negweightfraction": "1.938e-04 +- 1.719e-11"}, "/DYToLL_0J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {"nevents": "10000066", "xsec": 4754.0, "unit": "pb", "err": 5.856, "negweightfraction": "9.129e-02 +- 2.513e-06"}, "/GJets_SM_5f_TuneEE5C_EWK_13TeV-madgraph-herwigpp/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": "996678", "xsec": 29.65, "unit": "pb", "err": 0.005235, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYToLL_2J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {"nevents": "10000121", "xsec": 339.1, "unit": "pb", "err": 0.3482, "negweightfraction": "3.544e-01 +- 3.192e-05"}, "/WJetsToQQ_HT-800toInf_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {"nevents": "3604055", "xsec": 34.74, "unit": "pb", "err": 0.01639, "negweightfraction": "2.252e-03 +- 2.799e-09"}, "/DiPhotonJetsBox_M40_80-Sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {"nevents": null, "xsec": 302.1, "unit": "pb", "err": 0.1527, "negweightfraction": "0.000e+00 +- 0.000e+00"}, "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {"nevents": "7037803", "xsec": 6494.0, "unit": "pb", "err": 10.79, "negweightfraction": "1.611e-01 +- 8.964e-06"}}
+{
+    "/": {
+        "err": null, 
+        "negweightfraction": null, 
+        "nevents": null, 
+        "unit": null, 
+        "xsec": null
+    }, 
+    "/AJJ_EWK_TuneCP5_13TeV_amcatnlo-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.04543, 
+        "negweightfraction": "3.433e-01 +- 4.250e-05", 
+        "nevents": "5052000", 
+        "unit": "pb", 
+        "xsec": 6.096
+    }, 
+    "/AJJ_EWK_TuneCP5_13TeV_amcatnlo-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.04543, 
+        "negweightfraction": "3.433e-01 +- 4.406e-05", 
+        "nevents": "4703000", 
+        "unit": "pb", 
+        "xsec": 6.096
+    }, 
+    "/AJJ_EWK_TuneCUETP8M1_13TeV_amcatnlo-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.04389, 
+        "negweightfraction": "3.392e-01 +- 4.248e-05", 
+        "nevents": "4850200", 
+        "unit": "pb", 
+        "xsec": 6.275
+    }, 
+    "/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.2749, 
+        "negweightfraction": "3.275e-04 +- 4.195e-11", 
+        "nevents": "7274356", 
+        "unit": "pb", 
+        "xsec": 875.3
+    }, 
+    "/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.2521, 
+        "negweightfraction": "3.775e-04 +- 5.213e-11", 
+        "nevents": "8541013", 
+        "unit": "pb", 
+        "xsec": 876.7
+    }, 
+    "/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_v3_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {
+        "err": 0.4084, 
+        "negweightfraction": "3.607e-04 +- 8.563e-11", 
+        "nevents": "3254536", 
+        "unit": "pb", 
+        "xsec": 875.6
+    }, 
+    "/DY1JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.2732, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "10000098", 
+        "unit": "pb", 
+        "xsec": 1012.0
+    }, 
+    "/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.1133, 
+        "negweightfraction": "3.631e-04 +- 5.492e-11", 
+        "nevents": "6285303", 
+        "unit": "pb", 
+        "xsec": 306.4
+    }, 
+    "/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {
+        "err": 1.257, 
+        "negweightfraction": "5.294e-04 +- 5.392e-08", 
+        "nevents": "51002", 
+        "unit": "pb", 
+        "xsec": 307.9
+    }, 
+    "/DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {
+        "err": 0.1173, 
+        "negweightfraction": "5.306e-04 +- 1.268e-10", 
+        "nevents": "5821698", 
+        "unit": "pb", 
+        "xsec": 306.6
+    }, 
+    "/DY2JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.09846, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "10000064", 
+        "unit": "pb", 
+        "xsec": 334.4
+    }, 
+    "/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.06546, 
+        "negweightfraction": "5.152e-04 +- 1.895e-10", 
+        "nevents": "2707750", 
+        "unit": "pb", 
+        "xsec": 111.8
+    }, 
+    "/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.04493, 
+        "negweightfraction": "7.218e-04 +- 2.315e-10", 
+        "nevents": "5748466", 
+        "unit": "pb", 
+        "xsec": 111.9
+    }, 
+    "/DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {
+        "err": 0.1005, 
+        "negweightfraction": "7.577e-04 +- 7.016e-10", 
+        "nevents": "1149467", 
+        "unit": "pb", 
+        "xsec": 111.9
+    }, 
+    "/DY3JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.2599, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "145017", 
+        "unit": "pb", 
+        "xsec": 102.0
+    }, 
+    "/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.03294, 
+        "negweightfraction": "9.652e-04 +- 1.074e-09", 
+        "nevents": "1677313", 
+        "unit": "pb", 
+        "xsec": 43.88
+    }, 
+    "/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_v2_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.02056, 
+        "negweightfraction": "1.258e-03 +- 8.023e-10", 
+        "nevents": "4328648", 
+        "unit": "pb", 
+        "xsec": 43.99
+    }, 
+    "/DY4JetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.026, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "4197868", 
+        "unit": "pb", 
+        "xsec": 54.46
+    }, 
+    "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 5.792, 
+        "negweightfraction": "9.832e-02 +- 3.435e-06", 
+        "nevents": "7140272", 
+        "unit": "pb", 
+        "xsec": 5324.0
+    }, 
+    "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 5.805, 
+        "negweightfraction": "9.816e-02 +- 3.521e-06", 
+        "nevents": "6759626", 
+        "unit": "pb", 
+        "xsec": 5333.0
+    }, 
+    "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 2.25, 
+        "negweightfraction": "2.739e-01 +- 2.423e-05", 
+        "nevents": "6965651", 
+        "unit": "pb", 
+        "xsec": 986.6
+    }, 
+    "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 2.228, 
+        "negweightfraction": "2.760e-01 +- 2.699e-05", 
+        "nevents": "5765101", 
+        "unit": "pb", 
+        "xsec": 964.7
+    }, 
+    "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 1.51, 
+        "negweightfraction": "3.483e-01 +- 4.081e-05", 
+        "nevents": "5762890", 
+        "unit": "pb", 
+        "xsec": 368.7
+    }, 
+    "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 1.476, 
+        "negweightfraction": "3.499e-01 +- 3.906e-05", 
+        "nevents": "6388211", 
+        "unit": "pb", 
+        "xsec": 361.9
+    }, 
+    "/DYJetsToLL_M-50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.05893, 
+        "negweightfraction": "7.940e-04 +- 2.598e-10", 
+        "nevents": "6399010", 
+        "unit": "pb", 
+        "xsec": 160.9
+    }, 
+    "/DYJetsToLL_M-50_HT-100to200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.2606, 
+        "negweightfraction": "5.437e-04 +- 3.632e-09", 
+        "nevents": "325526", 
+        "unit": "pb", 
+        "xsec": 160.6
+    }, 
+    "/DYJetsToLL_M-50_HT-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.0867, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2606169", 
+        "unit": "pb", 
+        "xsec": 147.5
+    }, 
+    "/DYJetsToLL_M-50_HT-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.0764, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "3416105", 
+        "unit": "pb", 
+        "xsec": 148.8
+    }, 
+    "/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0002346, 
+        "negweightfraction": "6.869e-03 +- 8.952e-08", 
+        "nevents": "625286", 
+        "unit": "pb", 
+        "xsec": 0.1927
+    }, 
+    "/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.0006827, 
+        "negweightfraction": "3.890e-03 +- 4.111e-07", 
+        "nevents": "74038", 
+        "unit": "pb", 
+        "xsec": 0.1941
+    }, 
+    "/DYJetsToLL_M-50_HT-1200to2500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.0001884, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "596079", 
+        "unit": "pb", 
+        "xsec": 0.1512
+    }, 
+    "/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.01777, 
+        "negweightfraction": "1.362e-03 +- 7.342e-10", 
+        "nevents": "6621835", 
+        "unit": "pb", 
+        "xsec": 48.68
+    }, 
+    "/DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {
+        "err": 0.04454, 
+        "negweightfraction": "1.301e-03 +- 3.257e-09", 
+        "nevents": "1043658", 
+        "unit": "pb", 
+        "xsec": 48.43
+    }, 
+    "/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.05781, 
+        "negweightfraction": "8.633e-04 +- 1.979e-09", 
+        "nevents": "623182", 
+        "unit": "pb", 
+        "xsec": 48.66
+    }, 
+    "/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.04009, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "962195", 
+        "unit": "pb", 
+        "xsec": 41.04
+    }, 
+    "/DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.01524, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "6621160", 
+        "unit": "pb", 
+        "xsec": 40.92
+    }, 
+    "/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 5.443e-06, 
+        "negweightfraction": "2.138e-02 +- 1.042e-06", 
+        "nevents": "401161", 
+        "unit": "pb", 
+        "xsec": 0.003476
+    }, 
+    "/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 5.263e-06, 
+        "negweightfraction": "1.327e-02 +- 4.261e-07", 
+        "nevents": "424411", 
+        "unit": "pb", 
+        "xsec": 0.003513
+    }, 
+    "/DYJetsToLL_M-50_HT-2500toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 5.548e-06, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "399492", 
+        "unit": "pb", 
+        "xsec": 0.003659
+    }, 
+    "/DYJetsToLL_M-50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.009447, 
+        "negweightfraction": "2.257e-03 +- 1.932e-08", 
+        "nevents": "490508", 
+        "unit": "pb", 
+        "xsec": 6.983
+    }, 
+    "/DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v7/MINIAODSIM": {
+        "err": 0.003265, 
+        "negweightfraction": "1.396e-03 +- 1.034e-09", 
+        "nevents": "4084138", 
+        "unit": "pb", 
+        "xsec": 6.976
+    }, 
+    "/DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext2-v3/MINIAODSIM": {
+        "err": 0.004807, 
+        "negweightfraction": "1.395e-03 +- 1.827e-09", 
+        "nevents": "1889314", 
+        "unit": "pb", 
+        "xsec": 6.988
+    }, 
+    "/DYJetsToLL_M-50_HT-400to600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.005273, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "1070454", 
+        "unit": "pb", 
+        "xsec": 5.675
+    }, 
+    "/DYJetsToLL_M-50_HT-400to600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.00393, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "1933021", 
+        "unit": "pb", 
+        "xsec": 5.685
+    }, 
+    "/DYJetsToLL_M-50_HT-40to70_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.1164, 
+        "negweightfraction": "3.685e-04 +- 5.975e-11", 
+        "nevents": "5555310", 
+        "unit": "pb", 
+        "xsec": 311.1
+    }, 
+    "/DYJetsToLL_M-50_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.000756, 
+        "negweightfraction": "2.984e-03 +- 4.053e-09", 
+        "nevents": "4818674", 
+        "unit": "pb", 
+        "xsec": 1.744
+    }, 
+    "/DYJetsToLL_M-50_HT-600to800_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.007486, 
+        "negweightfraction": "2.145e-03 +- 4.463e-07", 
+        "nevents": "49422", 
+        "unit": "pb", 
+        "xsec": 1.754
+    }, 
+    "/DYJetsToLL_M-50_HT-600to800_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.002727, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "229218", 
+        "unit": "pb", 
+        "xsec": 1.356
+    }, 
+    "/DYJetsToLL_M-50_HT-70to100_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.4901, 
+        "negweightfraction": "6.205e-04 +- 2.650e-08", 
+        "nevents": "74133", 
+        "unit": "pb", 
+        "xsec": 146.9
+    }, 
+    "/DYJetsToLL_M-50_HT-70to100_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.05623, 
+        "negweightfraction": "4.216e-04 +- 8.295e-11", 
+        "nevents": "5610075", 
+        "unit": "pb", 
+        "xsec": 146.6
+    }, 
+    "/DYJetsToLL_M-50_HT-70to100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.05046, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "9691660", 
+        "unit": "pb", 
+        "xsec": 170.4
+    }, 
+    "/DYJetsToLL_M-50_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.0004359, 
+        "negweightfraction": "4.056e-03 +- 9.745e-09", 
+        "nevents": "3114980", 
+        "unit": "pb", 
+        "xsec": 0.8048
+    }, 
+    "/DYJetsToLL_M-50_HT-800to1200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.0004518, 
+        "negweightfraction": "2.592e-03 +- 4.093e-09", 
+        "nevents": "2915934", 
+        "unit": "pb", 
+        "xsec": 0.8099
+    }, 
+    "/DYJetsToLL_M-50_HT-800to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.0003671, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2673066", 
+        "unit": "pb", 
+        "xsec": 0.6236
+    }, 
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 13.34, 
+        "negweightfraction": "1.610e-01 +- 2.381e-05", 
+        "nevents": "997561", 
+        "unit": "pb", 
+        "xsec": 6549.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM": {
+        "err": 11.47, 
+        "negweightfraction": "1.613e-01 +- 1.400e-05", 
+        "nevents": "2899024", 
+        "unit": "pb", 
+        "xsec": 6526.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 10.79, 
+        "negweightfraction": "1.611e-01 +- 8.964e-06", 
+        "nevents": "7037803", 
+        "unit": "pb", 
+        "xsec": 6494.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {
+        "err": 10.71, 
+        "negweightfraction": "1.610e-01 +- 7.880e-06", 
+        "nevents": "9082538", 
+        "unit": "pb", 
+        "xsec": 6504.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 33.77, 
+        "negweightfraction": "1.441e-04 +- 1.468e-08", 
+        "nevents": "13882", 
+        "unit": "pb", 
+        "xsec": 5276.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 1.541, 
+        "negweightfraction": "4.308e-04 +- 7.697e-11", 
+        "nevents": "6769253", 
+        "unit": "pb", 
+        "xsec": 5344.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {
+        "err": 1.426, 
+        "negweightfraction": "4.302e-04 +- 6.605e-11", 
+        "nevents": "7916468", 
+        "unit": "pb", 
+        "xsec": 5347.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext2-v1/MINIAODSIM": {
+        "err": 9.21, 
+        "negweightfraction": "1.652e-01 +- 7.888e-06", 
+        "nevents": "10000120", 
+        "unit": "pb", 
+        "xsec": 5927.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 1.264, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "10000191", 
+        "unit": "pb", 
+        "xsec": 4925.0
+    }, 
+    "/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext2-v2/MINIAODSIM": {
+        "err": 1.264, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "10000191", 
+        "unit": "pb", 
+        "xsec": 4925.0
+    }, 
+    "/DYToLL_0J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM": {
+        "err": 5.858, 
+        "negweightfraction": "9.125e-02 +- 2.510e-06", 
+        "nevents": "10000150", 
+        "unit": "pb", 
+        "xsec": 4756.0
+    }, 
+    "/DYToLL_0J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 5.856, 
+        "negweightfraction": "9.129e-02 +- 2.513e-06", 
+        "nevents": "10000066", 
+        "unit": "pb", 
+        "xsec": 4754.0
+    }, 
+    "/DYToLL_1J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM": {
+        "err": 1.943, 
+        "negweightfraction": "2.729e-01 +- 2.008e-05", 
+        "nevents": "10000139", 
+        "unit": "pb", 
+        "xsec": 885.6
+    }, 
+    "/DYToLL_1J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 1.943, 
+        "negweightfraction": "2.726e-01 +- 2.005e-05", 
+        "nevents": "10000074", 
+        "unit": "pb", 
+        "xsec": 885.9
+    }, 
+    "/DYToLL_2J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.3508, 
+        "negweightfraction": "3.546e-01 +- 3.194e-05", 
+        "nevents": "10000051", 
+        "unit": "pb", 
+        "xsec": 341.5
+    }, 
+    "/DYToLL_2J_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.3482, 
+        "negweightfraction": "3.544e-01 +- 3.192e-05", 
+        "nevents": "10000121", 
+        "unit": "pb", 
+        "xsec": 339.1
+    }, 
+    "/DiPhotonJetsBox_M40_80-Sherpa/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.09257, 
+        "negweightfraction": "9.381e-05 +- 4.670e-12", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 310.2
+    }, 
+    "/DiPhotonJetsBox_M40_80-Sherpa/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.0808, 
+        "negweightfraction": "1.023e-04 +- 7.624e-12", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 310.1
+    }, 
+    "/DiPhotonJetsBox_M40_80-Sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.1527, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 302.1
+    }, 
+    "/DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.02188, 
+        "negweightfraction": "3.053e-04 +- 3.902e-11", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 87.24
+    }, 
+    "/DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.02571, 
+        "negweightfraction": "2.327e-04 +- 2.139e-11", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 87.74
+    }, 
+    "/DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.03393, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 82.83
+    }, 
+    "/EWK_LLJJ_MLL-50_MJJ-120_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.0004825, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "838800", 
+        "unit": "pb", 
+        "xsec": 1.61
+    }, 
+    "/EWK_LLJJ_MLL-50_MJJ-120_TuneCH3_PSweights_13TeV-madgraph-herwig7_corrected/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.0, 
+        "negweightfraction": "8.862e-04 +- 4.943e-10", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1.051
+    }, 
+    "/EWK_LLJJ_MLL-50_MJJ-120_TuneCH3_PSweights_13TeV-madgraph-herwig7_corrected/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0, 
+        "negweightfraction": "8.698e-04 +- 5.042e-10", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1.048
+    }, 
+    "/EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.0008505, 
+        "negweightfraction": "1.945e-03 +- 1.737e-08", 
+        "nevents": "272000", 
+        "unit": "pb", 
+        "xsec": 1.7
+    }, 
+    "/EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0003436, 
+        "negweightfraction": "2.025e-03 +- 3.957e-09", 
+        "nevents": "1363700", 
+        "unit": "pb", 
+        "xsec": 1.713
+    }, 
+    "/EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_PSweights_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0002266, 
+        "negweightfraction": "1.943e-03 +- 2.036e-09", 
+        "nevents": "3530700", 
+        "unit": "pb", 
+        "xsec": 1.7
+    }, 
+    "/EWK_LLJJ_MLL-50_MJJ-120_TuneEEC5_13TeV-madgraph-herwigpp_corrected/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.0001262, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2798348", 
+        "unit": "pb", 
+        "xsec": 0.9836
+    }, 
+    "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCH3_13TeV-madgraph-herwig7_corrected/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.0, 
+        "negweightfraction": "7.448e-04 +- 4.228e-10", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 0.07819
+    }, 
+    "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCH3_13TeV-madgraph-herwig7_corrected/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0, 
+        "negweightfraction": "7.614e-04 +- 4.479e-10", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 0.07805
+    }, 
+    "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCP5_PSweights_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 1.138e-05, 
+        "negweightfraction": "1.458e-03 +- 3.273e-09", 
+        "nevents": "992000", 
+        "unit": "pb", 
+        "xsec": 0.04917
+    }, 
+    "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneCUETP8M1_PSweights_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 9.034e-06, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "996600", 
+        "unit": "pb", 
+        "xsec": 0.0465
+    }, 
+    "/EWK_LLJJ_MLL_105-160_SM_5f_LO_TuneEEC5_13TeV-madgraph-herwigpp_corrected/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 6.965e-06, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2995145", 
+        "unit": "pb", 
+        "xsec": 0.0741
+    }, 
+    "/GJets_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-4cores5k_102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 3.162, 
+        "negweightfraction": "6.464e-05 +- 2.452e-12", 
+        "nevents": "6280824", 
+        "unit": "pb", 
+        "xsec": 8608.0
+    }, 
+    "/GJets_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 2.923, 
+        "negweightfraction": "1.078e-04 +- 5.381e-12", 
+        "nevents": "7349825", 
+        "unit": "pb", 
+        "xsec": 8626.0
+    }, 
+    "/GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 3.806, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "5131873", 
+        "unit": "pb", 
+        "xsec": 9235.0
+    }, 
+    "/GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 3.871, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "4972282", 
+        "unit": "pb", 
+        "xsec": 9245.0
+    }, 
+    "/GJets_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.845, 
+        "negweightfraction": "1.938e-04 +- 1.719e-11", 
+        "nevents": "5876162", 
+        "unit": "pb", 
+        "xsec": 2190.0
+    }, 
+    "/GJets_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.7988, 
+        "negweightfraction": "3.426e-04 +- 5.038e-11", 
+        "nevents": "6588786", 
+        "unit": "pb", 
+        "xsec": 2194.0
+    }, 
+    "/GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.6896, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "10000067", 
+        "unit": "pb", 
+        "xsec": 2303.0
+    }, 
+    "/GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.6897, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "10000178", 
+        "unit": "pb", 
+        "xsec": 2304.0
+    }, 
+    "/GJets_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.1242, 
+        "negweightfraction": "3.940e-04 +- 9.304e-11", 
+        "nevents": "3850619", 
+        "unit": "pb", 
+        "xsec": 257.7
+    }, 
+    "/GJets_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.1133, 
+        "negweightfraction": "7.349e-04 +- 2.639e-10", 
+        "nevents": "4646958", 
+        "unit": "pb", 
+        "xsec": 258.3
+    }, 
+    "/GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.1649, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2529729", 
+        "unit": "pb", 
+        "xsec": 274.6
+    }, 
+    "/GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.2542, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "1070654", 
+        "unit": "pb", 
+        "xsec": 275.4
+    }, 
+    "/GJets_HT-40To100_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 6.172, 
+        "negweightfraction": "8.217e-06 +- 6.711e-14", 
+        "nevents": "7423490", 
+        "unit": "pb", 
+        "xsec": 18580.0
+    }, 
+    "/GJets_HT-40To100_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14_ext1-v2/MINIAODSIM": {
+        "err": 7.702, 
+        "negweightfraction": "1.346e-05 +- 2.764e-13", 
+        "nevents": "4754796", 
+        "unit": "pb", 
+        "xsec": 18620.0
+    }, 
+    "/GJets_HT-40To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 28.24, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "454900", 
+        "unit": "pb", 
+        "xsec": 20880.0
+    }, 
+    "/GJets_HT-600ToInf_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {
+        "err": 0.0425, 
+        "negweightfraction": "9.243e-04 +- 5.162e-10", 
+        "nevents": "3635103", 
+        "unit": "pb", 
+        "xsec": 85.1
+    }, 
+    "/GJets_HT-600ToInf_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.0448, 
+        "negweightfraction": "1.762e-03 +- 1.848e-09", 
+        "nevents": "3289629", 
+        "unit": "pb", 
+        "xsec": 85.23
+    }, 
+    "/GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.05712, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2463946", 
+        "unit": "pb", 
+        "xsec": 93.51
+    }, 
+    "/GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.05538, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2616911", 
+        "unit": "pb", 
+        "xsec": 93.43
+    }, 
+    "/GJets_Mjj-500_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.001118, 
+        "negweightfraction": "2.669e-03 +- 5.804e-09", 
+        "nevents": "1994000", 
+        "unit": "pb", 
+        "xsec": 4.95
+    }, 
+    "/GJets_Mjj-500_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.001929, 
+        "negweightfraction": "2.638e-03 +- 1.922e-08", 
+        "nevents": "560000", 
+        "unit": "pb", 
+        "xsec": 4.935
+    }, 
+    "/GJets_Mjj-500_SM_5f_TuneCP5_INTERFERENCE_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.0004871, 
+        "negweightfraction": "2.829e-01 +- 6.900e-05", 
+        "nevents": "984000", 
+        "unit": "pb", 
+        "xsec": 0.6295
+    }, 
+    "/GJets_Mjj-500_SM_5f_TuneCP5_INTERFERENCE_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0003801, 
+        "negweightfraction": "2.843e-01 +- 6.948e-05", 
+        "nevents": "974600", 
+        "unit": "pb", 
+        "xsec": 0.6245
+    }, 
+    "/GJets_Mjj-500_SM_5f_TuneCUETP8M1_EWK_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.001108, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "1996500", 
+        "unit": "pb", 
+        "xsec": 4.781
+    }, 
+    "/GJets_Mjj-500_SM_5f_TuneCUETP8M1_INTERFERENCE_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.0004279, 
+        "negweightfraction": "2.906e-01 +- 7.133e-05", 
+        "nevents": "995200", 
+        "unit": "pb", 
+        "xsec": 0.6502
+    }, 
+    "/GJets_Pt-1000To2000_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 8.569e-05, 
+        "negweightfraction": "1.506e-02 +- 3.758e-07", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 0.02094
+    }, 
+    "/GJets_Pt-100To200_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 3.217, 
+        "negweightfraction": "1.095e-02 +- 2.259e-07", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1032.0
+    }, 
+    "/GJets_Pt-100To250_13TeV_sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 7.959, 
+        "negweightfraction": "2.618e-01 +- 2.038e-04", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1704.0
+    }, 
+    "/GJets_Pt-2000To5000_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 4.507e-07, 
+        "negweightfraction": "1.231e-01 +- 2.600e-05", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 7.451e-05
+    }, 
+    "/GJets_Pt-200To500_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.2971, 
+        "negweightfraction": "1.066e-02 +- 2.488e-07", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 70.15
+    }, 
+    "/GJets_Pt-20To100_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 199.1, 
+        "negweightfraction": "1.867e-02 +- 6.274e-07", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 136700.0
+    }, 
+    "/GJets_Pt-250To400_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.05453, 
+        "negweightfraction": "2.897e-01 +- 5.261e-05", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 33.44
+    }, 
+    "/GJets_Pt-500To1000_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.004075, 
+        "negweightfraction": "1.138e-02 +- 2.487e-07", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 0.9904
+    }, 
+    "/GJets_Pt-50To100_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 8.22, 
+        "negweightfraction": "2.402e-01 +- 1.590e-05", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 20440.0
+    }, 
+    "/GJets_Pt-5To50_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 4791.0, 
+        "negweightfraction": "2.538e-01 +- 1.761e-05", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 18070000.0
+    }, 
+    "/GJets_Pt-650ToInf_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.0008495, 
+        "negweightfraction": "3.036e-01 +- 5.488e-05", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 0.3343
+    }, 
+    "/GJets_SM_5f_TuneCH3_EWK_13TeV-madgraph-herwig7/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.0, 
+        "negweightfraction": "1.441e-03 +- 3.887e-09", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 32.89
+    }, 
+    "/GJets_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.003195, 
+        "negweightfraction": "1.219e-03 +- 8.347e-10", 
+        "nevents": "3265735", 
+        "unit": "pb", 
+        "xsec": 32.72
+    }, 
+    "/GJets_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM": {
+        "err": 0.02111, 
+        "negweightfraction": "1.151e-03 +- 8.022e-08", 
+        "nevents": "80800", 
+        "unit": "pb", 
+        "xsec": 32.84
+    }, 
+    "/GJets_SM_5f_TuneCP5_INTERFERENCE_13TeV-madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.005397, 
+        "negweightfraction": "2.973e-01 +- 7.505e-05", 
+        "nevents": "979000", 
+        "unit": "pb", 
+        "xsec": 20.68
+    }, 
+    "/GJets_SM_5f_TuneCUETP8M1_EWK_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.003586, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "1993700", 
+        "unit": "pb", 
+        "xsec": 29.76
+    }, 
+    "/GJets_SM_5f_TuneCUETP8M1_INTERFERENCEFOR17DATA_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.006679, 
+        "negweightfraction": "2.993e-01 +- 9.297e-05", 
+        "nevents": "664400", 
+        "unit": "pb", 
+        "xsec": 20.34
+    }, 
+    "/GJets_SM_5f_TuneCUETP8M1_INTERFERENCE_13TeV-madgraph-pythia8/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.00653, 
+        "negweightfraction": "3.014e-01 +- 7.712e-05", 
+        "nevents": "988000", 
+        "unit": "pb", 
+        "xsec": 20.69
+    }, 
+    "/GJets_SM_5f_TuneEE5C_EWK_13TeV-madgraph-herwigpp/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.005287, 
+        "negweightfraction": "1.145e-03 +- 1.675e-09", 
+        "nevents": "993232", 
+        "unit": "pb", 
+        "xsec": 32.78
+    }, 
+    "/GJets_SM_5f_TuneEE5C_EWK_13TeV-madgraph-herwigpp/RunIISummer16MiniAODv3-94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.005235, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "996678", 
+        "unit": "pb", 
+        "xsec": 29.65
+    }, 
+    "/LLJJ_INT_SM_5f_LO_TuneCP5_PSweights_13TeV_madgraph-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.0002995, 
+        "negweightfraction": "3.857e-01 +- 1.686e-04", 
+        "nevents": "494000", 
+        "unit": "pb", 
+        "xsec": 0.1546
+    }, 
+    "/LLJJ_INT_SM_5f_LO_TuneCP5_PSweights_13TeV_madgraph-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0002591, 
+        "negweightfraction": "3.853e-01 +- 1.704e-04", 
+        "nevents": "500000", 
+        "unit": "pb", 
+        "xsec": 0.1555
+    }, 
+    "/LLJJ_INT_SM_5f_LO_TuneCP5_PSweights_13TeV_madgraph-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.0002424, 
+        "negweightfraction": "3.878e-01 +- 1.707e-04", 
+        "nevents": "498200", 
+        "unit": "pb", 
+        "xsec": 0.1496
+    }, 
+    "/QCD_Pt-120to170_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 22.95, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 66500.0
+    }, 
+    "/QCD_Pt-120to170_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 27.2, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 66520.0
+    }, 
+    "/QCD_Pt-120to170_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 22.51, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 76050.0
+    }, 
+    "/QCD_Pt-15to20_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {
+        "err": 485.8, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1324000.0
+    }, 
+    "/QCD_Pt-15to20_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 456.8, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1324000.0
+    }, 
+    "/QCD_Pt-170to300_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 8.369, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 16550.0
+    }, 
+    "/QCD_Pt-170to300_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 8.369, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 16550.0
+    }, 
+    "/QCD_Pt-170to300_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 5.571, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 18800.0
+    }, 
+    "/QCD_Pt-20to30_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 1722.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 4914000.0
+    }, 
+    "/QCD_Pt-20to30_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 1722.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 4914000.0
+    }, 
+    "/QCD_Pt-20to30_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 1820.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 5555000.0
+    }, 
+    "/QCD_Pt-300toInf_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.6101, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1100.0
+    }, 
+    "/QCD_Pt-300toInf_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.6125, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1099.0
+    }, 
+    "/QCD_Pt-300toInf_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.424, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1216.0
+    }, 
+    "/QCD_Pt-30to50_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {
+        "err": 2179.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 6416000.0
+    }, 
+    "/QCD_Pt-30to50_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 2179.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 6416000.0
+    }, 
+    "/QCD_Pt-30to50_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 3135.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 6955000.0
+    }, 
+    "/QCD_Pt-30to50_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 2623.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 6959000.0
+    }, 
+    "/QCD_Pt-50to80_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 726.5, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1987000.0
+    }, 
+    "/QCD_Pt-50to80_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 657.4, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 1986000.0
+    }, 
+    "/QCD_Pt-50to80_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 664.5, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 2198000.0
+    }, 
+    "/QCD_Pt-50to80_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 1299.0, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 2199000.0
+    }, 
+    "/QCD_Pt-80to120_EMEnriched_TuneCP5_13TeV_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 144.9, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 366500.0
+    }, 
+    "/QCD_Pt-80to120_EMEnriched_TuneCP5_13TeV_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 118.5, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 366400.0
+    }, 
+    "/QCD_Pt-80to120_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 123.9, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 415700.0
+    }, 
+    "/QCD_Pt-80to120_EMEnriched_TuneCUETP8M1_13TeV_pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 123.8, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": null, 
+        "unit": "pb", 
+        "xsec": 415500.0
+    }, 
+    "/TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.009121, 
+        "negweightfraction": "3.038e-01 +- 3.987e-05", 
+        "nevents": "3733029", 
+        "unit": "pb", 
+        "xsec": 4.215
+    }, 
+    "/TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.008805, 
+        "negweightfraction": "3.056e-01 +- 3.654e-05", 
+        "nevents": "4536155", 
+        "unit": "pb", 
+        "xsec": 4.116
+    }, 
+    "/TTGJets_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.009507, 
+        "negweightfraction": "3.380e-01 +- 4.214e-05", 
+        "nevents": "4870911", 
+        "unit": "pb", 
+        "xsec": 3.772
+    }, 
+    "/TTGJets_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.01135, 
+        "negweightfraction": "3.385e-01 +- 8.567e-05", 
+        "nevents": "1185239", 
+        "unit": "pb", 
+        "xsec": 3.759
+    }, 
+    "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext1-v2/MINIAODSIM": {
+        "err": 2.128, 
+        "negweightfraction": "3.104e-01 +- 4.149e-05", 
+        "nevents": "3723079", 
+        "unit": "pb", 
+        "xsec": 749.5
+    }, 
+    "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15_ext2-v1/MINIAODSIM": {
+        "err": 2.14, 
+        "negweightfraction": "3.103e-01 +- 4.303e-05", 
+        "nevents": "3453677", 
+        "unit": "pb", 
+        "xsec": 749.3
+    }, 
+    "/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 2.108, 
+        "negweightfraction": "3.134e-01 +- 4.682e-05", 
+        "nevents": "3025193", 
+        "unit": "pb", 
+        "xsec": 727.0
+    }, 
+    "/TTJets_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 2.254, 
+        "negweightfraction": "3.270e-01 +- 2.774e-05", 
+        "nevents": "10000045", 
+        "unit": "pb", 
+        "xsec": 747.1
+    }, 
+    "/TTJets_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_backup_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 2.25, 
+        "negweightfraction": "3.270e-01 +- 2.775e-05", 
+        "nevents": "10000038", 
+        "unit": "pb", 
+        "xsec": 746.0
+    }, 
+    "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.5174, 
+        "negweightfraction": "4.046e-03 +- 6.190e-09", 
+        "nevents": "6985000", 
+        "unit": "pb", 
+        "xsec": 687.1
+    }, 
+    "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.5174, 
+        "negweightfraction": "4.035e-03 +- 6.512e-09", 
+        "nevents": "6243208", 
+        "unit": "pb", 
+        "xsec": 687.1
+    }, 
+    "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v2/MINIAODSIM": {
+        "err": 0.5174, 
+        "negweightfraction": "4.013e-03 +- 6.204e-09", 
+        "nevents": "6779142", 
+        "unit": "pb", 
+        "xsec": 687.1
+    }, 
+    "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.5174, 
+        "negweightfraction": "4.026e-03 +- 5.354e-09", 
+        "nevents": "9238400", 
+        "unit": "pb", 
+        "xsec": 687.1
+    }, 
+    "/WGToLNuG_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.1539, 
+        "negweightfraction": "1.061e-05 +- 1.452e-13", 
+        "nevents": "5373836", 
+        "unit": "pb", 
+        "xsec": 464.8
+    }, 
+    "/WGToLNuG_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.1673, 
+        "negweightfraction": "1.848e-05 +- 5.527e-13", 
+        "nevents": "4546682", 
+        "unit": "pb", 
+        "xsec": 464.9
+    }, 
+    "/WGToLNuG_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.2048, 
+        "negweightfraction": "0.000e+00 +- 0.000e+00", 
+        "nevents": "2147532", 
+        "unit": "pb", 
+        "xsec": 377.1
+    }, 
+    "/WJetsToLNu_Pt-100To250_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 1.535, 
+        "negweightfraction": "3.148e-01 +- 3.223e-05", 
+        "nevents": "6480537", 
+        "unit": "pb", 
+        "xsec": 771.8
+    }, 
+    "/WJetsToLNu_Pt-100To250_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 1.588, 
+        "negweightfraction": "3.147e-01 +- 3.880e-05", 
+        "nevents": "4471477", 
+        "unit": "pb", 
+        "xsec": 772.0
+    }, 
+    "/WJetsToLNu_Pt-100To250_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.4215, 
+        "negweightfraction": "3.194e-01 +- 2.669e-05", 
+        "nevents": "9944879", 
+        "unit": "pb", 
+        "xsec": 626.4
+    }, 
+    "/WJetsToLNu_Pt-100To250_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.4199, 
+        "negweightfraction": "3.193e-01 +- 2.661e-05", 
+        "nevents": "10000149", 
+        "unit": "pb", 
+        "xsec": 626.1
+    }, 
+    "/WJetsToLNu_Pt-250To400_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.05382, 
+        "negweightfraction": "3.048e-01 +- 3.726e-05", 
+        "nevents": "4324691", 
+        "unit": "pb", 
+        "xsec": 28.04
+    }, 
+    "/WJetsToLNu_Pt-250To400_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.05574, 
+        "negweightfraction": "3.048e-01 +- 4.319e-05", 
+        "nevents": "3217973", 
+        "unit": "pb", 
+        "xsec": 28.0
+    }, 
+    "/WJetsToLNu_Pt-250To400_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.04483, 
+        "negweightfraction": "3.156e-01 +- 8.261e-05", 
+        "nevents": "1001250", 
+        "unit": "pb", 
+        "xsec": 21.83
+    }, 
+    "/WJetsToLNu_Pt-250To400_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v1/MINIAODSIM": {
+        "err": 0.0448, 
+        "negweightfraction": "3.154e-01 +- 8.242e-05", 
+        "nevents": "1000132", 
+        "unit": "pb", 
+        "xsec": 21.81
+    }, 
+    "/WJetsToLNu_Pt-250To400_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext4-v2/MINIAODSIM": {
+        "err": 0.01465, 
+        "negweightfraction": "3.156e-01 +- 2.605e-05", 
+        "nevents": "10000018", 
+        "unit": "pb", 
+        "xsec": 22.55
+    }, 
+    "/WJetsToLNu_Pt-400To600_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.007294, 
+        "negweightfraction": "2.923e-01 +- 5.131e-05", 
+        "nevents": "1967802", 
+        "unit": "pb", 
+        "xsec": 3.59
+    }, 
+    "/WJetsToLNu_Pt-400To600_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.007304, 
+        "negweightfraction": "2.919e-01 +- 5.139e-05", 
+        "nevents": "1948286", 
+        "unit": "pb", 
+        "xsec": 3.59
+    }, 
+    "/WJetsToLNu_Pt-400To600_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.005339, 
+        "negweightfraction": "3.085e-01 +- 8.188e-05", 
+        "nevents": "951713", 
+        "unit": "pb", 
+        "xsec": 2.635
+    }, 
+    "/WJetsToLNu_Pt-400To600_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.005472, 
+        "negweightfraction": "3.095e-01 +- 8.042e-05", 
+        "nevents": "988234", 
+        "unit": "pb", 
+        "xsec": 2.736
+    }, 
+    "/WJetsToLNu_Pt-50To100_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 7.581, 
+        "negweightfraction": "3.149e-01 +- 3.036e-05", 
+        "nevents": "7310523", 
+        "unit": "pb", 
+        "xsec": 3575.0
+    }, 
+    "/WJetsToLNu_Pt-50To100_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 7.581, 
+        "negweightfraction": "3.149e-01 +- 3.036e-05", 
+        "nevents": "7310523", 
+        "unit": "pb", 
+        "xsec": 3575.0
+    }, 
+    "/WJetsToLNu_Pt-600ToInf_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.001061, 
+        "negweightfraction": "2.906e-01 +- 5.101e-05", 
+        "nevents": "1950016", 
+        "unit": "pb", 
+        "xsec": 0.5487
+    }, 
+    "/WJetsToLNu_Pt-600ToInf_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.001057, 
+        "negweightfraction": "2.907e-01 +- 5.053e-05", 
+        "nevents": "1989303", 
+        "unit": "pb", 
+        "xsec": 0.5491
+    }, 
+    "/WJetsToLNu_Pt-600ToInf_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.0007805, 
+        "negweightfraction": "2.997e-01 +- 7.619e-05", 
+        "nevents": "989482", 
+        "unit": "pb", 
+        "xsec": 0.4102
+    }, 
+    "/WJetsToLNu_Pt-600ToInf_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3_ext1-v2/MINIAODSIM": {
+        "err": 0.0007814, 
+        "negweightfraction": "2.988e-01 +- 7.540e-05", 
+        "nevents": "985127", 
+        "unit": "pb", 
+        "xsec": 0.4117
+    }, 
+    "/WJetsToQQ_HT-800toInf_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.01639, 
+        "negweightfraction": "2.252e-03 +- 2.799e-09", 
+        "nevents": "3604055", 
+        "unit": "pb", 
+        "xsec": 34.74
+    }, 
+    "/WJetsToQQ_HT-800toInf_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.01546, 
+        "negweightfraction": "3.298e-03 +- 5.529e-09", 
+        "nevents": "4065889", 
+        "unit": "pb", 
+        "xsec": 34.73
+    }, 
+    "/WJetsToQQ_HT-800toInf_qc19_3j_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.01176, 
+        "negweightfraction": "3.289e-03 +- 4.705e-09", 
+        "nevents": "5490987", 
+        "unit": "pb", 
+        "xsec": 30.22
+    }, 
+    "/WJetsToQQ_HT400to600_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.1524, 
+        "negweightfraction": "1.047e-03 +- 6.759e-10", 
+        "nevents": "3375160", 
+        "unit": "pb", 
+        "xsec": 315.0
+    }, 
+    "/WJetsToQQ_HT400to600_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.1369, 
+        "negweightfraction": "1.531e-03 +- 1.179e-09", 
+        "nevents": "4194781", 
+        "unit": "pb", 
+        "xsec": 315.2
+    }, 
+    "/WJetsToQQ_HT400to600_qc19_3j_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.1048, 
+        "negweightfraction": "1.581e-03 +- 1.071e-09", 
+        "nevents": "5450480", 
+        "unit": "pb", 
+        "xsec": 270.1
+    }, 
+    "/WJetsToQQ_HT600to800_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
+        "err": 0.03358, 
+        "negweightfraction": "1.435e-03 +- 1.137e-09", 
+        "nevents": "3314192", 
+        "unit": "pb", 
+        "xsec": 68.6
+    }, 
+    "/WJetsToQQ_HT600to800_qc19_3j_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.02964, 
+        "negweightfraction": "2.129e-03 +- 2.300e-09", 
+        "nevents": "4266353", 
+        "unit": "pb", 
+        "xsec": 68.6
+    }, 
+    "/WJetsToQQ_HT600to800_qc19_3j_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+        "err": 0.03805, 
+        "negweightfraction": "2.177e-03 +- 3.499e-09", 
+        "nevents": "2016043", 
+        "unit": "pb", 
+        "xsec": 59.48
+    }, 
+    "/ZGTo2LG_PtG-130_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
+        "err": 0.0002915, 
+        "negweightfraction": "2.375e-01 +- 2.695e-05", 
+        "nevents": "3345009", 
+        "unit": "pb", 
+        "xsec": 0.1599
+    }, 
+    "/ZGTo2LG_PtG-130_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM": {
+        "err": 0.0003593, 
+        "negweightfraction": "2.373e-01 +- 5.670e-05", 
+        "nevents": "754311", 
+        "unit": "pb", 
+        "xsec": 0.1599
+    }, 
+    "/ZGTo2LG_PtG-130_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v2/MINIAODSIM": {
+        "err": 0.0002468, 
+        "negweightfraction": "2.593e-01 +- 6.239e-05", 
+        "nevents": "868323", 
+        "unit": "pb", 
+        "xsec": 0.1585
+    }
+}
