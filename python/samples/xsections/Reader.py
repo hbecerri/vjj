@@ -18,8 +18,8 @@ class Reader():
         for scale_re,scale_val in self.scales.items() :
             if scale_re.match( ds ):
                 scale *= scale_val
-        if scale != 1.0:
-            print( ds , vals['xsec'] , scale )
+        #if scale != 1.0:
+        #    print( ds , vals['xsec'] , scale )
         return vals['xsec']*scale
 
     def get_err(self , ds):
