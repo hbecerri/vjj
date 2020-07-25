@@ -54,6 +54,21 @@ class Manager():
                 json.dump( self.js , f )
 
 
+    def get_lumis(self, ds):
+        s = Sample(ds)
+        year = s.year()
+        LUMIS = None
+        if year==2016:
+            LUMIS={'LowAPt':28200.0, 'HighAPt':35900.0}
+        elif year==2017:
+            LUMIS={'LowAPt':7661.0,'HighAPt':41367.0}
+        elif year==2018:
+            LUMIS={'LowAPt':59735.969368,'HighAPt':59735.969368}
+
+        LUMIS['ee'] = LUMIS['HighAPt']
+        LUMIS['mm'] = LUMIS['HighAPt']
+        return LUMIS
+                
 
     def get_dataset_info(self, ds , just_ok_files = True):
         for year in self.AllInfo:
@@ -102,12 +117,13 @@ class Manager():
     def get_nTotal(self , ds):
         return np.sum(  self.LinkedSamples[ds]['nevents'] )
 
-    def get_lumi_weight(self , ds , lumi = 1000 ):
+    def get_lumi_weight(self , ds ):
         s = Sample(ds)
+        lumis = self.get_lumis(ds)
         if s.isData():
-            return 1
+            return dict( [(cat , 1) for cat in lumis] )
         else:
-            return lumi*self.get_xsection(ds)/self.get_nTotal(ds)
+            return dict( [(cat , lumis[cat]*self.get_xsection(ds)/self.get_nTotal(ds)) for cat in lumis] )
 
     def fileInfo(self , f):
         f = os.path.abspath( f )
