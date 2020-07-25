@@ -1,5 +1,4 @@
 #include "../interface/EventShapeVariables.h"
-
 #include "TMath.h"
 
 
