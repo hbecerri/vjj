@@ -5,7 +5,7 @@ import copy
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from UserCode.VJJSkimmer.samples.Sample import Sample
-from UserCode.VJJSkimmer.samples.campaign.Manager import Manager as CampaignManager
+from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
 
 class VJJSkimmer(Module):
 
@@ -16,8 +16,8 @@ class VJJSkimmer(Module):
         self.sample = Sample(sample)
         self.campaign = CampaignManager( campaign )
         
-        self.isData           = self.Sample.isData()
-        self.era              = self.Sample.year()
+        self.isData           = self.sample.isData()
+        self.era              = self.sample.year()
 
         self.xSection         = self.campaign.get_xsection(sample)
         self.nTotal           = self.campaign.get_nTotal(sample)
@@ -37,7 +37,7 @@ class VJJSkimmer(Module):
                 else:
                     ROOT.gROOT.ProcessLine(".L ../../VJJPlotter/src/BDTReader.cc++")
             dummy = ROOT.BDTReader()
-        self.BDTReader()
+        
     def beginJob(self):
         pass
 
@@ -47,7 +47,8 @@ class VJJSkimmer(Module):
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 
         outputFile.cd()
-        self.BDTReader.Init(inputTree)
+        self.BDTReader = ROOT.BDTReader(True,True,True)
+        self.BDTReader.Init(inputTree._ttreereader.GetTree())
         
         #define output tree
         self.out = wrappedOutputTree
@@ -62,6 +63,9 @@ class VJJSkimmer(Module):
         self.out.branch('vjj_lumiWeight' , 'F' )
         self.out.branch('vjj_weight' , 'F' )
 
+        if not self.isData:
+            self.out.branch('vjj_photonIsMatched' , 'B' )
+            self.out.branch('vjj_maxGenPhotonPt' , 'F' )
     def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         pass
 
@@ -79,7 +83,7 @@ class VJJSkimmer(Module):
                 high_pt_lowerCut = 175 if self.era == 2016 else 200
                 if event.vjj_trig==2 and event.vjj_v_pt>high_pt_lowerCut:
                     category = 'HighAPt'
-                else if event.vjj_trig!=2 and event.vjj_v_pt>75:
+                elif event.vjj_trig!=2 and event.vjj_v_pt>75:
                     category = 'LowAPt'
             elif event.vjj_fs == 121 and event.vjj_trig==3:
                 category = 'Zee'
@@ -92,10 +96,11 @@ class VJJSkimmer(Module):
         self.out.fillBranch('vjj_is{0}'.format( category ) , True)
         self.out.fillBranch('vjj_xsection',self.xSection)
         self.out.fillBranch('vjj_nTotal' , self.nTotal)
-        self.out.fillBranch('vjj_lumiWeight' , self.lumiWeights[category])
+        self.out.fillBranch('vjj_lumiWeight' , self.lumiWeights[category if category in ['LowAPt' , 'HighAPt'] else category[1:] ])
 
         self.BDTReader.Process( event._entry )
-        for i,mva_name in self.BDTReader.methodNames.items():
+        for i in range(self.BDTReader.methodNames.size()):
+            mva_name = self.BDTReader.methodNames[i]
             self.out.fillBranch('vjj_mva_{0}'.format( mva_name ) , self.BDTReader.mvaValues[i] )
 
         if self.isData:
@@ -103,4 +108,23 @@ class VJJSkimmer(Module):
         else:
             prefirew =  event.PrefireWeight if self.era != 2018 else 1
             self.out.fillBranch('vjj_weight' , event.vjj_mu_effWgt*event.Generator_weight*event.puWeight*prefirew )
+            
+            genParts = Collection(event , "GenPart")
+            vjjPhotons = Collection(event , "vjj_photons" , 'vjj_nphotons')
+            if event.vjj_nphotons > 0:
+                photons = Collection(event, "Photon" )
+                selectedPhotonIndex = ord(event.vjj_photons[0])
+                photon_genPartIdx = photons[selectedPhotonIndex].genPartIdx
+                if photon_genPartIdx > -1:
+                    self.out.fillBranch( 'vjj_photonIsMatched' , genParts[photon_genPartIdx].statusFlags & 1 )
+                else: self.out.fillBranch( 'vjj_photonIsMatched' , -10 )
+            else: self.out.fillBranch( 'vjj_photonIsMatched' , -20 )
 
+            maxGenPhotonPt = -1
+            for genPart in genParts:
+                if genPart.pdgId == 22:
+                    if genPart.statusFlags & 1 :
+                        if genPart.pt > maxGenPhotonPt :
+                            maxGenPhotonPt = genPart.pt
+            self.out.fillBranch( 'vjj_maxGenPhotonPt' , maxGenPhotonPt )
+        return True

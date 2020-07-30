@@ -16,6 +16,12 @@ class Manager():
         with open('{0}/{1}'.format( __dir , file) ) as f:
             self.js = json.load( f )
 
+        self.isSkimmedCampaign = False
+        if 'generalInfo' in self.js:
+            if 'parentcampaign' in self.js['generalInfo']:
+                self.parentcampaign = Manager( self.js['generalInfo']['parentcampaign'] )
+                self.isSkimmedCampaign = True
+            
         isJsonModified = False
         self.samples = SampleManager( self.js.keys() , update_html=False )
         self.AllInfo = {}
@@ -23,18 +29,22 @@ class Manager():
         for ds, year, binval , sname in self.samples.all_datasets(moreinfo=True):
             s = Sample(ds)
             year = s.year()
-            try:
-                parent = str( self.js[ds]['parent'] )
-            except:
-                parent = s.GetParent().ds
-                self.js[ds]['parent'] = parent
-                isJsonModified = True
+            xsection = 0 if s.isData() else 1
+            ntotal = 0
+                
+            if not self.isSkimmedCampaign:
+                try:
+                    parent = str( self.js[ds]['parent'] )
+                except:
+                    parent = s.GetParent().ds
+                    self.js[ds]['parent'] = parent
+                    isJsonModified = True
 
-            if s.isData():
-                xsection = 0
-            else:
-                xsection = xsec[parent]
-            ntotal = self.js[ds]['total']
+                if s.isData():
+                    xsection = 0
+                else:
+                    xsection = xsec[parent]
+                ntotal = self.js[ds]['total']
 
             if year not in self.AllInfo:
                 self.AllInfo[year] = {sname:{binval:{'xsecs':[] , 'samples':[] , 'nevents':[] }}}
@@ -80,7 +90,7 @@ class Manager():
                             files = []
                             for f,info in self.js[ds]['files'].items():
                                 if just_ok_files:
-                                    if type( info ) == str:
+                                    if type( info ) in [str, unicode]:
                                         continue
                                 files.append( os.path.abspath(f) )
                             return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_nTotal(ds) , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample , 'files':files}
@@ -100,7 +110,10 @@ class Manager():
         if s.isData():
             return 0
         else:
-            return xsec[ self.js[ds]['parent'] ]
+            if 'parent' in self.js[ds]:
+                return xsec[ self.js[ds]['parent'] ]
+            else:
+                return 1
 
     def get_xsection_avg(self, ds):
         try:
