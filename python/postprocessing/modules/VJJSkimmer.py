@@ -54,8 +54,10 @@ class VJJSkimmer(Module):
         self.out = wrappedOutputTree
         self.out.branch('vjj_isHighAPt','O')
         self.out.branch('vjj_isLowAPt','O')
-        self.out.branch('vjj_isZmm','O')
-        self.out.branch('vjj_isZee','O')
+        self.out.branch('vjj_isHighZmm','O')
+        self.out.branch('vjj_isLowZmm','O')
+        self.out.branch('vjj_isHighZee','O')
+        self.out.branch('vjj_isLowZee','O')
         for mva_name in self.BDTReader.methodNames:
             self.out.branch('vjj_mva_{0}'.format( mva_name ) , 'F' )
         self.out.branch('vjj_xsection' , 'F' )
@@ -74,22 +76,26 @@ class VJJSkimmer(Module):
         """
         process event, return True (go to next module) or False (fail, go to next event)
         """
-        for b in ['LowAPt' , 'HighAPt' , 'Zmm' , 'Zee']:
+        for b in ['LowAPt' , 'HighAPt' , 'HighZmm','LowZmm' ,'HighZee' ,'LowZee']:
             self.out.fillBranch('vjj_is{0}'.format( b ) , False)
 
         category = ""
-        if event.vjj_isGood and event.vjj_jj_m>200 and event.vjj_lead_pt>50 and event.vjj_sublead_pt>50:
+        if event.vjj_isGood and event.vjj_jj_m>200 and event.vjj_lead_pt>50 and  event.vjj_sublead_pt>50:
             if event.vjj_fs==22:
                 high_pt_lowerCut = 175 if self.era == 2016 else 200
                 if event.vjj_trig==2 and event.vjj_v_pt>high_pt_lowerCut:
                     category = 'HighAPt'
-                elif event.vjj_trig!=2 and event.vjj_v_pt>75:
+                elif event.vjj_trig!=2 and event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442:
                     category = 'LowAPt'
-            elif event.vjj_fs == 121 and event.vjj_trig==3:
-                category = 'Zee'
-            elif event.vjj_fs == 169 and event.vjj_trig==3:
-                category = 'Zmm'
-
+                elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>high_pt_lowerCut:
+                    category = 'HighZee'
+                elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442:
+                    category = 'LowZee'
+                elif event.vjj_fs == 169 and event.vjj_trig==3 and event.vjj_v_pt>high_pt_lowerCut:
+                    category = 'HighZmm'
+                elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442:
+                    category = 'LowZmm'
+                
         if category == "":
             return False
 
@@ -107,7 +113,7 @@ class VJJSkimmer(Module):
             self.out.fillBranch('vjj_weight' , 1 )
         else:
             prefirew =  event.PrefireWeight if self.era != 2018 else 1
-            self.out.fillBranch('vjj_weight' , event.vjj_mu_effWgt*event.Generator_weight*event.puWeight*prefirew )
+            self.out.fillBranch('vjj_weight' , event.Generator_weight*event.puWeight*prefirew )
             
             genParts = Collection(event , "GenPart")
             vjjPhotons = Collection(event , "vjj_photons" , 'vjj_nphotons')
