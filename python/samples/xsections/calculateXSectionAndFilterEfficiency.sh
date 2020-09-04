@@ -43,7 +43,6 @@ do
     esac
 done
 
-
 echo ${LINENUMBER}
 mapfile -s ${LINENUMBER} -n 1 datasets < ${FILE}
 export dataset=${datasets[0]::-1}

@@ -12,7 +12,7 @@ def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-c', '--campaign',     dest='campaign',   help='campaign',  default=None, type=str)
     parser.add_argument('--nfilesperchunk',     dest='nfilesperchunk',   help='number of files to run on',  default=1, type=int)
-    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory, $TOP_CMG_AREA/SMP-19-005/$campaign/$outdir/',  default='Skimmed', type=str)
+    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory, /eos/user/n/nshafiei/SMP19005/$outdir/',  default='Skimmed', type=str)
     parser.add_argument('-l', '--logdir',     dest='logdir',   help='logdir',  default='SkimmerCondor', type=str)
     parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='8nh' , choices=['8nm' , '1nh' , '8nh' , '1nd' , '2nd' , '1nw' , '2nw'], type=str)
     parser.add_argument('--outfilename', dest='outfilename',   help='the name of the submit file',  default='vjj_finalSkimmer.submit' , type=str)
