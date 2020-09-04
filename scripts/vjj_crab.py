@@ -173,6 +173,9 @@ def main():
     elif opt.action == 'status' :
         all_commands_torun.append( 'echo "is going to fetch the status of crab jobs and store results in json format for further processing"')
         for ds,info in samples.all_datasets():
+            if ds != '/GJets_Pt-400To650_13TeV-sherpa/RunIISummer16NanoAODv7-PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM':
+                continue
+
             s = Sample( ds )
             #if not any([a in ds for a in ['QCD', 'Sherpa' , 'sherpa']] ):
             jsonfile = '{0}_{1}/crab_{2}/status.json'.format(  opt.workarea , s.year() , s.makeUniqueName() )
@@ -198,6 +201,9 @@ def main():
     elif opt.action == 'makecampaignfile':
         outjs = {}
         for ds,info in samples.all_datasets():
+            if ds != '/GJets_Pt-400To650_13TeV-sherpa/RunIISummer16NanoAODv7-PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM':
+                continue
+
             print('get information for ds {0}'.format( ds ) )
             s = Sample(ds)
             outjs[ds] = FinalSummary( '{0}_{1}/crab_{2}'.format(  opt.workarea , s.year() , s.makeUniqueName() )  , ds , opt.outLFNDirBase )
