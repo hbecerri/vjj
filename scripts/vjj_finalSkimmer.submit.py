@@ -12,7 +12,8 @@ def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-c', '--campaign',     dest='campaign',   help='campaign',  default=None, type=str)
     parser.add_argument('--nfilesperchunk',     dest='nfilesperchunk',   help='number of files to run on',  default=1, type=int)
-    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory, /eos/user/n/nshafiei/SMP19005/$outdir/',  default='Skimmed', type=str)
+    parser.add_argument('--baseoutdir' , dest='baseoutdir' , help='the base directory to write output fiels' , default= '/eos/cms/store/cmst3/group/top/SMP-19-005' , type=str )
+    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory name. it will be added at the end of the baseoutdir',  default='Skimmed', type=str)
     parser.add_argument('-l', '--logdir',     dest='logdir',   help='logdir',  default='SkimmerCondor', type=str)
     parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='8nh' , choices=['8nm' , '1nh' , '8nh' , '1nd' , '2nd' , '1nw' , '2nw'], type=str)
     parser.add_argument('--outfilename', dest='outfilename',   help='the name of the submit file',  default='vjj_finalSkimmer.submit' , type=str)
@@ -37,13 +38,13 @@ def main():
     condor = []
 
     step_par_name = 'Step' if opt.includeexistingfiles else 'chunkid'
-    full_outdir = '/eos/cms/store/cmst3/group/top/SMP-19-005/{0}/{1}/'.format( opt.campaign , opt.outdir )
+    full_outdir = '{2}/{0}/{1}/'.format( opt.campaign , opt.outdir , opt.baseoutdir )
     total_existing_files = 0
     total_jobs = 0
     total_jobs_with_no_input = 0
 
     condor.append( ('executable' , '{0}/vjj_finalSkimmer.sh'.format(os.getcwd()) ) )
-    condor.append( ('arguments','-c july20 -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(opt.nfilesperchunk , step_par_name , full_outdir)))
+    condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(opt.nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
     condor.append( ('output','{0}/$(ClusterId).$(ProcId).out'.format(opt.logdir)))
     condor.append( ('error','{0}/$(ClusterId).$(ProcId).err'.format(opt.logdir)))
     condor.append( ('log','{0}/$(ClusterId).log'.format(opt.logdir)))
