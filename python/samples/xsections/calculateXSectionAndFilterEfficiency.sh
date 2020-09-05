@@ -21,10 +21,11 @@ DEBUG=False
 
 export HOME=/afs/cern.ch/user/h/hbakhshi/
 echo `pwd`
-cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_6_2/src/genproductions/test/calculateXSectionAndFilterEfficiency
+cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_2_13/src/UserCode/VJJSkimmer/python/samples/xsections/
+#cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_2_13/src/GeneratorInterface/calculateXSectionAndFilterEfficiency/
 echo `pwd`
 
-export SCRAM_ARCH=slc7_amd64_gcc820
+export SCRAM_ARCH=slc7_amd64_gcc700
 eval `scramv1 runtime -sh`
 export X509_USER_PROXY=`pwd`/x509up_u12330
 
@@ -43,6 +44,7 @@ do
     esac
 done
 
+
 echo ${LINENUMBER}
 mapfile -s ${LINENUMBER} -n 1 datasets < ${FILE}
 export dataset=${datasets[0]::-1}
@@ -53,6 +55,7 @@ echo 'compute_cross_section.py -f '${dataset}' -c '${CAMPAIGN}' -n '${EVENTS}' -
 output="$(python compute_cross_section.py -f "${dataset}" -c "${CAMPAIGN}" -n "${EVENTS}" -d "${DATATIER}" --mcm "${MCM}" --skipexisting "${SKIPEXISTING}" --debug "${DEBUG}")"
 output="${output#*.txt}"
 output="${output#*.txt}"
+#echo ${output}
 
 if [ "${DEBUG}" != "True" ]; then
     if [[ $output == *"cmsRun"* ]]; then

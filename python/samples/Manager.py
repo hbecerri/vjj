@@ -53,6 +53,12 @@ class Manager:
         if update_html:
             self.write_html()
 
+    def get_sampleName(self , ds):
+        for _,s in self.all_samples.items():
+            if ds in s.datasets:
+                return s.name
+        return None
+
     def get_sampleColor(self, sample):
         for _,s in self.all_samples.items():
             if s.name == sample:

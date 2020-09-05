@@ -88,12 +88,13 @@ if __name__ == "__main__":
         command=das_cmd+" --limit=100 --query=\"file dataset="+dataset_used+"\" "
         if debug: 
             print 'command',command
-            print 'output:', commands.getstatusoutput(command) 
-        filelist_used = "/store"+commands.getstatusoutput(command)[1].replace("\n",",").split("/store",1)[1] 
-        filelist_used.replace( '/store/' , 'root://cms-xrd-global.cern.ch/' )
+            #print 'output:', commands.getstatusoutput(command) 
+        filelist_used = "/store"+commands.getstatusoutput(command)[1].replace("\n",",").split("/store",1)[1]
+        #filelist_used.replace( '/store/' , 'root://cms-xrd-global.cern.ch/' )
+        filelist_used = [a.replace( '/store/' , 'root://cmsxrootd.fnal.gov//store/' ) for a in filelist_used.split(',')]
         if debug: 
-            print 'filelist_used',filelist_used.split(',')[0]
-            filelist_used = filelist_used.split(',')[0]
+            print 'filelist_used',filelist_used[0]
+            filelist_used = [filelist_used[0]]
         # compute cross section
-        command = 'cmsRun genXsec_cfg.py inputFiles=\"'+filelist_used+'\" maxEvents='+str(args.events)+" 2>&1 | tee xsec_"+primary_dataset_name+".log"
+        command = 'cmsRun genXsec_cfg.py inputFiles=\"'+','.join(filelist_used)+'\" maxEvents='+str(args.events)+" 2>&1 | tee xsec_"+primary_dataset_name+".log"
         print command

@@ -45,10 +45,11 @@ def main():
     else:
         raise ValueError( 'please specify campaign name you want to run using -c option')
         
+    print( campaign.AllInfo[2016].keys() )
     module = None
     inputFiles = None
     if opt.dataSet:
-        module = VJJSkimmer( opt.dataSet , opt.campaign )
+        module = VJJSkimmer( opt.dataSet , campaign )
         inputFiles = get_fileNames( campaign , opt.dataSet , opt.nfilesperchunk , opt.chunkindex )
     else:
         raise ValueError('please specify dataset name using -d option')
