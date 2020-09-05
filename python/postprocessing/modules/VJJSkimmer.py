@@ -89,11 +89,11 @@ class VJJSkimmer(Module):
                     category = 'LowAPt'
                 elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>high_pt_lowerCut:
                     category = 'HighZee'
-                elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442:
+                elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>75 and abs(event.vjj_v_eta)<2.4:
                     category = 'LowZee'
                 elif event.vjj_fs == 169 and event.vjj_trig==3 and event.vjj_v_pt>high_pt_lowerCut:
                     category = 'HighZmm'
-                elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442:
+                elif event.vjj_fs == 121 and event.vjj_trig==3 and event.vjj_v_pt>75 and abs(event.vjj_v_eta)<2.4:
                     category = 'LowZmm'
                 
         if category == "":
