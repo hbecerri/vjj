@@ -65,7 +65,7 @@ class VJJSkimmer(Module):
         self.out.branch('vjj_isLowVPtmm','O')
         self.out.branch('vjj_isHighVPtee','O')
         self.out.branch('vjj_isLowVPtee','O')
-        for mva_name in self.BDTReader.methodNames:
+        for mva_name in self.BDTReader.outputNames:
             self.out.branch('vjj_mva_{0}'.format( mva_name ) , 'F' )
 
         if not self.isData:
@@ -130,8 +130,8 @@ class VJJSkimmer(Module):
 
         self.out.fillBranch('vjj_is{0}'.format( category ) , True)
         self.BDTReader.Process( event._entry )
-        for i in range(self.BDTReader.methodNames.size()):
-            mva_name = self.BDTReader.methodNames[i]
+        for i in range(self.BDTReader.outputNames.size()):
+            mva_name = self.BDTReader.outputNames[i]
             self.out.fillBranch('vjj_mva_{0}'.format( mva_name ) , self.BDTReader.mvaValues[i] )
 
 
