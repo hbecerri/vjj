@@ -1470,10 +1470,10 @@
         "xsec": 0.1585
     },
     "/GJets_Pt-400To650_13TeV-sherpa/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
-        "err": 0.2971, 
-        "negweightfraction": "1.066e-02 +- 2.488e-07", 
-        "nevents": null, 
+        "err": 0.008507, 
+        "negweightfraction": "3.022e-01 +- 5.440e-05", 
+        "nevents": "10000000", 
         "unit": "pb", 
-        "xsec": 70.15
+        "xsec": 3.781
     }
 }
