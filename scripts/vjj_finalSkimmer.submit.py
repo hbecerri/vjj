@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--baseoutdir' , dest='baseoutdir' , help='the base directory to write output fiels' , default= '/eos/cms/store/cmst3/group/top/SMP-19-005' , type=str )
     parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory name. it will be added at the end of the baseoutdir',  default='Skimmed', type=str)
     parser.add_argument('-l', '--logdir',     dest='logdir',   help='logdir',  default='SkimmerCondor', type=str)
-    parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='8nh' , choices=['8nm' , '1nh' , '8nh' , '1nd' , '2nd' , '1nw' , '2nw'], type=str)
+    parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='2nw' , choices=['8nm' , '1nh' , '8nh' , '1nd' , '2nd' , '1nw' , '2nw'], type=str)
     parser.add_argument('--outfilename', dest='outfilename',   help='the name of the submit file',  default='vjj_finalSkimmer.submit' , type=str)
     parser.add_argument('--includeexistingfiles', dest='includeexistingfiles',   help='ignore if an output file exists and resubmit the job',  default=False , action='store_true')
     parser.add_argument('--splitjobs', dest='splitjobs',   help='set nfilesperchunk=1 and run for the remaining jobs',  default=False , action='store_true')
@@ -35,6 +35,9 @@ def main():
                     '2nd':'tomorrow',
                     '1nw':'testmatch',
                     '2nw':'nextweek' }
+
+
+
 
     condor = []
 
