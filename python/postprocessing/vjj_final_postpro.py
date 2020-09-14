@@ -20,8 +20,10 @@ def make_hadd_fname(outdir, ds, nfilesperchunk, chunkindex , fromevent = None , 
     return haddFileName, os.path.exists(haddFileName)
 
 def get_fileNames( campaign , ds , nfilesperchunk , chunkindex ):
+
     all_inputFiles = campaign.get_dataset_info( ds )['files']
     chunks = [ all_inputFiles[a:a+nfilesperchunk] for a in range( 0 , len(all_inputFiles) , nfilesperchunk ) ]
+    print(ds,nfilesperchunk,chunkindex,len(all_inputFiles) , len(chunks) )
     inputFiles = chunks[ chunkindex ]
     return inputFiles
 
