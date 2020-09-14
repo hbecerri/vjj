@@ -124,6 +124,7 @@ class VJJSkimmer(Module):
                 category += 'ee'
             elif event.vjj_fs == 169:
                 category += 'mm'
+
                 
         if category == "":
             return False

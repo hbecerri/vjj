@@ -18,6 +18,7 @@ def main():
     parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='8nh' , choices=['8nm' , '1nh' , '8nh' , '1nd' , '2nd' , '1nw' , '2nw'], type=str)
     parser.add_argument('--outfilename', dest='outfilename',   help='the name of the submit file',  default='vjj_finalSkimmer.submit' , type=str)
     parser.add_argument('--includeexistingfiles', dest='includeexistingfiles',   help='ignore if an output file exists and resubmit the job',  default=False , action='store_true')
+    parser.add_argument('--splitjobs', dest='splitjobs',   help='set nfilesperchunk=1 and run for the remaining jobs',  default=False , action='store_true')
 
     opt, unknownargs = parser.parse_known_args()
 
@@ -43,8 +44,11 @@ def main():
     total_jobs = 0
     total_jobs_with_no_input = 0
 
+    actual_nfilesperchunk = 1 if opt.splitjobs else opt.nfilesperchunk
+    print(actual_nfilesperchunk)
+
     condor.append( ('executable' , '{0}/vjj_finalSkimmer.sh'.format(os.getcwd()) ) )
-    condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(opt.nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
+    condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
     condor.append( ('output','{0}/$(ClusterId).$(ProcId).out'.format(opt.logdir)))
     condor.append( ('error','{0}/$(ClusterId).$(ProcId).err'.format(opt.logdir)))
     condor.append( ('log','{0}/$(ClusterId).log'.format(opt.logdir)))
@@ -69,7 +73,14 @@ def main():
                 if not exists:
                     try:
                         inputfilenames = get_fileNames(campaign , s , opt.nfilesperchunk , step )
-                        filesToRun.append( step )
+                        if opt.splitjobs:
+                            for i in range( opt.nfilesperchunk ):
+                                newjobindex = step*opt.nfilesperchunk+i
+                                _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex )
+                                if not exists1:
+                                    filesToRun.append( newjobindex )
+                        else:
+                            filesToRun.append( step )
                     except:
                         print( "input files for {0} / {1} / step: {2} can not be fetched (total={3})".format( opt.campaign , s , step , totalFiles ) )
                         total_jobs_with_no_input += 1
@@ -77,8 +88,8 @@ def main():
                     total_existing_files += 1
             condor.append( ('queue_list' , filesToRun , s ) )
             total_jobs += len( filesToRun )
-
     added_samples = []
+    print(opt.outfilename)
     with open( opt.outfilename , 'w') as f:
         available_nqueues = []
         for l in condor:
@@ -112,3 +123,6 @@ def main():
 if __name__ == "__main__":
 
     main()
+
+                                
+                                
