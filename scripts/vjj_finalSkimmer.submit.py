@@ -6,6 +6,10 @@ from UserCode.VJJSkimmer.samples.Manager import currentSampleList
 from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
 from UserCode.VJJSkimmer.postprocessing.vjj_final_postpro import make_hadd_fname, get_fileNames
 
+import ROOT
+ROOT.PyConfig.IgnoreCommandLineOptions = True
+
+
 def main():
 
     #parse command line
@@ -19,6 +23,8 @@ def main():
     parser.add_argument('--outfilename', dest='outfilename',   help='the name of the submit file',  default='vjj_finalSkimmer.submit' , type=str)
     parser.add_argument('--includeexistingfiles', dest='includeexistingfiles',   help='ignore if an output file exists and resubmit the job',  default=False , action='store_true')
     parser.add_argument('--splitjobs', dest='splitjobs',   help='set nfilesperchunk=1 and run for the remaining jobs',  default=False , action='store_true')
+    parser.add_argument('--neventsperjob', dest='neventsperjob',   help='set nevents per job, only if splitjobs is set',  default=-1 , type=int)
+
 
     opt, unknownargs = parser.parse_known_args()
 
@@ -36,6 +42,9 @@ def main():
                     '1nw':'testmatch',
                     '2nw':'nextweek' }
 
+    if not os.path.exists( opt.logdir ):
+        os.makedirs( opt.logdir )
+
     condor = []
 
     step_par_name = 'Step' if opt.includeexistingfiles else 'chunkid'
@@ -48,7 +57,10 @@ def main():
     print(actual_nfilesperchunk)
 
     condor.append( ('executable' , '{0}/vjj_finalSkimmer.sh'.format(os.getcwd()) ) )
-    condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
+    if opt.neventsperjob > 0 :
+        condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {4} -f $(FIRSTEVENT)'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign , opt.neventsperjob )))
+    else:
+        condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
     condor.append( ('output','{0}/$(ClusterId).$(ProcId).out'.format(opt.logdir)))
     condor.append( ('error','{0}/$(ClusterId).$(ProcId).err'.format(opt.logdir)))
     condor.append( ('log','{0}/$(ClusterId).log'.format(opt.logdir)))
@@ -76,9 +88,18 @@ def main():
                         if opt.splitjobs:
                             for i in range( opt.nfilesperchunk ):
                                 newjobindex = step*opt.nfilesperchunk+i
-                                _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex )
-                                if not exists1:
-                                    filesToRun.append( newjobindex )
+                                if opt.neventsperjob != -1:
+                                    fIn = ROOT.TFile.Open( inputfilenames[0] )
+                                    tIn = fIn.Get("Events")
+                                    ntotalevents = tIn.GetEntries()
+                                    for start in range(0, ntotalevents , opt.neventsperjob ):
+                                        _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex , start , opt.neventsperjob )
+                                        if not exists1:
+                                            filesToRun.append( [newjobindex , start] )
+                                else:
+                                    _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex )
+                                    if not exists1:
+                                        filesToRun.append( newjobindex )
                         else:
                             filesToRun.append( step )
                     except:
@@ -110,11 +131,19 @@ def main():
                         added_samples.append( ll[2] )
                 f.write( ")\n" )
         else:
-            f.write( 'queue DATASET,{0} from (\n'.format( step_par_name ) )
-            for l in condor:
-                if l[0] == 'queue_list':
-                    for index in l[1]:
-                        f.write('\t{0} {1}\n'.format( l[2] , index ) )
+            if opt.neventsperjob < 0 :
+                f.write( 'queue DATASET,{0} from (\n'.format( step_par_name ) )
+                for l in condor:
+                    if l[0] == 'queue_list':
+                        for index in l[1]:
+                            f.write('\t{0} {1}\n'.format( l[2] , index ) )
+            else:
+                f.write( 'queue DATASET,{0},FIRSTEVENT from (\n'.format( step_par_name ) )
+                for l in condor:
+                    if l[0] == 'queue_list':
+                        for index in l[1]:
+                            f.write('\t{0} {1} {2}\n'.format( l[2] , index[0] , index[1] ) )
+
             f.write( ')\n' )
     print('In total, {0} jobs will be submitted. The output of {1} files already exists. They are skipped'.format( total_jobs , total_existing_files ) )
     print('{0} jobs skipped, because the input files can not be found'.format( total_jobs_with_no_input ) )

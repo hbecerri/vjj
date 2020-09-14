@@ -17,17 +17,20 @@ SKIPEXISTING=False
 LINENUMBER=0
 
 DEBUG=False
-#DEBUG=True
+DEBUG=True
 
 export HOME=/afs/cern.ch/user/h/hbakhshi/
 echo `pwd`
-cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_2_13/src/UserCode/VJJSkimmer/python/samples/xsections/
 #cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_2_13/src/GeneratorInterface/calculateXSectionAndFilterEfficiency/
-echo `pwd`
 
+cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_6_0/src/
 export SCRAM_ARCH=slc7_amd64_gcc700
 eval `scramv1 runtime -sh`
 export X509_USER_PROXY=`pwd`/x509up_u12330
+echo `pwd`
+
+cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_2_13/src/UserCode/VJJSkimmer/python/samples/xsections/
+echo `pwd`
 
 while getopts f:c:d:n:m:s:l: option
 do

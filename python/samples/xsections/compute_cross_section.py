@@ -91,7 +91,9 @@ if __name__ == "__main__":
             #print 'output:', commands.getstatusoutput(command) 
         filelist_used = "/store"+commands.getstatusoutput(command)[1].replace("\n",",").split("/store",1)[1]
         #filelist_used.replace( '/store/' , 'root://cms-xrd-global.cern.ch/' )
-        filelist_used = [a.replace( '/store/' , 'root://cmsxrootd.fnal.gov//store/' ) for a in filelist_used.split(',')]
+        #filelist_used = [a.replace( '/store/' , 'root://cmsxrootd.fnal.gov//store/' ) for a in filelist_used.split(',')]
+        #filelist_used = [a.replace( '/store/' , 'root://cms-xrd-global.cern.ch//store/' ) for a in filelist_used.split(',')]
+        filelist_used = [a for a in filelist_used.split(',')]
         if debug: 
             print 'filelist_used',filelist_used[0]
             filelist_used = [filelist_used[0]]
