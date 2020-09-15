@@ -225,7 +225,7 @@ class Manager():
                     for ds in self.AllInfo[year][sample][binval]['samples']:
                         if f in [os.path.abspath(fff) for fff in self.js[ds]['files']]:
                             s = Sample(ds)
-                            return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_allNTotals(ds) , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample}
+                            return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_allNTotals(ds, 'nominal') , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample }
 
         raise NameError('no dataset found for file:{0}'.format( f ))
 

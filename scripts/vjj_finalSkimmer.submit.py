@@ -88,11 +88,14 @@ def main():
                         inputfilenames = get_fileNames(campaign , s , opt.nfilesperchunk , step )
                         if opt.splitjobs:
                             for i in range( opt.nfilesperchunk ):
+                                if len(inputfilenames)<i+1 :
+                                    continue
                                 newjobindex = step*opt.nfilesperchunk+i
                                 if opt.neventsperjob != -1:
-                                    fIn = ROOT.TFile.Open( inputfilenames[0] )
+                                    fIn = ROOT.TFile.Open( inputfilenames[i] )
                                     tIn = fIn.Get("Events")
                                     ntotalevents = tIn.GetEntries()
+                                    fIn.Close()
                                     for start in range(0, ntotalevents , opt.neventsperjob ):
                                         _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex , start , opt.neventsperjob )
                                         if not exists1:
