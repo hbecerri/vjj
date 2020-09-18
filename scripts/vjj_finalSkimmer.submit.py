@@ -91,6 +91,9 @@ def main():
                                     continue
                                 newjobindex = step*opt.nfilesperchunk+i
                                 if opt.neventsperjob != -1:
+                                    _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex )
+                                    if exists1:
+                                        continue
                                     fIn = ROOT.TFile.Open( inputfilenames[i] )
                                     tIn = fIn.Get("Events")
                                     ntotalevents = tIn.GetEntries()
