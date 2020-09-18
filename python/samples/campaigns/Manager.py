@@ -47,7 +47,10 @@ class Manager():
                 else:
                     xsection = xsec[parent]
                 #ntotal = self.js[ds]['total']
-
+                
+            
+            
+    
             if year not in self.AllInfo:
                 self.AllInfo[year] = {}
                 #sname:{'weights':{i:vals['name'] for i,vals in self.js[ds]['weights'].items()} , binval:{'xsecs':[] , 'samples':[] , 'nevents':{} }}}

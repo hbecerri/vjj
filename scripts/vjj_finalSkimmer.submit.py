@@ -65,7 +65,7 @@ def main():
     condor.append( ('output','{0}/$(ClusterId).$(ProcId).out'.format(opt.logdir)))
     condor.append( ('error','{0}/$(ClusterId).$(ProcId).err'.format(opt.logdir)))
     condor.append( ('log','{0}/$(ClusterId).log'.format(opt.logdir)))
-    condor.append( ('+JobFlavour',jobFlavours[opt.flavour]))
+    condor.append( ('+MaxRuntime',32400))
     condor.append( ('transfer_executable',False))
     condor.append( ('requirements','( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )'))
     #condor.append( ('should_transfer_files' , 'NO') )
