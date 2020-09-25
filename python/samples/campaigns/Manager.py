@@ -23,7 +23,15 @@ class Manager():
                 self.isSkimmedCampaign = True
             
         isJsonModified = False
-        self.samples = SampleManager( self.js.keys() , update_html=False )
+
+        self.dyjs = {}
+        for key, val in self.js.iteritems():
+            if '10DYJetsMGHT' in key:
+                self.dyjs[key]=val
+        print self.dyjs
+        #self.samples = SampleManager( self.js.keys() , update_html=False )
+        self.samples = SampleManager( self.dyjs.keys() , update_html=False )
+                
         self.AllInfo = {}
         self.LinkedSamples = {}
         self.SamplesWithWeightErrors = []
@@ -48,9 +56,8 @@ class Manager():
                     xsection = xsec[parent]
                 #ntotal = self.js[ds]['total']
                 
-            
-            
-    
+                        
+           
             if year not in self.AllInfo:
                 self.AllInfo[year] = {}
                 #sname:{'weights':{i:vals['name'] for i,vals in self.js[ds]['weights'].items()} , binval:{'xsecs':[] , 'samples':[] , 'nevents':{} }}}
