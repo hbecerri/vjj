@@ -158,7 +158,7 @@ class Manager():
                                     if type( info ) in [str, unicode]:
                                         continue
                                 files.append( os.path.abspath(f) )
-                            return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_allNTotals(ds) , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample , 'files':files}
+                            return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_allNTotals(ds) , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample , 'files':files , 'regions':self.samples.get_sampleRegions(sample)}
         return None
 
     def get_files_byyear(self , year , just_ok_files = False):
