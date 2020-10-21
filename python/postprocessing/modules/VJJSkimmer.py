@@ -115,15 +115,16 @@ class VJJSkimmer(Module):
             
             if isHigh:
                 category = "HighVPt"
-            else:
+            elif isLow:
                 category = "LowVPt"
 
-            if event.vjj_fs==22:
-                pass
-            elif event.vjj_fs == 121:
-                category += 'ee'
-            elif event.vjj_fs == 169:
-                category += 'mm'
+            if category != '':
+                if event.vjj_fs==22:
+                    pass
+                elif event.vjj_fs == 121:
+                    category += 'ee'
+                elif event.vjj_fs == 169:
+                    category += 'mm'
 
                 
         if category == "":

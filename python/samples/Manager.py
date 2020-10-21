@@ -10,32 +10,33 @@ class Manager:
 
     def __init__(self , lst , update_html=False):
         self.all_samples = {}
-        self.all_samples[ '00DoubleEGData' ] = SampleList( "DoubleEGData"  , ['/DoubleEG/.*' , '/EGamma/.*' ] , 'era' , color=1)
-        self.all_samples[ '01PhotonData' ] = SampleList( "PhotonData"  , ['/SinglePhoton/.*' , '/EGamma/.*'] , 'era' , color=1)
-        self.all_samples[ '02DoubleMuData' ] = SampleList( "DoubleMuData"  , [ '/DoubleMuon/.*' ] , 'era' , color=1)
+        self.all_samples[ '00DoubleEGData' ] = SampleList( "DoubleEGData"  , ['/DoubleEG/.*' , '/EGamma/.*' ] , 'era' , color=1 , regions=['gamma' , 'ee'])
+        self.all_samples[ '01PhotonData' ] = SampleList( "PhotonData"  , ['/SinglePhoton/.*' , '/EGamma/.*'] , 'era' , color=1 , regions=['gamma'])
+        self.all_samples[ '02DoubleMuData' ] = SampleList( "DoubleMuData"  , [ '/DoubleMuon/.*' ] , 'era' , color=1 , regions=['mm'])
 
-        self.all_samples[ '07GJetsSherpa' ] = SampleList( "GJetsSherpa"  , [ '/GJets_Pt-(?P<ptrange>[^_]*)_13TeV[_-]sherpa/.*' ] , 'ptrange'  , color=2)
-        self.all_samples[ '03SignalMGPythia500' ] = SampleList( 'SignalMGPythia500' , ['/GJets_Mjj-500.*pythia.*' , '/GJets_Mjj-500.*(?P<interference>_INTERFERENCE_).*pythia.*'] , signal=True , color=4 , binning = "interference")
-        self.all_samples[ '04SignalMGPythia120' ] = SampleList( 'SignalMGPythia120' , ['/GJets_SM_5f.*EWK.*pythia.*' , '/GJets_SM_5f.*(?P<interference>_INTERFERENCE).*pythia.*'] , signal=True , color=4 , binning = "interference")
-        self.all_samples[ '05SignalMGHerwig120' ] = SampleList( 'SignalMGHerwig120' , ['/GJets_SM_5f.*EWK.*herwig.*' , '/GJets_SM_5f.*(?P<interference>_INTERFERENCE_).*herwig.*'] , signal=True , color=4, binning = "interference")
-        self.all_samples[ '06SignalNLOPythia' ] = SampleList( 'SignalNLOPythia' , ['/AJJ_EWK.*'] , signal=True, color=4)
-        self.all_samples[ '09DiPhotonJetBox' ] = SampleList( 'DiPhotonJetsBox'  , [ '/DiPhotonJetsBox_M(?P<mrange>40_80).*' , '/DiPhotonJetsBox_MGG-(?P<mrange>80toInf).*' ] , 'mrange' , color=3)
-        self.all_samples[ '10DYJetsMGHT' ] = SampleList( 'DYJetsLO' , [ '/DYJetsToLL_M-(?P<mrange>[^_]*)_HT-(?P<htrange>[^_]*)_.*madgraphMLM.*']  , 'htrange' , color=4)
-        self.all_samples[ '10DYJetsMGJets' ] = SampleList( 'DYJetsLOJetBins' , [ '/DY(?P<njets>[0-9])Jet.*_M-(?P<mrange>[^_]*).*madgraphMLM.*']  , 'njets' , Filter=['HT'] , color=4)
-        self.all_samples[ '10DYJetsLOInclusive' ] = SampleList( 'DYJetsLOInclusive' , [ '/DYJet.*_M-(?P<mrange>[^_]*).*madgraphMLM.*']  , Filter=['HT'] , color=4)
-        self.all_samples[ '11DYJetsNLO' ] = SampleList( 'DYJetsNLO' , [ '/DYJetsToLL_M-(?P<mrange>[^_]*).*amcatnlo.*']  , 'htrange' , color=4)
-        self.all_samples[ '11DYJetsJetBins' ] = SampleList( 'DYJetsJetBins' , ['/DYJetsToLL_(?P<njets>[0-9])J' , '/DYToLL_(?P<njets>[0-9])J.*' ] , 'njets' , color=4)
-        self.all_samples[ '14QCDEMEnriched' ] = SampleList( 'QCDEMEnriched' ,  [ '/QCD_Pt-(?P<ptrange>[^_]*)_EMEnriched.*' ] , 'ptrange' , color=14)
-        self.all_samples[ '08GJetsLO' ] = SampleList( 'GJetsLO' , ['/GJets_HT-(?P<htrange>[^_]*).*' ] , 'htrange' , color=2)
-        self.all_samples[ '12lljjherwig' ] = SampleList( 'LLJJherwig'  , ['.*LLJJ.*herwig.*' , '.*LLJJ.*(?P<interference>_INT_).*herwig.*' , '.*MLL[-_](?P<mll>[^_]*).*herwig.*' , '.*MJJ-(?P<mjj>[^_]*).*herwig.*' , '.*p[Tt]J-(?P<ptj>[^_]*).*herwig.*'] , 'mll' , color=5)
-        self.all_samples[ '13lljjpythia' ] = SampleList( 'LLJJPythai'  , ['.*LLJJ.*pythia.*' , '/LLJJ_(?P<interference>_INT_).*pythia.*' , '.*MLL[-_](?P<mll>[^_]*).*pythia.*' , '.*MJJ-(?P<mjj>[^_]*).*pythia.*' , '.*p[Tt]J-(?P<ptj>[^_]*).*pythia.*'] , 'mll' , color=5)
-        self.all_samples[ '15ttjetsamcatnlo' ] = SampleList('TTJets' , [ '/TTJets.*' ] , color=46 ) # this picks amcatnlo
-        self.all_samples[ '15ttjetspowheg' ] = SampleList('TTTo2L2NuPowheg'  , [ '/TTTo2L2Nu.*' ] , color=46 )
-        self.all_samples[ '16ttg' ] = SampleList('TTG'  , [ '/TTGJets.*' ] , color=30)
-        self.all_samples[ '17wg' ] = SampleList( 'WG'  , ['/WGToLNuG_.*' ] , color=28)
-        self.all_samples[ '18wjlnu' ] = SampleList( 'WJetsToLNu'  , ['/WJetsToLNu_Pt-(?P<Pt>[^_]*).*'] , 'Pt' , color=41)
-        self.all_samples[ '19wjqq' ] = SampleList( 'WJetsToQQ' , ['/WJetsToQQ_HT[-]{0,1}(?P<htrange>[^_]*).*' ] , 'htrange' , color=43)
-        self.all_samples[ '20zgto2lg' ] = SampleList( 'ZG' , ['.*ZGTo2LG.*' ] , color=38 )
+        self.all_samples[ '07GJetsSherpaLowStat' ] = SampleList( "GJetsSherpa"  , [ '/GJets_Pt-(?P<ptrange>[^_]*)_13TeV[_-]sherpa/.*' ] , 'ptrange'  , color=2 , Filter=['5To50','50To100', '100To250', '250To400', '400To650', '650ToInf'] , regions=['gamma'])
+        self.all_samples[ '07GJetsSherpaHighStat' ] = SampleList( "GJetsSherpaHighStat"  , [ '/GJets_Pt-(?P<ptrange>[^_]*)_13TeV[_-]sherpa/.*' ] , 'ptrange'  , color=2 , Filter=['20To100', '100To200', '200To500', '500To1000', '1000To2000' , '2000To5000'] , regions=['gamma'])
+        self.all_samples[ '03SignalMGPythia500' ] = SampleList( 'SignalMGPythia500' , ['/GJets_Mjj-500.*pythia.*' , '/GJets_Mjj-500.*(?P<interference>_INTERFERENCE_).*pythia.*'] , signal=True , color=4 , binning = "interference" , regions=['gamma'])
+        self.all_samples[ '04SignalMGPythia120' ] = SampleList( 'SignalMGPythia120' , ['/GJets_SM_5f.*EWK.*pythia.*' , '/GJets_SM_5f.*(?P<interference>_INTERFERENCE).*pythia.*'] , signal=True , color=4 , binning = "interference" , regions=['gamma'])
+        self.all_samples[ '05SignalMGHerwig120' ] = SampleList( 'SignalMGHerwig120' , ['/GJets_SM_5f.*EWK.*herwig.*' , '/GJets_SM_5f.*(?P<interference>_INTERFERENCE_).*herwig.*'] , signal=True , color=4, binning = "interference" , regions=['gamma'])
+        self.all_samples[ '06SignalNLOPythia' ] = SampleList( 'SignalNLOPythia' , ['/AJJ_EWK.*'] , signal=True, color=4 , regions=['gamma'])
+        self.all_samples[ '09DiPhotonJetBox' ] = SampleList( 'DiPhotonJetsBox'  , [ '/DiPhotonJetsBox_M(?P<mrange>40_80).*' , '/DiPhotonJetsBox_MGG-(?P<mrange>80toInf).*' ] , 'mrange' , color=3, regions=['gamma'])
+        self.all_samples[ '10DYJetsMGHT' ] = SampleList( 'DYJetsLO' , [ '/DYJetsToLL_M-(?P<mrange>[^_]*)_HT-(?P<htrange>[^_]*)_.*madgraphMLM.*']  , 'htrange' , color=4 , regions=['ee','mm'])
+        self.all_samples[ '10DYJetsMGJets' ] = SampleList( 'DYJetsLOJetBins' , [ '/DY(?P<njets>[0-9])Jet.*_M-(?P<mrange>[^_]*).*madgraphMLM.*']  , 'njets' , Filter=['HT'] , color=4 , regions=['ee','mm'])
+        self.all_samples[ '10DYJetsLOInclusive' ] = SampleList( 'DYJetsLOInclusive' , [ '/DYJet.*_M-(?P<mrange>[^_]*).*madgraphMLM.*']  , Filter=['HT'] , color=4 , regions=['ee','mm'])
+        self.all_samples[ '11DYJetsNLO' ] = SampleList( 'DYJetsNLO' , [ '/DYJetsToLL_M-(?P<mrange>[^_]*).*amcatnlo.*']  , 'htrange' , color=4 , regions=['ee','mm'])
+        self.all_samples[ '11DYJetsJetBins' ] = SampleList( 'DYJetsJetBins' , ['/DYJetsToLL_(?P<njets>[0-9])J' , '/DYToLL_(?P<njets>[0-9])J.*' ] , 'njets' , color=4 , regions=['ee','mm'])
+        self.all_samples[ '14QCDEMEnriched' ] = SampleList( 'QCDEMEnriched' ,  [ '/QCD_Pt-(?P<ptrange>[^_]*)_EMEnriched.*' ] , 'ptrange' , color=14, regions=['ee','gamma'])
+        self.all_samples[ '08GJetsLO' ] = SampleList( 'GJetsLO' , ['/GJets_HT-(?P<htrange>[^_]*).*' ] , 'htrange' , color=2 , regions=['gamma'])
+        self.all_samples[ '12lljjherwig' ] = SampleList( 'LLJJherwig'  , ['.*LLJJ.*herwig.*' , '.*LLJJ.*(?P<interference>_INT_).*herwig.*' , '.*MLL[-_](?P<mll>[^_]*).*herwig.*' , '.*MJJ-(?P<mjj>[^_]*).*herwig.*' , '.*p[Tt]J-(?P<ptj>[^_]*).*herwig.*'] , 'mll' , color=5 , regions=['mm'])
+        self.all_samples[ '13lljjpythia' ] = SampleList( 'LLJJPythai'  , ['.*LLJJ.*pythia.*' , '/LLJJ_(?P<interference>_INT_).*pythia.*' , '.*MLL[-_](?P<mll>[^_]*).*pythia.*' , '.*MJJ-(?P<mjj>[^_]*).*pythia.*' , '.*p[Tt]J-(?P<ptj>[^_]*).*pythia.*'] , 'mll' , color=5 , regions=['mm','ee'])
+        self.all_samples[ '15ttjetsamcatnlo' ] = SampleList('TTJets' , [ '/TTJets.*' ] , color=46 , regions=[] ) # this picks amcatnlo
+        self.all_samples[ '15ttjetspowheg' ] = SampleList('TTTo2L2NuPowheg'  , [ '/TTTo2L2Nu.*' ] , color=46 , regions=['gamma', 'ee', 'mm'] )
+        self.all_samples[ '16ttg' ] = SampleList('TTG'  , [ '/TTGJets.*' ] , color=30 , regions=['gamma'])
+        self.all_samples[ '17wg' ] = SampleList( 'WG'  , ['/WGToLNuG_.*' ] , color=28 , regions=['gamma'])
+        self.all_samples[ '18wjlnu' ] = SampleList( 'WJetsToLNu'  , ['/WJetsToLNu_Pt-(?P<Pt>[^_]*).*'] , 'Pt' , color=41 , regions=['ee', 'mm'])
+        self.all_samples[ '19wjqq' ] = SampleList( 'WJetsToQQ' , ['/WJetsToQQ_HT[-]{0,1}(?P<htrange>[^_]*).*' ] , 'htrange' , color=43 , regions=['gamma'])
+        self.all_samples[ '20zgto2lg' ] = SampleList( 'ZG' , ['.*ZGTo2LG.*' ] , color=38 , regions=['gamma'])
 
         if type(lst) == str:
             self.inputFileName = lst
@@ -58,6 +59,11 @@ class Manager:
             if ds in s.datasets:
                 return s.name
         return None
+
+    def get_sampleRegions(self , sample):
+        for _,s in self.all_samples.items():
+            if s.name == sample:
+                return s.Regions
 
     def get_sampleColor(self, sample):
         for _,s in self.all_samples.items():

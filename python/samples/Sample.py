@@ -84,7 +84,7 @@ class Sample:
                    
 
 class SampleList:
-    def __init__(self , name  , ds_res , binning=None  , Filter = [] , signal = False , color=None):
+    def __init__(self , name  , ds_res , binning=None  , Filter = [] , signal = False , color=None , regions=['gamma' , 'ee' , 'mm']):
         self.binning = binning
         self.name = name
         self.ds_res = [ re.compile( ds_re ) for ds_re in ds_res ]
@@ -97,6 +97,7 @@ class SampleList:
             import random
             self.color = random.randrange(50)
             print( 'color for sample {0} chosen randomely: {1}'.format( name , self.color ) )
+        self.Regions = regions
 
     def add_sample(self , sample):
         if any( [ a in sample for a in self.filter ] ):
