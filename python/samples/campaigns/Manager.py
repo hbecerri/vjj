@@ -24,14 +24,13 @@ class Manager():
             
         isJsonModified = False
 
-        self.dyjs = {}
-        for key, val in self.js.iteritems():
-            if '10DYJetsMGHT' in key:
-                self.dyjs[key]=val
-        print self.dyjs
-        #self.samples = SampleManager( self.js.keys() , update_html=False )
-        self.samples = SampleManager( self.dyjs.keys() , update_html=False )
-                
+#        self.dyjs = {}
+#        for key, val in self.js.iteritems():
+#            if '10DYJetsMGHT' in key:
+#                self.dyjs[key]=val
+#        print self.dyjs'''
+        self.samples = SampleManager( self.js.keys() , update_html=False )
+        #self.samples = SampleManager( self.dyjs.keys() , update_html=False )
         self.AllInfo = {}
         self.LinkedSamples = {}
         self.SamplesWithWeightErrors = []

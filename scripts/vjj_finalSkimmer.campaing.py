@@ -113,7 +113,7 @@ def main():
     incompletesamples = []
     for ds,info in currentSampleList.all_datasets():
         s = Sample(ds)
-        if s.makeUniqueName() != 'DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8_2017_v1' :
+        if s.makeUniqueName() != 'EGamma_2018_A_v1' :
             continue
         print('get information for ds {0}'.format( ds ) ) 
         outjs[ds] = FinalSummary( parentcampaign, s , full_outdir , len( parentcampaign.get_dataset_info(ds)['files'] ) , opt.nfilesperchunk , opt.splitjobs , opt.neventsperjob )

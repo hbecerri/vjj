@@ -99,7 +99,7 @@ class VJJSkimmer(Module):
         if event.vjj_isGood and event.vjj_jj_m>200 and event.vjj_lead_pt>50 and  event.vjj_sublead_pt>50 and event.vjj_fs in [22,121,169]:
             isLow = False
             isHigh = False
-            if event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442 and abs(event.vjj_jj_deta) > 3.0 and event.vjj_jj_m > 500:
+            if event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442 and abs(event.vjj_jj_deta) > 3.0 and event.vjj_jj_m > 200:
                 if event.vjj_fs==22:
                     if event.vjj_trig != 2:
                         isLow = True
