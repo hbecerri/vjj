@@ -22,6 +22,8 @@
 
 #include "TMatrixDSym.h"
 #include "TVectorD.h"
+#include "TLorentzVector.h"
+#include "Math/Vector3D.h"
 
 #include <vector>
 
