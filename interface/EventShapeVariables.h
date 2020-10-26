@@ -20,7 +20,6 @@
 	   Christian Veelken, UC Davis
 */
 
-#include "TLorentzVector.h"
 #include "TMatrixDSym.h"
 #include "TVectorD.h"
 #include "TLorentzVector.h"
@@ -29,20 +28,22 @@
 #include <vector>
 
 class EventShapeVariables {
-public:
+
+ public:  
+  /// constructors from TLorentzVectors
+  explicit EventShapeVariables(const std::vector<TLorentzVector>& inputVectors);
   explicit EventShapeVariables();
   /// default destructor
   ~EventShapeVariables(){};
 
-  void addObject(TLorentzVector v){
-    inputVectors_.push_back( v );
-  };
-  /// the return value is 1 for spherical events and 0 for events linear in r-phi. This function
-  /// needs the number of steps to determine how fine the granularity of the algorithm in phi
+  void addObject(TLorentzVector object);
+
+  /// the return value is 1 for spherical events and 0 for events linear in r-phi. This function 
+  /// needs the number of steps to determine how fine the granularity of the algorithm in phi 
   /// should be
   double isotropy(const unsigned int& numberOfSteps = 1000) const;
-
-  /// the return value is 1 for spherical and 0 linear events in r-phi. This function needs the
+  
+  /// the return value is 1 for spherical and 0 linear events in r-phi. This function needs the 
   /// number of steps to determine how fine the granularity of the algorithm in phi should be
   double circularity(const unsigned int& numberOfSteps = 1000) const;
 
@@ -52,52 +53,40 @@ public:
   /// set number of Fox-Wolfram moments to compute
   void setFWmax(unsigned m);
 
-  /// 1.5*(q1+q2) where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor
-  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return values are 1 for spherical, 3/4 for
+  /// 1.5*(q1+q2) where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor 
+  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return values are 1 for spherical, 3/4 for 
   /// plane and 0 for linear events
   double sphericity();
-  /// 1.5*q2 where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor
-  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return values are 0.5 for spherical and 0
+  /// 1.5*q2 where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor 
+  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return values are 0.5 for spherical and 0 
   /// for plane and linear events
   double aplanarity();
-  /// 3.*(q0*q1+q0*q2+q1*q2) where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor
-  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return value is between 0 and 1
+  /// 3.*(q0*q1+q0*q2+q1*q2) where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor 
+  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return value is between 0 and 1 
   /// and measures the 3-jet structure of the event (C vanishes for a "perfect" 2-jet event)
   double C();
-  /// 27.*(q0*q1*q2) where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor
-  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return value is between 0 and 1
+  /// 27.*(q0*q1*q2) where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor 
+  /// sum{p_j[a]*p_j[b]}/sum{p_j**2} normalized to 1. Return value is between 0 and 1 
   /// and measures the 4-jet structure of the event (D vanishes for a planar event)
   double D();
 
-  const std::vector<double>& getEigenValues() {
-    if (!tensors_computed_)
-      compTensorsAndVectors();
-    return eigenValues_;
-  }
-  const std::vector<double>& getEigenValuesNoNorm() {
-    if (!tensors_computed_)
-      compTensorsAndVectors();
-    return eigenValuesNoNorm_;
-  }
-  const TMatrixD& getEigenVectors() {
-    if (!tensors_computed_)
-      compTensorsAndVectors();
-    return eigenVectors_;
-  }
+  const std::vector<double>& getEigenValues() { if(!tensors_computed_) compTensorsAndVectors(); return eigenValues_; }
+  const std::vector<double>& getEigenValuesNoNorm() { if(!tensors_computed_) compTensorsAndVectors(); return eigenValuesNoNorm_; }
+  const TMatrixD& getEigenVectors() { if(!tensors_computed_) compTensorsAndVectors(); return eigenVectors_; }
 
-  double getFWmoment(unsigned l);
+  double getFWmoment( unsigned l ) ;
   const std::vector<double>& getFWmoments();
 
-private:
+ private:
   /// helper function to fill the 3 dimensional momentum tensor from the inputVectors where needed
   /// also fill the 3 dimensional vectors of eigen-values and eigen-vectors;
   /// the largest (smallest) eigen-value is stored at index position 0 (2)
-  void compTensorsAndVectors();
+  void compTensorsAndVectors() ;
 
-  void computeFWmoments();
+  void computeFWmoments() ;
 
   /// caching of input vectors
-  std::vector<TLorentzVector> inputVectors_;
+  std::vector<ROOT::Math::XYZVector> inputVectors_;
 
   /// caching of output
   double r_;
@@ -109,7 +98,9 @@ private:
   /// Owen ; save computed Fox-Wolfram moments
   unsigned fwmom_maxl_;
   std::vector<double> fwmom_;
-  bool fwmom_computed_;
+  bool   fwmom_computed_ ;
+
 };
 
 #endif
+
