@@ -1,28 +1,12 @@
 #include "../interface/EventShapeVariables.h"
-
 #include "TMath.h"
 
+
 /// constructor from TLorentzVector
-EventShapeVariables::EventShapeVariables(const std::vector<TLorentzVector>& inputVectors) : eigenVectors_(3, 3) {
-  inputVectors_.reserve(inputVectors.size());
-  for (const auto& vec : inputVectors) {
-    inputVectors_.push_back(ROOT::Math::XYZVector(vec.X(), vec.Y(), vec.Z()));
-  }
+EventShapeVariables::EventShapeVariables() : eigenVectors_(3, 3) {
   //default values
   set_r(2.);
   setFWmax(10);
-}
-
-/// default constructor (TLorentzVectors are added through EventShapeVariables::addObject)
-EventShapeVariables::EventShapeVariables() : eigenVectors_(3, 3) {
-  set_r(2.);
-  setFWmax(10);
-}
-
-///add single TLorentzVectors
-void EventShapeVariables::addObject(TLorentzVector object) {
-  ROOT::Math::XYZVector vector(object.X(), object.Y(), object.Z());
-  inputVectors_.push_back(vector);
 }
 
 /// the return value is 1 for spherical events and 0 for events linear in r-phi. This function
@@ -203,17 +187,17 @@ void EventShapeVariables::computeFWmoments() {
 
   double esum_total(0.);
   for (unsigned int i = 0; i < inputVectors_.size(); i++) {
-    esum_total += inputVectors_[i].R();
+    esum_total += inputVectors_[i].Rho();
   }  // i
   double esum_total_sq = esum_total * esum_total;
 
   for (unsigned int i = 0; i < inputVectors_.size(); i++) {
-    double p_i = inputVectors_[i].R();
+    double p_i = inputVectors_[i].Rho();
     if (p_i <= 0)
       continue;
 
     for (unsigned int j = 0; j <= i; j++) {
-      double p_j = inputVectors_[j].R();
+      double p_j = inputVectors_[j].Rho();
       if (p_j <= 0)
         continue;
 
@@ -255,4 +239,3 @@ void EventShapeVariables::computeFWmoments() {
 }  // computeFWmoments
 
 //========================================================================================================
-
