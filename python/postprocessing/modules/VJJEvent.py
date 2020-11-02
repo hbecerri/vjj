@@ -47,12 +47,13 @@ class VJJEvent:
                   'qglqWgt', 'qglgWgt', 
                   'v_pt', 'v_eta', 'v_phi', 'v_m', 'v_ystar', 
                   'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v',
-                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v',
+                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv'
                   'j_maxAbsEta','j_minAbsEta',
                   'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
-                  'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m',
+                  'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi'
                   'vjj_scalarht', 'vjj_isotropy', 'vjj_circularity', 'vjj_sphericity', 'vjj_aplanarity', 
                   'vjj_C', 'vjj_D',
+                  'vj_dphi',
                   'centj_pt', 'centj_eta', 'centj_phi', 'centj_m', 'centj_ystar', 'centj_dr2v',
                   'htsoft','centhtsoft']:            
             outv=self.pfix+v
