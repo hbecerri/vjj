@@ -1,0 +1,16 @@
+#! /bin/bash
+
+
+dohadd (){
+    cd ${1};
+    echo $(basename ${1});
+    haddnano.py ../$(basename ${1}).root *.root > haddlog 2> hadderror;
+}
+
+export -f dohadd;
+for year in 2016 2017 2018
+do
+    echo ${year}
+    parallel -j 8 dohadd {1} ::: $(find ${1}/${year}/* -type d);
+    
+done

@@ -1,5 +1,6 @@
 <use name="root"/>
 <use name="hepmc"/>
+<use name="roottmva"/>
 <export>
   <lib   name="1"/>
 </export>

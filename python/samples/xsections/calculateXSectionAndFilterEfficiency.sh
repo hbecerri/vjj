@@ -17,16 +17,20 @@ SKIPEXISTING=False
 LINENUMBER=0
 
 DEBUG=False
-#DEBUG=True
+DEBUG=True
 
 export HOME=/afs/cern.ch/user/h/hbakhshi/
 echo `pwd`
-cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_6_2/src/genproductions/test/calculateXSectionAndFilterEfficiency
-echo `pwd`
+#cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_2_13/src/GeneratorInterface/calculateXSectionAndFilterEfficiency/
 
-export SCRAM_ARCH=slc7_amd64_gcc820
+cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_6_0/src/
+export SCRAM_ARCH=slc7_amd64_gcc700
 eval `scramv1 runtime -sh`
 export X509_USER_PROXY=`pwd`/x509up_u12330
+echo `pwd`
+
+cd /afs/cern.ch/user/h/hbakhshi/work/VBFGamma/CMSSW_10_2_13/src/UserCode/VJJSkimmer/python/samples/xsections/
+echo `pwd`
 
 while getopts f:c:d:n:m:s:l: option
 do
@@ -54,6 +58,7 @@ echo 'compute_cross_section.py -f '${dataset}' -c '${CAMPAIGN}' -n '${EVENTS}' -
 output="$(python compute_cross_section.py -f "${dataset}" -c "${CAMPAIGN}" -n "${EVENTS}" -d "${DATATIER}" --mcm "${MCM}" --skipexisting "${SKIPEXISTING}" --debug "${DEBUG}")"
 output="${output#*.txt}"
 output="${output#*.txt}"
+#echo ${output}
 
 if [ "${DEBUG}" != "True" ]; then
     if [[ $output == *"cmsRun"* ]]; then
