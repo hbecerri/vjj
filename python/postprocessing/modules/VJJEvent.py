@@ -146,6 +146,11 @@ class VJJEvent:
             self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)
 
         #reco-level only variables
+        for n in self.vjjEvent:         
+            if (isinf(tagJets[0].qgl) or isnan(tagJets[0].qgl)) : 
+                continue
+            if (isinf(tagJets[1].qgl) or isnan(tagJets[1].qgl)) : 
+                continue
         try:
             self.out.fillBranch(self.pfix+'lead_qgl',      tagJets[0].qgl)
             self.out.fillBranch(self.pfix+'sublead_qgl',   tagJets[1].qgl)
