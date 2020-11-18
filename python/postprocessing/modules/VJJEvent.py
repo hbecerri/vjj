@@ -31,7 +31,7 @@ class VJJEvent:
         self.pfix=''
         self.outvars=[]
         self.photonExtra=[]
-
+        self.vjjEvent         = VJJEvent(cfg=_defaultVjjCfg)
     def makeBranches(self, out, isGen=False):
 
         """ prepare the branches """
@@ -50,7 +50,7 @@ class VJJEvent:
                   'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv'
                   'j_maxAbsEta','j_minAbsEta',
                   'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
-                  'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi'
+                  'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi' ,'vjj_deta',
                   'vjj_scalarht', 'vjj_isotropy', 'vjj_circularity', 'vjj_sphericity', 'vjj_aplanarity', 
                   'vjj_C', 'vjj_D',
                   'vj_dphi',
@@ -146,11 +146,12 @@ class VJJEvent:
             self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)
 
         #reco-level only variables
-        for n in self.vjjEvent:         
-            if (isinf(tagJets[0].qgl) or isnan(tagJets[0].qgl)) : 
-                continue
-            if (isinf(tagJets[1].qgl) or isnan(tagJets[1].qgl)) : 
-                continue
+        def nullevents(self):
+            for n in self.vjjEvent:         
+                if (isinf(tagJets[0].qgl) or isnan(tagJets[0].qgl)) : 
+                    continue
+                if (isinf(tagJets[1].qgl) or isnan(tagJets[1].qgl)) : 
+                    continue
         try:
             self.out.fillBranch(self.pfix+'lead_qgl',      tagJets[0].qgl)
             self.out.fillBranch(self.pfix+'sublead_qgl',   tagJets[1].qgl)
