@@ -131,4 +131,5 @@ class Manager:
 #a.write_txt( 'NanoAODv7_v2.lst' )
 samplesV6 = lambda : Manager(__dir+'/lists/NanoAODv6.lst')
 samplesV7 = lambda : Manager(__dir+'/lists/NanoAODv7.lst')
-currentSampleList = samplesV7()
+samplesV7_sig_Bkg = lambda : Manager(__dir+'/lists/NanoAODv7_sig_Bkg.lst')
+currentSampleList = samplesV7_sig_Bkg()
