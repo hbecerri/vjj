@@ -91,11 +91,11 @@ def main():
     #parse command line
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-c', '--parentcampaign',     dest='parentcampaign',   help='name of the parent campaign',  default=None, type=str)
-    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory, $TOP_CMG_AREA/SMP-19-005/$campaign/$outdir/',  default='Skimmed', type=str)
+    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory, $TOP_CMG_AREA/SMP-19-005/$campaign/$outdir/',  default='/eos/user/n/nshafiei/SMP19005/july20w2/SKimmed2_AllSamples_NewBDT', type=str)
     parser.add_argument('--nfilesperchunk',     dest='nfilesperchunk',   help='number of files to run on',  default=1, type=int)
     parser.add_argument('--splitjobs', dest='splitjobs',   help='set nfilesperchunk=1 and run for the remaining jobs',  default=False , action='store_true')
     parser.add_argument('--neventsperjob', dest='neventsperjob',   help='set nevents per job, only if splitjobs is set',  default=-1 , type=int)
-
+    parser.add_argument( '-d' , '--dataset' , dest='dataset' , help='the dataset directory' , default=None , type=str )
     opt, unknownargs = parser.parse_known_args()
 
     parentcampaign = None
@@ -113,8 +113,8 @@ def main():
     incompletesamples = []
     for ds,info in currentSampleList.all_datasets():
         s = Sample(ds)
-        if s.makeUniqueName() != 'EGamma_2018_A_v1' :
-            continue
+#        if s.makeUniqueName() != 'GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_2016_v1' :
+#            continue
         print('get information for ds {0}'.format( ds ) ) 
         outjs[ds] = FinalSummary( parentcampaign, s , full_outdir , len( parentcampaign.get_dataset_info(ds)['files'] ) , opt.nfilesperchunk , opt.splitjobs , opt.neventsperjob )
         print(outjs[ds]['files'].keys())

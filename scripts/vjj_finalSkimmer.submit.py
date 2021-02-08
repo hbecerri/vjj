@@ -2,6 +2,7 @@
 import os
 import argparse
 from collections import OrderedDict
+from UserCode.VJJSkimmer.samples.Sample import Sample
 from UserCode.VJJSkimmer.samples.Manager import currentSampleList 
 from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
 from UserCode.VJJSkimmer.postprocessing.vjj_final_postpro import make_hadd_fname, get_fileNames
@@ -16,7 +17,8 @@ def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-c', '--campaign',     dest='campaign',   help='campaign',  default=None, type=str)
     parser.add_argument('--nfilesperchunk',     dest='nfilesperchunk',   help='number of files to run on',  default=1, type=int)
-    parser.add_argument('--baseoutdir' , dest='baseoutdir' , help='the base directory to write output fiels' , default= '/eos/cms/store/cmst3/group/top/SMP-19-005' , type=str )
+    parser.add_argument('--baseoutdir' , dest='baseoutdir' , help='the base directory to write output fiels' , default='/eos/user/n/nshafiei/SMP19005/july20w2Test' , type=str) 
+#'/eos/cms/store/cmst3/group/top/SMP-19-005')
     parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory name. it will be added at the end of the baseoutdir',  default='Skimmed', type=str)
     parser.add_argument('-l', '--logdir',     dest='logdir',   help='logdir',  default='SkimmerCondor', type=str)
     parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='2nw' , choices=['8nm' , '1nh' , '8nh' , '1nd' , '2nd' , '1nw' , '2nw'], type=str)
@@ -74,6 +76,10 @@ def main():
     condor.append( ('WHEN_TO_TRANSFER_OUTPUT' , 'ON_EXIT_OR_EVICT' ) )
 
     for s,info in currentSampleList.all_datasets():
+        n = Sample(s)
+#        if n.makeUniqueName() != 'SinglePhoton_2016_E_v1' and n.makeUniqueName() !='SinglePhoton_2017_B_v1' and n.makeUniqueName() !='SinglePhoton_2016_B_v1' and n.makeUniqueName() !='SinglePhoton_2016_B_v2' and n.makeUniqueName() !='SinglePhoton_2016_D_v1' and n.makeUniqueName() !='SinglePhoton_2016_H_v1' and n.makeUniqueName() !='SinglePhoton_2016_G_v1'  and n.makeUniqueName() !='SinglePhoton_2016_B_v1' and n.makeUniqueName() !='SinglePhoton_2017_B_v1' and n.makeUniqueName() !='SinglePhoton_2017_C_v1' and n.makeUniqueName() !='SinglePhoton_2017_D_v1' and n.makeUniqueName() !='SinglePhoton_2016_E_v1':
+#            continue
+        print(s)
         totalFiles = len( campaign.get_dataset_info(s)['files'] )
         nsteps = totalFiles/opt.nfilesperchunk if totalFiles%opt.nfilesperchunk==0 else 1+totalFiles/opt.nfilesperchunk
         if opt.includeexistingfiles:

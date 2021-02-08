@@ -132,4 +132,4 @@ class Manager:
 samplesV6 = lambda : Manager(__dir+'/lists/NanoAODv6.lst')
 samplesV7 = lambda : Manager(__dir+'/lists/NanoAODv7.lst')
 samplesV7_sig_Bkg = lambda : Manager(__dir+'/lists/NanoAODv7_sig_Bkg.lst')
-currentSampleList = samplesV7_sig_Bkg()
+currentSampleList = samplesV7()

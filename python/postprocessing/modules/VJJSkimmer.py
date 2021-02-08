@@ -67,6 +67,8 @@ class VJJSkimmer(Module):
         self.out.branch('vjj_isLowVPtee','O')
         for mva_name in self.BDTReader.outputNames:
             self.out.branch('vjj_mva_{0}'.format( mva_name ) , 'F' )
+        for mvavar_name in self.BDTReader.outputVarNames:
+            self.out.branch('vjj_{0}'.format(mvavar_name),'F')
 
         if not self.isData:
             self.out.branch('vjj_photonIsMatched' , 'B' )
@@ -135,6 +137,9 @@ class VJJSkimmer(Module):
         for i in range(self.BDTReader.outputNames.size()):
             mva_name = self.BDTReader.outputNames[i]
             self.out.fillBranch('vjj_mva_{0}'.format( mva_name ) , self.BDTReader.mvaValues[i] )
+        for j in range(self.BDTReader.outputVarNames.size()):
+            var_name = self.BDTReader.outputVarNames[j]
+            self.out.fillBranch('vjj_{0}'.format( var_name ) , self.BDTReader.mvaVarValues[j] )
 
 
 

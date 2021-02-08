@@ -31,7 +31,7 @@ class VJJEvent:
         self.pfix=''
         self.outvars=[]
         self.photonExtra=[]
-        self.vjjEvent         = VJJEvent(cfg=_defaultVjjCfg)
+
     def makeBranches(self, out, isGen=False):
 
         """ prepare the branches """
@@ -46,8 +46,8 @@ class VJJEvent:
                   'effWgt',  'effWgtUp',  'effWgtDn',
                   'qglqWgt', 'qglgWgt', 
                   'v_pt', 'v_eta', 'v_phi', 'v_m', 'v_ystar', 
-                  'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v','lead_dphiv','lead_detav'
-                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav'
+                  'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v','lead_dphiv','lead_detav',
+                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav',
                   'j_maxAbsEta','j_minAbsEta',
                   'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
                   'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi' ,'vjj_deta',
@@ -136,7 +136,7 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'lead_m',       tagJets[0].mass)
         self.out.fillBranch(self.pfix+'lead_dr2v',    tagJets[0].DeltaR(v))
         self.out.fillBranch(self.pfix+'lead_dphiv',   tagJets[0].DeltaPhi(v))
-        self.out.fillBranch(self.pfix+'lead_detav',   fabs(tagJets[0].eta-v.Eta()))
+        self.out.fillBranch(self.pfix+'lead_detav',   abs(tagJets[0].eta-v.Eta()))
         if hasattr(tagJets[0],'partonFlavour'):
             self.out.fillBranch(self.pfix+'lead_flav',    tagJets[0].partonFlavour)
         self.out.fillBranch(self.pfix+'sublead_pt',   tagJets[1].pt)
@@ -150,12 +150,12 @@ class VJJEvent:
             self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)
 
         #reco-level only variables
-        def nullevents(self):
-            for n in self.vjjEvent:         
-                if (isinf(tagJets[0].qgl) or isnan(tagJets[0].qgl)) : 
-                    continue
-                if (isinf(tagJets[1].qgl) or isnan(tagJets[1].qgl)) : 
-                    continue
+#        def nullevents(self):
+#            for n in self.vjjEvent:         
+#                if (isinf(tagJets[0].qgl) or isnan(tagJets[0].qgl)) : 
+#                    continue
+#                if (isinf(tagJets[1].qgl) or isnan(tagJets[1].qgl)) : 
+#                    continue    
         try:
             self.out.fillBranch(self.pfix+'lead_qgl',      tagJets[0].qgl)
             self.out.fillBranch(self.pfix+'sublead_qgl',   tagJets[1].qgl)
