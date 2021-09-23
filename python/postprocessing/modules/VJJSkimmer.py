@@ -2,7 +2,7 @@ import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 import os
 import copy
-from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
+from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from UserCode.VJJSkimmer.samples.Sample import Sample
 from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
@@ -15,11 +15,11 @@ class VJJSkimmer(Module):
 
         self.sample = Sample(sample)
         self.campaign = campaign
-        
+
         self.isData           = self.sample.isData()
         self.era              = self.sample.year()
 
-        self.allWeights       = self.campaign.get_allWeightIndices(sample)        
+        self.allWeights       = self.campaign.get_allWeightIndices(sample)
         self.nWeights         = len(self.allWeights)
         self.lumiWeights      = self.campaign.get_lumi_weight(sample)
         self.xSection         = self.campaign.get_xsection(sample)
@@ -38,7 +38,7 @@ class VJJSkimmer(Module):
                 else:
                     ROOT.gROOT.ProcessLine(".L ../../VJJPlotter/src/BDTReader.cc++")
             dummy = ROOT.BDTReader()
-        
+
     def beginJob(self):
         pass
 
@@ -56,7 +56,7 @@ class VJJSkimmer(Module):
 
         self.BDTReader = ROOT.BDTReader(True,True,True)
         self.BDTReader.Init(inputTree._ttreereader.GetTree())
-        
+
         #define output tree
         self.out = wrappedOutputTree
         self.out.branch('vjj_isHighVPt','O')
@@ -67,8 +67,8 @@ class VJJSkimmer(Module):
         self.out.branch('vjj_isLowVPtee','O')
         for mva_name in self.BDTReader.outputNames:
             self.out.branch('vjj_mva_{0}'.format( mva_name ) , 'F' )
-        for mvavar_name in self.BDTReader.outputVarNames:
-            self.out.branch('vjj_{0}'.format(mvavar_name),'F')
+        #for mvavar_name in self.BDTReader.outputVarNames: #FIXME
+        #    self.out.branch('vjj_{0}'.format(mvavar_name),'F')
 
         if not self.isData:
             self.out.branch('vjj_photonIsMatched' , 'B' )
@@ -77,7 +77,7 @@ class VJJSkimmer(Module):
             self.out.branch('vjj_xsection' , 'F' )
             self.out.branch('vjj_lumiWeights' , 'F' , lenVar='vjj_nlumiWeights' )
             self.out.branch('vjj_weight' , 'F' )
-        
+
             self.out.branch('vjj_sfweight_up' , 'F')
             self.out.branch('vjj_sfweight_down' , 'F')
 
@@ -113,8 +113,8 @@ class VJJSkimmer(Module):
                         isHigh = True
                 elif event.vjj_trig == 3:
                     isHigh = True
-                    
-            
+
+
             if isHigh:
                 category = "HighVPt"
             elif isLow:
@@ -128,7 +128,7 @@ class VJJSkimmer(Module):
                 elif event.vjj_fs == 169:
                     category += 'mm'
 
-                
+
         if category == "":
             return False
 
@@ -137,9 +137,9 @@ class VJJSkimmer(Module):
         for i in range(self.BDTReader.outputNames.size()):
             mva_name = self.BDTReader.outputNames[i]
             self.out.fillBranch('vjj_mva_{0}'.format( mva_name ) , self.BDTReader.mvaValues[i] )
-        for j in range(self.BDTReader.outputVarNames.size()):
-            var_name = self.BDTReader.outputVarNames[j]
-            self.out.fillBranch('vjj_{0}'.format( var_name ) , self.BDTReader.mvaVarValues[j] )
+        #for j in range(self.BDTReader.outputVarNames.size()): #FIXME
+        #    var_name = self.BDTReader.outputVarNames[j]
+        #    self.out.fillBranch('vjj_{0}'.format( var_name ) , self.BDTReader.mvaVarValues[j] )
 
 
 
@@ -165,7 +165,7 @@ class VJJSkimmer(Module):
                 wsf = event.vjj_ele_effWgt
                 wsf_up = event.vjj_ele_effWgtUp
                 wsf_down = event.vjj_ele_effWgtDn
-                
+
 
             prefirew =  event.PrefireWeight if self.era != 2018 else 1
             self.out.fillBranch('vjj_weight' , wsf*event.puWeight*prefirew )

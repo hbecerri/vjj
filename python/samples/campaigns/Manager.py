@@ -231,6 +231,8 @@ class Manager():
         for year in self.AllInfo:
             for sample in self.AllInfo[year]:
                 for binval in self.AllInfo[year][sample]:
+                    print(binval)
+                    print(self.AllInfo[year][sample][binval])
                     for ds in self.AllInfo[year][sample][binval]['samples']:
                         if f in [os.path.abspath(fff) for fff in self.js[ds]['files']]:
                             s = Sample(ds)
@@ -322,3 +324,4 @@ class Manager():
 
 #a = Manager('june2020')
 #a.write_html()
+

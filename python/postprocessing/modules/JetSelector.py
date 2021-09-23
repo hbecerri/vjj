@@ -45,20 +45,20 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
     def isGood(self,jet):
 
         """ checks if jet is good for analysis applying a series of standard cuts """
-        
+
         #base cuts
         #print('pt',jet.pt),
-        if jet.pt < self.min_pt : 
+        if jet.pt < self.min_pt :
             #print("NO")
             return False
         #print('eta',abs(jet.eta), self.max_eta),
         abseta=abs(jet.eta)
         if abseta > self.max_eta :
             #print("NO")
-            return False        
+            return False
         min_dr = self.mindr_toVetoObjs(jet) #min([obj.DeltaR(jet) for obj in vetoObjs] or [2*self.min_dr2vetoObjs])
         #print('mindr',min_dr < self.min_dr2vetoObjs),
-        if min_dr < self.min_dr2vetoObjs : 
+        if min_dr < self.min_dr2vetoObjs :
             #print("NO")
             return False
 
@@ -84,24 +84,24 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
         if self.applyEraAdHocCuts :
 
             if self.era == 2016 :
-                
+
                 if looseID==0:
                     #print("NO")
                     return False
 
             if self.era == 2017:
                 #print('id',tightLepVeto),
-                if tightLepVeto==0 : 
+                if tightLepVeto==0 :
                     #print("NO")
                     return False
 
                 #ECAL noise (2017)
                 #print("ECAL NOISE"),
                 if abseta>2.650 and abseta<3.139:
-                    if jet.chEmEF+jet.neEmEF > 0.55: 
+                    if jet.chEmEF+jet.neEmEF > 0.55:
                         #print("NO")
                         return False
-                
+
             if self.era == 2018:
 
                 if tightLepVeto==0:
@@ -117,7 +117,7 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
 
         SFs={'qglgWgt':[],'qglqWgt':[]}
 
-        for j in jets:            
+        for j in jets:
             flav=getattr( j , 'partonFlavour') if hasattr( j , 'partonFlavour') else 0
             objAttrs=[j.qgl]
             if flav==21:
@@ -130,7 +130,7 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
                 SFs['qglqWgt'].append( None )
                 SFs['qglgWgt'].append( None )
 
-        #combine scale factors 
+        #combine scale factors
         if combined:
             ret = {}
             for k in SFs:
@@ -140,7 +140,7 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
 
         return SFs
 
-        
+
 jetSelector2016 = lambda apply_id=True : JetSelector(2016,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
 jetSelector2017 = lambda apply_id=True : JetSelector(2017,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
 jetSelector2018 = lambda apply_id=True : JetSelector(2018,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
