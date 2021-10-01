@@ -16,7 +16,7 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
         self.max_eta = max_eta
         self.min_dr2vetoObjs = dr2vetoObjs
         self.indices=[]
-        
+
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
         baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         eleSFSources={
@@ -31,8 +31,8 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
             2018:{
                 'rec'    : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_updatedAll.root'), 'EGamma_SF2D'),
                 'id'     : (os.path.join(baseSFDir,'2018_ElectronMVA80.root'),              'EGamma_SF2D'),
-                }        
-        }    
+                }
+        }
         for k in eleSFSources[self.era]:
             url,obj=eleSFSources[self.era][k]
             self.addSFFromSource(k,url,obj)
@@ -41,17 +41,17 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
         return "Electron"
 
     def obj_name(self):
-        return "ele"
+        return "eles"
 
     def isGood(self, ele):
 
         """checks if electron passes standard selection"""
-        
+
         if ele.pt < self.min_pt : return False
         absEta=abs( ele.eta )
         if absEta > self.max_eta : return False
         if absEta> 1.4442 and absEta<1.5660 : return False #EB->EE transition
-        min_dr = self.mindr_toVetoObjs(ele) 
+        min_dr = self.mindr_toVetoObjs(ele)
         if min_dr < self.min_dr2vetoObjs : return False
 
         #id requirement
@@ -66,14 +66,14 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
 
         SFs={'rec':[],'id':[]}
         for ele in electrons:
-            SFs['rec'].append(  
-                self.evalSF('rec', objAttrs=[ele.eta,ele.pt]) 
+            SFs['rec'].append(
+                self.evalSF('rec', objAttrs=[ele.eta,ele.pt])
             )
-            SFs['id'].append(  
-                self.evalSF('id', objAttrs=[ele.eta,ele.pt]) 
+            SFs['id'].append(
+                self.evalSF('id', objAttrs=[ele.eta,ele.pt])
             )
 
-        #combine scale factors 
+        #combine scale factors
         if combined:
             selSFs = []
             for k in SFs:
@@ -81,7 +81,7 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
             SFs = self.combineScaleFactors(selSFs)
             ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
             return ret
-            
+
 
         return SFs
 

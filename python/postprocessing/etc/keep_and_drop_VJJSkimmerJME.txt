@@ -1,0 +1,5 @@
+#FIXME only keep MVA vars... ?
+
+drop *
+keep vjj*
+#keep LHE_*

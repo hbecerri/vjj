@@ -3,15 +3,15 @@ from ObjectSelectorBase import *
 import numpy as np
 from VJJEvent import _defaultVjjSkimCfg
 
-class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
+class JetSelector(ScaleFactorBase, ObjectSelectorBase):
 
     """ Applies standard jet selections, returning a list of indices of good jets """
 
-    def __init__(self , era, min_pt, max_eta, dr2vetoObjs=0.4, applyPUid=True, apply_id=True, applyEraAdHocCuts=True , vetoObjs = [("Muon", "mu"), ("Electron", "ele"), ("Photon", "photon")] ):
+    def __init__(self , era, min_pt, max_eta, dr2vetoObjs=0.4, applyPUid=True, apply_id=True, applyEraAdHocCuts=True , vetoObjs = [("Muon", "mu"), ("Electron", "ele"), ("Photon", "photon")], JMEvar=""):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
-        self.setParams(2 , vetoObjs , dofilter=False) #set parameters for object selection
+        self.setParams(2 , vetoObjs , dofilter=False, JMEvar=JMEvar) #set parameters for object selection
 
         self.era               = era
         self.min_pt            = min_pt
@@ -23,6 +23,7 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
             self.applyPUid     = False
         self.applyEraAdHocCuts = applyEraAdHocCuts
         self.indices           = []
+        self.JMEvar            = JMEvar #'' <-> nominal; else, will consider the updated jet collection corresponding to this JME variation
 
         #quark-gluon weights
         self.addSFObject(tag='qglgWgt',
@@ -35,14 +36,16 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
 
     def obj_name(self):
         if self.apply_id:
-            return 'jet'
+            name = 'jets'
         else:
-            return "looseJet"
+            name = "looseJets"
+        if self.JMEvar != "": name+= "_{}".format(self.JMEvar) #Ex: 'jets_TotalUp' for JEC variation 'TotalUp'
+        return name
 
     def weight_names(self):
         return ["vjj_qglqWgt_{0}s".format(self.obj_name()) , "vjj_qglgWgt_{0}s".format( self.obj_name() )]
 
-    def isGood(self,jet):
+    def isGood(self, jet):
 
         """ checks if jet is good for analysis applying a series of standard cuts """
 
@@ -113,7 +116,7 @@ class JetSelector(ScaleFactorBase , ObjectSelectorBase ):
         #print("PASS")
         return True
 
-    def fillSFs(self,jets , combined=True):
+    def fillSFs(self, jets, combined=True):
 
         SFs={'qglgWgt':[],'qglqWgt':[]}
 

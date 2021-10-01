@@ -33,8 +33,8 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
             2018:{
                 'id'       : (os.path.join(baseSFDir,'RunABCD_SF_ID.root'),  'NUM_TightID_DEN_TrackerMuons_pt_abseta'),
                 'iso'      : (os.path.join(baseSFDir,'RunABCD_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
-                }        
-        }    
+                }
+        }
         for k in muSFSources[self.era]:
             url,obj=muSFSources[self.era][k]
             self.addSFFromSource(k,url,obj)
@@ -46,7 +46,7 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         return "Muon"
 
     def obj_name(self):
-        return "mu"
+        return "mus"
 
     def isGood(self, mu):
 
@@ -73,19 +73,19 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
             for k in SFs:
                 #average by luminosity in 2016
                 if self.era==2016:
-                    sfVal=self.evalSF(k, objAttrs=[m.eta, m.pt]) 
+                    sfVal=self.evalSF(k, objAttrs=[m.eta, m.pt])
 
-                    sfValGH=self.evalSF(k+'_gh', objAttrs=[m.eta,m.pt]) 
+                    sfValGH=self.evalSF(k+'_gh', objAttrs=[m.eta,m.pt])
                     w=16551.4/(16551.4+19323.4)
                     sfVal=(w*sfVal[0]+(1-w)*sfValGH[0],
                            np.sqrt( (w*sfVal[1])**2 + ((1-w)*sfValGH[1])**2 ) )
 
                 else:
-                    sfVal=self.evalSF(k, objAttrs=[m.pt,abs(m.eta)]) 
+                    sfVal=self.evalSF(k, objAttrs=[m.pt,abs(m.eta)])
 
                 SFs[k].append( sfVal )
 
-        #combine scale factors 
+        #combine scale factors
         if combined:
             selSFs = []
             for k in SFs:

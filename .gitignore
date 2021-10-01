@@ -77,7 +77,9 @@ Thumbs.db
 *.eps
 *.pdf
 
-.*
-*pyc
+*.pyc
 *.d
 *.pcm
+*.err
+*__init__*
+
