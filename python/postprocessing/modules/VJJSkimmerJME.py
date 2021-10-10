@@ -10,6 +10,11 @@ Main functionalities:
 # //--------------------------------------------
 # //--------------------------------------------
 
+DEBUG = False #True <-> printout debug info
+
+# //--------------------------------------------
+# //--------------------------------------------
+
 import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 import os
@@ -31,6 +36,7 @@ class VJJSkimmerJME(Module):
 
     def __init__(self, sample, campaign, JMEvars=[], includeTotalJER=False):
 
+        self.samplename = sample
         self.sample = Sample(sample)
         self.campaign = campaign
 
@@ -115,7 +121,7 @@ class VJJSkimmerJME(Module):
         #-- Add custom histo
         outputFile.cd()
         self.hTotals = ROOT.TH1D("TotalNumbers" , "" , self.nWeights , 0 , self.nWeights )
-        nTotals          = self.campaign.get_allNTotals(self.sample.ds)
+        nTotals = self.campaign.get_allNTotals(self.sample.ds)
         for wid in range(self.nWeights):
             self.hTotals.SetBinContent( wid + 1 , nTotals[wid] )
             self.hTotals.GetXaxis().SetBinLabel( wid + 1 , self.allWeights[wid][0] )
@@ -153,9 +159,12 @@ class VJJSkimmerJME(Module):
         #-- Create new 'FullOutput' (and corresponding output TTree) objects -- 1 per JME variation <-> will be used to store events associated with each variation independently
         self.outputs_JMEvars = [] #FullOutput (see class: https://github.com/cms-nanoAOD/nanoAOD-tools/blob/master/python/postprocessing/framework/output.py)
         self.trees_JMEvars = [] #Corresponding TTree objects
+        self.treenames_JMEvars = [] #Unique names of JME-varied trees
         for ivar, JMEvar in enumerate(self.JMEvars):
             self.outputs_JMEvars.append(FullOutput(inputFile, inputTree, outputFile, outputbranchSelection=self.branchsel, fullClone=False, maxEntries=None))
             self.trees_JMEvars.append(self.outputs_JMEvars[ivar].tree())
+            self.treenames_JMEvars.append("Events_{}".format(JMEvar))
+            self.trees_JMEvars[ivar].SetName(self.treenames_JMEvars[ivar]) #Must set tree name manually (else it is 'Events' for all)
             self.obsMaker.CreateAllBranches(self.outputs_JMEvars[ivar], isDefaultTree=False) #Create branches for variation output trees
 
         return
@@ -192,9 +201,8 @@ class VJJSkimmerJME(Module):
             copytree = self.trees_JMEvars[ivar].CopyTree('1', "", ROOT.TVirtualTreePlayer.kMaxEntries, 0) #Trick to keep only relevant branch as in nanoAOD
             self.finaltrees_JMEvars.append(copytree)
 
-            treename_tmp = "Events_{}".format(JMEvar) #Unique output name
-            print(colors.fg.orange + '... Writing output Tree: {} ...'.format(treename_tmp) + colors.reset + ' ({} entries)'.format(self.finaltrees_JMEvars[ivar].GetEntries()))
-            self.finaltrees_JMEvars[ivar].Write(treename_tmp)
+            print(colors.fg.orange + '... Writing output Tree: {} ...'.format(self.treenames_JMEvars[ivar]) + colors.reset + ' ({} entries)'.format(self.finaltrees_JMEvars[ivar].GetEntries()))
+            self.finaltrees_JMEvars[ivar].Write(self.treenames_JMEvars[ivar])
 
         return
 
@@ -217,8 +225,13 @@ class VJJSkimmerJME(Module):
         Process each event --> return True (go to next module) or False (fail, go to next event)
         """
 
-        #print('-- ENTRY: ' + str(event._entry) + ' // EVENT: ' + str(event.event))
-        # if event._entry != 110: return False #Debug specific entry
+        if DEBUG:
+            #if event._entry != 110: return False #Debug specific entry
+            if int(event.event) not in [1029822716,871121165]: return False #Debug specific event number
+
+            print('-- ENTRY: ' + str(event._entry) + ' // EVENT: ' + str(event.event))
+            self.Debug_Printouts_EventVariables(event) #Printout event quantities
+            # self.nomOutput.tree().Show(event._entry) #Built-in method to show *all* input branch values for this entry
 
         #-- Perform nominal event selection #Based on event variables computed in VJJSelector step
         category_nominal = self.Selection(event)
@@ -233,13 +246,12 @@ class VJJSkimmerJME(Module):
             #NB: these are already present in the input ntuples, but values appear to be bugged --> recompute here
             all_jets = Collection(event, "Jet")
             goodJets = [all_jets[i] for i in Convert_Chars_toIntegers(event.vjj_jets)] #Trick, cf. helper function comment
-            hasGoodTagJets, tagJets, extraJets = self.obsMaker.SelectTaggedJets(v, goodJets)
+            hasGoodTagJets, tagJets, extraJets = self.obsMaker.SelectTaggedJets(v, goodJets, DEBUG)
             if hasGoodTagJets:
                 self.obsMaker.FillEventShapeObservables(self.nomOutput, v, tagJets)
 
             #Compute MVA variables
             self.obsMaker.FillMVAObservables(self.nomOutput, event, self.BDTReader)
-
 
         #-- Loop on JEC variations
         for ivar, JMEvar in enumerate(self.JMEvars):
@@ -312,7 +324,7 @@ class VJJSkimmerJME(Module):
         category = ""
         isLow = False
         isHigh = False
-        high_pt_lowerCut = 175 if self.era == 2016 else 200 #FIXME check
+        high_pt_lowerCut = 175 if self.era == 2016 else 200 #to check
         min_vjj_jj_m = 200; min_v_pt = 75; vjj_lead_ptCut = 50; vjj_sublead_ptCut = 50
         vjj_v_etaCut = 1.442; vjj_jj_detaCut = 3.0
 
@@ -339,9 +351,21 @@ class VJJSkimmerJME(Module):
 
             #Update category name
             if category != '':
-                if event.vjj_fs == 22: pass 
+                if event.vjj_fs == 22: pass
                 elif event.vjj_fs == 121: category += 'ee'
                 elif event.vjj_fs == 169: category += 'mm'
+
+        #-- Trigger logic #Same data events may be found in multiple datasets --> Make sure that an event is only considered once
+        # ee region <-> only DoubleEG, EGamma (2018)
+        # mm region <-> only DoubleMuon
+        # SR <-> only SinglePhoton, EGamma (2018)
+        if self.isData:
+            if 'ee' in category:
+                if not any([substring in self.samplename for substring in ['DoubleEG','EGamma']]): return ""
+            elif 'mm' in category:
+                if 'DoubleMuon' not in self.samplename: return ""
+            else:
+                if not any([substring in self.samplename for substring in ['SinglePhoton','EGamma']]): return ""
 
         return category
 
@@ -389,4 +413,12 @@ class VJJSkimmerJME(Module):
         # print('Jet_pt_jerUp', event.Jet_pt_jerUp)
 
         print('') #Empty line
+        return
+
+
+    def Debug_Printouts_EventVariables(self, event):
+
+        for varSel in ['vjj_isGood','vjj_jj_m','vjj_lead_pt','vjj_sublead_pt','vjj_fs','vjj_v_pt','vjj_v_eta','vjj_jj_deta','vjj_trig','vjj_nlooseJets','vjj_njets']:
+            print('-- ', varSel, ' --> ', eval('event.{}'.format(varSel)))
+
         return

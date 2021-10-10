@@ -53,7 +53,7 @@ class ReadComputeObservables:
 # //--------------------------------------------
 # //--------------------------------------------
 
-    def SelectTaggedJets(self, v, jets):
+    def SelectTaggedJets(self, v, jets, printDebug=False):
         '''
         Select 'tagged' (= 2 hardest) jets
         '''
@@ -64,6 +64,10 @@ class ReadComputeObservables:
 
         #-- Select tagged jets
         tagJets = [j for j in cleanJets if j.pt>self.selCfg['min_tagJetPt']]
+
+        if printDebug:
+            print('Nof tagged jets: ', len(tagJets))
+            for jet in tagJets: print('- pt: ', jet.pt)
 
         #-- Event selection criteria
         if len(tagJets) < 2 : return False, None, None
@@ -99,12 +103,16 @@ class ReadComputeObservables:
         Prepare all relevant branches
         '''
 
-        if not isDefaultTree: #Not needed for nominal tree (taken directly from input tree)
+        #-- Not needed for nominal (read directly from input tree)
+        if not isDefaultTree:
             self.CreateVJJBranches(out)
 
+        #-- Will recompute event shape observables (bugged in nom) and MVA for both nominal & JME variations
         self.CreateEventShapeBranches(out)
-        self.CreateCategBranches(out)
         self.CreateMVABranches(out)
+
+        #-- Create/fill these new branches for both nominal & JME variations
+        self.CreateCategBranches(out)
 
         if not self.isData:
             self.CreateGenBranches(out)
@@ -124,6 +132,7 @@ class ReadComputeObservables:
     def CreateVJJBranches(self, out):
         '''
         Prepare the 'vjj_x' branches
+        NB: for nominal scenario, can directly read these branches from input tree; but must be recomputed for JME variations
         '''
 
         #NB: could use VJJEvent function directly (but better to control here the list of vars)

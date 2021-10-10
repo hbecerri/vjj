@@ -77,7 +77,7 @@ class Maker:
         print(self.dir , das , name )
         dir = os.path.join( self.dir , das.split('/')[1] , 'crab_' + name )
         if not os.path.exists( dir ):
-            print('\033[91m the direcotry for sample {0} does not exist \033[0m'.format(das) )
+            print('\033[91m the directory for sample {0} does not exist \033[0m'.format(das) )
             return {'weights':{'0':{'name':'nominal', 'total':0}} , 'size':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0} , 'submit_datetime':str('')}
         dates = os.listdir(dir) 
         if len(dates) == 1:
@@ -94,6 +94,7 @@ class Maker:
             ret = {'weights':{'0':{'name':'nominal', 'total':0}} , 'size':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0} , 'submit_datetime':str(date)}
             sys.stdout.write('\tjobs:')
             
+            #FIXME why incorrect files e.g. for /SinglePhoton/Run2016D-02Apr2020-v1/NANOAOD ?
             nwgts = -1
             for job in range( 1, max(all_jobs)+1 ):
                 sys.stdout.write( '{0},'.format(job) )
@@ -101,6 +102,7 @@ class Maker:
                 ret['filestat']['nFile'] += 1
                 if job in all_jobs:
                     f = all_jobs[job]
+                    print('== f ', f) #FIXME
                     try:
                         fo = ROOT.TFile.Open( f )
                     except:
@@ -156,8 +158,9 @@ class Maker:
                     else:
                         ret['files'][f] = 'file is None'
                         ret['filestat']['nNoneFiles'] += 1
-                else:
-                    ret['files'][f] = 'does not exist'
+                else: #Problem: if next file not found, declare previous file as missing !
+                    print('XX f ', f) #FIXME --> wrong index, should be updated to n+1
+                    #ret['files'][f] = 'does not exist'
                     ret['filestat']['nNotExisting'] += 1
             print('')
 
@@ -173,8 +176,4 @@ class Maker:
 
                         
         else:
-            raise ValueError( 'there is {0} dates for {1}, {2}'.format( len(dates) , das , ','.join(dates) ) )
-            
-
-    
-        
+            raise ValueError( 'there is {0} dates for {1}, {2}'.format( len(dates) , das , ','.join(dates) ) )        

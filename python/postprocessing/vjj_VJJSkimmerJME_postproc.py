@@ -13,6 +13,11 @@ from UserCode.VJJSkimmer.samples.Manager import currentSampleList as samples
 from UserCode.VJJSkimmer.postprocessing.modules.JetSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultVjjSkimCfg
 
+#To copy job output manually (not used)
+#from shutil import copyfile
+#import glob
+
+
 # //--------------------------------------------
 # //--------------------------------------------
 #-- DEFINE JEC/JER VARIATIONS
@@ -60,11 +65,11 @@ def make_hadd_fname(outdir, ds, nfilesperchunk, chunkindex, fromevent = None, nE
     return haddFileName, os.path.exists(haddFileName)
 
 
-def get_fileNames(campaign, ds, nfilesperchunk, chunkindex):
+def get_fileNames(campaign, ds, nfilesperchunk, chunkindex, printout=True):
 
     all_inputFiles = campaign.get_dataset_info( ds )['files']
     chunks = [ all_inputFiles[a:a+nfilesperchunk] for a in range( 0 , len(all_inputFiles) , nfilesperchunk ) ]
-    print(ds,nfilesperchunk,chunkindex,len(all_inputFiles) , len(chunks) )
+    if printout: print(ds,nfilesperchunk,chunkindex,len(all_inputFiles) , len(chunks) )
     inputFiles = chunks[ chunkindex ]
 
     return inputFiles
@@ -118,8 +123,8 @@ def main():
     parser.add_argument('-c', '--campaign',     dest='campaign',   help='campaign',  default=None, type=str)
     parser.add_argument('--chunkindex',     dest='chunkindex',   help='chunk the file list into sub-lists with size=nfilesperchunk and selects #chunkindex to run on',  default = None, type=int)
     parser.add_argument('--nfilesperchunk',     dest='nfilesperchunk',   help='number of files to run on',  default=1, type=int)
-    parser.add_argument('--workingdir',     dest='workingdir',   help='where to store individual files',  default='./', type=str)
-    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory',  default='./', type=str)
+    parser.add_argument('--workingdir',     dest='workingdir',   help='where to temporarily store individual output files',  default='./', type=str)
+    parser.add_argument('-o' , '--outdir',     dest='outdir',   help='final output directory',  default='./', type=str)
     parser.add_argument('-f', '--firstEntry', dest='firstEntry',   help='first entry to process', type=int, default=0)
 
     opt, unknownargs = parser.parse_known_args()
@@ -141,6 +146,15 @@ def main():
 
     #-- Define keep/drop filepath for nominal scenario (can specific independent keep/drop file for JME variations in VJJSkimmerJME.py)
     keep_drop = '{0}/python/UserCode/VJJSkimmer/postprocessing/etc/skimmer_keep_and_drop.txt'.format( os.getenv('CMSSW_BASE' , '.') )
+
+    #-- Define 'golden json' luminosity mask to be applied for data
+    jsonMask = None
+    if opt.isData: #Do not apply to MC !
+        jsonDir = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/'
+        if opt.year == 2016: jsonMask = jsonDir+'Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_ReReco_07Aug2017_Collisions16_JSON.txt' #2016
+        elif opt.year == 2017: jsonMask = jsonDir+'Collisions17/13TeV/ReReco/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON.txt' #2017
+        elif opt.year == 2018: jsonMask = jsonDir+'Collisions18/13TeV/ReReco/Cert_314472-325175_13TeV_17SeptEarlyReReco2018ABC_PromptEraD_Collisions18_JSON.txt' #2018
+    if jsonMask is not None: print(colors.fg.lightblue + '\n== Applying lumi mask: ' + colors.reset); print(jsonMask); print('')
 
     campaign = None
     if opt.campaign: campaign = CampaignManager(opt.campaign)
@@ -177,26 +191,36 @@ def main():
 
     #-- Cut formula for event preselection (do not process further uninteresting events) #Do not use, cf. below
     # cut = None
-    cut = 'vjj_isGood && vjj_looseJets>=2 && vjj_fs!=0' #NB: supposed to speed up the processing by preskimming events; but creates problems in BDTReader (entry number not synchronized anymore) #Also 'vjj_trig>0' ?
+    cut = 'vjj_isGood && vjj_nlooseJets>=2 && vjj_fs!=0 && vjj_trig>0' #NB: supposed to speed up the processing by pre-skimming events; but creates problems in BDTReader (entry number not synchronized anymore)
 
     #-- Call post-processor
-    p = PostProcessor(outputDir=opt.workingdir,
+    p = PostProcessor(outputDir=opt.workingdir, #Dir where to store individual output files
                     inputFiles=inputFiles,
                     cut=cut,
-                    branchsel=None,
                     modules=mymodules,
+                    outputbranchsel=keep_drop,
+                    jsonInput=jsonMask,
+                    branchsel=None,
                     provenance=True,
                     justcount=False,
                     fwkJobReport=False,
                     noOut=False,
-                    outputbranchsel=keep_drop,
                     firstEntry=opt.firstEntry,
                     maxEntries=opt.maxEntries,
-                    haddFileName=haddFileName)
+                    haddFileName=haddFileName) #If not None <-> final outputfile name (after running 'haddnano.py')
 
     p.run() #Run the PostProcessor code
 
     print(colors.bold + colors.fg.orange + '\n... DONE !' + colors.reset)
+
+    #-- Manual copy of output files (not used) #NB: noticed some files got truncated (size/time job limitations ?)
+    '''
+    for name in glob.glob('./*.root'):
+        print(name)
+        outname = '/afs/cern.ch/work/n/ntonon/public/VBFphoton/CMSSW_10_2_27/src/UserCode/VJJSkimmer/scripts/'+haddFileName
+        print('MANUAL COPY FROM: ', name, ' TO: ', outname)
+    copyfile(name, outname)
+    '''
 
     return
 

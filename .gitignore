@@ -77,9 +77,19 @@ Thumbs.db
 *.eps
 *.pdf
 
+##########
+# OTHERS #
+##########
+
+.* #Hidden files
+!/.gitignore #Keep this file
+
 *.pyc
 *.d
 *.pcm
 *.err
 *__init__*
+*.__
+scripts/july20w2
+ntonon.cc
 

@@ -9,10 +9,10 @@ from ROOT import TMVA, TFile, TString
 from array import array
 from subprocess import call
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
+from UserCode.VJJSkimmer.postprocessing.helpers.ColoredPrintout import *
 
-from random import seed, random #For tests with random inputs
-seed(1)
-
+# from random import seed, random #For tests with random inputs
+# seed(1)
 
 class BDTReader():
 
@@ -161,9 +161,9 @@ class BDTReader():
                 # self.branches_readers[ireader][ib][0] = random()
 
                 #-- Protection against NaNs (e.g. qgl variable has some NaNs already in NanoAOD files) #Disactivate for now for speedup, as this only affects few events
-                # if math.isnan(self.branches_readers[ireader][ib][0]):
-                #     self.branches_readers[ireader][ib][0] = 0
-                #     print('The following branch value is NaN --> Setting it to 0: ', branchName)
+                #if math.isnan(self.branches_readers[ireader][ib][0]):
+                #    self.branches_readers[ireader][ib][0] = 0
+                #    print(colors.fg.lightred + 'The following branch value is NaN --> Setting it to 0: ' + branchName + colors.reset)
 
         return
 
