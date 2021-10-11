@@ -142,9 +142,9 @@ class Manager():
         year = s.year()
         LUMIS = None
         if year==2016:
-            LUMIS={'LowVPt':28200.0, 'HighVPt':35900.0}
+            LUMIS={'LowVPt':28771.723170, 'HighVPt':36322.745578}
         elif year==2017:
-            LUMIS={'LowVPt':7661.0,'HighVPt':41367.0}
+            LUMIS={'LowVPt':7728.065748,'HighVPt':41527.348931}
         elif year==2018:
             LUMIS={'LowVPt':59735.969368,'HighVPt':59735.969368}
 
