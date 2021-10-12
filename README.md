@@ -58,7 +58,7 @@ cmsrel CMSSW_10_2_13
 cd CMSSW_10_2_13/src
 cmsenv
 
-#Higgs combination tool (see https://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/)
+#-- Higgs combination tool (see https://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/)
 git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
 cd $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit
 git fetch origin
@@ -66,13 +66,13 @@ git checkout v8.1.0
 scram b
 cd -
 
-#nanoAOD tools
+#-- nanoAOD tools
 git clone https://github.com/cms-nanoAOD/nanoAOD-tools.git PhysicsTools/NanoAODTools
 cd PhysicsTools/NanoAODTools
 scram b
 cd -
 
-#SMP-19-005 framework (if ssh does not work, use https)
+#-- SMP-19-005 framework (if ssh does not work, use https)
 git clone ssh://git@gitlab.cern.ch:7999/cms-ewkvjj/vjjskimmer.git UserCode/VJJSkimmer
 #git clone https://gitlab.cern.ch/cms-ewkvjj/vjjskimmer.git UserCode/VJJSkimmer
 cd UserCode/VJJSkimmer
@@ -92,15 +92,31 @@ The code can be found under `python/postprocessing/modules`:
 
 #### Run the code
 
-A wrapper is available in `python/postprocessing/vjj_postproc.py` to build the command to run the code.
-You can inspect its options with `-h`. An example of how to run it is give below:
+A wrapper is available in `python/postprocessing/vjj_postproc.py` to build the command to run the code. You can inspect its options with `-h`.
 
+- Example command to run interactively (in `python/postprocessing`):
 ```
 voms-proxy-init --rfc --voms cms --hours 192 #Renew proxy
 
-#Make sure that your file exists (via DAS)
+#-- Make sure that your file exists (via DAS)
 python vjj_postproc.py -i root://cms-xrd-global.cern.ch//store/mc/RunIISummer16NanoAODv7/G1Jet_Pt-400To650_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/100000/2F564BDF-0A8B-DB44-A485-19BE3C1DB5C9.root -N 5000 -y 2016
 ```
+
+- Example command to run via CRAB (in `python/scripts`):
+```
+#-- SUBMIT
+python vjj_crab.py submit
+
+#--year X <-> process only samples of year 'X'
+#-d X <-> process only the specific sample 'X'
+#--datasetkey X <-> process only samples whose names contain 'X'
+#--runcommands <-> run commands; else, only prints them to stdout
+#More options available
+```
+
+:arrow_right: Submit crab jobs. The config file is based on the template `python/etc/crab_cfg.py`, with overriding options `outLFNDirBase` / `inputDataset` / `workArea`.
+The crab job runs the script `crab_script.sh`, which in turn calls the `vjj_postproc.py` wrapper with arguments `--inputfiles=crab` (needed to process file via CRAB) and `--dataSet` set to the proper dataset DAS name.
+
 
 ## 'Skimmed ntuples' production
 
@@ -115,7 +131,6 @@ In the PostProcessor call, one can specify preselection cuts (to speed up the pr
 #### Run the code
 
 - Example command to run interactively (in `python/postprocessing`):
-
 ```
 python vjj_VJJSkimmerJME_postproc.py -c july20new -o . --workingdir . -d /GJets_SM_5f_TuneEE5C_EWK_13TeV-madgraph-herwigpp/RunIISummer16NanoAODv7-Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM --nfilesperchunk 1 --chunkindex 0 -N 1000
 
@@ -174,16 +189,16 @@ Below are example commands to create a new campaign file:
 ```
 cd scripts
 
-#[MAKE] <-> interactive; specify dataset(s) and years(s) #Can consider only one year/sample with:
+#-- [MAKE] <-> interactive; specify dataset(s) and years(s) #Can consider only one year/sample with:
 ./vjj_campaign.sh make -d /eos/bigNtuplesDir -c myCampaign #--year 16 --sample PhotonData <-> will consider only 2016 samples containing the 'PhotonData' keyword
 
-#[SUBMIT] (all datasets) <-> HTcondor; runs [make] on all years/datasets
+#-- [SUBMIT] (all datasets) <-> HTcondor; runs [make] on all years/datasets
 ./vjj_campaign.sh submit -d /eos/bigNtuplesDir -c myCampaign
 
-#[MERGE] (all datasets) <-> inetactive; merges all outputs from condor jobs
+#-- [MERGE] (all datasets) <-> inetactive; merges all outputs from condor jobs
 ./vjj_campaign.sh merge -d /eos/bigNtuplesDir -c myCampaign
 
-#Verify the output JSON file, and add its parent information
+#-- Verify the output JSON file, and add its parent information
 voms-proxy-init --rfc --voms cms --hours 192 #Renew proxy (need to access DAS -- cf. GetParent() function)
 python #Interactive python
 
