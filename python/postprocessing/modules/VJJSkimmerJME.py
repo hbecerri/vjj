@@ -51,24 +51,6 @@ class VJJSkimmerJME(Module):
         self.lumiWeights      = self.campaign.get_lumi_weight(sample)
         self.xSection         = self.campaign.get_xsection(sample)
 
-        '''
-        #-- Try to load BDTReader class (implemented in VJJPlotter code) via python dictionaries
-        try:
-            ROOT.gSystem.Load("libUserCodeVJJPlotter")
-            dummy = ROOT.BDTReader()
-            #Load it via ROOT ACLIC. NB: this creates the object file in the CMSSW directory,
-            #causing problems if many jobs are working from the same CMSSW directory
-        except Exception as e:
-            print "Could not load module via python, trying via ROOT", e
-            if "/BDTReader_cc.so" not in ROOT.gSystem.GetLibraries():
-                print "Load C++ Worker"
-                if 'CMSSW_BASE' in os.environ:
-                    ROOT.gROOT.ProcessLine(".L %s/src/UserCode/VJJPlotter/src/BDTReader.cc++" % os.environ['CMSSW_BASE'])
-                else:
-                    ROOT.gROOT.ProcessLine(".L ../../VJJPlotter/src/BDTReader.cc++")
-            dummy = ROOT.BDTReader()
-        '''
-
         #Try to load EventShapeVariables class via python dictionaries
         try:
             ROOT.gSystem.Load("libUserCodeVJJSkimmer")

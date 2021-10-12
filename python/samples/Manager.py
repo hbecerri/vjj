@@ -72,6 +72,9 @@ class Manager:
                 return s.color
 
     def write_html(self):
+
+        print('ERROR: must fix VJJPlotter path'); return
+
         html = Element("html")
         head = SubElement( html , 'head')
         css = SubElement( head , 'link'  )
@@ -94,7 +97,7 @@ class Manager:
             #SubElement( lnk , 'h1')
             lnk.set('href' , '#{0}'.format( s.name ) )
         tree = ElementTree(html)        
-        tree.write( '{0}/src/UserCode/VJJPlotter/web/Samples/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.inputFileName.split('.')[0] ) )
+        tree.write( '{0}/src/UserCode/VJJPlotter/web/Samples/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.inputFileName.split('.')[0] ) ) #Change path to make repos independent
 
     def __str__(self):
         ret = ''

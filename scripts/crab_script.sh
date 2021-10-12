@@ -1,18 +1,18 @@
 #this is not mean to be run locally
-#
+
 echo Check if TTY
 if [ "`tty`" != "not a tty" ]; then
   echo "YOU SHOULD NOT RUN THIS IN INTERACTIVE, IT DELETES YOUR LOCAL FILES"
 else
 
 echo "ENV..................................."
-env 
+env
 echo "VOMS"
 voms-proxy-info -all
 echo "CMSSW BASE, python path, pwd"
 echo $CMSSW_BASE 
 echo $PYTHON_PATH
-echo $PWD 
+echo $PWD
 rm -rf $CMSSW_BASE/lib/
 rm -rf $CMSSW_BASE/src/
 rm -rf $CMSSW_BASE/module/

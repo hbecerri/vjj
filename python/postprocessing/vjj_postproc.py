@@ -15,13 +15,41 @@ from UserCode.VJJSkimmer.postprocessing.modules.JetSelector import *
 from UserCode.VJJSkimmer.postprocessing.etc.testDatasets import getTestDataset, getTestCIDir
 from UserCode.VJJSkimmer.samples.Sample import SampleNameParser
 from UserCode.VJJSkimmer.samples.Manager import currentSampleList as samples
+from UserCode.VJJSkimmer.postprocessing.helpers.ColoredPrintout import *
 
-def defineModules(year,isData,isSignal):
+# //--------------------------------------------
+# //--------------------------------------------
+##     ## ######## ##       ########  ######## ########
+##     ## ##       ##       ##     ## ##       ##     ##
+##     ## ##       ##       ##     ## ##       ##     ##
+######### ######   ##       ########  ######   ########
+##     ## ##       ##       ##        ##       ##   ##
+##     ## ##       ##       ##        ##       ##    ##
+##     ## ######## ######## ##        ######## ##     ##
+# //--------------------------------------------
+# //--------------------------------------------
 
+def PrintBanner(year):
+    '''
+    Print some info when starting this code
+    '''
+
+    print('\n' + colors.bg.orange + '                                           ' + colors.reset)
+    print(colors.fg.orange + '\n--- Running VJJSelector (via vjj_postproc.py) ---' + colors.reset + '\n')
+    # print('* NB1: xxx')
+    print(colors.bg.orange + '                                           ' + colors.reset + '\n')
+
+    print('== YEAR: ', year)
+
+    return
+
+
+def defineModules(year, isData, isSignal):
     """
-    configures the modules to be run depending on the year and whether is data or MC
-    returns a list of modules
+    Configures the modules to be run depending on the year and whether is data or MC
+    Returns a list of modules
     """
+
     if isData and isSignal:
         raise ValueError('isData and isSignal can not be True at the same time')
 
@@ -63,43 +91,22 @@ def defineModules(year,isData,isSignal):
     return modules
 
 
-def vjj_postproc(opt, crab = False):
-    
-    """steers the VJJ analysis"""
-
-    print('== YEAR: ', opt.year)
-
-    #start by defining modules3 to run
-    modules=defineModules(opt.year,opt.isData, opt.isSignal)
-    #print('modules = ', modules)
-
-    fwkJobReport=False
-    haddFileName = None
-    if crab:
-        fwkJobReport=True
-        haddFileName = 'out.root'
-
-    #call post processor
-    p=PostProcessor(outputDir=".",
-                    inputFiles=opt.inputFiles,
-                    cut=None,
-                    branchsel=None,
-                    modules=modules,
-                    provenance=True,
-                    justcount=False,
-                    fwkJobReport=fwkJobReport,
-                    noOut=False,
-                    outputbranchsel = opt.keep_and_drop,
-                    maxEntries=opt.maxEntries,
-                    firstEntry=opt.firstEntry,
-                    haddFileName = haddFileName)
-
-    p.run()
-
+# //--------------------------------------------
+# //--------------------------------------------
+##     ##    ###    #### ##    ##
+###   ###   ## ##    ##  ###   ##
+#### ####  ##   ##   ##  ####  ##
+## ### ## ##     ##  ##  ## ## ##
+##     ## #########  ##  ##  ####
+##     ## ##     ##  ##  ##   ###
+##     ## ##     ## #### ##    ##
+# //--------------------------------------------
+# //--------------------------------------------
 
 
 def main():
 
+# //--------------------------------------------
     #parse command line
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-y', '--year',       dest='year',   help='year',  choices=[2016,2017,2018], default=None,  type=int)
@@ -115,10 +122,13 @@ def main():
                         default=0)
     parser.add_argument('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory',  default=getTestCIDir(), type=str)
     parser.add_argument('-D', '--dataSet',     dest='dataSet',   help='dataset name to run on, setting it overrides "year", "data" and "isSignal" values.',  default=None, type=str)
+# //--------------------------------------------
 
+# //--------------------------------------------
     opt, unknownargs = parser.parse_known_args() #job number is passed by crab as the first argument and shouldn't be parsed here
-
     if opt.year == None: raise ValueError('Must set year !')
+
+    PrintBanner(opt.year) #Print banner in terminal
 
     if opt.dataSet:
         s = SampleNameParser()
@@ -133,16 +143,54 @@ def main():
             raise ValueError( 'dataSet name seems inconsistent: {0}'.format( opt.dataSet ) )
 
     crab = False
+    inputFiles = []
     if opt.inputFiles == "auto":
-        opt.inputFiles = [getTestDataset(opt.year, opt.isData, fromLocalCIDir=opt.localCIDir)]
+        inputFiles = [getTestDataset(opt.year, opt.isData, fromLocalCIDir=opt.localCIDir)]
     elif opt.inputFiles == "crab":
         import PhysicsTools.NanoAODTools.postprocessing.framework.crabhelper as nano_crab
-        opt.inputFiles = nano_crab.inputFiles()
+        inputFiles = nano_crab.inputFiles()
         crab = True
     else:
-        opt.inputFiles=opt.inputFiles.split(',')
+        inputFiles=opt.inputFiles.split(',')
 
-    vjj_postproc(opt , crab)
+    #-- Set input files
+    print(colors.fg.lightblue + '\n== Processing following files:' + colors.reset)
+    for i in inputFiles: print(i)
+    print('')
+
+    fwkJobReport=False
+    haddFileName = None
+    if crab:
+        fwkJobReport=True
+        haddFileName = 'out.root'
+# //--------------------------------------------
+
+# //--------------------------------------------
+    #-- Define modules to run
+    modules=defineModules(opt.year,opt.isData, opt.isSignal)
+    # print('My modules: ', mymodules)
+
+    #call post processor
+    p=PostProcessor(outputDir=".",
+                    inputFiles=inputFiles,
+                    cut=None,
+                    branchsel=None,
+                    modules=modules,
+                    provenance=True,
+                    justcount=False,
+                    fwkJobReport=fwkJobReport,
+                    noOut=False,
+                    outputbranchsel = opt.keep_and_drop,
+                    maxEntries=opt.maxEntries,
+                    firstEntry=opt.firstEntry,
+                    haddFileName = haddFileName)
+
+    p.run()
+# //--------------------------------------------
+
+
+# //--------------------------------------------
+# //--------------------------------------------
 
 
 if __name__ == "__main__":

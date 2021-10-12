@@ -76,7 +76,6 @@ def get_fileNames(campaign, ds, nfilesperchunk, chunkindex, printout=True):
 
 
 def defineModules(year, isData, dataset, campaign, jme_vars):
-
     """
     Configures the modules to be run depending on the year and whether is data or MC
     Returns a list of modules
@@ -179,8 +178,7 @@ def main():
 
     #-- Set chain of modules to be run
     mymodules = defineModules(opt.year, opt.isData, opt.dataSet, campaign, jme_vars)
-    # mymodules = [VJJSkimmerJME(opt.dataSet, campaign)]
-    print('My modules: ', mymodules)
+    # print('My modules: ', mymodules)
 
     #-- Set output
     if opt.firstEntry : haddFileName, exists = make_hadd_fname(opt.outdir, opt.dataSet, opt.nfilesperchunk, opt.chunkindex, opt.firstEntry, opt.maxEntries)

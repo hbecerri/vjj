@@ -241,6 +241,9 @@ class Manager():
         raise NameError('no dataset found for file:{0}'.format( f ))
 
     def write_html(self):
+
+        print('ERROR: must fix VJJPlotter path'); return
+
         html = Element("html")
         head = SubElement( html , 'head')
         css = SubElement( head , 'link'  )
@@ -318,7 +321,7 @@ class Manager():
                                 SubElement( lo_ds_files , 'li' ).text = '{0} : {1}'.format( file_ds , file_ds_stat ) 
 
         tree = ElementTree(html)        
-        tree.write( '{0}/src/UserCode/VJJPlotter/web/Campaigns/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.filename.split('.')[0] ) )
+        tree.write( '{0}/src/UserCode/VJJPlotter/web/Campaigns/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.filename.split('.')[0] ) ) #Change path to make repos independent
 
     
 
