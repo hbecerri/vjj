@@ -5,6 +5,7 @@ CODE EXAMPLE
 
 === Emoji list (see https://gist.github.com/rxaviers/7360908)
 :arrow_right:
+:information_source:
 :heavy_exclamation_mark:
 :heavy_check_mark:
 :link:
@@ -42,27 +43,11 @@ CODE EXAMPLE
 :construction: **README UNDER CONSTRUCTION**
 
 
-# VJJSkimmer
-
 Tools for skimming and building of final ntuple analysis for V+2j analysis based on NanoAOD.
 For more details on the analysis visit the [Twiki page](https://twiki.cern.ch/twiki/bin/view/CMS/AjjEWK).
 
 
-## Table Of Contents
-
 [[_TOC_]]
-
-* [Installation](#Installation)
-
-* [Big ntuples production](#big-ntuples-production)
-  * [Run the code](#run-the-code)
-
-* [Skimmed ntuples production](#skimmed-ntuples-production)
-  * [Run the code](#run-the-code-1)
-
-* [Compute the integrated luminosities](#compute-the-integrated-luminosities)
-
-* [Continuous integration](#instructions-for-continuous-integration)
 
 
 ## Installation
@@ -157,7 +142,7 @@ condor_submit vjj_VJJSkimmerJME.submit #Submit the jobs
 #More options available
 ```
 
-:heavy_exclamation_mark: The user can configure this code to define a list of years/sample keywords to process (to avoid processing useless samples).
+:information_source: The user can configure this code to define a list of years/sample keywords to process (to avoid processing useless samples).
 
 :arrow_right: Once all jobs are finished, rerunning the same command will reproduce a config file including only failed jobs.
 Since these jobs likely failed due to memory consumption, it is better to split them in smaller chunks of e.g. 100K events, by adding the additional options `--splitjobs --neventsperjob 100000`.
