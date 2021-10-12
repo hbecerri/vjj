@@ -28,11 +28,11 @@ def main():
     parser.add_argument('-c' , '--campaign',     dest='campaign',   help='the name of the produced campaign',  type=str)
     
     if sys.argv[1] in ['submit' , 'make']:
-        parser.add_argument('-d' , '--directory',     dest='directory',   help='the directory the root files are stored, usually under /eos/cms/store/cmst3/group/top/SMP-19-005/',  type=str)
+        parser.add_argument('-d' , '--directory',     dest='directory',   help='directory containing rootfiles',  type=str)
         parser.add_argument('-o' , '--outjsonname',     dest='outjsonname',   help='name of the json output',  default='auto', type=str)
     if sys.argv[1] == 'make':
         parser.add_argument( '--year',  dest='year',   help='year', choices=['16','17','18','all'] , type=str , default='all'  )
-        parser.add_argument( '--sample',  dest='sample',   help='sample' , choices=[s.name for _,s in currentSampleList.all_samples.items()] , type=str , default=None  )
+        parser.add_argument( '--sample',  dest='sample',   help='sample' , choices=[s.name for _,s in currentSampleList.all_samples.items()] , type=str , default=None)
         parser.add_argument('-s','--ds', action='append' , dest='datasets' , type=str , default=[] )
 
     opt, unknownargs = parser.parse_known_args()
@@ -46,6 +46,7 @@ def main():
         if opt.outjsonname == 'auto':
             opt.outjsonname = make_fname( opt.campaign , opt.year , opt.sample , opt.datasets )
 
+        print('== Running CampaignMaker()...')
         maker = CampaignMaker( opt.directory , opt.outjsonname , opt.sample , opt.year , opt.datasets )
     
     elif opt.action == 'submit': #Run on all years/datasets

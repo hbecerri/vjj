@@ -54,7 +54,7 @@ class Maker:
                     #    inconsistencymap[ s2.makeUniqueName() ].append( s1.makeUniqueName() )
                     #else:
                     #    inconsistencymap[ s2.makeUniqueName() ] = [s1.makeUniqueName()]
-        if ninconsistencies == 0:
+        if ninconsistencies == 0 and len(dsnames)>0:
             print( '\033[92m weights are consistent \033[0m' )
         else:
             print( inconsistencymap )
@@ -77,7 +77,7 @@ class Maker:
         print(self.dir , das , name )
         dir = os.path.join( self.dir , das.split('/')[1] , 'crab_' + name )
         if not os.path.exists( dir ):
-            print('\033[91m the directory for sample {0} does not exist \033[0m'.format(das) )
+            print('\033[91m the directory for sample {0} does not exist ({1}) \033[0m'.format(das,dir) )
             return {'weights':{'0':{'name':'nominal', 'total':0}} , 'size':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0} , 'submit_datetime':str('')}
         dates = os.listdir(dir) 
         if len(dates) == 1:
@@ -94,7 +94,6 @@ class Maker:
             ret = {'weights':{'0':{'name':'nominal', 'total':0}} , 'size':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0} , 'submit_datetime':str(date)}
             sys.stdout.write('\tjobs:')
             
-            #FIXME why incorrect files e.g. for /SinglePhoton/Run2016D-02Apr2020-v1/NANOAOD ?
             nwgts = -1
             for job in range( 1, max(all_jobs)+1 ):
                 sys.stdout.write( '{0},'.format(job) )
@@ -102,7 +101,7 @@ class Maker:
                 ret['filestat']['nFile'] += 1
                 if job in all_jobs:
                     f = all_jobs[job]
-                    print('== f ', f) #FIXME
+                    #print('== f ', f)
                     try:
                         fo = ROOT.TFile.Open( f )
                     except:
@@ -159,8 +158,7 @@ class Maker:
                         ret['files'][f] = 'file is None'
                         ret['filestat']['nNoneFiles'] += 1
                 else: #Problem: if next file not found, declare previous file as missing !
-                    print('XX f ', f) #FIXME --> wrong index, should be updated to n+1
-                    #ret['files'][f] = 'does not exist'
+                    #ret['files'][f] = 'does not exist' #--> wrong index, still refering to previous file, not the current (actually missing) file #Now commented out
                     ret['filestat']['nNotExisting'] += 1
             print('')
 
