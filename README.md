@@ -25,15 +25,14 @@ cd PhysicsTools/NanoAODTools
 scram b
 cd -
 
-#SMP-19-005 framework (if ssh does not work for you switch to https)
+#SMP-19-005 framework (if ssh does not work, use https)
 git clone ssh://git@gitlab.cern.ch:7999/cms-ewkvjj/vjjskimmer.git UserCode/VJJSkimmer
+#git clone https://gitlab.cern.ch/cms-ewkvjj/vjjskimmer.git UserCode/VJJSkimmer
 cd UserCode/VJJSkimmer
 scram b
 ```
 
-## Skimming 
-
-## Final ntuple production
+## 'Big ntuples' production
 
 The final V+2j selection at reco and gen level runs on NanoAOD ntuples and saves a summary tree for the analysis.
 The code can be found under `python/postprocessing/modules`:
@@ -44,6 +43,10 @@ The code can be found under `python/postprocessing/modules`:
 * `ScaleFactorBase.py` holds generic functions to read and evaluate scale factors from TH1, TGraph or TF1
 * the `etc` sub-directory contains configuration files, scale factor ROOT files etc which are used by the selection code
 
+### Run the code
+
+:construction: **TO VERIFY**
+
 A wrapper is available in `python/postprocessing/vjj_postproc.py` to build the command to run the code.
 You can inspect its options with `-h`. An example of how to run it is give below:
 
@@ -53,10 +56,74 @@ python python/postprocessing/vjj_postproc.py \
        -N 5000
 ```
 
+## 'Skimmed ntuples' production
+
+In `python/postprocessing/modules/`, the `VJJSkimmerJME.py` is used to skim big ntuples and only retain events entering the final categories. It calls `BDTReader.py` and `ReadComputeObservables_VJJSkimmerJME.py` to (re)compute the MVA and other relevant observables, individually for each JME variation.
+This code varies an individual output TTree for the nominal scenario, and for each JME variation.
+Different branch selections may be applied to the nominal/shifted TTrees, via independent keep/drop instruction files.
+
+The wrapper code `vjj_VJJSkimmerJME_postproc.py` chains the different modules: it calls the nanoAOD `jetmetHelperRun2` module, then calls JetSelector once per JME variation to obtain varied jet collections (nominal collection read directly from big ntuples), and finally the skimmer code.
+In the PostProcessor call, one can specify preselection cuts (to speed up the processing) and JSON luminosity masks to apply to data.
+
+### Run the code
+
+- Example command to run interactively (in `python/postprocessing`):
+
+```
+python vjj_VJJSkimmerJME_postproc.py -c july20new -o . --workingdir . -d /GJets_SM_5f_TuneEE5C_EWK_13TeV-madgraph-herwigpp/RunIISummer16NanoAODv7-Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM --nfilesperchunk 1 --chunkindex 0 -N 1000
+
+#-c <-> campaign file, must be found in `python/samples/campaigns/`
+#-o <-> outputdir, where to write the final output files
+#--workingdir <-> where to write the tmp output files (before call to haddnano.py to merge all tmp outputs)
+#-d <-> name of dataset to process
+#-nfilesperchunk x <-> will chain x files per chunk, i.e. process x files per run/job (use 1 file per job by default for skimmer)
+#--chunkindex x <-> run on the xth chunk of files
+#-N x <-> only process the x first events
+#More options available
+```
+
+- Example command to run via HTCondor (in `python/scripts`):
+```
+python vjj_VJJSkimmerJME.submit.py -c july20new --baseoutdir . -o TEST -d SinglePhoton_2016_B_v2 #Create the config file
+
+condor_submit vjj_VJJSkimmerJME.submit #Submit the jobs
+
+#-c <-> campaign file, must be found in `python/samples/campaigns/`
+#--baseoutdir<-> where to write the final output files (BASE)
+#-o <-> where to write the final output files (SUFFIX)
+#-d <-> name of dataset to process; if empty, process all datasets
+#More options available
+```
+
+:heavy_exclamation_mark: The user can configure this code to define a list of years/sample keywords to process (to avoid processing useless samples).
+
+:arrow_right: Once all jobs are finished, rerunning the same command will reproduce a config file including only failed jobs.
+Since these jobs likely failed due to memory consumption, it is better to split them in smaller chunks of e.g. 100K events, by adding the additional options `--splitjobs --neventsperjob 100000`.
+Repeat with smaller values until all jobs are completed.
+
+## Compute the integrated luminosities
+
+The integrated recorded luminosity corresponding to a given trigger path may be computed using `brilcalc`.
+
+:arrow_right: See the dedicated [Twiki](https://twiki.cern.ch/twiki/bin/viewauth/CMS/BrilcalcQuickStart).
+
+- Example command to compute the recorded luminosity recorded by the trigger path `HLT_Photon175_v`:
+```
+#Go to lxplus, cmsenv (?)
+
+export PATH=$HOME/.local/bin:/cvmfs/cms-bril.cern.ch/brilconda/bin:$PATH #Set up env
+
+pip install --user --upgrade brilws #Make sure latest version installed
+
+brilcalc lumi --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_PHYSICS.json -u /fb -i /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_ReReco_07Aug2017_Collisions16_JSON.txt --hltpath "HLT_Photon175_v*" #Adapt JSON and trigger path to your needs
+```
+
 
 ## Instructions for continuous integration
 
-A basic set of scripts are run everytime the code is pushed to gitlab. These test are defined in `.gitlab-ci.yml`. 
+:construction: **TO VERIFY**
+
+A basic set of scripts are run everytime the code is pushed to gitlab. These test are defined in `.gitlab-ci.yml`.
 Special instructions are given below on how to prepare the final validation based on the comparison of the cutflow histograms.
 
 1. the first step is to define the directory to be used as reference for the continuous integration and the samples to be copied over in `python/postprocessing/etc/testDatasets.py`
@@ -71,4 +138,3 @@ python python/postprocessing/vjj_basetests.py --prepare 2016,data 2016,mc 2017,d
 
 Omitting the `--prepare` option will simply run the skims and compare the cutflows with the ones stored by default.
 Note: you may need to start a proxy before running the `prepare` step.
- 

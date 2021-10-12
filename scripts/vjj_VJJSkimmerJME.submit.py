@@ -50,7 +50,8 @@ MCsamples = ['GJets_SM_5f', #Signal
 ]
 
 #-- Empty <-> will process all years; [a,b] <-> will process only datasets corresponding to years (a || b)
-yearsToProcess = [2016]
+#NB: gets overridden by arg --year
+years = [2016,2017,2018]
 
 # //--------------------------------------------
 # //--------------------------------------------
@@ -74,6 +75,7 @@ def main():
     parser.add_argument('-d', '--dataset', dest='dataset',   help='name of single dataset to process (else process all)',  default='', type=str)
     parser.add_argument('--data', dest='onlydata', help='only process data samples', nargs='?', const=1)
     parser.add_argument('--mc', dest='onlymc', help='only process mc samples', nargs='?', const=1)
+    parser.add_argument('-y', '--year', dest='year',   help='process only the specified year',  default=-1, type=int)
 
     opt, unknownargs = parser.parse_known_args()
 
@@ -89,6 +91,9 @@ def main():
     if opt.onlydata and opt.onlymc: print(colors.fg.lightred + 'ERROR: cannot use both options onlydata and opt.onlymc !'); return
     elif opt.onlydata: datasetsToProcess = DATAsamples
     elif opt.onlymc: datasetsToProcess = MCsamples
+
+    yearsToProcess = years
+    if opt.year > 0: yearsToProcess = [opt.year]
 
     print(colors.fg.orange + '== Only considering samples containing any of the following keys:' + colors.reset)
     print(datasetsToProcess)
