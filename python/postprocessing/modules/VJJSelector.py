@@ -345,9 +345,9 @@ class VJJSelector(Module):
                 wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}_effWgtUp".format( 'mu' if fsCat == 13*13 else "ele" ) )
                 wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}_effWgtDn".format( 'mu' if fsCat == 13*13 else "ele" ) )
 
-            #quark gluon discriminator weights (tag jets only)
-            wgt_dict['qglgWgt'] = event.vjj_qglgWgt_jets
-            wgt_dict['qglqWgt'] = event.vjj_qglqWgt_jets
+            #quark gluon discriminator weights (tag jets only) #Removed '_jets' suffix (obsolete?)
+            wgt_dict['qglgWgt'] = event.vjj_qglgWgt
+            wgt_dict['qglqWgt'] = event.vjj_qglqWgt
 
             self.vjjEvent.fillWeightBranches(wgt_dict)
 

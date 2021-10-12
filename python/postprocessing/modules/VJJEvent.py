@@ -135,7 +135,7 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'lead_phi',     tagJets[0].phi)
         self.out.fillBranch(self.pfix+'lead_m',       tagJets[0].mass)
         self.out.fillBranch(self.pfix+'lead_dr2v',    tagJets[0].DeltaR(v))
-        self.out.fillBranch(self.pfix+'lead_dphiv',   tagJets[0].DeltaPhi(v))
+        self.out.fillBranch(self.pfix+'lead_dphiv',   tagJets[0].p4().DeltaPhi(v))
         self.out.fillBranch(self.pfix+'lead_detav',   abs(tagJets[0].eta-v.Eta()))
         if hasattr(tagJets[0],'partonFlavour'):
             self.out.fillBranch(self.pfix+'lead_flav',    tagJets[0].partonFlavour)
@@ -144,7 +144,7 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'sublead_phi',  tagJets[1].phi)
         self.out.fillBranch(self.pfix+'sublead_m',    tagJets[1].mass)
         self.out.fillBranch(self.pfix+'sublead_dr2v', tagJets[1].DeltaR(v))
-        self.out.fillBranch(self.pfix+'sublead_dphiv',   tagJets[1].DeltaPhi(v))
+        self.out.fillBranch(self.pfix+'sublead_dphiv',   tagJets[1].p4().DeltaPhi(v))
         self.out.fillBranch(self.pfix+'sublead_detav',   abs(tagJets[1].eta-v.Eta()))
         if hasattr(tagJets[1],'partonFlavour'):
             self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)

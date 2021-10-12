@@ -92,15 +92,14 @@ The code can be found under `python/postprocessing/modules`:
 
 #### Run the code
 
-:construction: **TO VERIFY**
-
 A wrapper is available in `python/postprocessing/vjj_postproc.py` to build the command to run the code.
 You can inspect its options with `-h`. An example of how to run it is give below:
 
 ```
-python python/postprocessing/vjj_postproc.py \
-       -i root://cms-xrd-global.cern.ch//store/mc/RunIIFall17NanoAODv6/GJets_Mjj-500_SM_5f_TuneCP5_EWK_13TeV-madgraph-pythia8/NANOAODSIM/PU2017_12Apr2018_Nano25Oct2019_102X_mc2017_realistic_v7-v1/260000/45CA9950-BD37-374A-8604-AC35C9446A0F.root \
-       -N 5000
+voms-proxy-init --rfc --voms cms --hours 192 #Renew proxy
+
+#Make sure that your file exists (via DAS)
+python vjj_postproc.py -i root://cms-xrd-global.cern.ch//store/mc/RunIISummer16NanoAODv7/G1Jet_Pt-400To650_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/100000/2F564BDF-0A8B-DB44-A485-19BE3C1DB5C9.root -N 5000 -y 2016
 ```
 
 ## 'Skimmed ntuples' production
@@ -185,7 +184,7 @@ cd scripts
 ./vjj_campaign.sh merge -d /eos/bigNtuplesDir -c myCampaign
 
 #Verify the output JSON file, and add its parent information
-voms #Renew proxy (need to access DAS -- cf. GetParent() function)
+voms-proxy-init --rfc --voms cms --hours 192 #Renew proxy (need to access DAS -- cf. GetParent() function)
 python #Interactive python
 
 >from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
