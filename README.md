@@ -110,6 +110,7 @@ This code varies an individual output TTree for the nominal scenario, and for ea
 Different branch selections may be applied to the nominal/shifted TTrees, via independent keep/drop instruction files.
 
 The wrapper code `vjj_VJJSkimmerJME_postproc.py` chains the different modules: it calls the nanoAOD `jetmetHelperRun2` module, then calls JetSelector once per JME variation to obtain varied jet collections (nominal collection read directly from big ntuples), and finally the skimmer code.
+You can specify there the JEC/JER variations to process.
 In the PostProcessor call, one can specify preselection cuts (to speed up the processing) and JSON luminosity masks to apply to data.
 
 #### Run the code
@@ -165,6 +166,33 @@ pip install --user --upgrade brilws #Make sure latest version installed
 brilcalc lumi --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_PHYSICS.json -u /fb -i /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_ReReco_07Aug2017_Collisions16_JSON.txt --hltpath "HLT_Photon175_v*" #Adapt JSON and trigger path to your needs
 ```
 
+## Create a new campaign file
+
+When processing ntuples, one must refer to a campaign file listing the filepaths, cross sections, etc. These files can be found under `python/samples/campaigns/`.
+
+Below are example commands to create a new campaign file:
+
+```
+cd scripts
+
+#[MAKE] <-> interactive; specify dataset(s) and years(s) #Can consider only one year/sample with:
+./vjj_campaign.sh make -d /eos/bigNtuplesDir -c myCampaign #--year 16 --sample PhotonData <-> will consider only 2016 samples containing the 'PhotonData' keyword
+
+#[SUBMIT] (all datasets) <-> HTcondor; runs [make] on all years/datasets
+./vjj_campaign.sh submit -d /eos/bigNtuplesDir -c myCampaign
+
+#[MERGE] (all datasets) <-> inetactive; merges all outputs from condor jobs
+./vjj_campaign.sh merge -d /eos/bigNtuplesDir -c myCampaign
+
+#Verify the output JSON file, and add its parent information
+voms #Renew proxy (need to access DAS -- cf. GetParent() function)
+python #Interactive python
+
+>from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
+>campaign = CampaignManager('july20new')
+>ds_name = '/SinglePhoton/Run2016D-02Apr2020-v1/NANOAOD' #Random samplename
+>campaign.get_dataset_info(ds_name)
+```
 
 ## Instructions for continuous integration
 
