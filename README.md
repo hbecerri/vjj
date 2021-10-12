@@ -1,7 +1,69 @@
+<!--
+```
+CODE EXAMPLE
+```
+
+=== Emoji list (see https://gist.github.com/rxaviers/7360908)
+:arrow_right:
+:heavy_exclamation_mark:
+:heavy_check_mark:
+:link:
+:white_check_mark:
+:heavy_multiplication_x:
+:x:
+:negative_squared_cross_mark:
+:bangbang:
+:white_check_mark:
+:copyright:
+:clock430:
+:no_entry:
+:ok:
+:arrow_right_hook:
+:paperclip:
+:open_file_folder:
+:chart_with_upwards_trend:
+:lock:
+:hourglass:
+:warning:
+:construction:
+:fr:
+:one: :two: :hash:
+:underage:
+:put_litter_in_its_place:
+:new:
+
+
+#HOW TO HIDE CONTENTS (which can be viewed by cliking icon) :
+<details>
+<summary>[NameOfHiddenContent]:</summary>
+[theHiddenContent]
+</details>
+-------------------------------------------->
+:construction: **README UNDER CONSTRUCTION**
+
+
 # VJJSkimmer
 
 Tools for skimming and building of final ntuple analysis for V+2j analysis based on NanoAOD.
-For more details on the analysis visit the twiki page: https://twiki.cern.ch/twiki/bin/view/CMS/AjjEWK
+For more details on the analysis visit the [Twiki page](https://twiki.cern.ch/twiki/bin/view/CMS/AjjEWK).
+
+
+## Table Of Contents
+
+[[_TOC_]]
+
+* [Installation](#Installation)
+
+* [Big ntuples production](#big-ntuples-production)
+  * [Run the code](#run-the-code)
+
+* [Skimmed ntuples production](#skimmed-ntuples-production)
+  * [Run the code](#run-the-code-1)
+
+* [Compute the integrated luminosities](#compute-the-integrated-luminosities)
+
+* [Continuous integration](#instructions-for-continuous-integration)
+
 
 ## Installation
 
