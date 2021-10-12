@@ -44,9 +44,9 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     def obj_name(self):
         if self.apply_id:
-            return "photons"
+            return "photon"
         else:
-            return 'loosePhotons'
+            return 'loosePhoton'
 
     def isGood(self, photon):
 

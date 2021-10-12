@@ -41,7 +41,7 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
         return "Electron"
 
     def obj_name(self):
-        return "eles"
+        return "ele"
 
     def isGood(self, ele):
 

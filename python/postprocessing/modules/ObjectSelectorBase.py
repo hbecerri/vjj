@@ -42,7 +42,7 @@ class ObjectSelectorBase( Module ):
         for brnch in self.weight_names():
             self.out.branch( brnch , 'F' , limitedPrecision=False )
 
-        self.idx_branchName = 'vjj_{0}'.format(self.obj_name() )
+        self.idx_branchName = 'vjj_{0}{1}'.format(self.obj_name(), '' if 'ets' in self.obj_name() else 's') #Second arg: add 's' suffix to regular object (e.g.: vjj_[jet]s, vjj_[photon]s); but for JME variations (e.g. jets_TotalUp/looseJets_TotalUp), suffix was added directly in JetSelector (trick!)
         self.out.branch( self.idx_branchName  , "b", lenVar='vjj_n{0}s'.format(self.obj_name() ) )
 
     def selectedObjs(self):

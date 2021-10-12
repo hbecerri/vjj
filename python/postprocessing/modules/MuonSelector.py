@@ -46,7 +46,7 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         return "Muon"
 
     def obj_name(self):
-        return "mus"
+        return "mu"
 
     def isGood(self, mu):
 
