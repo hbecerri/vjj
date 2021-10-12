@@ -46,8 +46,6 @@ CODE EXAMPLE
 Tools for skimming and building of final ntuple analysis for V+2j analysis based on NanoAOD.
 For more details on the analysis visit the [Twiki page](https://twiki.cern.ch/twiki/bin/view/CMS/AjjEWK).
 
-[Mining gold](https://ntonon.web.cern.ch/ntonon/vbfgamma.png)
-
 
 [[_TOC_]]
 
@@ -92,7 +90,7 @@ The code can be found under `python/postprocessing/modules`:
 * `ScaleFactorBase.py` holds generic functions to read and evaluate scale factors from TH1, TGraph or TF1
 * the `etc` sub-directory contains configuration files, scale factor ROOT files etc which are used by the selection code
 
-### Run the code
+#### Run the code
 
 :construction: **TO VERIFY**
 
@@ -114,7 +112,7 @@ Different branch selections may be applied to the nominal/shifted TTrees, via in
 The wrapper code `vjj_VJJSkimmerJME_postproc.py` chains the different modules: it calls the nanoAOD `jetmetHelperRun2` module, then calls JetSelector once per JME variation to obtain varied jet collections (nominal collection read directly from big ntuples), and finally the skimmer code.
 In the PostProcessor call, one can specify preselection cuts (to speed up the processing) and JSON luminosity masks to apply to data.
 
-### Run the code
+#### Run the code
 
 - Example command to run interactively (in `python/postprocessing`):
 
