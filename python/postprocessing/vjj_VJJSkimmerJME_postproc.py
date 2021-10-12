@@ -191,7 +191,7 @@ def main():
 
     #-- Cut formula for event preselection (do not process further uninteresting events) #Do not use, cf. below
     # cut = None
-    cut = 'vjj_isGood && vjj_nlooseJets>=2 && vjj_fs!=0 && vjj_trig>0' #NB: supposed to speed up the processing by pre-skimming events; but creates problems in BDTReader (entry number not synchronized anymore)
+    cut = 'vjj_nlooseJets>=2 && vjj_fs!=0 && vjj_trig>0' #NB: speed up processing
 
     #-- Call post-processor
     p = PostProcessor(outputDir=opt.workingdir, #Dir where to store individual output files
