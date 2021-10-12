@@ -67,8 +67,11 @@ def vjj_postproc(opt, crab = False):
     
     """steers the VJJ analysis"""
 
+    print('== YEAR: ', opt.year)
+
     #start by defining modules3 to run
     modules=defineModules(opt.year,opt.isData, opt.isSignal)
+    #print('modules = ', modules)
 
     fwkJobReport=False
     haddFileName = None
@@ -99,7 +102,7 @@ def main():
 
     #parse command line
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-y', '--year',       dest='year',   help='year',  default=2017,  type=int)
+    parser.add_argument('-y', '--year',       dest='year',   help='year',  choices=[2016,2017,2018], default=None,  type=int)
     parser.add_argument(      '--isData',     dest='isData', help='data?', default=False, action='store_true')
     parser.add_argument(      '--isSignal',   dest='isSignal', help='signal?', default=False, action='store_true')
     parser.add_argument('-i', '--inputfiles', dest='inputFiles',   help='input, should be set to crab to run on GRID', type=str,
@@ -115,6 +118,7 @@ def main():
 
     opt, unknownargs = parser.parse_known_args() #job number is passed by crab as the first argument and shouldn't be parsed here
 
+    if opt.year == None: raise ValueError('Must set year !')
 
     if opt.dataSet:
         s = SampleNameParser()
