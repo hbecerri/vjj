@@ -160,10 +160,10 @@ class BDTReader():
                 # if branchName == 'vjj_vjj_aplanarity': self.branches_readers[ireader][ib][0] = random() / 2
                 # self.branches_readers[ireader][ib][0] = random()
 
-                #-- Protection against NaNs (e.g. qgl variable has some NaNs already in NanoAOD files) #Disactivate for now for speedup, as this only affects few events
-                #if math.isnan(self.branches_readers[ireader][ib][0]):
-                #    self.branches_readers[ireader][ib][0] = 0
-                #    print(colors.fg.lightred + 'The following branch value is NaN --> Setting it to 0: ' + branchName + colors.reset)
+                #-- Protection against NaNs (e.g. qgl variable has some NaNs already in NanoAOD files)
+                if math.isnan(self.branches_readers[ireader][ib][0]):
+                    self.branches_readers[ireader][ib][0] = -1
+                    print(colors.fg.lightred + 'The following branch value is NaN --> Setting it to -1: ' + branchName + colors.reset)
 
         return
 
