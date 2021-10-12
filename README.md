@@ -46,6 +46,8 @@ CODE EXAMPLE
 Tools for skimming and building of final ntuple analysis for V+2j analysis based on NanoAOD.
 For more details on the analysis visit the [Twiki page](https://twiki.cern.ch/twiki/bin/view/CMS/AjjEWK).
 
+[Mining gold](https://ntonon.web.cern.ch/ntonon/vbfgamma.png)
+
 
 [[_TOC_]]
 
@@ -170,6 +172,8 @@ brilcalc lumi --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_PH
 
 :construction: **TO VERIFY**
 
+<details>
+<summary>Instructions</summary>
 A basic set of scripts are run everytime the code is pushed to gitlab. These test are defined in `.gitlab-ci.yml`.
 Special instructions are given below on how to prepare the final validation based on the comparison of the cutflow histograms.
 
@@ -185,3 +189,4 @@ python python/postprocessing/vjj_basetests.py --prepare 2016,data 2016,mc 2017,d
 
 Omitting the `--prepare` option will simply run the skims and compare the cutflows with the ones stored by default.
 Note: you may need to start a proxy before running the `prepare` step.
+</details>
