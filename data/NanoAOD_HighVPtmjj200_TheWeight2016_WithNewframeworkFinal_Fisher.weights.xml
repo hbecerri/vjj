@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<MethodSetup Method="Fisher::Fisher">
+  <GeneralInfo>
+    <Info name="TMVA Release" value="4.2.1 [262657]"/>
+    <Info name="ROOT Release" value="6.20/06 [398342]"/>
+    <Info name="Creator" value="nshafiei"/>
+    <Info name="Date" value="Mon Aug 17 21:28:56 2020"/>
+    <Info name="Host" value="Linux lcgapp-centos7-x86-64-104.cern.ch-docker 3.10.0-1062.18.1.el7.x86_64 #1 SMP Tue Mar 17 23:49:17 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux"/>
+    <Info name="Dir" value="/eos/home-n/nshafiei/SWAN_projects"/>
+    <Info name="Training events" value="37225"/>
+    <Info name="TrainingTime" value="3.01220417e-02"/>
+    <Info name="AnalysisType" value="Classification"/>
+  </GeneralInfo>
+  <Options>
+    <Option name="V" modified="Yes">False</Option>
+    <Option name="VerbosityLevel" modified="No">Default</Option>
+    <Option name="VarTransform" modified="Yes">None</Option>
+    <Option name="H" modified="Yes">True</Option>
+    <Option name="CreateMVAPdfs" modified="Yes">True</Option>
+    <Option name="IgnoreNegWeightsInTraining" modified="No">False</Option>
+    <Option name="Method" modified="Yes">Fisher</Option>
+  </Options>
+  <Variables NVar="5">
+    <Variable VarIndex="0" Expression="vjj_lead_pt" Label="vjj_lead_pt" Title="vjj_lead_pt" Unit="" Internal="vjj_lead_pt" Type="F" Min="5.39375000e+01" Max="1.77800000e+03"/>
+    <Variable VarIndex="1" Expression="vjj_jj_m" Label="vjj_jj_m" Title="vjj_jj_m" Unit="" Internal="vjj_jj_m" Type="F" Min="2.00012039e+02" Max="6.93115039e+03"/>
+    <Variable VarIndex="2" Expression="vjj_vjj_pt" Label="vjj_vjj_pt" Title="vjj_vjj_pt" Unit="" Internal="vjj_vjj_pt" Type="F" Min="3.82764935e-01" Max="1.14142224e+03"/>
+    <Variable VarIndex="3" Expression="vjj_sublead_pt" Label="vjj_sublead_pt" Title="vjj_sublead_pt" Unit="" Internal="vjj_sublead_pt" Type="F" Min="5.00312500e+01" Max="1.59400000e+03"/>
+    <Variable VarIndex="4" Expression="vjj_jj_scalarht" Label="vjj_jj_scalarht" Title="vjj_jj_scalarht" Unit="" Internal="vjj_jj_scalarht" Type="F" Min="1.05375000e+02" Max="3.20900000e+03"/>
+  </Variables>
+  <Spectators NSpec="0"/>
+  <Classes NClass="2">
+    <Class Name="Signal" Index="0"/>
+    <Class Name="Background" Index="1"/>
+  </Classes>
+  <Transformations NTransformations="0"/>
+  <MVAPdfs>
+    <PDF Name="Fisher_PDFSig" MinNSmooth="10" MaxNSmooth="10" InterpolMethod="2" KDE_type="1" KDE_iter="1" KDE_border="1" KDE_finefactor="1.0000000000000000e+00">
+      <Histogram Name="Fisher_tr_S_original" NBins="50" XMin="-1.1599820852279663e+00" XMax="1.0597270727157593e+00" HasEquidistantBins="1">
+        0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 1.16816564e-02 0.00000000e+00 0.00000000e+00 1.06292210e-02 0.00000000e+00 3.54109872e-02 1.32123709e-02 1.19160662e-02 5.85918540e-02 8.61959607e-02 2.19561468e-01 6.48985680e-01 1.46544119e+00 4.02276918e+00 6.97396694e+00 4.85349904e+00 1.72223718e+00 8.40271385e-01 5.28843587e-01 3.20704412e-01 1.81835707e-01 1.61245561e-01 1.66835943e-01 5.08891234e-02 6.58439515e-02 2.78133085e-02 2.78427392e-02 0.00000000e+00 1.06796675e-02 0.00000000e+00 8.56940460e-03 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 
+      </Histogram>
+    </PDF>
+    <PDF Name="Fisher_PDFBkg" MinNSmooth="10" MaxNSmooth="10" InterpolMethod="2" KDE_type="1" KDE_iter="1" KDE_border="1" KDE_finefactor="1.0000000000000000e+00">
+      <Histogram Name="Fisher_tr_B_original" NBins="50" XMin="-1.1599820852279663e+00" XMax="1.0597270727157593e+00" HasEquidistantBins="1">
+        7.05901488e-04 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 6.67770534e-04 0.00000000e+00 7.05738614e-04 0.00000000e+00 1.93173374e-03 7.52455366e-03 8.69410104e-03 7.16961810e-03 7.68507952e-03 2.13604083e-02 2.88845785e-02 6.10535630e-02 1.08404106e-01 2.07994887e-01 4.65445218e-01 9.36151148e-01 1.89917743e+00 3.75314152e+00 6.69407534e+00 5.90588854e+00 1.65916769e+00 4.23971891e-01 1.58553576e-01 7.00321536e-02 4.87406033e-02 2.09043779e-02 6.63557693e-03 8.88332953e-03 5.09783831e-03 2.34238279e-03 1.10856601e-03 1.04650844e-03 1.34649364e-03 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 6.00481596e-04 3.80878085e-04 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00 
+      </Histogram>
+    </PDF>
+  </MVAPdfs>
+  <Weights NCoeff="6">
+    <Coefficient Index="0" Value="5.2162525390143655e-02"/>
+    <Coefficient Index="1" Value="-9.7147681667999043e-04"/>
+    <Coefficient Index="2" Value="1.7671424903067194e-04"/>
+    <Coefficient Index="3" Value="-8.7263259528848889e-04"/>
+    <Coefficient Index="4" Value="-1.0463429199837695e-03"/>
+    <Coefficient Index="5" Value="7.8252903215140514e-04"/>
+  </Weights>
+</MethodSetup>
