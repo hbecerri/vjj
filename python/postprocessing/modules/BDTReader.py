@@ -26,7 +26,7 @@ class BDTReader():
 
     def __init__(self):
 
-        self.xmlDir = '{0}/src/UserCode/VJJPlotter/data/'.format(os.getenv('CMSSW_BASE', '.'))
+        self.xmlDir = '{0}/src/UserCode/VJJSkimmer/data/'.format(os.getenv('CMSSW_BASE', '.'))
         self.outputNames = []
         self.mvaValues = []
         self.readers = []
