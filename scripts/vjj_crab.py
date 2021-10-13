@@ -124,11 +124,7 @@ def create_config_files(outdir):
     with open('auto_crab_cfg.py' , 'w') as f:
         f.write('from UserCode.VJJSkimmer.etc import crab_cfg\n')
         f.write('config = crab_cfg.config\n')
-        f.write("config.Data.outLFNDirBase = '/store/group/cmst3/group/top/SMP-19-005/{0}'\n".format(outdir))
-    # with open('auto_crab_signal_cfg.py' , 'w') as f:
-    #     f.write('from UserCode.VJJSkimmer.etc import crab_cfg\n')
-    #     f.write('config = crab_cfg.config\n')
-    #     f.write("config.JobType.scriptArgs += ['--isSignal']\n" )
+        f.write("config.Data.outLFNDirBase = '/store/group/phys_smp/vbfA/big_ntuples/{0}'\n".format(outdir)) #USER-SPECIFIC PATH #Verify write permissions, e.g. with: [crab checkwrite --lfn=/store/group/phys_smp/vbfA --site T2_CH_CERN]
 
 
 # //--------------------------------------------
