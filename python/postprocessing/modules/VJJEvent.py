@@ -46,13 +46,14 @@ class VJJEvent:
                   'effWgt',  'effWgtUp',  'effWgtDn',
                   'qglqWgt', 'qglgWgt', 
                   'v_pt', 'v_eta', 'v_phi', 'v_m', 'v_ystar', 
-                  'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v',
-                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v',
+                  'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v','lead_dphiv','lead_detav',
+                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav',
                   'j_maxAbsEta','j_minAbsEta',
                   'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
-                  'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m',
+                  'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi' ,'vjj_deta',
                   'vjj_scalarht', 'vjj_isotropy', 'vjj_circularity', 'vjj_sphericity', 'vjj_aplanarity', 
                   'vjj_C', 'vjj_D',
+                  
                   'centj_pt', 'centj_eta', 'centj_phi', 'centj_m', 'centj_ystar', 'centj_dr2v',
                   'htsoft','centhtsoft']:            
             outv=self.pfix+v
@@ -134,6 +135,8 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'lead_phi',     tagJets[0].phi)
         self.out.fillBranch(self.pfix+'lead_m',       tagJets[0].mass)
         self.out.fillBranch(self.pfix+'lead_dr2v',    tagJets[0].DeltaR(v))
+        self.out.fillBranch(self.pfix+'lead_dphiv',   tagJets[0].p4().DeltaPhi(v))
+        self.out.fillBranch(self.pfix+'lead_detav',   abs(tagJets[0].eta-v.Eta()))
         if hasattr(tagJets[0],'partonFlavour'):
             self.out.fillBranch(self.pfix+'lead_flav',    tagJets[0].partonFlavour)
         self.out.fillBranch(self.pfix+'sublead_pt',   tagJets[1].pt)
@@ -141,10 +144,18 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'sublead_phi',  tagJets[1].phi)
         self.out.fillBranch(self.pfix+'sublead_m',    tagJets[1].mass)
         self.out.fillBranch(self.pfix+'sublead_dr2v', tagJets[1].DeltaR(v))
+        self.out.fillBranch(self.pfix+'sublead_dphiv',   tagJets[1].p4().DeltaPhi(v))
+        self.out.fillBranch(self.pfix+'sublead_detav',   abs(tagJets[1].eta-v.Eta()))
         if hasattr(tagJets[1],'partonFlavour'):
             self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)
 
         #reco-level only variables
+#        def nullevents(self):
+#            for n in self.vjjEvent:         
+#                if (isinf(tagJets[0].qgl) or isnan(tagJets[0].qgl)) : 
+#                    continue
+#                if (isinf(tagJets[1].qgl) or isnan(tagJets[1].qgl)) : 
+#                    continue    
         try:
             self.out.fillBranch(self.pfix+'lead_qgl',      tagJets[0].qgl)
             self.out.fillBranch(self.pfix+'sublead_qgl',   tagJets[1].qgl)
@@ -181,6 +192,9 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'vjj_phi',vjj.Phi())
         self.out.fillBranch(self.pfix+'vjj_m',  vjj.M())
         self.out.fillBranch(self.pfix+'vjj_scalarht',v.Pt()+jj_scalarht)
+        self.out.fillBranch(self.pfix+'vjj_dphi',v.DeltaPhi(tagJets[0].p4()+tagJets[1].p4() ))
+        self.out.fillBranch(self.pfix+'vjj_deta',abs(v.Eta()-jj.Eta()))
+
 
         eventShape = ROOT.EventShapeVariables()
         eventShape.addObject( v )

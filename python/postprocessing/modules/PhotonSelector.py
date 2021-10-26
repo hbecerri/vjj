@@ -32,8 +32,8 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
                 },
             2018:{
                 'id'     : (os.path.join(baseSFDir,'2018_PhotonsTight.root'),               'EGamma_SF2D'),
-                }        
-        }    
+                }
+        }
         for k in photonSFSources[self.era]:
             url,obj=photonSFSources[self.era][k]
             self.addSFFromSource(k,url,obj)
@@ -54,7 +54,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         absEta=abs( photon.eta )
         if absEta > self.max_eta : return False
         if absEta> 1.4442 and absEta<1.5660 : return False #EB->EE transition
-        
+
         min_dr = self.mindr_toVetoObjs(photon)
         if min_dr < self.min_dr2vetoObjs : return False
 
@@ -89,20 +89,20 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         for p in photons:
 
             abseta=abs(p.eta)
-            # SFs['trig_ajj'].append(     
-            #     self.evalSF('trig_ajj', objAttrs=[p.pt,mjj]) 
+            # SFs['trig_ajj'].append(
+            #     self.evalSF('trig_ajj', objAttrs=[p.pt,mjj])
             # )
-            # SFs['trig_highpta'].append( 
-            #     self.evalSF('trig_highpta', objAttrs=[p.pt]) 
+            # SFs['trig_highpta'].append(
+            #     self.evalSF('trig_highpta', objAttrs=[p.pt])
             # )
-            SFs['id'].append(  
-                self.evalSF('id', objAttrs=[p.eta,p.pt]) 
+            SFs['id'].append(
+                self.evalSF('id', objAttrs=[p.eta,p.pt])
             )
-            SFs['pxseed'].append( 
-                self.evalSF('pxseed',objAttrs=[3.5 if abseta>1.5 else 0.5]) 
+            SFs['pxseed'].append(
+                self.evalSF('pxseed',objAttrs=[3.5 if abseta>1.5 else 0.5])
             )
 
-        #combine scale factors 
+        #combine scale factors
         if combined:
             selSFs = []
             for k in SFs:
@@ -111,7 +111,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
             ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
             return ret
 
-            
+
         return SFs
 
 

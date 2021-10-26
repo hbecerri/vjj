@@ -54,7 +54,7 @@ class Maker:
                     #    inconsistencymap[ s2.makeUniqueName() ].append( s1.makeUniqueName() )
                     #else:
                     #    inconsistencymap[ s2.makeUniqueName() ] = [s1.makeUniqueName()]
-        if ninconsistencies == 0:
+        if ninconsistencies == 0 and len(dsnames)>0:
             print( '\033[92m weights are consistent \033[0m' )
         else:
             print( inconsistencymap )
@@ -77,7 +77,7 @@ class Maker:
         print(self.dir , das , name )
         dir = os.path.join( self.dir , das.split('/')[1] , 'crab_' + name )
         if not os.path.exists( dir ):
-            print('\033[91m the direcotry for sample {0} does not exist \033[0m'.format(das) )
+            print('\033[91m the directory for sample {0} does not exist ({1}) \033[0m'.format(das,dir) )
             return {'weights':{'0':{'name':'nominal', 'total':0}} , 'size':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0} , 'submit_datetime':str('')}
         dates = os.listdir(dir) 
         if len(dates) == 1:
@@ -101,6 +101,7 @@ class Maker:
                 ret['filestat']['nFile'] += 1
                 if job in all_jobs:
                     f = all_jobs[job]
+                    #print('== f ', f)
                     try:
                         fo = ROOT.TFile.Open( f )
                     except:
@@ -156,8 +157,8 @@ class Maker:
                     else:
                         ret['files'][f] = 'file is None'
                         ret['filestat']['nNoneFiles'] += 1
-                else:
-                    ret['files'][f] = 'does not exist'
+                else: #Problem: if next file not found, declare previous file as missing !
+                    #ret['files'][f] = 'does not exist' #--> wrong index, still refering to previous file, not the current (actually missing) file #Now commented out
                     ret['filestat']['nNotExisting'] += 1
             print('')
 
@@ -173,8 +174,4 @@ class Maker:
 
                         
         else:
-            raise ValueError( 'there is {0} dates for {1}, {2}'.format( len(dates) , das , ','.join(dates) ) )
-            
-
-    
-        
+            raise ValueError( 'there is {0} dates for {1}, {2}'.format( len(dates) , das , ','.join(dates) ) )        

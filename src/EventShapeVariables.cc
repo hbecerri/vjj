@@ -154,11 +154,11 @@ double EventShapeVariables::aplanarity() {
 /// 3.*(q0*q1+q0*q2+q1*q2) where q0>=q1>=q2>=0 are the eigenvalues of the momentum tensor sum{p_j[a]*p_j[b]}/sum{p_j**2}
 /// normalized to 1. Return value is between 0 and 1
 /// and measures the 3-jet structure of the event (C vanishes for a "perfect" 2-jet event)
-double EventShapeVariables::C() {
-  if (!tensors_computed_)
-    compTensorsAndVectors();
-  return 3. *
-         (eigenValues_[0] * eigenValues_[1] + eigenValues_[0] * eigenValues_[2] + eigenValues_[1] * eigenValues_[2]);
+double EventShapeVariables::C()
+{
+  if(!tensors_computed_) {compTensorsAndVectors();}
+
+  return 3. * (eigenValues_[0] * eigenValues_[1] + eigenValues_[0] * eigenValues_[2] + eigenValues_[1] * eigenValues_[2]);
 }
 
 /// 27.*(q0*q1*q2) where q0>=q1>=q2>=0 are the eigenvalues of the momemtum tensor sum{p_j[a]*p_j[b]}/sum{p_j**2}
@@ -255,4 +255,3 @@ void EventShapeVariables::computeFWmoments() {
 }  // computeFWmoments
 
 //========================================================================================================
-

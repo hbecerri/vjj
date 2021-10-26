@@ -11,6 +11,6 @@ export -f dohadd;
 for year in 2016 2017 2018
 do
     echo ${year}
-    parallel -j 8 dohadd {1} ::: $(find ${1}/${year}/* -type d);
+    parallel --bibtex -j 8 dohadd {1} ::: $(find ${1}/${year}/* -type d); #'parallel' will act separately on each item after ':::'
     
 done

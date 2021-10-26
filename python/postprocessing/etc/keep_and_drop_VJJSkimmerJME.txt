@@ -1,0 +1,8 @@
+#FIXME only keep MVA vars... ?
+
+drop *
+
+keep vjj*
+keep event #event number (for debugging)
+
+#keep LHE_*

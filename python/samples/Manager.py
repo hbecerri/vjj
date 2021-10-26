@@ -37,6 +37,7 @@ class Manager:
         self.all_samples[ '18wjlnu' ] = SampleList( 'WJetsToLNu'  , ['/WJetsToLNu_Pt-(?P<Pt>[^_]*).*'] , 'Pt' , color=41 , regions=['ee', 'mm'])
         self.all_samples[ '19wjqq' ] = SampleList( 'WJetsToQQ' , ['/WJetsToQQ_HT[-]{0,1}(?P<htrange>[^_]*).*' ] , 'htrange' , color=43 , regions=['gamma'])
         self.all_samples[ '20zgto2lg' ] = SampleList( 'ZG' , ['.*ZGTo2LG.*' ] , color=38 , regions=['gamma'])
+        self.all_samples[ '21G1JetNLO' ] = SampleList( 'G1JetNLO' , [ '/G1Jet_Pt-(?P<ptrange>[^_]*).*_13TeV-amcatnlo-pythia8/.*' ] , 'ptrange'  , color=2 , regions=['gamma'])
 
         if type(lst) == str:
             self.inputFileName = lst
@@ -71,6 +72,9 @@ class Manager:
                 return s.color
 
     def write_html(self):
+
+        print('ERROR: must fix VJJPlotter path'); return
+
         html = Element("html")
         head = SubElement( html , 'head')
         css = SubElement( head , 'link'  )
@@ -93,7 +97,7 @@ class Manager:
             #SubElement( lnk , 'h1')
             lnk.set('href' , '#{0}'.format( s.name ) )
         tree = ElementTree(html)        
-        tree.write( '{0}/src/UserCode/VJJPlotter/web/Samples/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.inputFileName.split('.')[0] ) )
+        tree.write( '{0}/src/UserCode/VJJPlotter/web/Samples/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.inputFileName.split('.')[0] ) ) #Change path to make repos independent
 
     def __str__(self):
         ret = ''
@@ -131,4 +135,5 @@ class Manager:
 #a.write_txt( 'NanoAODv7_v2.lst' )
 samplesV6 = lambda : Manager(__dir+'/lists/NanoAODv6.lst')
 samplesV7 = lambda : Manager(__dir+'/lists/NanoAODv7.lst')
+samplesV7_sig_Bkg = lambda : Manager(__dir+'/lists/NanoAODv7_sig_Bkg.lst')
 currentSampleList = samplesV7()

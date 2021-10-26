@@ -23,7 +23,14 @@ class Manager():
                 self.isSkimmedCampaign = True
             
         isJsonModified = False
+
+#        self.dyjs = {}
+#        for key, val in self.js.iteritems():
+#            if '10DYJetsMGHT' in key:
+#                self.dyjs[key]=val
+#        print self.dyjs'''
         self.samples = SampleManager( self.js.keys() , update_html=False )
+        #self.samples = SampleManager( self.dyjs.keys() , update_html=False )
         self.AllInfo = {}
         self.LinkedSamples = {}
         self.SamplesWithWeightErrors = []
@@ -47,7 +54,9 @@ class Manager():
                 else:
                     xsection = xsec[parent]
                 #ntotal = self.js[ds]['total']
-
+                
+                        
+           
             if year not in self.AllInfo:
                 self.AllInfo[year] = {}
                 #sname:{'weights':{i:vals['name'] for i,vals in self.js[ds]['weights'].items()} , binval:{'xsecs':[] , 'samples':[] , 'nevents':{} }}}
@@ -133,9 +142,9 @@ class Manager():
         year = s.year()
         LUMIS = None
         if year==2016:
-            LUMIS={'LowVPt':28200.0, 'HighVPt':35900.0}
+            LUMIS={'LowVPt':28771.723170, 'HighVPt':36322.745578}
         elif year==2017:
-            LUMIS={'LowVPt':7661.0,'HighVPt':41367.0}
+            LUMIS={'LowVPt':7728.065748,'HighVPt':41527.348931}
         elif year==2018:
             LUMIS={'LowVPt':59735.969368,'HighVPt':59735.969368}
 
@@ -222,6 +231,8 @@ class Manager():
         for year in self.AllInfo:
             for sample in self.AllInfo[year]:
                 for binval in self.AllInfo[year][sample]:
+                    print(binval)
+                    print(self.AllInfo[year][sample][binval])
                     for ds in self.AllInfo[year][sample][binval]['samples']:
                         if f in [os.path.abspath(fff) for fff in self.js[ds]['files']]:
                             s = Sample(ds)
@@ -230,6 +241,9 @@ class Manager():
         raise NameError('no dataset found for file:{0}'.format( f ))
 
     def write_html(self):
+
+        print('ERROR: must fix VJJPlotter path'); return
+
         html = Element("html")
         head = SubElement( html , 'head')
         css = SubElement( head , 'link'  )
@@ -307,9 +321,10 @@ class Manager():
                                 SubElement( lo_ds_files , 'li' ).text = '{0} : {1}'.format( file_ds , file_ds_stat ) 
 
         tree = ElementTree(html)        
-        tree.write( '{0}/src/UserCode/VJJPlotter/web/Campaigns/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.filename.split('.')[0] ) )
+        tree.write( '{0}/src/UserCode/VJJPlotter/web/Campaigns/{1}.html'.format( os.getenv('CMSSW_BASE' , '.') , self.filename.split('.')[0] ) ) #Change path to make repos independent
 
     
 
 #a = Manager('june2020')
 #a.write_html()
+

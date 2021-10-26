@@ -4,7 +4,6 @@ export workingdirectory=$(pwd)
 echo $workingdirectory
 echo "$(dirname "$0")"
 cd "$(dirname "$0")"
-#cd /afs/cern.ch/work/h/hbakhshi/VBFGamma/CMSSW_10_2_13/src/UserCode/VJJPlotter/scripts/
 kernel_release=`uname -r`
 case ${kernel_release} in
 

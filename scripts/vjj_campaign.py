@@ -11,6 +11,7 @@ import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 ROOT.gROOT.SetBatch(True)
 
+
 def make_fname(c,y,s,ds):
     ret = './{2}/{0}_{1}'.format( s,y,c )
     for s in ds:
@@ -27,11 +28,11 @@ def main():
     parser.add_argument('-c' , '--campaign',     dest='campaign',   help='the name of the produced campaign',  type=str)
     
     if sys.argv[1] in ['submit' , 'make']:
-        parser.add_argument('-d' , '--directory',     dest='directory',   help='the directory the root files are stored, usually under /eos/cms/store/cmst3/group/top/SMP-19-005/',  type=str)
+        parser.add_argument('-d' , '--directory',     dest='directory',   help='directory containing rootfiles',  type=str)
         parser.add_argument('-o' , '--outjsonname',     dest='outjsonname',   help='name of the json output',  default='auto', type=str)
     if sys.argv[1] == 'make':
         parser.add_argument( '--year',  dest='year',   help='year', choices=['16','17','18','all'] , type=str , default='all'  )
-        parser.add_argument( '--sample',  dest='sample',   help='sample' , choices=[s.name for _,s in currentSampleList.all_samples.items()] , type=str , default=None  )
+        parser.add_argument( '--sample',  dest='sample',   help='sample' , choices=[s.name for _,s in currentSampleList.all_samples.items()] , type=str , default=None)
         parser.add_argument('-s','--ds', action='append' , dest='datasets' , type=str , default=[] )
 
     opt, unknownargs = parser.parse_known_args()
@@ -41,12 +42,14 @@ def main():
     campaigndir = currentdir + '/' + opt.campaign
     if not os.path.exists( campaigndir ): os.makedirs( campaigndir )
 
-    if opt.action == 'make':
+    if opt.action == 'make': #Run on specific year/dataset
         if opt.outjsonname == 'auto':
             opt.outjsonname = make_fname( opt.campaign , opt.year , opt.sample , opt.datasets )
 
+        print('== Running CampaignMaker()...')
         maker = CampaignMaker( opt.directory , opt.outjsonname , opt.sample , opt.year , opt.datasets )
-    elif opt.action == 'submit':
+    
+    elif opt.action == 'submit': #Run on all years/datasets
         logDir = campaigndir + '/logs/'
         if not os.path.exists( logDir  ): os.makedirs( logDir )
         commands = OrderedDict()
@@ -54,7 +57,7 @@ def main():
         commands['output'] = '{0}/$(ClusterId).$(ProcId).out'.format( logDir )
         commands['error'] = '{0}/$(ClusterId).$(ProcId).err'.format( logDir )
         commands['log'] = '{0}/$(ClusterId).log'.format( logDir )
-        commands['+JobFlavour'] = 'microcentury'
+        commands['+JobFlavour'] = 'microcentury' #microcentury=1h, longlunch=2h 
         commands['transfer_executable'] = False
         commands['requirements'] = '( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )'
         commands['stream_output'] = True
@@ -97,7 +100,10 @@ def main():
                 return
         with open( outjson  , 'w') as f:
             json.dump( outjs  , f ) 
-        print('{0} is written'.format( outjson ) )
+        print('==> Wrote the campaign JSON file: {0}'.format( outjson ) )
+
+
 if __name__ == "__main__":
     main()
+
 

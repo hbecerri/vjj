@@ -11,6 +11,19 @@ from UserCode.VJJSkimmer.samples.Manager import *
 from UserCode.VJJSkimmer.samples.Sample import *
 import ROOT
 
+
+# //--------------------------------------------
+# //--------------------------------------------
+##     ## ######## ##       ########  ######## ########
+##     ## ##       ##       ##     ## ##       ##     ##
+##     ## ##       ##       ##     ## ##       ##     ##
+######### ######   ##       ########  ######   ########
+##     ## ##       ##       ##        ##       ##   ##
+##     ## ##       ##       ##        ##       ##    ##
+##     ## ######## ######## ##        ######## ##     ##
+# //--------------------------------------------
+# //--------------------------------------------
+
 def GetJobSubmissionTime( working_directory , username = getpass.getuser() ):
     jobtime = ''
     if not os.path.exists( '{0}/.requestcache'.format( working_directory ) ):
@@ -75,7 +88,7 @@ def FinalSummary( wd , ds , outLFNDirBase ):
             ret['filestat']['nNotExisting'] += 1
 
     return ret
-        
+
 def ParseStatusJSON( jsonfile ):
     Failed = []
     Finished = []
@@ -107,36 +120,46 @@ def ParseStatusJSON( jsonfile ):
     else:
         return 2,(1.0*len(Failed))/nTotal,Failed,Finished,Others
 
-
-
 def create_config_files(outdir):
     with open('auto_crab_cfg.py' , 'w') as f:
         f.write('from UserCode.VJJSkimmer.etc import crab_cfg\n')
         f.write('config = crab_cfg.config\n')
-        f.write("config.Data.outLFNDirBase = '/store/group/cmst3/group/top/SMP-19-005/{0}'".format( outdir ))
-    # with open('auto_crab_signal_cfg.py' , 'w') as f:
-    #     f.write('from UserCode.VJJSkimmer.etc import crab_cfg\n')
-    #     f.write('config = crab_cfg.config\n')
-    #     f.write("config.JobType.scriptArgs += ['--isSignal']\n" )
+        f.write("config.Data.outLFNDirBase = '/store/group/phys_smp/vbfA/big_ntuples/{0}'\n".format(outdir)) #USER-SPECIFIC PATH #Verify write permissions, e.g. with: [crab checkwrite --lfn=/store/group/phys_smp/vbfA --site T2_CH_CERN]
+
+
+# //--------------------------------------------
+# //--------------------------------------------
+##     ##    ###    #### ##    ##
+###   ###   ## ##    ##  ###   ##
+#### ####  ##   ##   ##  ####  ##
+## ### ## ##     ##  ##  ## ## ##
+##     ## #########  ##  ##  ####
+##     ## ##     ##  ##  ##   ###
+##     ## ##     ## #### ##    ##
+# //--------------------------------------------
+# //--------------------------------------------
 
 def main():
 
-    #parse command line
+# //--------------------------------------------
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument( 'action',   help='the action to take', choices=['submit','delete', 'resubmit' , 'status' , 'statussummary' , 'makecampaignfile'] ,  type=str)
-    parser.add_argument( '--samples',  dest='samples',   help='file which includes list of samples, by default latest available list is used', default='auto' , type=str )
+    parser.add_argument( '--samplelist',  dest='samplelist',   help='file including list of samples. By default, latest available list is used', default='auto' , type=str ) #E.g.: ../python/samples/lists/NanoAODv7.lst #Use most recent by default
     parser.add_argument( '--year',  dest='year',   help='year', choices=[2016,2017,2018,-1] , type=int , default=-1  )
     parser.add_argument( '--workarea',  dest='workarea',   help='directory name to store crab job information',  default='crab',  type=str)
     parser.add_argument( '--runcommands',  dest='runcommands',   help='Run commands instead of printing them on stdout',  default=False,  action='store_true')
     parser.add_argument( '--crab_cfg' , dest='crab_cfg'  , help="specify the name of the crab config file, if not specified it is automatically created" , default='auto' )
-    parser.add_argument( '--outLFNDirBase' , dest='outLFNDirBase'  , help="the address where the output files are stored, it is just used for makecampaignfile action"  )
+    parser.add_argument( '--outLFNDirBase' , dest='outLFNDirBase'  , help="[Only for makecampaignfile action] Address where the output files are stored"  )
+    parser.add_argument('-d', '--dataset', dest='dataset',   help='process only this dataset',  default='', type=str)
+    parser.add_argument('--datasetkey', dest='datasetkey',   help='process only samples containing this keyword',  default='', type=str)
     opt = parser.parse_args()
-    
+# //--------------------------------------------
+
     samples = None
-    if opt.samples == "auto":
+    if opt.samplelist == "auto":
         samples = currentSampleList
     else:
-        samples = Manager( opt.samples )
+        samples = Manager( opt.samplelist )
 
     if opt.crab_cfg == 'auto':
         create_config_files(opt.workarea)
@@ -146,38 +169,31 @@ def main():
     opt.workarea = crab_dir + opt.workarea
     if not os.path.exists( crab_dir ): os.makedirs( crab_dir )
 
+# //--------------------------------------------
+    #-- Define list of commands to run
     all_commands_torun = [] #'source /cvmfs/cms.cern.ch/crab3/crab.sh;']
     #all_commands_torun.append( 'voms-proxy-init -hours 999 -voms cms;' )
-    if opt.action == 'submit':
-        for ds,info in samples.all_datasets():
-            s = Sample( ds )
-            #if info['signal']:
-            #if not any([a in ds for a in ['QCD', 'Sherpa' , 'sherpa']] ):
+
+    #-- Main loop on samples to process
+    counter_samples = 0
+    for ds,info in samples.all_datasets():
+        s = Sample( ds )
+        if opt.dataset != '' and s.makeUniqueName() != opt.dataset: continue #Only process this specific sample
+        if opt.datasetkey != '' and opt.datasetkey not in s.makeUniqueName(): continue #Only process samples matching this keyword
+        counter_samples+= 1
+
+        if opt.action == 'submit':
             if opt.year != -1 and s.year() != opt.year : continue
             all_commands_torun.append( 'crab submit --config={4} General.requestName={1} Data.inputDataset={0} General.workArea={3}_{2};'.format( ds , s.makeUniqueName() , s.year() , opt.workarea , opt.crab_cfg ) )
 
-    elif opt.action == 'delete':
-        for ds,info in samples.all_datasets():
-            #if info['signal']:
-            #if any([a in ds for a in ['QCD', 'Sherpa' , 'sherpa']] ):
-            if True:
-                s = Sample( ds )
-                #all_commands_torun.append( 'rm -rf {0}_{1}/crab_{2};'.format( opt.workarea , s.year() , s.makeUniqueName() ) )
-                all_commands_torun.append( 'mv {0}_{1}/crab_{2} /tmp/hbakhshi/;'.format( opt.workarea , s.year() , s.makeUniqueName() ) )
-    elif opt.action == 'resubmit' :
-        for ds,info in samples.all_datasets():
-            s = Sample( ds )
-            #if not any([a in ds for a in ['QCD', 'Sherpa' , 'sherpa']] ):
-            if True:
-                all_commands_torun.append( 'crab purge -d {0}_{1}/crab_{2};'.format(  opt.workarea , s.year() , s.makeUniqueName() ) )
-    elif opt.action == 'status' :
-        all_commands_torun.append( 'echo "is going to fetch the status of crab jobs and store results in json format for further processing"')
-        for ds,info in samples.all_datasets():
-            if ds != '/GJets_Pt-400To650_13TeV-sherpa/RunIISummer16NanoAODv7-PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM':
-                continue
+        elif opt.action == 'delete':
+            all_commands_torun.append( 'mv {0}_{1}/crab_{2} /tmp/{3}/;'.format( opt.workarea , s.year() , s.makeUniqueName(), os.environ["USER"] ) )
 
-            s = Sample( ds )
-            #if not any([a in ds for a in ['QCD', 'Sherpa' , 'sherpa']] ):
+        elif opt.action == 'resubmit' :
+            all_commands_torun.append( 'crab purge -d {0}_{1}/crab_{2};'.format(  opt.workarea , s.year() , s.makeUniqueName() ) )
+
+        elif opt.action == 'status' :
+            all_commands_torun.append( 'echo "is going to fetch the status of crab jobs and store results in json format for further processing"')
             jsonfile = '{0}_{1}/crab_{2}/status.json'.format(  opt.workarea , s.year() , s.makeUniqueName() )
             stat,ratio,failds,finishds,others = ParseStatusJSON( jsonfile )
             if stat != 1:
@@ -185,10 +201,9 @@ def main():
                 all_commands_torun.append( 'echo "fetching status of {0}";'.format( s.makeUniqueName() ) )
                 all_commands_torun.append( 'mv {0} {0}_{1};'.format( jsonfile , dt_tag ) )
                 all_commands_torun.append( 'crab status -d {0}_{1}/crab_{2} --json | grep \'"1":\' > {0}_{1}/crab_{2}/status.json;'.format(  opt.workarea , s.year() , s.makeUniqueName() ) )
-        all_commands_torun.append( '{0} statussummary --sample {1} --workarea {2};'.format( sys.argv[0] , opt.samples , opt.workarea ) )
-    elif opt.action == 'statussummary' :
-        for ds,info in samples.all_datasets():
-            s = Sample( ds )
+            all_commands_torun.append( '{0} statussummary --sample {1} --workarea {2};'.format( sys.argv[0] , opt.samplelist , opt.workarea ) )
+
+        elif opt.action == 'statussummary' :
             stat,ratio,failds,finishds,others = ParseStatusJSON( '{0}_{1}/crab_{2}/status.json'.format(  opt.workarea , s.year() , s.makeUniqueName() ) )
             if stat==1 or (len(failds)==0 and stat>=0):
                 continue
@@ -198,24 +213,30 @@ def main():
             if stat != 1 :
                 print ('\tList of failed jobs: {0}'.format( str( failds ) ) )
                 print ('\tList of other jobs: {0}'.format( str( others ) ) )
-    elif opt.action == 'makecampaignfile':
-        outjs = {}
-        for ds,info in samples.all_datasets():
-            if ds != '/GJets_Pt-400To650_13TeV-sherpa/RunIISummer16NanoAODv7-PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM':
-                continue
 
+        elif opt.action == 'makecampaignfile':
+            outjs = {}
             print('get information for ds {0}'.format( ds ) )
             s = Sample(ds)
             outjs[ds] = FinalSummary( '{0}_{1}/crab_{2}'.format(  opt.workarea , s.year() , s.makeUniqueName() )  , ds , opt.outLFNDirBase )
-        #print outjs
-        with open('campaign.json' , 'w') as f :
-            json.dump( outjs ,  f )
+            with open('campaign.json' , 'w') as f :
+                json.dump( outjs ,  f ) #print outjs
+# //--------------------------------------------
+
+    print('\n-- Considering {} samples --\n'.format(counter_samples))
 
     if opt.runcommands:
         print('running commands by this script is not implemented yet')
     else:
         for command in all_commands_torun:
             print(command)
+
+    return
+
+
+# //--------------------------------------------
+# //--------------------------------------------
+
 
 if __name__ == "__main__":
 
