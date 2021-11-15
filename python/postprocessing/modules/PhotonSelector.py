@@ -23,11 +23,11 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         #no need for reconstructed efficiency (assumed to be 100% for superclusters)
         baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         photonSFSources={
-            2016preVPF:{
+            20161:{ #preVPF
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
                 'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL16_preVFP.root'),               'Tight_ID'),
               },
-            2016postVPF:{
+            20162:{ #postVPF
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
                 'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL16_postVFP.root'),              'Tight_ID'),
               },
@@ -104,9 +104,11 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         return SFs
 
 
-photonSelector2016 = lambda : PhotonSelector(2016, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
+photonSelector2016pre = lambda : PhotonSelector(20161, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
+photonSelector2016post = lambda : PhotonSelector(20162, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
 photonSelector2017 = lambda : PhotonSelector(2017, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
 photonSelector2018 = lambda : PhotonSelector(2018, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
-loosePhotonSelector2016 = lambda : PhotonSelector(2016 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
+loosePhotonSelector2016pre = lambda : PhotonSelector(20161 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
+loosePhotonSelector2016post = lambda : PhotonSelector(20162 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
 loosePhotonSelector2017 = lambda : PhotonSelector(2017 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
 loosePhotonSelector2018 = lambda : PhotonSelector(2018 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
