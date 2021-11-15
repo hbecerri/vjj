@@ -6,7 +6,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     """ Applies standard photon selections, returning a list of indices of good photons """
 
-    def __init__(self , era, min_pt, max_eta, apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")]):
+    def __init__(self , era, min_pt, max_eta, apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf=''):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
@@ -22,14 +22,13 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
         #no need for reconstructed efficiency (assumed to be 100% for superclusters)
         baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
+        PixelSeed2016 = ''
+        if vpf=='pre': PixelSeed2016 = 'HasPix_SummaryPlot_UL16_preVFP.root'
+        if vpf=='post': PixelSeed2016 = 'HasPix_SummaryPlot_UL16_preVFP.root'
         photonSFSources={
-            20161:{ #preVPF
+            2016:{ 
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
-                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL16_preVFP.root'),               'Tight_ID'),
-              },
-            20162:{ #postVPF
-                'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
-                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL16_postVFP.root'),              'Tight_ID'),
+                'pxseed' : (os.path.join(baseSFDir, PixelSeed2016),                                      'Tight_ID'),
               },
             2017:{
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_PHO_Tight_UL17.root'),          'EGamma_SF2D'),
@@ -104,11 +103,11 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         return SFs
 
 
-photonSelector2016pre = lambda : PhotonSelector(20161, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
-photonSelector2016post = lambda : PhotonSelector(20162, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
+photonSelector2016pre = lambda : PhotonSelector(2016, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'], apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre' )
+photonSelector2016post = lambda : PhotonSelector(2016, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'], apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post' ) 
 photonSelector2017 = lambda : PhotonSelector(2017, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
 photonSelector2018 = lambda : PhotonSelector(2018, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
-loosePhotonSelector2016pre = lambda : PhotonSelector(20161 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
-loosePhotonSelector2016post = lambda : PhotonSelector(20162 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
+loosePhotonSelector2016pre = lambda : PhotonSelector(2016 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre')
+loosePhotonSelector2016post = lambda : PhotonSelector(2016 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post')
 loosePhotonSelector2017 = lambda : PhotonSelector(2017 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
 loosePhotonSelector2018 = lambda : PhotonSelector(2018 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)

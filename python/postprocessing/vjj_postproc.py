@@ -62,7 +62,10 @@ def defineModules(year, isData, isSignal):
                                      jetmapname="L1prefiring_jetpt_2016BtoH",
                                      photonroot="L1prefiring_photonpt_2016BtoH.root",
                                      photonmapname="L1prefiring_photonpt_2016BtoH") )
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016post(), photonSelector2016pre(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016post(), loosePhotonSelector2016pre() ])
+            if fpv=='pre':
+                modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016pre(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016pre() ])
+            if fpv=='post':
+                modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016post(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016post() ])
             modules.append( vjjSkimmer2016mc(signal=isSignal) )
         if year==2017:
             modules.append( puAutoWeight_2017() )
@@ -79,7 +82,10 @@ def defineModules(year, isData, isSignal):
 
     else:
         if year==2016:
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016post(), photonSelector2016pre(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016pre(), loosePhotonSelector2016post()])
+            if fpv=='pre':
+                modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016pre(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016pre()])
+            if fpv=='post':
+                modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016post(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016post()])
             modules.append( vjjSkimmer2016data() )
         if year==2017:
             modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ,jetSelector2017(apply_id=False), loosePhotonSelector2017()])
@@ -110,6 +116,7 @@ def main():
     #parse command line
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-y', '--year',       dest='year',   help='year',  choices=[2016,2017,2018], default=-1,  type=int)
+    parser.add_argument('-fpv', '--FPV',      dest='fpv',    help='for 2016, pre or post FPV',  default='', type=str)
     parser.add_argument(      '--isData',     dest='isData', help='data?', default=False, action='store_true')
     parser.add_argument(      '--isSignal',   dest='isSignal', help='signal?', default=False, action='store_true')
     parser.add_argument('-i', '--inputfiles', dest='inputFiles',   help='input, should be set to crab to run on GRID', type=str,
