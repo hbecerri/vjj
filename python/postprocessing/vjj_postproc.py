@@ -62,7 +62,7 @@ def defineModules(year, isData, isSignal):
                                      jetmapname="L1prefiring_jetpt_2016BtoH",
                                      photonroot="L1prefiring_photonpt_2016BtoH.root",
                                      photonmapname="L1prefiring_photonpt_2016BtoH") )
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
+            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016post(), photonSelector2016pre(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016post(), loosePhotonSelector2016pre() ])
             modules.append( vjjSkimmer2016mc(signal=isSignal) )
         if year==2017:
             modules.append( puAutoWeight_2017() )
@@ -79,7 +79,7 @@ def defineModules(year, isData, isSignal):
 
     else:
         if year==2016:
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
+            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016post(), photonSelector2016pre(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016pre(), loosePhotonSelector2016post()])
             modules.append( vjjSkimmer2016data() )
         if year==2017:
             modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ,jetSelector2017(apply_id=False), loosePhotonSelector2017()])
@@ -170,7 +170,7 @@ def main():
     #-- Define modules to run
     modules=defineModules(opt.year,opt.isData, opt.isSignal)
     # print('My modules: ', mymodules)
-
+    print (opt.keep_and_drop)
     #call post processor
     p=PostProcessor(outputDir=".",
                     inputFiles=inputFiles,
