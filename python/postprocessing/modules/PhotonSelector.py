@@ -23,15 +23,21 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         #no need for reconstructed efficiency (assumed to be 100% for superclusters)
         baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         photonSFSources={
-            2016:{
-                'id'     : (os.path.join(baseSFDir,'Fall17V2_2016_Tight_photons.root'),          'EGamma_SF2D'),
+            2016preVPF:{
+                'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
+                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL16_preVFP.root'),               'Tight_ID'),
+              },
+            2016postVPF:{
+                'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
+                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL16_postVFP.root'),              'Tight_ID'),
               },
             2017:{
-                'id'     : (os.path.join(baseSFDir,'2017_PhotonsTight.root'),                         'EGamma_SF2D'),
-                'pxseed' : (os.path.join(baseSFDir,'PixelSeed_ScaleFactors_2017.root'),               'Tight_ID'),
+                'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_PHO_Tight_UL17.root'),          'EGamma_SF2D'),
+                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL17.root'),                      'Tight_ID'),
                 },
             2018:{
-                'id'     : (os.path.join(baseSFDir,'2018_PhotonsTight.root'),               'EGamma_SF2D'),
+                'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_PHO_Tight_UL18.root'),          'EGamma_SF2D'),
+                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL18.root'),                      'Tight_ID'),
                 }
         }
         for k in photonSFSources[self.era]:
@@ -58,22 +64,12 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         min_dr = self.mindr_toVetoObjs(photon)
         if min_dr < self.min_dr2vetoObjs : return False
 
-        #id+iso requirement (tight id is the 3rd bit)
-        # if self.era == 2016:
-        #     hasId=((photon.cutBased17Bitmap>>2) & 0x1)
-        # elif self.era == 2017:
-        #     hasId=((photon.cutBased>>2)&0x1)
-        # elif self.era == 2018:
-        #     hasId=((photon.cutBased>>2)&0x1)
         if self.apply_id:
             hasId= False
             hasId= photon.cutBased == 3
             if not hasId:
                 return False
 
-        #additional requirements
-        #ele_veto = photon.electronVeto
-        #if not ele_veto : return False
         has_pixelseed = photon.pixelSeed
         if has_pixelseed : return False
 
@@ -83,18 +79,11 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
         """evaluates the scale factors for a collection of photons """
 
-        #SFs={'trig_ajj':[],'trig_highpta':[],'id':[],'pxseed':[]}
-        #,mjj=0
         SFs={'id':[],'pxseed':[]}
         for p in photons:
 
             abseta=abs(p.eta)
-            # SFs['trig_ajj'].append(
-            #     self.evalSF('trig_ajj', objAttrs=[p.pt,mjj])
-            # )
-            # SFs['trig_highpta'].append(
-            #     self.evalSF('trig_highpta', objAttrs=[p.pt])
-            # )
+
             SFs['id'].append(
                 self.evalSF('id', objAttrs=[p.eta,p.pt])
             )
