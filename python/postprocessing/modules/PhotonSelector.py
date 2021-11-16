@@ -22,13 +22,14 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
         #no need for reconstructed efficiency (assumed to be 100% for superclusters)
         baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
-        PixelSeed2016 = ''
-        if vpf=='pre': PixelSeed2016 = 'HasPix_SummaryPlot_UL16_preVFP.root'
-        if vpf=='post': PixelSeed2016 = 'HasPix_SummaryPlot_UL16_preVFP.root'
+        # PixelSeed2016 = ''
+        # if vpf=='pre': PixelSeed2016 = 'HasPix_SummaryPlot_UL16_preVFP.root'
+        # if vpf=='post': PixelSeed2016 = 'HasPix_SummaryPlot_UL16_postVFP.root'
         photonSFSources={
             2016:{ 
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
-                'pxseed' : (os.path.join(baseSFDir, PixelSeed2016),                                      'Tight_ID'),
+#                'pxseed' : (os.path.join(baseSFDir, PixelSeed2016),                                      'Tight_ID'),
+                'pxseed' : (os.path.join('HasPix_SummaryPlot_UL16_preVFP.root' if vpf=='pre' else 'HasPix_SummaryPlot_UL16_postVFP.root'), 'Tight_ID'),
               },
             2017:{
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_PHO_Tight_UL17.root'),          'EGamma_SF2D'),
