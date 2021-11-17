@@ -116,7 +116,7 @@ def main():
     #parse command line
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-y', '--year',       dest='year',   help='year',  choices=[2016,2017,2018], default=-1,  type=int)
-    parser.add_argument('-p', '--FPV',        dest='fpv',    help='for 2016 pixel, pre or post FPV',  default=False, type='store_true')
+    parser.add_argument('-p', '--FPV',        dest='fpv',    help='for 2016 pixel, pre or post FPV',  default=False, action='store_true')
     parser.add_argument(      '--isData',     dest='isData', help='data?', default=False, action='store_true')
     parser.add_argument(      '--isSignal',   dest='isSignal', help='signal?', default=False, action='store_true')
     parser.add_argument('-i', '--inputfiles', dest='inputFiles',   help='input, should be set to crab to run on GRID', type=str,
