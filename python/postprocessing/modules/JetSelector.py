@@ -67,49 +67,26 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
 
         #id bits
         #https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookNanoAOD#Jets
-
+        #https://twiki.cern.ch/twiki/bin/view/CMS/PileupJetIDUL
         #pileup id (optional)
         if self.applyPUid:
-            loosePuID=((jet.puId>>2) & 1)
-            #print('loosepuid',loosePuID),
-            if loosePuID!=1:
-                #print("NO")
+            loosePuID = ((jet.puId > 0) if self.era == 2016 else (jet.puId > 3))
+            if not loosePuID: 
                 return False
 
-        #jet id: loose + tightLepVeto (these are run-dependent, see below)
-        looseID=(jet.jetId & 1)
-        tightLepVeto=((jet.jetId>>2) & 1)
-        if not self.apply_id:
-            looseID = True
-            tightLepVeto = True
+        #jet id in UL: only tight and tightLeptonVeto are supported. No loose anymore
+        #tightleptonveto is recommended
+        #https://twiki.cern.ch/twiki/bin/view/CMS/JetID13TeVUL
+        #https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetID#nanoAOD_Flags
+
+        if self.apply_id:
+            tightLepVeto=((jet.jetId > 5) if self.era == 2016 else (jet.jetId > 6))
+            if not tightLeptonVeto: 
+                return False
 
         #era-dependent (optional)
         if self.applyEraAdHocCuts :
-
-            if self.era == 2016 :
-
-                if looseID==0:
-                    #print("NO")
-                    return False
-
-            if self.era == 2017:
-                #print('id',tightLepVeto),
-                if tightLepVeto==0 :
-                    #print("NO")
-                    return False
-
-                #ECAL noise (2017)
-                #print("ECAL NOISE"),
-                if abseta>2.650 and abseta<3.139:
-                    if jet.chEmEF+jet.neEmEF > 0.55:
-                        #print("NO")
-                        return False
-
             if self.era == 2018:
-
-                if tightLepVeto==0:
-                    return False
-
                 #HEM 15/16 failure (2018)
                 if jet.eta>-3.0 and jet.eta<-1.3 and jet.phi>-1.57 and jet.phi<-0.87:
                     return False
