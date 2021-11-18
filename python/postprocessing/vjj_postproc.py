@@ -57,11 +57,11 @@ def defineModules(year, isData, isSignal, preVFP=False):
     if not isData:
         if year==2016:
             modules.append( puAutoWeight_2016() )
-            modules.append( PrefCorr() )
-            modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2016BtoH.root",
-                                     jetmapname="L1prefiring_jetpt_2016BtoH",
-                                     photonroot="L1prefiring_photonpt_2016BtoH.root",
-                                     photonmapname="L1prefiring_photonpt_2016BtoH") )
+            # modules.append( PrefCorr() )
+            # modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2016BtoH.root",
+            #                          jetmapname="L1prefiring_jetpt_2016BtoH",
+            #                          photonroot="L1prefiring_photonpt_2016BtoH.root",
+            #                          photonmapname="L1prefiring_photonpt_2016BtoH") )
             if preVFP:
                 modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016pre(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016pre() ])
             else:
@@ -69,10 +69,10 @@ def defineModules(year, isData, isSignal, preVFP=False):
             modules.append( vjjSkimmer2016mc(signal=isSignal) )
         if year==2017:
             modules.append( puAutoWeight_2017() )
-            modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2017BtoF.root",
-                                     jetmapname="L1prefiring_jetpt_2017BtoF",
-                                     photonroot="L1prefiring_photonpt_2017BtoF.root",
-                                     photonmapname="L1prefiring_photonpt_2017BtoF") )
+            # modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2017BtoF.root",
+            #                          jetmapname="L1prefiring_jetpt_2017BtoF",
+            #                          photonroot="L1prefiring_photonpt_2017BtoF.root",
+            #                          photonmapname="L1prefiring_photonpt_2017BtoF") )
             modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017(),jetSelector2017(apply_id=False) , loosePhotonSelector2017() ])
             modules.append( vjjSkimmer2017mc(signal=isSignal) )
         if year==2018:
