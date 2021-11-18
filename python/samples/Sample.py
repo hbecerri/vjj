@@ -9,7 +9,9 @@ class SampleNameParser:
         self.regexps.append( re.compile( r'.*/RunII(?P<campaign>[^-]*(?P<year>[0-9][0-9])).*' ) )
         self.regexps.append( re.compile( r'.*/(?P<isData>Run20)(?P<year>[0-9][0-9])(?P<era>.)[-_].*' ) )
         self.regexps.append( re.compile( r'.*-Nano(?P<nanotag>[^-_]*)[-_].*' ) )
-        self.regexps.append( re.compile( r'.*NanoAODv(?P<nanoversion>[0-9]*).*' )  )
+        self.regexps.append( re.compile( r'.*NanoAODv(?P<nanoversion>[0-9]*).*' ))
+        self.regexps.append( re.compile( r'.*NanoAODAPVv(?P<nanoversion>[0-9]*).*' ))
+        self.regexps.append( re.compile( r'.*(?P<prevfp>NanoAODAPV).*' )  )
         self.regexps.append( re.compile( r'.*_ext(?P<ext>[0-9]*).*' )  )
         self.regexps.append( re.compile( r'.*-v(?P<version>[0-9]*).*' )  )
         self.regexps.append( re.compile( r'.*_ver(?P<version>[0-9]*).*' )  )
@@ -45,6 +47,9 @@ class Sample:
     
     def tune(self):
         return self.info.get('tune' , 'noTune' )
+
+    def preVFP(self):
+        return 'prevfp' in self.info 
 
     def makeUniqueName(self):
         uName = self.ds.split('/')[1]

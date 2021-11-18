@@ -5,18 +5,20 @@ def defineTriggerList( year ):
     """
 
     #triggers of interest (here we list the main analysis triggers)
+    ## paths for ee and mm are checked with https://twiki.cern.ch/twiki/bin/view/CMS/TopTrigger#HLT_Menus_in_Run_2
+    ## J/Psi dimuon triggers are not used
     signal_trig_dict={
         2016: {'ajj'     : ['HLT_Photon75_R9Id90_HE10_Iso40_EBOnly_VBF'],
                'highpta' : ['HLT_Photon175'],
-               'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'],
-               'mm'      : ['HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ','HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ','HLT_IsoMu24','HLT_IsoTkMu24']},
+               'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ','HLT_DoubleEle24_22_eta2p1_WPLoose_Gsf','HLT_Ele32_eta2p1_WPTight_Gsf','HLT_Ele27_WPTight_Gsf','HLT_Ele25_eta2p1_WPTight_Gsf'],
+               'mm'      : ['HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ','HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ','HLT_IsoMu24','HLT_IsoTkMu24','HLT_IsoMu22_eta2p1','HLT_IsoTkMu22_eta2p1']},
         2017: {'ajj'     : ['HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3'],
                'highpta' : ['HLT_Photon200'],
-               'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL','HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'],
-               'mm'      : ['HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ','HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8','HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8','HLT_IsoMu27']},
+               'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL','HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ', 'HLT_Ele35_WPTight_Gsf', 'HLT_Ele38_WPTight_Gsf', 'HLT_Ele40_WPTight_Gsf', 'HLT_Ele32_WPTight_Gsf_L1DoubleEG'],
+               'mm'      : ['HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ','HLT_IsoMu27','HLT_IsoMu24_eta2p1']},
         2018: {'ajj'     : ['HLT_Photon75_R9Id90_HE10_IsoM_EBOnly_PFJetsMJJ300DEta3'],
                'highpta' : ['HLT_Photon200'],
-               'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL','HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ'],
+               'ee'      : ['HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL','HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ','HLT_Ele32_WPTight_Gsf'],
                'mm'      : ['HLT_IsoMu24']}
         }
 

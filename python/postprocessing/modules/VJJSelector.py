@@ -11,12 +11,13 @@ from TriggerLists import defineTriggerList
 class VJJSelector(Module):
 
     """Implements a generic V+2j selection for VBF X studies"""
-
-    def __init__(self, isData, era, bypassSelFilters=False):
+    """Regions are MM, EE, A, Af"""
+    def __init__(self, isData, era, bypassSelFilters=False, region='MM'):
 
         self.isData           = isData
         self.era              = era
         self.bypassSelFilters = bypassSelFilters
+        self.sampleTag        = sampleTag
         self.vjjEvent         = VJJEvent(cfg=_defaultVjjCfg)
         self.gen_vjjEvent     = None 
         if not isData:
@@ -87,35 +88,39 @@ class VJJSelector(Module):
         eventually checks if it's compatible with triggers 
         """
 
-        if len(good_muons)>=2:
-            mm=good_muons[0].p4()+good_muons[1].p4()
-            goodZmm=(abs(mm.M()-91)<15)
-            if trig_cats and trig_cats.count('mm')==0: 
-                goodZmm=False
-            if goodZmm:
-                return 13*13,[1,1],mm
+        if self.region == 'MM':
+            if len(good_muons)>=2:
+                mm=good_muons[0].p4()+good_muons[1].p4()
+                goodZmm=(abs(mm.M()-91)<15)
+                if trig_cats and trig_cats.count('mm')==0: 
+                    goodZmm=False
+                if goodZmm:
+                    return 13*13,[1,1],mm
         
-        if len(good_electrons)>=2:
-            ee=good_electrons[0].p4()+good_electrons[1].p4()
-            goodZee=(abs(ee.M()-91)<15)
-            if trig_cats and trig_cats.count('ee')==0:
-                goodZee=False
-            if goodZee:
-                return 11*11,[1,1],ee
+        if self.region == 'EE':
+            if len(good_electrons)>=2:
+                ee=good_electrons[0].p4()+good_electrons[1].p4()
+                goodZee=(abs(ee.M()-91)<15)
+                if trig_cats and trig_cats.count('ee')==0:
+                    goodZee=False
+                if goodZee:
+                    return 11*11,[1,1],ee
         
-        if len(good_photons)>0:
-            #trigger categories are not re-inforced for the photon case
-            #so that trigger efficiency can be measured
-            isAjj     = 1 if (trig_cats and trig_cats.count('ajj')>0)     else 0
-            isHighPtA = 1 if (trig_cats and trig_cats.count('highpta')>0) else 0
-            return 22,[isAjj,isHighPtA],good_photons[0].p4()
+        if self.region == 'A':
+            if len(good_photons)>0:
+                #trigger categories are not re-inforced for the photon case
+                #so that trigger efficiency can be measured
+                isAjj     = 1 if (trig_cats and trig_cats.count('ajj')>0)     else 0
+                isHighPtA = 1 if (trig_cats and trig_cats.count('highpta')>0) else 0
+                return 22,[isAjj,isHighPtA],good_photons[0].p4()
 
-        if len(loose_photons)>0:
-            #trigger categories are not re-inforced for the photon case
-            #so that trigger efficiency can be measured
-            isAjj     = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('ajj')>0)     else 0
-            isHighPtA = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('highpta')>0) else 0
-            return -22,[isAjj,isHighPtA],loose_photons[0].p4()
+        if self.region == 'Af':
+            if len(loose_photons)>0:
+                #trigger categories are not re-inforced for the photon case
+                #so that trigger efficiency can be measured
+                isAjj     = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('ajj')>0)     else 0
+                isHighPtA = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('highpta')>0) else 0
+                return -22,[isAjj,isHighPtA],loose_photons[0].p4()
 
 
         return None
