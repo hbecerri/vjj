@@ -5,7 +5,8 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
 
     """ Applies standard electron selections, returning a list of indices of good photons """
 
-    def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4 , vetoObjs = [("Muon", "mu")]):
+    #def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4 , vetoObjs = [("Muon", "mu")]):
+    def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4 , vetoObjs = [("Muon", "mu")], vpf=''):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
@@ -17,20 +18,28 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
         self.min_dr2vetoObjs = dr2vetoObjs
         self.indices=[]
 
+
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
+	#UL electron ID comes from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaUL2016To2018    --Nov 19, rec SF needs to be updated.
         baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         eleSFSources={
             2016:{
-                'rec'    : (os.path.join(baseSFDir,'EGM2D_BtoH_GT20GeV_RecoSF_Legacy2016.root'),    'EGamma_SF2D'),
-                'id'     : (os.path.join(baseSFDir,'2016LegacyReReco_ElectronMVA80_Fall17V2.root'), 'EGamma_SF2D'),
+                #'rec'    : (os.path.join(baseSFDir,'EGM2D_BtoH_GT20GeV_RecoSF_Legacy2016.root'),    'EGamma_SF2D'),
+                #'id'     : (os.path.join(baseSFDir,'2016LegacyReReco_ElectronMVA80_Fall17V2.root'), 'EGamma_SF2D'),
+                'rec'    : (os.path.join(baseSFDir,'egammaEffi_ptAbove20.txt_EGM2D_UL2016preVFP.root' if vpf=='pre' else 'egammaEffi_ptAbove20.txt_EGM2D_UL2016postVFP.root'),    'EGamma_SF2D'),
+		'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_preVFP_EGM2D.root' if vpf=='pre' else 'egammaEffi.txt_Ele_wp80iso_postVFP_EGM2D.root'), 'EGamma_SF2D'),
               },
             2017:{
-                'rec'    : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_runBCDEF_passingRECO.root'), 'EGamma_SF2D'),
-                'id'     : (os.path.join(baseSFDir,'2017_ElectronMVA80.root'),                        'EGamma_SF2D'),
+                #'rec'    : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_runBCDEF_passingRECO.root'), 'EGamma_SF2D'),
+                #'id'     : (os.path.join(baseSFDir,'2017_ElectronMVA80.root'),                        'EGamma_SF2D'),
+                'rec'    : (os.path.join(baseSFDir,'egammaEffi_ptAbove20.txt_EGM2D_UL2017.root'), 'EGamma_SF2D'),
+                'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_MVA80iso_UL17.root'),        'EGamma_SF2D'),
                 },
             2018:{
-                'rec'    : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_updatedAll.root'), 'EGamma_SF2D'),
-                'id'     : (os.path.join(baseSFDir,'2018_ElectronMVA80.root'),              'EGamma_SF2D'),
+                #'rec'    : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_updatedAll.root'), 'EGamma_SF2D'),
+                #'id'     : (os.path.join(baseSFDir,'2018_ElectronMVA80.root'),              'EGamma_SF2D'),
+                'rec'    : (os.path.join(baseSFDir,'egammaEffi_ptAbove20.txt_EGM2D_UL2018.root'), 'EGamma_SF2D'),
+		'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_SF2D'),
                 }
         }
         for k in eleSFSources[self.era]:
@@ -85,6 +94,8 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
 
         return SFs
 
-electronSelector2016 = lambda : ElectronSelector(2016)
+#electronSelector2016 = lambda : ElectronSelector(2016)
+electronSelector2016pre = lambda : ElectronSelector(2016,vpf='pre')
+electronSelector2016post = lambda : ElectronSelector(2016,vpf='post')
 electronSelector2017 = lambda : ElectronSelector(2017)
 electronSelector2018 = lambda : ElectronSelector(2018)

@@ -17,22 +17,31 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/MuonPOG
+        #files come from https://twiki.cern.ch/twiki/bin/view/CMS/MuonUL2016 or  MuonUL2017  for UL
         baseSFDir='${CMSSW_BASE}/python/UserCode/VJJSkimmer/postprocessing/etc/'
         muSFSources={
             2016:{
-                'id'     : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ID.root'),  'NUM_TightID_DEN_genTracks_eta_pt'),
-                'id_gh'  : (os.path.join(baseSFDir,'2016_RunGH_SF_ID.root'),    'NUM_TightID_DEN_genTracks_eta_pt'),
-                'iso'    : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt'),
-                'iso_gh' : (os.path.join(baseSFDir,'2016_RunGH_SF_ISO.root'),    'NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt'),
+                #'id'     : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ID.root'),  'NUM_TightID_DEN_genTracks_eta_pt'),
+                #'id_gh'  : (os.path.join(baseSFDir,'2016_RunGH_SF_ID.root'),    'NUM_TightID_DEN_genTracks_eta_pt'),
+                'id'     : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2016_UL_HIPM_ID.root'),    'NUM_TightID_DEN_TrackerMuons_abseta_pt'),
+                'id_gh'  : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2016_UL_ID.root'),    'NUM_TightID_DEN_TrackerMuons_abseta_pt'),
+                #'iso'    : (os.path.join(baseSFDir,'2016_RunBCDEF_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt'),
+                #'iso_gh' : (os.path.join(baseSFDir,'2016_RunGH_SF_ISO.root'),    'NUM_TightRelIso_DEN_TightIDandIPCut_eta_pt'),
+                'iso'    : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2016_UL_HIPM_ISO.root'),    'NUM_TightRelIso_DEN_TightIDandIPCut_abseta_pt'),
+                'iso_gh' : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2016_UL_ISO.root'),    'NUM_TightRelIso_DEN_TightIDandIPCut_abseta_pt'),
 
               },
             2017:{
-                'id'  : (os.path.join(baseSFDir,'RunBCDEF_SF_ID_syst.root'),  'NUM_TightID_DEN_genTracks_pt_abseta'),
-                'iso' : (os.path.join(baseSFDir,'RunBCDEF_SF_ISO_syst.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
+                #'id'  : (os.path.join(baseSFDir,'RunBCDEF_SF_ID_syst.root'),  'NUM_TightID_DEN_genTracks_pt_abseta'),
+                #'iso' : (os.path.join(baseSFDir,'RunBCDEF_SF_ISO_syst.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
+                'id'  : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2017_UL_ID.root'),  'NUM_TightID_DEN_TrackerMuons_abseta_pt'),
+                'iso' : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2017_UL_ISO.root'),  'NUM_TightRelIso_DEN_TightIDandIPCut_abseta_pt'),
                 },
             2018:{
-                'id'       : (os.path.join(baseSFDir,'RunABCD_SF_ID.root'),  'NUM_TightID_DEN_TrackerMuons_pt_abseta'),
-                'iso'      : (os.path.join(baseSFDir,'RunABCD_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
+                #'id'       : (os.path.join(baseSFDir,'RunABCD_SF_ID.root'),  'NUM_TightID_DEN_TrackerMuons_pt_abseta'),
+                #'iso'      : (os.path.join(baseSFDir,'RunABCD_SF_ISO.root'), 'NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta'),
+                'id'  : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2018_UL_ID.root'),  'NUM_TightID_DEN_TrackerMuons_abseta_pt'),
+                'iso' : (os.path.join(baseSFDir,'Efficiencies_muon_generalTracks_Z_Run2018_UL_ISO.root'),  'NUM_TightRelIso_DEN_TightIDandIPCut_abseta_pt'),
                 }
         }
         for k in muSFSources[self.era]:

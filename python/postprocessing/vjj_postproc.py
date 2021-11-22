@@ -44,7 +44,7 @@ def PrintBanner(year):
     return
 
 
-def defineModules(year, isData, isSignal):
+def defineModules(year, isData, isSignal, preVFP=False):
     """
     Configures the modules to be run depending on the year and whether is data or MC
     Returns a list of modules
@@ -62,7 +62,11 @@ def defineModules(year, isData, isSignal):
                                      jetmapname="L1prefiring_jetpt_2016BtoH",
                                      photonroot="L1prefiring_photonpt_2016BtoH.root",
                                      photonmapname="L1prefiring_photonpt_2016BtoH") )
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
+            #modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
+	    if preVFP:
+            	modules.extend( [muonSelector2016(), electronSelector2016pre(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
+	    else:
+            	modules.extend( [muonSelector2016(), electronSelector2016post(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
             modules.append( vjjSkimmer2016mc(signal=isSignal) )
         if year==2017:
             modules.append( puAutoWeight_2017() )
@@ -79,7 +83,11 @@ def defineModules(year, isData, isSignal):
 
     else:
         if year==2016:
-            modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
+            #modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
+	    if preVFP:
+            	modules.extend( [muonSelector2016(), electronSelector2016pre(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
+	    else:
+            	modules.extend( [muonSelector2016(), electronSelector2016post(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
             modules.append( vjjSkimmer2016data() )
         if year==2017:
             modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ,jetSelector2017(apply_id=False), loosePhotonSelector2017()])
@@ -110,6 +118,7 @@ def main():
     #parse command line
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-y', '--year',       dest='year',   help='year',  choices=[2016,2017,2018], default=-1,  type=int)
+    parser.add_argument('-p', '--FPV',        dest='fpv',    help='for 2016 pixel, pre or post FPV',  default=False, action='store_true')
     parser.add_argument(      '--isData',     dest='isData', help='data?', default=False, action='store_true')
     parser.add_argument(      '--isSignal',   dest='isSignal', help='signal?', default=False, action='store_true')
     parser.add_argument('-i', '--inputfiles', dest='inputFiles',   help='input, should be set to crab to run on GRID', type=str,
@@ -134,8 +143,10 @@ def main():
             opt.year = 2000 + int( info[ 'year' ] )
             opt.isData = 'isData' in info.keys()
             opt.isSignal = samples.is_signal( opt.dataSet )
+	    opt.fpv = 'prevfp' in info.keys()
             print( 'dataset name is {0}'.format( opt.dataSet ) )
-            print( 'year, isData and isSignal are set from the dataset name to {0}, {1} and {2}'.format( opt.year , opt.isData , opt.isSignal ) )
+            #print( 'year, isData and isSignal are set from the dataset name to {0}, {1} and {2}'.format( opt.year , opt.isData , opt.isSignal ) )
+            print( 'year, isData, preVFP and isSignal are set from the dataset name to {0}, {1}, {2} and {3}'.format( opt.year , opt.isData , opt.fpv, opt.isSignal ) )
         else:
             raise ValueError( 'dataSet name seems inconsistent: {0}'.format( opt.dataSet ) )
 
@@ -168,7 +179,8 @@ def main():
 
 # //--------------------------------------------
     #-- Define modules to run
-    modules=defineModules(opt.year,opt.isData, opt.isSignal)
+    #modules=defineModules(opt.year,opt.isData, opt.isSignal)
+    modules=defineModules(opt.year,opt.isData, opt.isSignal, opt.fpv)
     # print('My modules: ', mymodules)
 
     #call post processor
