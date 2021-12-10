@@ -103,11 +103,11 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         return SFs
 
 
-photonSelector2016pre = lambda : PhotonSelector(2016, apply_id = True , _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre' )
-photonSelector2016post = lambda : PhotonSelector(2016,  apply_id = True , _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post' ) 
+photonSelector2016pre = lambda : PhotonSelector(2016, apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre' )
+photonSelector2016post = lambda : PhotonSelector(2016,  apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post' ) 
 photonSelector2017 = lambda : PhotonSelector(2017)
 photonSelector2018 = lambda : PhotonSelector(2018)
-loosePhotonSelector2016pre = lambda : PhotonSelector(2016 ,  apply_id=False, _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre')
-loosePhotonSelector2016post = lambda : PhotonSelector(2016 ,  apply_id=False, _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post')
+loosePhotonSelector2016pre = lambda : PhotonSelector(2016 ,  apply_id=False, cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre')
+loosePhotonSelector2016post = lambda : PhotonSelector(2016 ,  apply_id=False, cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post')
 loosePhotonSelector2017 = lambda : PhotonSelector(2017,  apply_id=False)
 loosePhotonSelector2018 = lambda : PhotonSelector(2018,  apply_id=False)
