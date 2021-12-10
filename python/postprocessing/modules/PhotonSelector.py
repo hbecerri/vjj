@@ -1,22 +1,21 @@
 from ScaleFactorBase import *
 from ObjectSelectorBase import *
-from VJJEvent import _defaultVjjSkimCfg
+from VJJEvent import _defaultObjCfg
+import copy
 
 class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     """ Applies standard photon selections, returning a list of indices of good photons """
 
-    def __init__(self , era, min_pt, max_eta, apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf=''):
+    def __init__(self , era, apply_id = True , cfg= _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf=''):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
         self.setParams(1 , vetoObjs , dofilter=False) #set parameters for object selection
 
         self.era = era
-        self.min_pt = min_pt
-        self.max_eta = max_eta
         self.apply_id = apply_id
-        self.min_dr2vetoObjs = dr2vetoObjs
+        self.selCfg = copy.deepCopy(cfg)
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
@@ -56,13 +55,13 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     def isGood(self, photon):
 
-        if photon.pt < self.min_pt : return False
+        if photon.pt < self.selCfg['min_photonPt'] : return False
         absEta=abs( photon.eta )
-        if absEta > self.max_eta : return False
-        if absEta> 1.4442 and absEta<1.5660 : return False #EB->EE transition
+        if absEta > self.selCfg['max_photonEta'] : return False
+        if absEta> self.selCfg['max_EB'] and absEta< self.selCfg['min_EE'] : return False #EB->EE transition
 
         min_dr = self.mindr_toVetoObjs(photon)
-        if min_dr < self.min_dr2vetoObjs : return False
+        if min_dr < self.selCfg['min_drVeto']    : return False
 
         if self.apply_id:
             hasId= False
@@ -104,11 +103,11 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         return SFs
 
 
-photonSelector2016pre = lambda : PhotonSelector(2016, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'], apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre' )
-photonSelector2016post = lambda : PhotonSelector(2016, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'], apply_id = True , dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post' ) 
-photonSelector2017 = lambda : PhotonSelector(2017, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
-photonSelector2018 = lambda : PhotonSelector(2018, _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] )
-loosePhotonSelector2016pre = lambda : PhotonSelector(2016 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre')
-loosePhotonSelector2016post = lambda : PhotonSelector(2016 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False, dr2vetoObjs=0.4, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post')
-loosePhotonSelector2017 = lambda : PhotonSelector(2017 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
-loosePhotonSelector2018 = lambda : PhotonSelector(2018 , _defaultVjjSkimCfg['min_photonPt'] , _defaultVjjSkimCfg['max_photonEta'] ,apply_id=False)
+photonSelector2016pre = lambda : PhotonSelector(2016, apply_id = True , _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre' )
+photonSelector2016post = lambda : PhotonSelector(2016,  apply_id = True , _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post' ) 
+photonSelector2017 = lambda : PhotonSelector(2017)
+photonSelector2018 = lambda : PhotonSelector(2018)
+loosePhotonSelector2016pre = lambda : PhotonSelector(2016 ,  apply_id=False, _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='pre')
+loosePhotonSelector2016post = lambda : PhotonSelector(2016 ,  apply_id=False, _defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")], vpf='post')
+loosePhotonSelector2017 = lambda : PhotonSelector(2017,  apply_id=False)
+loosePhotonSelector2018 = lambda : PhotonSelector(2018,  apply_id=False)

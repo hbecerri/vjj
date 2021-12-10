@@ -6,6 +6,8 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from UserCode.VJJSkimmer.samples.Sample import Sample
 from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
+from UserCode.VJJSkimmer.postprocessing.modules.SelectionCuts import *
+
 
 class VJJSkimmer(Module):
 
@@ -88,6 +90,11 @@ class VJJSkimmer(Module):
         self.hTotals.Write()
         pass
 
+
+    def category(self, event):
+        category = ""
+        return category
+
     def analyze(self, event):
 
         """
@@ -96,37 +103,7 @@ class VJJSkimmer(Module):
         for b in ['LowVPt' , 'HighVPt' , 'HighVPtmm','LowVPtmm' ,'HighVPtee' ,'LowVPtee']:
             self.out.fillBranch('vjj_is{0}'.format( b ) , False)
 
-        category = ""
-        high_pt_lowerCut = 200 #175 if self.era == 2016 else 200
-        if event.vjj_isGood and event.vjj_jj_m>200 and event.vjj_lead_pt>50 and  event.vjj_sublead_pt>50 and event.vjj_fs in [22,121,169]:
-            isLow = False
-            isHigh = False
-            if event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442 and abs(event.vjj_jj_deta) > 3.0 and event.vjj_jj_m > 200:
-                if event.vjj_fs==22:
-                    if event.vjj_trig != 2:
-                        isLow = True
-                elif event.vjj_trig == 3:
-                    isLow = True
-            if not isLow and event.vjj_v_pt>high_pt_lowerCut:
-                if event.vjj_fs==22:
-                    if event.vjj_trig == 2:
-                        isHigh = True
-                elif event.vjj_trig == 3:
-                    isHigh = True
-
-
-            if isHigh:
-                category = "HighVPt"
-            elif isLow:
-                category = "LowVPt"
-
-            if category != '':
-                if event.vjj_fs==22:
-                    pass
-                elif event.vjj_fs == 121:
-                    category += 'ee'
-                elif event.vjj_fs == 169:
-                    category += 'mm'
+        category = category(event)
 
 
         if category == "":
@@ -137,14 +114,10 @@ class VJJSkimmer(Module):
         for i in range(self.BDTReader.outputNames.size()):
             mva_name = self.BDTReader.outputNames[i]
             self.out.fillBranch('vjj_mva_{0}'.format( mva_name ) , self.BDTReader.mvaValues[i] )
-        #for j in range(self.BDTReader.outputVarNames.size()): #FIXME
-        #    var_name = self.BDTReader.outputVarNames[j]
-        #    self.out.fillBranch('vjj_{0}'.format( var_name ) , self.BDTReader.mvaVarValues[j] )
 
 
 
         if self.isData:
-            #self.out.fillBranch('vjj_weight' , 1 )
             pass
         else:
             self.out.fillBranch('vjj_xsection',self.xSection)
@@ -167,7 +140,7 @@ class VJJSkimmer(Module):
                 wsf_down = event.vjj_ele_effWgtDn
 
 
-            prefirew =  event.PrefireWeight if self.era != 2018 else 1
+            prefirew =  event.L1PreFiringWeight_Nom #nanoAOD v9
             self.out.fillBranch('vjj_weight' , wsf*event.puWeight*prefirew )
             self.out.fillBranch('vjj_sfweight_down' , wsf_down/wsf )
             self.out.fillBranch('vjj_sfweight_up' , wsf_up/wsf )
@@ -191,3 +164,68 @@ class VJJSkimmer(Module):
                             maxGenPhotonPt = genPart.pt
             self.out.fillBranch( 'vjj_maxGenPhotonPt' , maxGenPhotonPt )
         return True
+
+class VJJPhotonSkimmer(VJJSkimmer):
+    def __init__(self, sample, campaign):
+        """Implements gamma+2j selection"""
+        super().__init__(sample,campain)
+        self.cuts             = PhotonCuts(self.era)
+
+
+    def beginJob(self):
+        pass
+
+    def endJob(self):
+        pass
+
+    def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
+        pass
+
+    def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
+        pass
+
+    def category(self,event):
+        category = ""
+        if event.vjj_isGood and event.vjj_jj_m> cuts.c_mjj and event.vjj_lead_pt>cuts.c_leadJetPt and  event.vjj_sublead_pt> cuts.c_subleadJetPt and event.vjj_fs == cuts.c_fs:
+            lowVPtCuts = cuts.lowVPtCuts()
+            if event.vjj_v_pt> lowVPtCuts[0] and abs(event.vjj_v_eta)<lowVPtCuts[1] and abs(event.vjj_jj_deta) > lowVPtCuts[2] and event.vjj_jj_m > lowVPtCuts[3]:
+                if event.vjj_trig != cuts.c_trig: category = "LowVPt{0}".format(cuts.c_cat)
+
+            if category == "" and event.vjj_v_pt>cuts.c_bosonPt_HVPt:
+                if event.vjj_trig == cuts.c_trig: category = "HighVPt{0}".format(cuts.c_cat)
+            return category
+
+    def analyze(self, event):
+        pass
+
+class VJJZSkimmer(VJJSkimmer):
+    def __init__(self, sample, campaign, channel = 'e'):
+        """Implements Z+2j selection, channel is either e or m"""
+        super().__init__(sample,campain)
+        self.cuts             = ZCuts(self.era, channel)
+
+
+    def beginJob(self):
+        pass
+
+    def endJob(self):
+        pass
+
+    def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
+        pass
+
+    def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
+        pass
+
+    def category(self,event):
+        category = ""
+        if event.vjj_isGood and event.vjj_jj_m> cuts.c_mjj and event.vjj_lead_pt>cuts.c_leadJetPt and  event.vjj_sublead_pt> cuts.c_subleadJetPt and event.vjj_fs == cuts.c_fs and event.vjj_trig == cuts.c_trig:
+            lowVPtCuts = cuts.lowVPtCuts()
+            if event.vjj_v_pt> lowVPtCuts[0] and abs(event.vjj_v_eta)<lowVPtCuts[1] and abs(event.vjj_jj_deta) > lowVPtCuts[2] and event.vjj_jj_m > lowVPtCuts[3]:
+                category = "LowVPt{0}".format(cuts.c_cat)
+            if category == "" and event.vjj_v_pt>cuts.c_bosonPt_HVPt:
+                category = "HighVPt{0}".format(cuts.c_cat)
+            return category
+
+    def analyze(self, event):
+        pass

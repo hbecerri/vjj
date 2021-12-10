@@ -1,20 +1,20 @@
 from ScaleFactorBase import *
 from ObjectSelectorBase import *
+from VJJEvent import _defaultObjCfg
+import copy
 
 class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
 
     """ Applies standard electron selections, returning a list of indices of good photons """
 
-    def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4 , vetoObjs = [("Muon", "mu")]):
+    def __init__(self , era, cfg=_defaultObjCfg , vetoObjs = [("Muon", "mu")]):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
         self.setParams(2 , vetoObjs , dofilter=False) #set parameters for object selection
 
         self.era = era
-        self.min_pt = min_pt
-        self.max_eta = max_eta
-        self.min_dr2vetoObjs = dr2vetoObjs
+        self.selCfg = copy.deepCopy(cfg)
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
@@ -47,12 +47,12 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
 
         """checks if electron passes standard selection"""
 
-        if ele.pt < self.min_pt : return False
+        if ele.pt < self.selCfg['min_leptonPt']  : return False
         absEta=abs( ele.eta )
-        if absEta > self.max_eta : return False
-        if absEta> 1.4442 and absEta<1.5660 : return False #EB->EE transition
+        if absEta > self.selCfg['max_leptonEta'] : return False
+        if absEta> self.selCfg['max_EB'] and absEta< self.selCfg['min_EE'] : return False #EB->EE transition
         min_dr = self.mindr_toVetoObjs(ele)
-        if min_dr < self.min_dr2vetoObjs : return False
+        if min_dr < self.selCfg['min_drVeto']    : return False
 
         #id requirement
         hasId=ele.mvaFall17V2Iso_WP80

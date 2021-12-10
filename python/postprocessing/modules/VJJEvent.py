@@ -2,35 +2,46 @@ import ROOT
 import copy
 
 
-_defaultVjjSkimCfg={'min_leptonPt':20,
-                    'min_photonPt':70,
-                    'max_photonEta':2.4,
-                    'min_jetPt':25,
-                    'max_jetEta':4.7}
+_defaultObjCfg={'min_leptonPt':20,
+                'max_leptonEta':2.4,
+                'min_photonPt':70,
+                'max_photonEta':2.4,
+                'min_jetPt':25,
+                'max_jetEta':4.7,
+                'min_drVeto':0.4,
+                'max_EB': 1.4442,
+                'min_EE': 1.5660
+}
 
 _defaultVjjCfg={'max_jetEta':4.7,
                 'min_jetPt':20,
                 'min_jetdr2v':0.4,
-                'min_tagJetPt':40,
-                'min_leadTagJetPt':50,
-                'min_mjj':200}
+                'min_tagJetPt':30,
+                'min_leadTagJetPt':30,
+                'min_mjj':150}
 
 _defaultGenVjjCfg={'max_jetEta':4.7,
                    'min_jetPt':15,
                    'min_jetdr2v':0.4,
-                   'min_tagJetPt':35,
-                   'min_leadTagJetPt':35,
-                   'min_mjj':200}
+                   'min_tagJetPt':20,
+                   'min_leadTagJetPt':20,
+                   'min_mjj':100,
+                   'min_leptonPt':20.,
+                   'max_leptonEta':2.4,
+                   'max_photonEta':2.4,
+                   'min_photonPt': 70.
+}
 
 class VJJEvent:
 
     """A summary of a vector boson + 2 jets event for plotting, stat analysis etc."""
 
-    def __init__(self,cfg=_defaultVjjCfg):
+    def __init__(self,cfg=_defaultVjjCfg,finalState = 22):
         self.selCfg=copy.deepcopy(cfg)
         self.pfix=''
         self.outvars=[]
         self.photonExtra=[]
+        self.fs = finalState
 
     def makeBranches(self, out, isGen=False):
 
@@ -59,6 +70,15 @@ class VJJEvent:
             outv=self.pfix+v
             self.outvars.append(outv)
             self.out.branch(outv,'F' , limitedPrecision=False)
+        
+        #only for Z
+        if abs(self.fs) != 22:
+            self.out.branch('genvjj_leadlep_pt','F')
+            self.out.branch('genvjj_subleadlep_pt','F')
+            self.out.branch('genvjj_leadlep_eta','F')
+            self.out.branch('genvjj_subleadlep_eta','F')
+            self.out.branch('genvjj_leadlep_phi','F')
+            self.out.branch('genvjj_subleadlep_phi','F')
 
         #reco only
         if not isGen:
@@ -85,6 +105,15 @@ class VJJEvent:
         for v in self.outvars:
             self.out.fillBranch(v,0)
             
+    def fillZextraBranches(self, leptons):
+        """ lepton variables for Z analysis """
+        self.out.fillBranch('genvjj_leadlep_pt',    leptons[0].pt)
+        self.out.fillBranch('genvjj_subleadlep_pt', leptons[1].pt)
+        self.out.fillBranch('genvjj_leadlep_eta',   leptons[0].eta)
+        self.out.fillBranch('genvjj_subleadlep_eta',leptons[1].eta)
+        self.out.fillBranch('genvjj_leadlep_phi',   leptons[0].phi)
+        self.out.fillBranch('genvjj_subleadlep_phi',leptons[1].phi)
+
 
     def fillPhotonExtraBranches(self, photon):
 
@@ -113,7 +142,6 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'trig', trigWord)
 
         self.out.fillBranch(self.pfix+'fs',   fsCat)
-        if fsCat==0 : return False
 
         #boson selection (base variables)
         self.out.fillBranch(self.pfix+'v_pt',v.Pt())
@@ -123,10 +151,10 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'v_m',v.M())
 
         #select jets
-        cleanJets=[j for j in jets if j.DeltaR(v)>self.selCfg['min_jetdr2v'] and abs(j.eta)<self.selCfg['max_jetEta'] and j.pt>self.selCfg['min_jetPt'] ]
-        cleanJets.sort(key = lambda x : x.pt, reverse=True)
-        
-        tagJets=[j for j in cleanJets if j.pt>self.selCfg['min_tagJetPt'] ]
+        #Cleaning wrt other objects is done in VJJSelector
+
+        jets.sort(key = lambda x : x.pt, reverse=True)
+        tagJets=[j for j in jets if j.pt>self.selCfg['min_tagJetPt'] ]
         if len(tagJets)<2 : return False
         if tagJets[0].pt<self.selCfg['min_leadTagJetPt'] : return False
 
@@ -149,13 +177,6 @@ class VJJEvent:
         if hasattr(tagJets[1],'partonFlavour'):
             self.out.fillBranch(self.pfix+'sublead_flav', tagJets[1].partonFlavour)
 
-        #reco-level only variables
-#        def nullevents(self):
-#            for n in self.vjjEvent:         
-#                if (isinf(tagJets[0].qgl) or isnan(tagJets[0].qgl)) : 
-#                    continue
-#                if (isinf(tagJets[1].qgl) or isnan(tagJets[1].qgl)) : 
-#                    continue    
         try:
             self.out.fillBranch(self.pfix+'lead_qgl',      tagJets[0].qgl)
             self.out.fillBranch(self.pfix+'sublead_qgl',   tagJets[1].qgl)
@@ -209,7 +230,7 @@ class VJJEvent:
         del eventShape
 
         #extra radiation activity
-        extraJets=[j for j in cleanJets if not j in tagJets]
+        extraJets=[j for j in jets if not j in tagJets]
         nextraj,ncentj=len(extraJets),0
         htsoft,centhtsoft=0.,0.
         minEtaStar=minEta+0.2
