@@ -11,7 +11,7 @@ from UserCode.VJJSkimmer.samples.Sample import Sample, SampleNameParser
 from UserCode.VJJSkimmer.postprocessing.helpers.ColoredPrintout import *
 from UserCode.VJJSkimmer.samples.Manager import currentSampleList as samples
 from UserCode.VJJSkimmer.postprocessing.modules.JetSelector import *
-from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultVjjSkimCfg
+from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultVjjSkimCfg, _defaultObjCfg
 
 #To copy job output manually (not used)
 #from shutil import copyfile
@@ -75,7 +75,7 @@ def get_fileNames(campaign, ds, nfilesperchunk, chunkindex, printout=True):
     return inputFiles
 
 
-def defineModules(year, isData, dataset, campaign, jme_vars):
+def defineModules(year, isData, dataset, campaign, finalState, jme_vars):
     """
     Configures the modules to be run depending on the year and whether is data or MC
     Returns a list of modules
@@ -93,10 +93,10 @@ def defineModules(year, isData, dataset, campaign, jme_vars):
 
         #-- Run JetSelector for each JEC/JER variation
         for var in jme_vars:
-            modules.extend([JetSelector(year, _defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=True, JMEvar=var)])
+            modules.extend([JetSelector(year, cfg=_defaultObjCfg, apply_id=True, JMEvar=var)])
 
     #-- Skimmer code (run once for all variations -- recomputes necessary variables)
-    modules.append(VJJSkimmerJME(dataset, campaign, JMEvars=jme_vars, includeTotalJER=includeTotalJER))
+    modules.append(VJJSkimmerJME(dataset, campaign, finalState, _defaultVjjSkimCfg, JMEvars=jme_vars, includeTotalJER=includeTotalJER))
 
     return modules
 
@@ -125,10 +125,13 @@ def main():
     parser.add_argument('--workingdir',     dest='workingdir',   help='where to temporarily store individual output files',  default='./', type=str)
     parser.add_argument('-o' , '--outdir',     dest='outdir',   help='final output directory',  default='./', type=str)
     parser.add_argument('-f', '--firstEntry', dest='firstEntry',   help='first entry to process', type=int, default=0)
-
+    parser.add_argument('-S', '--finalState',     dest='finalState',   help='photon:22, fake photon:-22, mm: 169, ee:121',  default=0, type=int)
     opt, unknownargs = parser.parse_known_args()
 
     if not opt.dataSet: raise ValueError('Please specify dataset name using -d option')
+
+    if opt.finalState == None: raise ValueError('Must set the final state. Use --help for the options.') 
+    if opt.finalState not in [22, -22, 169, 121]: raise ValueError('Non standard value for final state. Use --help for the options.') 
 
     PrintBanner() #Print banner in terminal
 
@@ -142,7 +145,6 @@ def main():
         print('year, isData and isSignal are set from the dataset name to {0}, {1} and {2}'.format(opt.year, opt.isData, opt.isSignal))
     else: raise ValueError( 'dataSet name seems inconsistent: {0}'.format(opt.dataSet))
     if opt.isData and opt.isSignal: raise ValueError(colors.fb.red + 'ERROR: isData and isSignal can not be True at the same time' + colors.reset)
-
     #-- Define keep/drop filepath for nominal scenario (can specific independent keep/drop file for JME variations in VJJSkimmerJME.py)
     keep_drop = '{0}/python/UserCode/VJJSkimmer/postprocessing/etc/skimmer_keep_and_drop.txt'.format( os.getenv('CMSSW_BASE' , '.') )
 
@@ -177,7 +179,7 @@ def main():
         print(colors.fg.lightblue + '\n== JEC variations: ' + colors.reset); print(jme_vars); print('')
 
     #-- Set chain of modules to be run
-    mymodules = defineModules(opt.year, opt.isData, opt.dataSet, campaign, jme_vars)
+    mymodules = defineModules(opt.year, opt.isData, opt.dataSet, campaign, opt.finalState, jme_vars)
     # print('My modules: ', mymodules)
 
     #-- Set output

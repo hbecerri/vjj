@@ -32,6 +32,21 @@ _defaultGenVjjCfg={'max_jetEta':4.7,
                    'min_photonPt': 70.
 }
 
+
+_defaultVjjSkimCfg={
+                'min_subeadTagJetPt':50,
+                'min_leadTagJetPt':50,
+                'min_mjj':200,
+		'min_photonPt_HVPt16': 175,
+		'min_photonPt_HVPt': 200,
+		'min_photonPt_LVPt': 75,
+		'max_photonEta_LVPt':1.442,
+		'min_mjj_LVPt':500,
+		'min_detajj_LVPt':3.0,
+		'HLT_photon': 2,
+		'HLT_lepton': 3
+}
+
 class VJJEvent:
 
     """A summary of a vector boson + 2 jets event for plotting, stat analysis etc."""

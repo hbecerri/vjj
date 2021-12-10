@@ -40,7 +40,7 @@ def main():
     parser.add_argument('--workingdir',     dest='workingdir',   help='where to store individual files',  default='./', type=str)
     parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory',  default='./', type=str)
     parser.add_argument('-f', '--firstEntry', dest='firstEntry',   help='first entry to process', type=int, default=0)
-
+    parser.add_argument('-S', '--finalState',     dest='finalState',   help='photon:22, fake photon:-22, mm: 169, ee:121',  default=0, type=int)
     opt, unknownargs = parser.parse_known_args()
     keep_drop = '{0}/python/UserCode/VJJSkimmer/postprocessing/etc/skimmer_keep_and_drop.txt'.format( os.getenv('CMSSW_BASE' , '.') )
 
@@ -49,12 +49,15 @@ def main():
         campaign = CampaignManager( opt.campaign )
     else:
         raise ValueError( 'please specify campaign name you want to run using -c option')
+
+    if opt.finalState == None: raise ValueError('Must set the final state. Use --help for the options.') 
+    if opt.finalState not in [22, -22, 169, 121]: raise ValueError('Non standard value for final state. Use --help for the options.') 
         
     print( campaign.AllInfo[2016].keys() )
     module = None
     inputFiles = None
     if opt.dataSet:
-        module = VJJSkimmer( opt.dataSet , campaign )
+        module = VJJSkimmer( opt.dataSet , campaign, opt.finalState )
         inputFiles = get_fileNames( campaign , opt.dataSet , opt.nfilesperchunk , opt.chunkindex )
     else:
         raise ValueError('please specify dataset name using -d option')
