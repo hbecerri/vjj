@@ -58,7 +58,9 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
         if year==2016:
             modules.append( puAutoWeight_2016() )
             if abs(fs) == 22:
-                if preVFP: modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
+                if preVFP: 
+                    modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) 
+                else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
             elif fs == 169: 
                 modules.extend( [muonSelector2016()])
             elif fs == 121: modules.extend( [electronSelector2016()])
@@ -87,7 +89,9 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
     else:
         if year==2016:
             if abs(fs) == 22:
-                if preVFP: modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
+                if preVFP: 
+                    modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) 
+                else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
             elif fs == 169: 
                 modules.extend( [muonSelector2016()])
             elif fs == 121: modules.extend( [electronSelector2016()])
