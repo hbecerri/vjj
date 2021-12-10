@@ -1,19 +1,18 @@
 from ScaleFactorBase import *
 from ObjectSelectorBase import *
-from VJJEvent import _defaultVjjSkimCfg
+from VJJEvent import _defaultObjCfg
+import copy
 
 class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
-    def __init__(self , era, min_pt=20., max_eta=2.4, dr2vetoObjs=0.4):
+    def __init__(self , era, cfg=_defaultObjCfg):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
         self.setParams(2, dofilter=False) #set parameters for object selection
 
         self.era = era
-        self.min_pt = min_pt
-        self.max_eta = max_eta
-        self.min_dr2vetoObjs   = dr2vetoObjs
+        self.selCfg = copy.deepCopy(cfg)
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/MuonPOG
@@ -50,10 +49,10 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
     def isGood(self, mu):
 
-        if mu.pt < self.min_pt : return False
-        if abs( mu.eta ) > self.max_eta : return False
+        if mu.pt < self.selCfg['min_leptonPt']          : return False
+        if abs( mu.eta ) > self.selCfg['max_leptonEta'] : return False
         min_dr = self.mindr_toVetoObjs( mu )
-        if min_dr < self.min_dr2vetoObjs : return False
+        if min_dr < self.selCfg['min_drVeto']           : return False
 
         hasId=mu.tightId
         if not hasId : return False

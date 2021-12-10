@@ -18,6 +18,7 @@ DEBUG = False #True <-> printout debug info
 import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 import os
+import copy
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from PhysicsTools.NanoAODTools.postprocessing.framework.output import *
@@ -28,13 +29,14 @@ from UserCode.VJJSkimmer.postprocessing.helpers.ColoredPrintout import *
 from UserCode.VJJSkimmer.postprocessing.helpers.Helper import *
 from ReadComputeObservables_VJJSkimmerJME import *
 from BDTReader import *
+from VJJEvent import _defaultVjjSkimCfg
 
 # //--------------------------------------------
 # //--------------------------------------------
 
 class VJJSkimmerJME(Module):
 
-    def __init__(self, sample, campaign, JMEvars=[], includeTotalJER=False):
+    def __init__(self, sample, campaign, finalState = 22, cfg=_defaultVjjSkimCfg, JMEvars=[], includeTotalJER=False):
 
         self.samplename = sample
         self.sample = Sample(sample)
@@ -50,6 +52,8 @@ class VJJSkimmerJME(Module):
         self.nWeights         = len(self.allWeights)
         self.lumiWeights      = self.campaign.get_lumi_weight(sample)
         self.xSection         = self.campaign.get_xsection(sample)
+	self.selCfg = copy.deepCopy(cfg)
+	self.fs = finalState
 
         #Try to load EventShapeVariables class via python dictionaries
         try:
@@ -264,8 +268,6 @@ class VJJSkimmerJME(Module):
             category_JMEvar = self.Selection(event)
             if category_JMEvar == "":
                 continue
-                #print('FAIL ', JMEvar)
-            #print('PASS ', JMEvar)
 
             self.obsMaker.FillCategory(self.outputs_JMEvars[ivar], category_JMEvar) #Fill category flag branch
 
@@ -304,38 +306,25 @@ class VJJSkimmerJME(Module):
 
         #-- Check if event enters any category
         category = ""
-        isLow = False
-        isHigh = False
-        high_pt_lowerCut = 175 if self.era == 2016 else 200 #to check
-        min_vjj_jj_m = 200; min_v_pt = 75; vjj_lead_ptCut = 50; vjj_sublead_ptCut = 50
-        vjj_v_etaCut = 1.442; vjj_jj_detaCut = 3.0
+
+        HighVPt_minVpt = self.selCfg['min_photonPt_HVPt16'] if self.era == 2016 else self.selCfg['min_photonPt_HVPt']
+
+	basicSelection  = (event.vjj_isGood and event.vjj_jj_m> self.selCfg['min_mjj'] and event.vjj_lead_pt> self.selCfg['min_leadTagJetPt'] and  event.vjj_sublead_pt> self.selCfg['min_subleadTagJetPt'])
+	lowVPtSelection = (event.vjj_v_pt> self.selCfg['min_photonPt_LVPt'] and abs(event.vjj_v_eta)<self.selCfg['max_photonEta_LVPt'] and abs(event.vjj_jj_deta) > self.selCfg['min_detajj_LVPt'] and event.vjj_jj_m > self.selCfg['min_mjj_LVPt'])
 
         #-- Assign events to SR/CR categories
-        if event.vjj_isGood and event.vjj_jj_m > min_vjj_jj_m and event.vjj_lead_pt > vjj_lead_ptCut and event.vjj_sublead_pt > vjj_sublead_ptCut and event.vjj_fs in [22,121,169]:
 
-            lowPtCuts = (event.vjj_v_pt > min_v_pt and abs(event.vjj_v_eta) < vjj_v_etaCut and abs(event.vjj_jj_deta) > vjj_jj_detaCut and event.vjj_jj_m > 500)
-
-            #LowVPt
-            if lowPtCuts:
-                if event.vjj_fs == 22:
-                    if event.vjj_trig != 2: isLow = True
-                elif event.vjj_trig == 3: isLow = True
-
-            #HighVPt
-            if event.vjj_v_pt>high_pt_lowerCut:
-                if event.vjj_fs == 22:
-                    if (lowPtCuts == False and event.vjj_trig == 3) or event.vjj_trig == 2: isHigh = True
-                elif lowPtCuts == False and event.vjj_trig == 3: isHigh = True
-
-            #Set category name
-            if isHigh: category = "HighVPt"
-            elif isLow: category = "LowVPt"
-
-            #Update category name
-            if category != '':
-                if event.vjj_fs == 22: pass
-                elif event.vjj_fs == 121: category += 'ee'
-                elif event.vjj_fs == 169: category += 'mm'
+	if basicSelection:
+            if abs(self.fs) == 22 and abs(event.vjj_fs) == 22:
+                if lowVPtSelection and event.vjj_trig != self.selCfg['HLT_photon']: category = "LowVPt"
+                if category == "" and event.vjj_v_pt > HighVPt_minVpt and event.vjj_trig == self.selCfg['HLT_photon']: category = "HighVPt"
+            else:
+                pfx = 'mm' if self.fs == 169 else 'ee'
+                if event.vjj_trig == self.selCfg['HLT_lepton'] and abs(self.fs) == abs(event.vjj_fs):
+                    if lowVPtSelection: category = "LowVPt{0}".format(pfx)
+                    if category == "" and event.vjj_v_pt> HighVPt_minVpt: category = "HighVPt{0}".format(pfx)
+                    
+       
 
         #-- Trigger logic #Same data events may be found in multiple datasets --> Make sure that an event is only considered once
         # ee region <-> only DoubleEG, EGamma (2018)
@@ -343,12 +332,12 @@ class VJJSkimmerJME(Module):
         # SR <-> only SinglePhoton, EGamma (2018)
         if self.isData:
             if 'ee' in category:
-                if not any([substring in self.samplename for substring in ['DoubleEG','EGamma']]): return ""
+                if not any([substring in self.samplename for substring in ['DoubleEG','EGamma', 'SingleElectron']]): return ""
             elif 'mm' in category:
-                if 'DoubleMuon' not in self.samplename: return ""
+		if not any([substring in self.samplename for substring in ['DoubleMuon','SingleMuon']]): return ""
             else:
                 if not any([substring in self.samplename for substring in ['SinglePhoton','EGamma']]): return ""
-
+                
         return category
 
 
