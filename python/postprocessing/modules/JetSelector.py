@@ -1,22 +1,21 @@
 from ScaleFactorBase import *
 from ObjectSelectorBase import *
 import numpy as np
-from VJJEvent import _defaultVjjSkimCfg
+from VJJEvent import _defaultObjCfg
+import copy
 
 class JetSelector(ScaleFactorBase, ObjectSelectorBase):
 
     """ Applies standard jet selections, returning a list of indices of good jets """
 
-    def __init__(self , era, min_pt, max_eta, dr2vetoObjs=0.4, applyPUid=True, apply_id=True, applyEraAdHocCuts=True , vetoObjs = [("Muon", "mu"), ("Electron", "ele"), ("Photon", "photon")], JMEvar=""):
+    def __init__(self , era, cfg=_defaultObjCfg, applyPUid=True, apply_id=True, applyEraAdHocCuts=True , vetoObjs = [("Muon", "mu"), ("Electron", "ele"), ("Photon", "photon")], JMEvar=""):
         super(ScaleFactorBase, self).__init__()
         super(ObjectSelectorBase, self).__init__()
         self.init() #init scale factor object
         self.setParams(2 , vetoObjs , dofilter=False, JMEvar=JMEvar) #set parameters for object selection
 
         self.era               = era
-        self.min_pt            = min_pt
-        self.max_eta           = max_eta
-        self.min_dr2vetoObjs   = dr2vetoObjs
+        self.selCfg            = copy.deepCopy(cfg)
         self.applyPUid         = applyPUid
         self.apply_id          = apply_id
         if not apply_id:
@@ -49,71 +48,37 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
 
         """ checks if jet is good for analysis applying a series of standard cuts """
 
-        #base cuts
-        #print('pt',jet.pt),
-        if jet.pt < self.min_pt :
-            #print("NO")
-            return False
-        #print('eta',abs(jet.eta), self.max_eta),
+        if jet.pt < self.selCfg['min_jetPt']  :  return False
         abseta=abs(jet.eta)
-        if abseta > self.max_eta :
-            #print("NO")
-            return False
-        min_dr = self.mindr_toVetoObjs(jet) #min([obj.DeltaR(jet) for obj in vetoObjs] or [2*self.min_dr2vetoObjs])
-        #print('mindr',min_dr < self.min_dr2vetoObjs),
-        if min_dr < self.min_dr2vetoObjs :
-            #print("NO")
-            return False
+        if abseta > self.selCfg['max_jetEta'] :  return False
+        min_dr = self.mindr_toVetoObjs(jet) 
+        if min_dr < self.selCfg['min_drVeto'] :  return False
 
         #id bits
         #https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookNanoAOD#Jets
-
+        #https://twiki.cern.ch/twiki/bin/view/CMS/PileupJetIDUL
         #pileup id (optional)
         if self.applyPUid:
-            loosePuID=((jet.puId>>2) & 1)
-            #print('loosepuid',loosePuID),
-            if loosePuID!=1:
-                #print("NO")
+            loosePuID = ((jet.puId > 0) if self.era == 2016 else (jet.puId > 3))
+            if not loosePuID: 
                 return False
 
-        #jet id: loose + tightLepVeto (these are run-dependent, see below)
-        looseID=(jet.jetId & 1)
-        tightLepVeto=((jet.jetId>>2) & 1)
-        if not self.apply_id:
-            looseID = True
-            tightLepVeto = True
+        #jet id in UL: only tight and tightLeptonVeto are supported. No loose anymore
+        #tightleptonveto is recommended
+        #https://twiki.cern.ch/twiki/bin/view/CMS/JetID13TeVUL
+        #https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetID#nanoAOD_Flags
+
+        if self.apply_id:
+            tightLepVeto=((jet.jetId > 5) if self.era == 2016 else (jet.jetId > 6))
+            if not tightLeptonVeto: 
+                return False
 
         #era-dependent (optional)
         if self.applyEraAdHocCuts :
-
-            if self.era == 2016 :
-
-                if looseID==0:
-                    #print("NO")
-                    return False
-
-            if self.era == 2017:
-                #print('id',tightLepVeto),
-                if tightLepVeto==0 :
-                    #print("NO")
-                    return False
-
-                #ECAL noise (2017)
-                #print("ECAL NOISE"),
-                if abseta>2.650 and abseta<3.139:
-                    if jet.chEmEF+jet.neEmEF > 0.55:
-                        #print("NO")
-                        return False
-
             if self.era == 2018:
-
-                if tightLepVeto==0:
-                    return False
-
                 #HEM 15/16 failure (2018)
                 if jet.eta>-3.0 and jet.eta<-1.3 and jet.phi>-1.57 and jet.phi<-0.87:
                     return False
-        #print("PASS")
         return True
 
     def fillSFs(self, jets, combined=True):
@@ -144,6 +109,6 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         return SFs
 
 
-jetSelector2016 = lambda apply_id=True : JetSelector(2016,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
-jetSelector2017 = lambda apply_id=True : JetSelector(2017,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
-jetSelector2018 = lambda apply_id=True : JetSelector(2018,_defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=apply_id)
+jetSelector2016 = lambda apply_id=True : JetSelector(2016,_defaultObCfg, apply_id=apply_id)
+jetSelector2017 = lambda apply_id=True : JetSelector(2017,_defaultObCfg, apply_id=apply_id)
+jetSelector2018 = lambda apply_id=True : JetSelector(2018,_defaultObCfg, apply_id=apply_id)

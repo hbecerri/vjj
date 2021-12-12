@@ -5,22 +5,24 @@ import copy
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from VJJEvent import VJJEvent,_defaultVjjCfg,_defaultGenVjjCfg,_defaultVjjSkimCfg
+from UserCode.VJJSkimmer.postprocessing.modules.SelectionCuts import *
 import numpy as np
 from TriggerLists import defineTriggerList
 
 class VJJSelector(Module):
 
     """Implements a generic V+2j selection for VBF X studies"""
-
-    def __init__(self, isData, era, bypassSelFilters=False):
+    """Regions are MM, EE, A, Af"""
+    def __init__(self, isData, era, bypassSelFilters=False, finalState = 22):
 
         self.isData           = isData
         self.era              = era
         self.bypassSelFilters = bypassSelFilters
-        self.vjjEvent         = VJJEvent(cfg=_defaultVjjCfg)
+        self.sampleTag        = sampleTag
+        self.vjjEvent         = VJJEvent(_defaultVjjCfg,finalState)
         self.gen_vjjEvent     = None 
         if not isData:
-            self.gen_vjjEvent=VJJEvent(cfg=_defaultGenVjjCfg)
+            self.gen_vjjEvent=VJJEvent(_defaultGenVjjCfg,finalState)
  
         self.histos={}
 
@@ -28,8 +30,13 @@ class VJJSelector(Module):
         self.trig_dict,self.ctrl_trig_dict = defineTriggerList(self.era)
         print('Will use the following set of triggers',self.trig_dict, self.ctrl_trig_dict)
 
+        self.fs = finalState
         #category codes
-        self.finalStates={'a':22,'ee':11*11,'mm':13*13, 'fake_a':-22}
+        self.triggerCatCode={'ajj':[22,-22], 'highpta':[22,-22], 'ee':[121], 'mm':[169]}
+        self.hltCats = []
+        for cat, idc in self.triggerCatCode.items():
+            for id_ in idc:
+                if id_ == fs: self.hltCats.append(cat)
 
         #Try to load module via python dictionaries
         try:
@@ -63,13 +70,19 @@ class VJJSelector(Module):
         #define output tree
         self.out = wrappedOutputTree
         self.vjjEvent.makeBranches( self.out )
-        self.out.branch('vjj_passSkim','O')
         self.out.branch('vjj_isGood','O')
 
         if self.gen_vjjEvent:
             self.gen_vjjEvent.makeBranches(self.out,isGen=True)
             self.out.branch('genvjj_isGood','O')
             self.out.branch('genvjj_hasPromptPhoton','O')
+            if abs(self.fs) != 22:
+                self.out.branch('genvjj_leadlep_pt','F')
+                self.out.branch('genvjj_subleadlep_pt','F')
+                self.out.branch('genvjj_leadlep_eta','F')
+                self.out.branch('genvjj_subleadlep_eta','F')
+                self.out.branch('genvjj_leadlep_phi','F')
+                self.out.branch('genvjj_subleadlep_phi','F')
         
     def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 
@@ -80,45 +93,55 @@ class VJJSelector(Module):
             h.Sumw2()
             h.Write()
 
-    def arbitrateBosonCandidate(self,good_photons,good_muons,good_electrons,trig_cats=None , loose_photons = [] , ctrl_trig_cats = None):
 
-        """ 
-        arbitrates the boson candidate choice and 
-        eventually checks if it's compatible with triggers 
-        """
+    def TriggerSelection(self,event):
+        """ decide on trigger based on final state 22, -22, 169, 121 """
+        trid_dict_items = self.trig_dict.items()
+        if self.fs == -22: trid_dict_items = self.ctrl_trig_dict.items()
+        trig_cats=[]
+        for cat,tlist in self.trig_dict.items():
+            if cat in self.hltCats:
+                tbits=[ getattr(event,t) if hasattr(event,t) else False for t in tlist ]
+                if tbits.count(1)==0: continue
+                trig_cats.append(cat)
+        return trig_cats
 
-        if len(good_muons)>=2:
-            mm=good_muons[0].p4()+good_muons[1].p4()
-            goodZmm=(abs(mm.M()-91)<15)
-            if trig_cats and trig_cats.count('mm')==0: 
-                goodZmm=False
-            if goodZmm:
-                return 13*13,[1,1],mm
-        
-        if len(good_electrons)>=2:
-            ee=good_electrons[0].p4()+good_electrons[1].p4()
-            goodZee=(abs(ee.M()-91)<15)
-            if trig_cats and trig_cats.count('ee')==0:
-                goodZee=False
-            if goodZee:
-                return 11*11,[1,1],ee
-        
-        if len(good_photons)>0:
-            #trigger categories are not re-inforced for the photon case
-            #so that trigger efficiency can be measured
-            isAjj     = 1 if (trig_cats and trig_cats.count('ajj')>0)     else 0
-            isHighPtA = 1 if (trig_cats and trig_cats.count('highpta')>0) else 0
-            return 22,[isAjj,isHighPtA],good_photons[0].p4()
-
-        if len(loose_photons)>0:
-            #trigger categories are not re-inforced for the photon case
-            #so that trigger efficiency can be measured
-            isAjj     = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('ajj')>0)     else 0
-            isHighPtA = 1 if (ctrl_trig_cats and ctrl_trig_cats.count('highpta')>0) else 0
-            return -22,[isAjj,isHighPtA],loose_photons[0].p4()
-
-
+    def BosonSelection(self, good_objs, fs, trig_cats=None):
+        """ Select Z or photon candidate. Check with trigger for Z """
+        if abs(fs) != 22:
+            if len(good_objs)>=2:
+                v4=good_objs[0].p4()+good_objs[1].p4()
+                goodZ=(abs(v4.M()-91)<15)            
+                if trig_cats and trig_cats.count(self.hltCats[0])==0:
+                    goodZ=False
+                    if goodZ:
+                        return self.fs,[1,1],v4
+        else:
+            if len(good_photons)>0:
+                isAjj     = 1 if (trig_cats and trig_cats.count('ajj')>0)     else 0
+                isHighPtA = 1 if (trig_cats and trig_cats.count('highpta')>0) else 0
+                return self.fs,[isAjj,isHighPtA],good_photons[0].p4()
         return None
+
+
+    def isGoodGenParticle(p,pid):
+        if abs(p.pdgId)!=pid                   : return False
+        if abs(pid) == 22:
+            if p.status!=1                                           : return False
+            if (p.statusFlags & 0x1)==0                              : return False
+            if p.pt< self.gen_vjjEvent.selCfg['min_photonPt']        : return False
+            if abs(p.eta)> self.gen_vjjEvent.selCfg['max_photonEta'] : return False
+        else:
+            if p.pt < self.gen_vjjEvent.selCfg['min_leptonPt']       : return False
+            if abs(p.eta) > self.gen_vjjEvent.selCfg['max_leptonEta']: return False
+        return True
+
+    def isGoodGenJet(p,vetoObjs):
+        if p.pt < self.gen_vjjEvent.selCfg['min_jetPt']        : return False
+        if abs(p.eta) > self.gen_vjjEvent.selCfg['max_jetEta'] : return False
+        min_dr = min([obj.DeltaR(p) for obj in vetoObjs] or [2*self.gen_vjjEvent.selCfg['min_jetdr2v']])
+        if min_dr < self.gen_vjjEvent.selCfg['min_jetdr2v']    : return False
+        return True
 
     def analyze(self, event):
 
@@ -141,17 +164,8 @@ class VJJSelector(Module):
         if isGoodForGen or isGoodForReco:
             return True
 
-        nLooseJets    = len(event.vjj_looseJets)
-        if nLooseJets < 2:
-            return False
 
-
-        if self.pass_photon_triggers:
-            nLoosePhotons = len(event.vjj_loosePhotons)
-            if nLoosePhotons==0:
-                return False
-
-        return True
+        return False
 
 
 
@@ -199,51 +213,44 @@ class VJJSelector(Module):
         self.gen_vjjEvent.fillWeightBranches( {'nwgt':totalWgts, 'wgt':wgts} )
 
 
-        #select base objects for boson construction
-        all_dressedLeptons = Collection(event,'GenDressedLepton')
-        def isGoodGenLepton(p,pid):
-            if abs(p.pdgId)!=pid: return False
-            if p.pt<20 : return False
-            if abs(p.eta)>2.4 : return False
-            return True
-        good_muons = [p for p in all_dressedLeptons if isGoodGenLepton(p,13)]
-        good_elecs = [p for p in all_dressedLeptons if isGoodGenLepton(p,11)]
-        
-        all_genParts = Collection(event,'GenPart')
-        def isGoodGenPhoton(p):
-            if p.status!=1              : return False
-            if (p.statusFlags & 0x1)==0 : return False
-            if p.pdgId!=22              : return False
-            if p.pt<70                  : return False
-            if abs(p.eta)>2.4           : return False
-            return True
-        good_photons = [p for p in all_genParts if isGoodGenPhoton(p)]
 
-        #add this piece of MC information
-        self.out.fillBranch('genvjj_hasPromptPhoton',True if len(good_photons)>0 else False)
+        #select base objects for boson construction
+        #fill based on final state
+
+        all_obj  = []
+        good_obj = []
+
+        if abs(self.fs) != 22:
+            pid = 13 if self.fs == 169 else 11
+            all_obj = Collection(event,'GenDressedLepton')
+        else:
+            pid = 22
+            all_obj = Collection(event,'GenPart')
+        good_obj = [p for p in all_obj if self.isGoodGenParticle(p,pid)]
+
 
         #call boson candidate arbitration
-        trig_cats=['mm','ee','ajj','highpta']
-        bosonArbitration = self.arbitrateBosonCandidate(good_photons,good_muons,good_elecs,trig_cats)
+
+        bosonArbitration = BosonSelection(good_obj,self.fs,self.hltCats)
         if bosonArbitration is None:
             return False
         fsCat,arbTrigCats,boson=bosonArbitration
 
+        #add MC information for final states
+        if abs(self.fs) == 22:    
+            self.out.fillBranch('genvjj_hasPromptPhoton',True if len(good_obj)>0 else False)
+        else: 
+            self.gen_vjjEvent.fillZextraBranches(good_obj)
+
         #jet selection
         all_genJets = Collection(event,'GenJet')
-        vetoObjs    = good_muons+good_elecs+good_photons
-        def isGoodGenJet(p,vetoObjs,min_dr2vetoObjs=0.4):
-            if p.pt<15 : return False
-            if abs(p.eta)>4.7 : return False
-            min_dr = min([obj.DeltaR(p) for obj in vetoObjs] or [2*min_dr2vetoObjs])
-            if min_dr<min_dr2vetoObjs : return False
-            return True
-        jets = [ j for j in all_genJets if isGoodGenJet(j,vetoObjs)]
+        jets = [ j for j in all_genJets if isGoodGenJet(j,good_obj)]
 
         #analyze v+2j event candidate
         isGoodV2J =  self.gen_vjjEvent.isGoodVJJ( boson, jets, arbTrigCats, fsCat ) 
             
         return isGoodV2J
+
 
 
     def reco_analyze(self,event):
@@ -255,57 +262,62 @@ class VJJSelector(Module):
         self.histos['cutflow'].Fill(0)
 
         #start possible event categories by checking the triggers that fired
-        trig_cats=[]
-        ctrl_trig_cats = []
-        self.pass_photon_triggers = False
-        for cat,tlist in self.trig_dict.items():
-            tbits=[ getattr(event,t) if hasattr(event,t) else False for t in tlist ]
-            if tbits.count(1)==0: continue
-            trig_cats.append(cat)
-            if any( [ getattr(event,t) if hasattr(event,t) else False for t in self.ctrl_trig_dict[cat] ] ):
-                ctrl_trig_cats.append( cat )
-        if len(trig_cats)==0 and len(ctrl_trig_cats) == 0 : return False
-        self.pass_photon_triggers = any( [ t in trig_cats+ctrl_trig_cats for t in ['ajj' , 'highpta'] ] )
+        trig_cats = self.TriggerSelection(event)
 
-        #select base objects for boson construction
-        all_muons      = Collection(event, "Muon")
-        good_muonsIdx  = event.vjj_mus
-        good_muons     = [all_muons[i] for i in good_muonsIdx]
+        #boson selection
+        all_obj        = []
+        good_objIdx    = []
+        good_obj       = []
 
-        all_electrons     = Collection(event, "Electron")
-        good_electronsIdx = event.vjj_eles
-        good_electrons    = [all_electrons[i] for i in good_electronsIdx]
+        if self.fs == 169:
+            all_obj     = Collection(event, "Muon")
+            good_objIdx = event.vjj_mus
 
-        all_photons     = Collection(event, "Photon")
-        good_photonsIdx = event.vjj_photons
-        loose_photonsIdx = event.vjj_loosePhotons
-        good_photons    = []
-        if len(good_photonsIdx)>0:
-            good_photons = [ all_photons[ good_photonsIdx[0] ] ]
-        loose_photons = []
-        if len(loose_photonsIdx)>0:
-            loose_photons = [ all_photons[ loose_photonsIdx[0] ] ]
+        if self.fs == 121:
+            all_obj     = Collection(event, "Electron")
+            good_objIdx = event.vjj_eles
 
-        #call boson candidate arbitration
-        bosonArbitration = self.arbitrateBosonCandidate(good_photons,good_muons,good_electrons,trig_cats , loose_photons , ctrl_trig_cats)
+        if abs(self.fs) == 22:
+            all_obj     = Collection(event, "Photon")
+            dummyIdx    = event.vjj_photons if self.fs == 22 else event.vjj_loosePhotons
+            if len(dummyIdx) > 0:
+                good_objIdx = [dummyIdx[0]]
+        
+        good_obj  = [all_obj[i] for i in good_objIdx]
+
+
+        bosonArbitration = BosonSelection(good_obj,self.fs,trig_cats)
+
         if bosonArbitration is None:
             return False
+
         fsCat,arbTrigCats,boson=bosonArbitration
+
+        if fsCat != self.fs: 
+            return False
+
         self.histos['cutflow'].Fill(np.sign(fsCat)*1)
+
 
         #jet selection
         all_jets = Collection(event, "Jet")
         jetsIdx  =  event.vjj_jets
         jets     = [all_jets[i] for i in jetsIdx]
-
+        cleanJets= []
+        for j in jets:
+            if j.DeltaR(good_obj[0]) < self.vjjEvent.selCfg['min_jetdr2v']: continue
+            if abs(self.fs) != 22:
+                if j.DeltaR(good_obj[1]) < self.vjjEvent.selCfg['min_jetdr2v']: continue
+            cleanJets.append(j)
+        
         #analyze v+2j event candidate
-        isGoodV2J =  self.vjjEvent.isGoodVJJ(boson, jets, arbTrigCats, fsCat) 
+        isGoodV2J =  self.vjjEvent.isGoodVJJ(boson, cleanJets, arbTrigCats, fsCat) 
 
         #add additional variables
-        if fsCat==22:
-            self.vjjEvent.fillPhotonExtraBranches(good_photons[0])
-        if fsCat == -22:
-            self.vjjEvent.fillPhotonExtraBranches(loose_photons[0])
+        if abs(fsCat) == 22:
+            self.vjjEvent.fillPhotonExtraBranches(good_obj[0])
+        else:
+            self.vjjEvent.fillZextraBranches(good_obj)
 
         #fill scale factors
         if isGoodV2J:
@@ -333,7 +345,7 @@ class VJJSelector(Module):
                 wgt_dict['effWgtDn'] = event.vjj_photon_effWgtDn
 
             #dilepton efficiency
-            if fsCat==11*11 or fsCat==13*13:
+            if fsCat==121 or fsCat==169:
                 wgt_dict['trigWgt']   = 1
                 wgt_dict['trigWgtUp'] = 1
                 wgt_dict['trigWgtDn'] = 1
@@ -341,9 +353,9 @@ class VJJSelector(Module):
                 wgt_dict['trigHighPtWgtUp']=1
                 wgt_dict['trigHighPtWgtDn']=1
 
-                wgt_dict['effWgt']   = getattr( event , "vjj_{0}_effWgt".format( 'mu' if fsCat == 13*13 else "ele" ) )
-                wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}_effWgtUp".format( 'mu' if fsCat == 13*13 else "ele" ) )
-                wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}_effWgtDn".format( 'mu' if fsCat == 13*13 else "ele" ) )
+                wgt_dict['effWgt']   = getattr( event , "vjj_{0}_effWgt".format( 'mu' if fsCat == 169 else "ele" ) )
+                wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}_effWgtUp".format( 'mu' if fsCat == 169 else "ele" ) )
+                wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}_effWgtDn".format( 'mu' if fsCat == 169 else "ele" ) )
 
             #quark gluon discriminator weights (tag jets only) #Removed '_jets' suffix (obsolete?)
             wgt_dict['qglgWgt'] = event.vjj_qglgWgt
@@ -352,13 +364,13 @@ class VJJSelector(Module):
             self.vjjEvent.fillWeightBranches(wgt_dict)
 
         #all done here
-        return True
+        return isGoodV2J
 
         
 # define modules using the syntax 'name = lambda : constructor' to avoid having them loaded when not needed
-vjjSkimmer2016data   = lambda : VJJSelector(True , 2016) 
-vjjSkimmer2016mc     = lambda signal=False: VJJSelector(False , 2016 , bypassSelFilters=signal) 
-vjjSkimmer2017data   = lambda : VJJSelector(True , 2017) 
-vjjSkimmer2017mc     = lambda signal=False: VJJSelector(False , 2017, bypassSelFilters=signal) 
-vjjSkimmer2018data   = lambda : VJJSelector(True , 2018) 
-vjjSkimmer2018mc     = lambda signal=False: VJJSelector(False , 2018 , bypassSelFilters=signal) 
+vjjSelector2016data   = lambda myFs = 22: VJJSelector(True , 2016, False, finalState = myFs) 
+vjjSelector2016mc     = lambda signal=False, myFs = 22: VJJSelector(False , 2016 , bypassSelFilters=signal, finalState = myFs) 
+vjjSelector2017data   = lambda myFs = 22: VJJSelector(True , 2017, finalState = myFs) 
+vjjSelector2017mc     = lambda signal=False, myFs = 22: VJJSelector(False , 2017, bypassSelFilters=signal, finalState = myFs) 
+vjjSelector2018data   = lambda myFs = 22: VJJSelector(True , 2018, finalState = myFs) 
+vjjSelector2018mc     = lambda signal=False, myFs = 22: VJJSelector(False , 2018 , bypassSelFilters=signal, finalState = myFs) 

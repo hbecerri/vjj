@@ -6,12 +6,14 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from UserCode.VJJSkimmer.samples.Sample import Sample
 from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
+from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultVjjSkimCfg
+
 
 class VJJSkimmer(Module):
 
     """Implements a generic V+2j selection for VBF X studies"""
 
-    def __init__(self, sample , campaign):
+    def __init__(self, sample , campaign, finalState = 22, cfg=_defaultVjjSkimCfg):
 
         self.sample = Sample(sample)
         self.campaign = campaign
@@ -23,6 +25,8 @@ class VJJSkimmer(Module):
         self.nWeights         = len(self.allWeights)
         self.lumiWeights      = self.campaign.get_lumi_weight(sample)
         self.xSection         = self.campaign.get_xsection(sample)
+	self.selCfg = copy.deepCopy(cfg)
+	self.fs = finalState
         #Try to load module via python dictionaries
         try:
             ROOT.gSystem.Load("libUserCodeVJJPlotter")
@@ -88,6 +92,50 @@ class VJJSkimmer(Module):
         self.hTotals.Write()
         pass
 
+
+
+    def Selection(self, event):
+        '''
+        Perform high-level event selection and final categorization
+        '''
+
+        #-- Check if event enters any category
+        category = ""
+
+        HighVPt_minVpt = self.selCfg['min_photonPt_HVPt16'] if self.era == 2016 else self.selCfg['min_photonPt_HVPt']
+
+	basicSelection  = (event.vjj_isGood and event.vjj_jj_m> self.selCfg['min_mjj'] and event.vjj_lead_pt> self.selCfg['min_leadTagJetPt'] and  event.vjj_sublead_pt> self.selCfg['min_subleadTagJetPt'])
+	lowVPtSelection = (event.vjj_v_pt> self.selCfg['min_photonPt_LVPt'] and abs(event.vjj_v_eta)<self.selCfg['max_photonEta_LVPt'] and abs(event.vjj_jj_deta) > self.selCfg['min_detajj_LVPt'] and event.vjj_jj_m > self.selCfg['min_mjj_LVPt'])
+
+        #-- Assign events to SR/CR categories
+
+	if basicSelection:
+            if abs(self.fs) == 22 and abs(event.vjj_fs) == 22:
+                if lowVPtSelection and event.vjj_trig != self.selCfg['HLT_photon']: category = "LowVPt"
+                if category == "" and event.vjj_v_pt > HighVPt_minVpt and event.vjj_trig == self.selCfg['HLT_photon']: category = "HighVPt"
+            else:
+                pfx = 'mm' if self.fs == 169 else 'ee'
+                if event.vjj_trig == self.selCfg['HLT_lepton'] and abs(self.fs) == abs(event.vjj_fs):
+                    if lowVPtSelection: category = "LowVPt{0}".format(pfx)
+                    if category == "" and event.vjj_v_pt> HighVPt_minVpt: category = "HighVPt{0}".format(pfx)
+    
+       
+
+        #-- Trigger logic #Same data events may be found in multiple datasets --> Make sure that an event is only considered once
+        # ee region <-> only DoubleEG, EGamma (2018)
+        # mm region <-> only DoubleMuon
+        # SR <-> only SinglePhoton, EGamma (2018)
+        if self.isData:
+            if 'ee' in category:
+                if not any([substring in self.samplename for substring in ['DoubleEG','EGamma', 'SingleElectron']]): return ""
+            elif 'mm' in category:
+		if not any([substring in self.samplename for substring in ['DoubleMuon','SingleMuon']]): return ""
+            else:
+                if not any([substring in self.samplename for substring in ['SinglePhoton','EGamma']]): return ""
+                
+        return category
+
+
     def analyze(self, event):
 
         """
@@ -96,37 +144,7 @@ class VJJSkimmer(Module):
         for b in ['LowVPt' , 'HighVPt' , 'HighVPtmm','LowVPtmm' ,'HighVPtee' ,'LowVPtee']:
             self.out.fillBranch('vjj_is{0}'.format( b ) , False)
 
-        category = ""
-        high_pt_lowerCut = 200 #175 if self.era == 2016 else 200
-        if event.vjj_isGood and event.vjj_jj_m>200 and event.vjj_lead_pt>50 and  event.vjj_sublead_pt>50 and event.vjj_fs in [22,121,169]:
-            isLow = False
-            isHigh = False
-            if event.vjj_v_pt>75 and abs(event.vjj_v_eta)<1.442 and abs(event.vjj_jj_deta) > 3.0 and event.vjj_jj_m > 200:
-                if event.vjj_fs==22:
-                    if event.vjj_trig != 2:
-                        isLow = True
-                elif event.vjj_trig == 3:
-                    isLow = True
-            if not isLow and event.vjj_v_pt>high_pt_lowerCut:
-                if event.vjj_fs==22:
-                    if event.vjj_trig == 2:
-                        isHigh = True
-                elif event.vjj_trig == 3:
-                    isHigh = True
-
-
-            if isHigh:
-                category = "HighVPt"
-            elif isLow:
-                category = "LowVPt"
-
-            if category != '':
-                if event.vjj_fs==22:
-                    pass
-                elif event.vjj_fs == 121:
-                    category += 'ee'
-                elif event.vjj_fs == 169:
-                    category += 'mm'
+        category = selection(event)
 
 
         if category == "":
@@ -137,14 +155,10 @@ class VJJSkimmer(Module):
         for i in range(self.BDTReader.outputNames.size()):
             mva_name = self.BDTReader.outputNames[i]
             self.out.fillBranch('vjj_mva_{0}'.format( mva_name ) , self.BDTReader.mvaValues[i] )
-        #for j in range(self.BDTReader.outputVarNames.size()): #FIXME
-        #    var_name = self.BDTReader.outputVarNames[j]
-        #    self.out.fillBranch('vjj_{0}'.format( var_name ) , self.BDTReader.mvaVarValues[j] )
 
 
 
         if self.isData:
-            #self.out.fillBranch('vjj_weight' , 1 )
             pass
         else:
             self.out.fillBranch('vjj_xsection',self.xSection)
@@ -167,7 +181,7 @@ class VJJSkimmer(Module):
                 wsf_down = event.vjj_ele_effWgtDn
 
 
-            prefirew =  event.PrefireWeight if self.era != 2018 else 1
+            prefirew =  event.L1PreFiringWeight_Nom #nanoAOD v9
             self.out.fillBranch('vjj_weight' , wsf*event.puWeight*prefirew )
             self.out.fillBranch('vjj_sfweight_down' , wsf_down/wsf )
             self.out.fillBranch('vjj_sfweight_up' , wsf_up/wsf )
@@ -191,3 +205,5 @@ class VJJSkimmer(Module):
                             maxGenPhotonPt = genPart.pt
             self.out.fillBranch( 'vjj_maxGenPhotonPt' , maxGenPhotonPt )
         return True
+
+        
