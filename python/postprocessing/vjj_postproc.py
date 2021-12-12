@@ -44,7 +44,7 @@ def PrintBanner(year):
     return
 
 
-def defineModules(year, isData, isSignal, fs, preVFP=False):
+def defineModules(year, isData, isSignal, preVFP=False):
     """
     Configures the modules to be run depending on the year and whether is data or MC
     Returns a list of modules
@@ -57,62 +57,44 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
     if not isData:
         if year==2016:
             modules.append( puAutoWeight_2016() )
-            if abs(fs) == 22:
-                if preVFP: 
-                    modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) 
-                else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2016()])
-            elif fs == 121: modules.extend( [electronSelector2016()])
-            modules.append( jetSelector2016(),jetSelector2016(apply_id=False))
-            modules.append( vjjSelector2016mc(signal=isSignal, myFs=fs) )
-
+            modules.append( PrefCorr() )
+            modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2016BtoH.root",
+                                     jetmapname="L1prefiring_jetpt_2016BtoH",
+                                     photonroot="L1prefiring_photonpt_2016BtoH.root",
+                                     photonmapname="L1prefiring_photonpt_2016BtoH") )
+            #modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
+	    if preVFP:
+            	modules.extend( [muonSelector2016(), electronSelector2016pre(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
+	    else:
+            	modules.extend( [muonSelector2016(), electronSelector2016post(), photonSelector2016(), jetSelector2016(),jetSelector2016(apply_id=False) , loosePhotonSelector2016() ])
+            modules.append( vjjSkimmer2016mc(signal=isSignal) )
         if year==2017:
             modules.append( puAutoWeight_2017() )
-            if abs(fs) == 22:
-                modules.extend([photonSelector2017(), loosePhotonSelector2017()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2017()])
-            elif fs == 121: modules.extend( [electronSelector2017()])
-            modules.append( jetSelector2017(),jetSelector2017(apply_id=False))
-            modules.append( vjjSelector2017mc(signal=isSignal, myFs=fs) )
-
+            modules.append( PrefCorr(jetroot="L1prefiring_jetpt_2017BtoF.root",
+                                     jetmapname="L1prefiring_jetpt_2017BtoF",
+                                     photonroot="L1prefiring_photonpt_2017BtoF.root",
+                                     photonmapname="L1prefiring_photonpt_2017BtoF") )
+            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017(),jetSelector2017(apply_id=False) , loosePhotonSelector2017() ])
+            modules.append( vjjSkimmer2017mc(signal=isSignal) )
         if year==2018:
-            if abs(fs) == 22:
-                modules.extend([photonSelector2018(), loosePhotonSelector2018()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2018()])
-            elif fs == 121: modules.extend( [electronSelector2018()])
-            modules.append( jetSelector2018(),jetSelector2018(apply_id=False))
-            modules.append( vjjSelector2018mc(signal=isSignal, myFs=fs) )
+            modules.append( puAutoWeight_2018() )
+            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018(),jetSelector2018(apply_id=False) , loosePhotonSelector2018()])
+            modules.append( vjjSkimmer2018mc(signal=isSignal) )
 
     else:
         if year==2016:
-            if abs(fs) == 22:
-                if preVFP: 
-                    modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) 
-                else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2016()])
-            elif fs == 121: modules.extend( [electronSelector2016()])
-            modules.append( jetSelector2016(),jetSelector2016(apply_id=False))
-            modules.append( vjjSelector2016data(myFs=fs) )
+            #modules.extend( [muonSelector2016(), electronSelector2016(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
+	    if preVFP:
+            	modules.extend( [muonSelector2016(), electronSelector2016pre(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
+	    else:
+            	modules.extend( [muonSelector2016(), electronSelector2016post(), photonSelector2016(), jetSelector2016() ,jetSelector2016(apply_id=False), loosePhotonSelector2016()])
+            modules.append( vjjSkimmer2016data() )
         if year==2017:
-            if abs(fs) == 22:
-                modules.extend([photonSelector2017(), loosePhotonSelector2017()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2017()])
-            elif fs == 121: modules.extend( [electronSelector2017()])
-            modules.append( jetSelector2017(),jetSelector2017(apply_id=False))
-            modules.append( vjjSelector2017data(myFs=fs) )
+            modules.extend( [muonSelector2017(), electronSelector2017(), photonSelector2017(), jetSelector2017() ,jetSelector2017(apply_id=False), loosePhotonSelector2017()])
+            modules.append( vjjSkimmer2017data() )
         if year==2018:
-            if abs(fs) == 22:
-                modules.extend([photonSelector2018(), loosePhotonSelector2018()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2018()])
-            elif fs == 121: modules.extend( [electronSelector2018()])
-            modules.append( jetSelector2018(),jetSelector2018(apply_id=False))
-            modules.append( vjjSelector2018data(myFs=fs) )
+            modules.extend( [muonSelector2018(), electronSelector2018(), photonSelector2018(), jetSelector2018() ,jetSelector2018(apply_id=False), loosePhotonSelector2018()])
+            modules.append( vjjSkimmer2018data() )
 
     return modules
 
@@ -148,7 +130,6 @@ def main():
     parser.add_argument('-f', '--firstEntry', dest='firstEntry',   help='first entry to process', type=int,
                         default=0)
     parser.add_argument('-d', '--localCIDir',     dest='localCIDir',   help='local CI directory',  default=getTestCIDir(), type=str)
-    parser.add_argument('-S', '--finalState',     dest='finalState',   help='photon:22, fake photon:-22, mm: 169, ee:121',  default=0, type=int)
     parser.add_argument('-D', '--dataSet',     dest='dataSet',   help='dataset name to run on, setting it overrides "year", "data" and "isSignal" values.',  default=None, type=str)
 # //--------------------------------------------
 
@@ -162,16 +143,14 @@ def main():
             opt.year = 2000 + int( info[ 'year' ] )
             opt.isData = 'isData' in info.keys()
             opt.isSignal = samples.is_signal( opt.dataSet )
-            opt.fpv = 'prevfp' in info.keys()
+	    opt.fpv = 'prevfp' in info.keys()
             print( 'dataset name is {0}'.format( opt.dataSet ) )
+            #print( 'year, isData and isSignal are set from the dataset name to {0}, {1} and {2}'.format( opt.year , opt.isData , opt.isSignal ) )
             print( 'year, isData, preVFP and isSignal are set from the dataset name to {0}, {1}, {2} and {3}'.format( opt.year , opt.isData , opt.fpv, opt.isSignal ) )
         else:
             raise ValueError( 'dataSet name seems inconsistent: {0}'.format( opt.dataSet ) )
-        
 
     if opt.year == None: raise ValueError('Must set year !')
-    if opt.finalState == None: raise ValueError('Must set the final state. Use --help for the options.') 
-    if opt.finalState not in [22, -22, 169, 121]: raise ValueError('Non standard value for final state. Use --help for the options.') 
 
     PrintBanner(opt.year) #Print banner in terminal
 
@@ -200,9 +179,10 @@ def main():
 
 # //--------------------------------------------
     #-- Define modules to run
-    modules=defineModules(opt.year,opt.isData, opt.isSignal, opt.fpv,opt.finalState)
+    #modules=defineModules(opt.year,opt.isData, opt.isSignal)
+    modules=defineModules(opt.year,opt.isData, opt.isSignal, opt.fpv)
     # print('My modules: ', mymodules)
-    print (opt.keep_and_drop)
+
     #call post processor
     p=PostProcessor(outputDir=".",
                     inputFiles=inputFiles,
