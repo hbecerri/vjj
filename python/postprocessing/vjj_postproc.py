@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+! /usr/bin/env python
 import os, sys
 import ROOT
 import argparse
@@ -6,8 +6,9 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 from importlib import import_module
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from UserCode.VJJSkimmer.postprocessing.modules.VJJSelector import *
-from PhysicsTools.NanoAODTools.postprocessing.modules.common.PrefireCorr import *
+#from PhysicsTools.NanoAODTools.postprocessing.modules.common.PrefireCorr import *
 from PhysicsTools.NanoAODTools.postprocessing.modules.common.puWeightProducer import *
+from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultObjCfg
 from UserCode.VJJSkimmer.postprocessing.modules.MuonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.ElectronSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.PhotonSelector import *
@@ -55,70 +56,14 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
 
     modules=[]
     if not isData:
-        if year==2016:
-            modules.append( puAutoWeight_2016() )
-            if abs(fs) == 22:
-                if preVFP: 
-                    modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) 
-                else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2016()])
-            elif fs == 121: modules.extend( [electronSelector2016()])
-            modules.append( jetSelector2016(),jetSelector2016(apply_id=False))
-            modules.append( vjjSelector2016mc(signal=isSignal, myFs=fs) )
+        modules.append( {2016:puWeight_UL2016 , 2017:puAutoWeight_2017 , 2018:puAutoWeight_2018}[year]() )
 
-        if year==2017:
-            modules.append( puAutoWeight_2017() )
-            if abs(fs) == 22:
-                modules.extend([photonSelector2017(), loosePhotonSelector2017()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2017()])
-            elif fs == 121: modules.extend( [electronSelector2017()])
-            modules.append( jetSelector2017(),jetSelector2017(apply_id=False))
-            modules.append( vjjSelector2017mc(signal=isSignal, myFs=fs) )
-
-        if year==2018:
-            if abs(fs) == 22:
-                modules.extend([photonSelector2018(), loosePhotonSelector2018()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2018()])
-            elif fs == 121: 
-		if preVFP: 
-                    modules.extend( [electronSelector2016pre()])
-		else: modules.extend( [electronSelector2016post()])
-            modules.append( jetSelector2018(),jetSelector2018(apply_id=False))
-            modules.append( vjjSelector2018mc(signal=isSignal, myFs=fs) )
-
-    else:
-        if year==2016:
-            if abs(fs) == 22:
-                if preVFP: 
-                    modules.extend([photonSelector2016pre(), loosePhotonSelector2016pre()]) 
-                else: modules.extend([photonSelector2016post(),loosePhotonSelector2016post()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2016()])
-            elif fs == 121: 
-		if preVFP: 
-                    modules.extend( [electronSelector2016pre()])
-		else: modules.extend( [electronSelector2016post()])
-            modules.append( jetSelector2016(),jetSelector2016(apply_id=False))
-            modules.append( vjjSelector2016data(myFs=fs) )
-        if year==2017:
-            if abs(fs) == 22:
-                modules.extend([photonSelector2017(), loosePhotonSelector2017()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2017()])
-            elif fs == 121: modules.extend( [electronSelector2017()])
-            modules.append( jetSelector2017(),jetSelector2017(apply_id=False))
-            modules.append( vjjSelector2017data(myFs=fs) )
-        if year==2018:
-            if abs(fs) == 22:
-                modules.extend([photonSelector2018(), loosePhotonSelector2018()])
-            elif fs == 169: 
-                modules.extend( [muonSelector2018()])
-            elif fs == 121: modules.extend( [electronSelector2018()])
-            modules.append( jetSelector2018(),jetSelector2018(apply_id=False))
-            modules.append( vjjSelector2018data(myFs=fs) )
+    options = { 'vpf' : '' if year != 2016 else 'pre' if preVFP else 'post'   }
+    modules.append( MuonSelector( year ) ,
+                    ElectronSelector( era = year , **options ),
+                    PhotonSelector( year , apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
+                    JetSelector( year , _defaultObCfg, apply_id=True ),
+                    VJJSelector(isData , year , bypassSelFilters=isSignal, finalState = fs) )
 
     return modules
 
@@ -206,7 +151,7 @@ def main():
 
 # //--------------------------------------------
     #-- Define modules to run
-    modules=defineModules(opt.year,opt.isData, opt.isSignal, opt.fpv,opt.finalState)
+    modules=defineModules(opt.year,opt.isData, opt.isSignal, opt.finalState, opt.fpv)
     # print('My modules: ', mymodules)
     print (opt.keep_and_drop)
     #call post processor

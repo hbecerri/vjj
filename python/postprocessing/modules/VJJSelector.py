@@ -13,15 +13,15 @@ class VJJSelector(Module):
 
     """Implements a generic V+2j selection for VBF X studies"""
     """Regions are MM, EE, A, Af"""
-    def __init__(self, isData, era, bypassSelFilters=False, finalState = 22):
+    def __init__(self, isData, era, signal=False, finalState = 22):
 
         self.isData           = isData
         self.era              = era
-        self.bypassSelFilters = bypassSelFilters
+        self.bypassSelFilters = signal
         self.sampleTag        = sampleTag
         self.vjjEvent         = VJJEvent(_defaultVjjCfg,finalState)
         self.gen_vjjEvent     = None 
-        if not isData:
+        if not isData and signal:
             self.gen_vjjEvent=VJJEvent(_defaultGenVjjCfg,finalState)
  
         self.histos={}
@@ -114,13 +114,13 @@ class VJJSelector(Module):
                 goodZ=(abs(v4.M()-91)<15)            
                 if trig_cats and trig_cats.count(self.hltCats[0])==0:
                     goodZ=False
-                    if goodZ:
-                        return self.fs,[1,1],v4
+                if goodZ:
+                    return self.fs,[1,1],v4
         else:
-            if len(good_photons)>0:
+            if len(good_objs)>0:
                 isAjj     = 1 if (trig_cats and trig_cats.count('ajj')>0)     else 0
                 isHighPtA = 1 if (trig_cats and trig_cats.count('highpta')>0) else 0
-                return self.fs,[isAjj,isHighPtA],good_photons[0].p4()
+                return self.fs,[isAjj,isHighPtA],good_objs[0].p4()
         return None
 
 
@@ -158,14 +158,7 @@ class VJJSelector(Module):
             isGoodForGen=self.gen_analyze(event)
             self.out.fillBranch('genvjj_isGood',isGoodForGen)
         
-        if self.bypassSelFilters:
-            return True
-
-        if isGoodForGen or isGoodForReco:
-            return True
-
-
-        return False
+        return isGoodForGen or isGoodForReco or self.bypassSelFilters
 
 
 
@@ -265,31 +258,38 @@ class VJJSelector(Module):
         trig_cats = self.TriggerSelection(event)
 
         #boson selection
-        all_obj        = []
-        good_objIdx    = []
+        all_pho        = Collection(event, "Photon")
+        good_phoIdx    = event.vjj_photons 
+        if self.fs == -22:  good_phoIdx  = event.vjj_loosePhotons
+
+        all_muo        = Collection(event, "Muon")
+        good_muoIdx    = event.vjj_mus
+
+        all_ele        = Collection(event, "Electron")
+        good_eleIdx    = event.vjj_eles
+
         good_obj       = []
+        
 
         if self.fs == 169:
-            all_obj     = Collection(event, "Muon")
-            good_objIdx = event.vjj_mus
-
-        if self.fs == 121:
-            all_obj     = Collection(event, "Electron")
-            good_objIdx = event.vjj_eles
-
-        if abs(self.fs) == 22:
-            all_obj     = Collection(event, "Photon")
-            dummyIdx    = event.vjj_photons if self.fs == 22 else event.vjj_loosePhotons
-            if len(dummyIdx) > 0:
-                good_objIdx = [dummyIdx[0]]
-        
-        good_obj  = [all_obj[i] for i in good_objIdx]
+            good_obj  = [all_muo[i] for i in good_muoIdx]       
+        elif self.fs == 121:
+            good_obj  = [all_ele[i] for i in good_eleIdx]       
+        elif abs(self.fs) == 22:
+            if len( good_phoIdx) > 0:
+                good_obj  = [all_obj[i] for i in good_phoIdx[0]]
 
 
         bosonArbitration = BosonSelection(good_obj,self.fs,trig_cats)
 
         if bosonArbitration is None:
             return False
+
+        #Signal and other CR VJJ's have no overlap
+
+        if self.fs == 169 and (len(good_eleIdx) > 0 or len(good_phoIdx) > 0) return False
+        elif self.fs == 121 and (len(good_muIdx) > 0 or len(good_phoIdx) > 0) return False
+        elif self.fs == 22 and (len(good_eleIdx) > 0 or len(good_muIdx) > 0) return False
 
         fsCat,arbTrigCats,boson=bosonArbitration
 
@@ -304,11 +304,12 @@ class VJJSelector(Module):
         jetsIdx  =  event.vjj_jets
         jets     = [all_jets[i] for i in jetsIdx]
         cleanJets= []
+        
+        #### Is this needed?
         for j in jets:
-            if j.DeltaR(good_obj[0]) < self.vjjEvent.selCfg['min_jetdr2v']: continue
-            if abs(self.fs) != 22:
-                if j.DeltaR(good_obj[1]) < self.vjjEvent.selCfg['min_jetdr2v']: continue
+            if j.DeltaR(boson) < self.vjjEvent.selCfg['min_jetdr2v']: continue
             cleanJets.append(j)
+        ####
         
         #analyze v+2j event candidate
         isGoodV2J =  self.vjjEvent.isGoodVJJ(boson, cleanJets, arbTrigCats, fsCat) 
