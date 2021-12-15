@@ -69,7 +69,7 @@ class ScaleFactorBase(object):
         sfObj = fIn.Get(obj)
         statObj = fIn.Get( obj + "_stat" )
         systObj = fIn.Get( obj + "_syst" )
-        #print tag, url , obj, sfObj, statObj, systObj
+#        print (tag, url , obj, sfObj, statObj, systObj)
         self.addSFObject(tag, sfObj, statObj, systObj)
         fIn.Close()
         

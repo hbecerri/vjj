@@ -5,7 +5,6 @@ import copy
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from VJJEvent import VJJEvent,_defaultVjjCfg,_defaultGenVjjCfg,_defaultVjjSkimCfg
-from UserCode.VJJSkimmer.postprocessing.modules.SelectionCuts import *
 import numpy as np
 from TriggerLists import defineTriggerList
 
@@ -18,7 +17,7 @@ class VJJSelector(Module):
         self.isData           = isData
         self.era              = era
         self.bypassSelFilters = signal
-        self.sampleTag        = sampleTag
+        #self.sampleTag        = sampleTag
         self.vjjEvent         = VJJEvent(_defaultVjjCfg,finalState)
         self.gen_vjjEvent     = None 
         if not isData and signal:
@@ -36,7 +35,7 @@ class VJJSelector(Module):
         self.hltCats = []
         for cat, idc in self.triggerCatCode.items():
             for id_ in idc:
-                if id_ == fs: self.hltCats.append(cat)
+                if id_ == self.fs: self.hltCats.append(cat)
 
         #Try to load module via python dictionaries
         try:
@@ -224,7 +223,7 @@ class VJJSelector(Module):
 
         #call boson candidate arbitration
 
-        bosonArbitration = BosonSelection(good_obj,self.fs,self.hltCats)
+        bosonArbitration = self.BosonSelection(good_obj,self.fs,self.hltCats)
         if bosonArbitration is None:
             return False
         fsCat,arbTrigCats,boson=bosonArbitration
@@ -277,19 +276,19 @@ class VJJSelector(Module):
             good_obj  = [all_ele[i] for i in good_eleIdx]       
         elif abs(self.fs) == 22:
             if len( good_phoIdx) > 0:
-                good_obj  = [all_obj[i] for i in good_phoIdx[0]]
+                good_obj  = [all_pho[i] for i in [good_phoIdx[0]]]
 
 
-        bosonArbitration = BosonSelection(good_obj,self.fs,trig_cats)
+        bosonArbitration = self.BosonSelection(good_obj,self.fs,trig_cats)
 
         if bosonArbitration is None:
             return False
 
         #Signal and other CR VJJ's have no overlap
 
-        if self.fs == 169 and (len(good_eleIdx) > 0 or len(good_phoIdx) > 0) return False
-        elif self.fs == 121 and (len(good_muIdx) > 0 or len(good_phoIdx) > 0) return False
-        elif self.fs == 22 and (len(good_eleIdx) > 0 or len(good_muIdx) > 0) return False
+        if self.fs == 169 and (len(good_eleIdx) > 0 or len(good_phoIdx) > 0): return False
+        elif self.fs == 121 and (len(good_muoIdx) > 0 or len(good_phoIdx) > 0): return False
+        elif self.fs == 22 and (len(good_eleIdx) > 0 or len(good_muoIdx) > 0): return False
 
         fsCat,arbTrigCats,boson=bosonArbitration
 

@@ -99,7 +99,8 @@ A wrapper is available in `python/postprocessing/vjj_postproc.py` to build the c
 voms-proxy-init --rfc --voms cms --hours 192 #Renew proxy
 
 #-- Make sure that your file exists (via DAS)
-python vjj_postproc.py -i root://cms-xrd-global.cern.ch//store/mc/RunIISummer16NanoAODv7/G1Jet_Pt-400To650_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/PUMoriond17_Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/100000/2F564BDF-0A8B-DB44-A485-19BE3C1DB5C9.root -N 5000 -y 2016
+#-- Make sure you run on UltraLgacy reconstruction
+python vjj_postproc.py -i root://cms-xrd-global.cern.ch//store/mc/RunIISummer20UL16NanoAODv9/GJets_DR-0p4_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_v17-v2/230000/9EA5E2CC-2DB3-6B4E-BA71-B56D3244B10B.root -N 5000 -y 2016 -S 22
 ```
 
 - Example command to run via CRAB (in `python/scripts`):
