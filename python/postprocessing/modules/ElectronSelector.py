@@ -14,7 +14,7 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
         self.setParams(2 , vetoObjs , dofilter=False) #set parameters for object selection
 
         self.era = era
-        self.selCfg = copy.deepCopy(cfg)
+        self.selCfg = copy.deepcopy(cfg)
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations

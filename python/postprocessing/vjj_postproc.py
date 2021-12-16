@@ -1,4 +1,4 @@
-! /usr/bin/env python
+#!/usr/bin/env python
 import os, sys
 import ROOT
 import argparse
@@ -6,7 +6,6 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 from importlib import import_module
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from UserCode.VJJSkimmer.postprocessing.modules.VJJSelector import *
-#from PhysicsTools.NanoAODTools.postprocessing.modules.common.PrefireCorr import *
 from PhysicsTools.NanoAODTools.postprocessing.modules.common.puWeightProducer import *
 from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultObjCfg
 from UserCode.VJJSkimmer.postprocessing.modules.MuonSelector import *
@@ -59,11 +58,11 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
         modules.append( {2016:puWeight_UL2016 , 2017:puAutoWeight_2017 , 2018:puAutoWeight_2018}[year]() )
 
     options = { 'vpf' : '' if year != 2016 else 'pre' if preVFP else 'post'   }
-    modules.append( MuonSelector( year ) ,
+    modules.extend( [MuonSelector( year ) ,
                     ElectronSelector( era = year , **options ),
                     PhotonSelector( year , apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
-                    JetSelector( year , _defaultObCfg, apply_id=True ),
-                    VJJSelector(isData , year , bypassSelFilters=isSignal, finalState = fs) )
+                    JetSelector( year , _defaultObjCfg, apply_id=True ),
+                    VJJSelector(isData , year , signal=isSignal, finalState = fs)] )
 
     return modules
 

@@ -12,7 +12,7 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         self.setParams(2, dofilter=False) #set parameters for object selection
 
         self.era = era
-        self.selCfg = copy.deepCopy(cfg)
+        self.selCfg = copy.deepcopy(cfg)
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/MuonPOG
