@@ -15,7 +15,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
 
         self.era = era
         self.apply_id = apply_id
-        self.selCfg = copy.deepCopy(cfg)
+        self.selCfg = copy.deepcopy(cfg)
         self.indices=[]
 
         #these files come from https://twiki.cern.ch/twiki/bin/view/CMS/EgammaRunIIRecommendations
@@ -27,16 +27,15 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         photonSFSources={
             2016:{ 
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
-#                'pxseed' : (os.path.join(baseSFDir, PixelSeed2016),                                      'Tight_ID'),
-                'pxseed' : (os.path.join('HasPix_SummaryPlot_UL16_preVFP.root' if vpf=='pre' else 'HasPix_SummaryPlot_UL16_postVFP.root'), 'Tight_ID'),
+                'pxseed' : (os.path.join(baseSFDir, 'HasPix_SummaryPlot_UL16_preVFP.root' if vpf=='pre' else 'HasPix_SummaryPlot_UL16_postVFP.root'), 'TightID/SF_HasPix_TightID'),
               },
             2017:{
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_PHO_Tight_UL17.root'),          'EGamma_SF2D'),
-                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL17.root'),                      'Tight_ID'),
+                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL17.root'),                      'TightID/SF_HasPix_TightID'),
                 },
             2018:{
                 'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_PHO_Tight_UL18.root'),          'EGamma_SF2D'),
-                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL18.root'),                      'Tight_ID'),
+                'pxseed' : (os.path.join(baseSFDir,'HasPix_SummaryPlot_UL18.root'),                      'TightID/SF_HasPix_TightID'),
                 }
         }
         for k in photonSFSources[self.era]:

@@ -15,7 +15,7 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         self.setParams(2 , vetoObjs , dofilter=False, JMEvar=JMEvar) #set parameters for object selection
 
         self.era               = era
-        self.selCfg            = copy.deepCopy(cfg)
+        self.selCfg            = copy.deepcopy(cfg)
         self.applyPUid         = applyPUid
         self.apply_id          = apply_id
         if not apply_id:
@@ -69,7 +69,7 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         #https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetID#nanoAOD_Flags
 
         if self.apply_id:
-            tightLepVeto=((jet.jetId > 5) if self.era == 2016 else (jet.jetId > 6))
+            tightLeptonVeto=((jet.jetId > 5) if self.era == 2016 else (jet.jetId > 6))
             if not tightLeptonVeto: 
                 return False
 
@@ -109,6 +109,6 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         return SFs
 
 
-jetSelector2016 = lambda apply_id=True : JetSelector(2016,_defaultObCfg, apply_id=apply_id)
-jetSelector2017 = lambda apply_id=True : JetSelector(2017,_defaultObCfg, apply_id=apply_id)
-jetSelector2018 = lambda apply_id=True : JetSelector(2018,_defaultObCfg, apply_id=apply_id)
+jetSelector2016 = lambda apply_id=True : JetSelector(2016,_defaultObjCfg, apply_id=apply_id)
+jetSelector2017 = lambda apply_id=True : JetSelector(2017,_defaultObjCfg, apply_id=apply_id)
+jetSelector2018 = lambda apply_id=True : JetSelector(2018,_defaultObjCfg, apply_id=apply_id)
