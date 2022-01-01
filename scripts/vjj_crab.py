@@ -152,9 +152,11 @@ def main():
     parser.add_argument( '--outLFNDirBase' , dest='outLFNDirBase'  , help="[Only for makecampaignfile action] Address where the output files are stored"  )
     parser.add_argument('-d', '--dataset', dest='dataset',   help='process only this dataset',  default='', type=str)
     parser.add_argument('--datasetkey', dest='datasetkey',   help='process only samples containing this keyword',  default='', type=str)
+    parser.add_argument('-S', '--finalState',     dest='finalState',   help='photon:22, fake photon:-22, mm: 169, ee:121',  default=0, type=int)
     opt = parser.parse_args()
 # //--------------------------------------------
 
+    if opt.finalState == None: raise ValueError('Must set the final state. Use --help for the options.') 
     samples = None
     if opt.samplelist == "auto":
         samples = currentSampleList
@@ -176,7 +178,8 @@ def main():
 
     #-- Main loop on samples to process
     counter_samples = 0
-    for ds,info in samples.all_datasets():
+#    for ds,info in samples.all_datasets():
+    for ds,info in samples.extractSamples(opt.finalState):
         s = Sample( ds )
         if opt.dataset != '' and s.makeUniqueName() != opt.dataset: continue #Only process this specific sample
         if opt.datasetkey != '' and opt.datasetkey not in s.makeUniqueName(): continue #Only process samples matching this keyword
