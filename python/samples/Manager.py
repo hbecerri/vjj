@@ -5,7 +5,7 @@ import json
 
 import os
 __dir=os.path.dirname(os.path.abspath(__file__))
-__RegionFinalStateDict = {
+RegionFinalStateDict = {
     "gamma" : 22,
     "fake"  : -22,
     "mm"    : 169,
@@ -16,7 +16,7 @@ class Manager:
 
     def __init__(self , lst , update_html=False):
         self.all_samples = {}
-        self.all_samples[ '00DoubleEGData' ] = SampleList( "DoubleEGData"  , ['/SingleElectron/.*', '/DoubleEG/.*' , '/EGamma/.*' ] , 'era' , color=1 , regions=['gamma' , 'ee', 'fake'])
+        self.all_samples[ '00DoubleEGData' ] = SampleList( "DoubleEGData"  , ['/SingleElectron/.*', '/DoubleEG/.*' , '/EGamma/.*' ] , 'era' , color=1 , regions=[ 'ee'])
         self.all_samples[ '01PhotonData' ] = SampleList( "PhotonData"  , ['/SinglePhoton/.*' , '/EGamma/.*'] , 'era' , color=1 , regions=['gamma', 'fake'])
         self.all_samples[ '02DoubleMuData' ] = SampleList( "DoubleMuData"  , [ '/DoubleMuon/.*','/SingleMuon/.*' ] , 'era' , color=1 , regions=['mm'])
 
@@ -72,19 +72,19 @@ class Manager:
         for _,s in self.all_samples.items():
             if s.name == sample:
                 for key in s.Regions:
-                    finalState.append(__RegionFinalStateDict[key])
+                    finalState.append(RegionFinalStateDict[key])
                 return finalState
         return None
 
     def extractSamples(self, finalState, moreinfo=False):
-        if finalState == 0: return self.all_datasets(moreinfo)
+        #if finalState == 0: return self.all_datasets(moreinfo)
         fs = ''
-        for key in __RegionFinalStateDict:
-            if __RegionFinalStateDict[key] == finalState:
+        for key in RegionFinalStateDict:
+            if RegionFinalStateDict[key] == finalState:
                 fs = key 
         for name,sample in self.all_samples.items():
             for ds,info in sample.datasets.items():
-                if not key in self.Regions:
+                if not fs in sample.Regions:
                     continue
                 yield ds,info
 
