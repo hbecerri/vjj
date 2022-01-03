@@ -120,11 +120,15 @@ def ParseStatusJSON( jsonfile ):
     else:
         return 2,(1.0*len(Failed))/nTotal,Failed,Finished,Others
 
-def create_config_files(outdir):
+def create_config_files(outdir, fs):
+    fsname = {b:a for a,b in RegionFinalStateDict.items()}[fs]
+    outdir = '{0}/{1}'.format(outdir,fsname)
+
     with open('auto_crab_cfg.py' , 'w') as f:
         f.write('from UserCode.VJJSkimmer.etc import crab_cfg\n')
         f.write('config = crab_cfg.config\n')
         f.write("config.Data.outLFNDirBase = '/store/group/phys_smp/vbfA/big_ntuples/{0}'\n".format(outdir)) #USER-SPECIFIC PATH #Verify write permissions, e.g. with: [crab checkwrite --lfn=/store/group/phys_smp/vbfA --site T2_CH_CERN]
+        f.write("config.JobType.scriptArgs.append('--finalState={0}')\n".format(fs))
 
 
 # //--------------------------------------------
@@ -164,11 +168,11 @@ def main():
         samples = Manager( opt.samplelist )
 
     if opt.crab_cfg == 'auto':
-        create_config_files(opt.workarea)
+        create_config_files(opt.workarea, opt.finalState)
         opt.crab_cfg = 'auto_crab_cfg.py'
 
-    crab_dir = '{0}/src/UserCode/VJJSkimmer/crab/'.format( os.getenv('CMSSW_BASE') )
-    opt.workarea = crab_dir + opt.workarea
+    crab_dir = '{0}/src/UserCode/VJJSkimmer/crab/{1}/'.format( os.getenv('CMSSW_BASE') ,  {b:a for a,b in RegionFinalStateDict.items()}[opt.finalState])
+    opt.workarea = crab_dir+ opt.workarea
     if not os.path.exists( crab_dir ): os.makedirs( crab_dir )
 
 # //--------------------------------------------
@@ -179,6 +183,7 @@ def main():
     #-- Main loop on samples to process
     counter_samples = 0
 #    for ds,info in samples.all_datasets():
+
     for ds,info in samples.extractSamples(opt.finalState):
         s = Sample( ds )
         if opt.dataset != '' and s.makeUniqueName() != opt.dataset: continue #Only process this specific sample
