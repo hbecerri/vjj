@@ -153,14 +153,22 @@ class Manager():
                 
 
     def get_dataset_info(self, ds , just_ok_files = True):
+        print("Hola")
         for year in self.AllInfo:
+#            print(year)
             for sample in self.AllInfo[year]:
+#                print(sample)
                 for binval in self.AllInfo[year][sample]:
+#                    print(binval)
                     if binval == 'weights':
                         continue
                     for ds_ in self.AllInfo[year][sample][binval]['samples']:
                         s = Sample(ds_)
+                        print(ds_)
+#                        print(ds)
+#                        print(s.makeUniqueName())
                         if ds == ds_ or ds == s.makeUniqueName():
+		            print("Pase")				
                             files = []
                             for f,info in self.js[ds]['files'].items():
                                 if just_ok_files:

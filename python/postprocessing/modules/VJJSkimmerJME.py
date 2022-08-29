@@ -52,7 +52,7 @@ class VJJSkimmerJME(Module):
         self.nWeights         = len(self.allWeights)
         self.lumiWeights      = self.campaign.get_lumi_weight(sample)
         self.xSection         = self.campaign.get_xsection(sample)
-	self.selCfg = copy.deepCopy(cfg)
+	self.selCfg            = copy.deepcopy(cfg)
 	self.fs = finalState
 
         #Try to load EventShapeVariables class via python dictionaries
