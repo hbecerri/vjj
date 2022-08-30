@@ -133,7 +133,7 @@ In the PostProcessor call, one can specify preselection cuts (to speed up the pr
 
 - Example command to run interactively (in `python/postprocessing`):
 ```
-python vjj_VJJSkimmerJME_postproc.py -c july20new -o . --workingdir . -d /GJets_SM_5f_TuneEE5C_EWK_13TeV-madgraph-herwigpp/RunIISummer16NanoAODv7-Nano02Apr2020_102X_mcRun2_asymptotic_v8-v1/NANOAODSIM --nfilesperchunk 1 --chunkindex 0 -N 1000
+ python vjj_VJJSkimmerJME_postproc.py -c july20new -o . --workingdir . -d /SinglePhoton/Run2016D-02Apr2020-v1/NANOAOD --nfilesperchunk 1 --chunkindex 0 -N 1000 -S 22
 
 #-c <-> campaign file, must be found in `python/samples/campaigns/`
 #-o <-> outputdir, where to write the final output files

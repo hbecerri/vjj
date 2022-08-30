@@ -153,7 +153,7 @@ class Manager():
                 
 
     def get_dataset_info(self, ds , just_ok_files = True):
-        print("Hola")
+#        print("Hola")
         for year in self.AllInfo:
 #            print(year)
             for sample in self.AllInfo[year]:
@@ -168,7 +168,7 @@ class Manager():
 #                        print(ds)
 #                        print(s.makeUniqueName())
                         if ds == ds_ or ds == s.makeUniqueName():
-		            print("Pase")				
+#		            print("Pase")				
                             files = []
                             for f,info in self.js[ds]['files'].items():
                                 if just_ok_files:
