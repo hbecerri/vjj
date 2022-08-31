@@ -73,7 +73,7 @@ class VJJEvent:
                   'qglqWgt', 'qglgWgt', 
                   'v_pt', 'v_eta', 'v_phi', 'v_m', 'v_ystar', 
                   'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v','lead_dphiv','lead_detav',
-                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav',
+                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav','sublead_isloosePU',
                   'j_maxAbsEta','j_minAbsEta',
                   'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
                   'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi' ,'vjj_deta',
@@ -183,6 +183,14 @@ class VJJEvent:
         if hasattr(tagJets[0],'partonFlavour'):
             self.out.fillBranch(self.pfix+'lead_flav',    tagJets[0].partonFlavour)
         self.out.fillBranch(self.pfix+'sublead_pt',   tagJets[1].pt)
+############
+        print(tagJets[1].puId) 
+        loosePuID = tagJets[1].puId > 3
+        if(not loosePuID):
+            self.out.fillBranch(self.pfix+'sublead_isloosePU',   -1.0)
+        if(loosePuID):
+            self.out.fillBranch(self.pfix+'sublead_isloosePU',   1.0)
+############
         self.out.fillBranch(self.pfix+'sublead_eta',  tagJets[1].eta)
         self.out.fillBranch(self.pfix+'sublead_phi',  tagJets[1].phi)
         self.out.fillBranch(self.pfix+'sublead_m',    tagJets[1].mass)

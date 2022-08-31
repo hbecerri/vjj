@@ -127,7 +127,7 @@ def main():
     condor.append( ('stream_output' , True ) )
     condor.append( ('stream_error' , True ) )
     condor.append( ('when_to_transfer_output' , 'ON_SUCCESS' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
-    condor.append( ('should_transfer_files' , 'IF_NEEDED' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
+    condor.append( ('should_transfer_files' , 'YES' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
 
 #//--------------------------------------------
 

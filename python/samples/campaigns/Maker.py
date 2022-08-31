@@ -138,7 +138,7 @@ class Maker:
                                         ret['weights'][ str(nwgts) ] = {'name':'SCALE_{0}'.format(i) , 'total':0}
                                         nwgts += 1
                                     for i in range(nwgts_lhe) :
-                                        ret['weights'][ str(nwgts) ] = {'name':'LHE_{0}'.format(i) , 'total':0}
+                                        ret['weights'][ str(nwgts) ] = {'name':'LHE{0}'.format(i) , 'total':0}
                                         nwgts += 1
                                     for i in range(nwgts_pdf) :
                                         ret['weights'][ str(nwgts) ] = {'name':'PDF_{0}'.format(i) , 'total':0}

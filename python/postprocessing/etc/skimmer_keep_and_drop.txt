@@ -1,6 +1,6 @@
 drop *
 keep vjj*
-keep LHE_*
+keep LHE*
 keep event #event number (for debugging)
 #For UL
 keep L1PreFiringWeight_

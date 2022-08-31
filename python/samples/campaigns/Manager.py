@@ -122,7 +122,7 @@ class Manager():
             nameIndice[nname] = index
             index += 1
         for lhe_id in range( len([ k for k in sampleWeights.keys() if 'LHE' in k ]) ):
-            nname = 'LHE_{0}'.format(lhe_id)
+            nname = 'LHE{0}'.format(lhe_id)
             ret[ index ] = ( nname , 0 ) 
             nameIndice[nname] = index
             index += 1

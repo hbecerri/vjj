@@ -167,6 +167,8 @@ class VJJSelector(Module):
 
         if self.isData : return False
 
+        print("estoy aqui")
+
         self.gen_vjjEvent.resetOutVars()
 
         #event weights (for additional weights we divide by the nominal one)

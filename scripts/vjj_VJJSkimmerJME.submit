@@ -1,14 +1,23 @@
-executable          = /afs/cern.ch/work/n/ntonon/public/VBFphoton/CMSSW_10_2_27/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
-arguments           = -c july20new -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o /eos/cms/store/group/phys_smp/vbfA/skimmed_ntuples/july20new/8oct21/
-output              = condor_11Oct2021_09h40m57/$(ClusterId).$(ProcId).out
-error               = condor_11Oct2021_09h40m57/$(ClusterId).$(ProcId).err
-log                 = condor_11Oct2021_09h40m57/$(ClusterId).log
+executable          = /afs/cern.ch/user/h/hbecerri/public/GJets/test_26_08_2022/CMSSW_10_2_13/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c PhotonData_16 -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o ./PhotonData_16/TEST/
+output              = condor_30Aug2022_18h58m04/$(ClusterId).$(ProcId).out
+error               = condor_30Aug2022_18h58m04/$(ClusterId).$(ProcId).err
+log                 = condor_30Aug2022_18h58m04/$(ClusterId).log
 +JobFlavour         = "microcentury"
 transfer_executable = False
 requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
 stream_output       = True
 stream_error        = True
 when_to_transfer_output= ON_SUCCESS
-should_transfer_files= IF_NEEDED
+should_transfer_files= YES
 queue DATASET,chunkid from (
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD 8
 )

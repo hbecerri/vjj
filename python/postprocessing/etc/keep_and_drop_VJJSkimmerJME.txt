@@ -5,4 +5,4 @@ drop *
 keep vjj*
 keep event #event number (for debugging)
 
-#keep LHE_*
+#keep LHE*

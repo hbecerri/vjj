@@ -389,7 +389,7 @@ class VJJSkimmerJME(Module):
 
     def Debug_Printouts_EventVariables(self, event):
 
-        for varSel in ['vjj_isGood','vjj_jj_m','vjj_lead_pt','vjj_sublead_pt','vjj_fs','vjj_v_pt','vjj_v_eta','vjj_jj_deta','vjj_trig','vjj_nlooseJets','vjj_njets']:
+        for varSel in ['vjj_isGood','vjj_jj_m','vjj_lead_pt','vjj_sublead_pt','vjj_fs','vjj_v_pt','vjj_v_eta','vjj_jj_deta','vjj_trig','vjj_njets']:
             print('-- ', varSel, ' --> ', eval('event.{}'.format(varSel)))
 
         return

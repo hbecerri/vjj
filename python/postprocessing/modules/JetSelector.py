@@ -58,10 +58,10 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         #https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookNanoAOD#Jets
         #https://twiki.cern.ch/twiki/bin/view/CMS/PileupJetIDUL
         #pileup id (optional)
-        if self.applyPUid:
-            loosePuID = ((jet.puId > 0) if self.era == 2016 else (jet.puId > 3))
-            if not loosePuID: 
-                return False
+        #if self.applyPUid:
+        #    loosePuID = ((jet.puId > 0) if self.era == 2016 else (jet.puId > 3))
+        #    if not loosePuID: 
+        #        return False
 
         #jet id in UL: only tight and tightLeptonVeto are supported. No loose anymore
         #tightleptonveto is recommended

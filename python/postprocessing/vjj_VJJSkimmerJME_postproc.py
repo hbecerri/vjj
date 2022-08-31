@@ -141,8 +141,8 @@ def main():
     if not opt.dataSet: raise ValueError('Please specify dataset name using -d option')
 
     if opt.finalState == None: raise ValueError('Must set the final state. Use --help for the options.') 
-    if opt.finalState not in [22, -22, 169, 121]: raise ValueError('Non standard value for final state. Use --help for the options.') 
-
+    if opt.finalState not in [22, -22, 169, 121]: opt.finalState = 22   #raise ValueError('Non standard value for final state. Use --help for the options.') 
+     
     PrintBanner() #Print banner in terminal
 
     s = SampleNameParser()
@@ -207,7 +207,7 @@ def main():
 
     #-- Cut formula for event preselection (do not process further uninteresting events) #Do not use, cf. below
     # cut = None
-    cut = 'vjj_nlooseJets>=2 && vjj_fs!=0 && vjj_trig>0' #NB: speed up processing
+    cut = 'vjj_njets>=2 && vjj_fs!=0 && vjj_trig>0' #NB: speed up processing
 
     #-- Call post-processor
     p = PostProcessor(outputDir=opt.workingdir, #Dir where to store individual output files
@@ -226,6 +226,8 @@ def main():
                     haddFileName=haddFileName) #If not None <-> final outputfile name (after running 'haddnano.py')
 
 #    print("aqui estoy")
+    print("#########")
+    print(opt.workingdir)
     p.run() #Run the PostProcessor code
 
     print(colors.bold + colors.fg.orange + '\n... DONE !' + colors.reset)
