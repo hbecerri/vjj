@@ -189,6 +189,9 @@ Below are example commands to create a new campaign file:
 
 ```
 cd scripts
+bash vjj_campaign.sh make -d /nfs/dust/cms/user/hugobg/GJets/CMSSW_10_2_13/src/UserCode/VJJSkimmer/python/postprocessing/root_files -c myCampaign2 --year 16 --sample PhotonData
+
+bash vjj_campaign.sh make -d /nfs/dust/cms/user/hugobg/GJets/CMSSW_10_2_13/src/UserCode/VJJSkimmer/python/postprocessing/root_files -c myCampaign3 --year 16 --sample GJetsNLO
 
 #-- [MAKE] <-> interactive; specify dataset(s) and years(s) #Can consider only one year/sample with:
 ./vjj_campaign.sh make -d /eos/bigNtuplesDir -c myCampaign #--year 16 --sample PhotonData <-> will consider only 2016 samples containing the 'PhotonData' keyword
