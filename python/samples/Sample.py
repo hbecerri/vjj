@@ -82,7 +82,23 @@ class Sample:
                 if output:
                     s = output.strip()
                     self.parents.append( s )
-        if len(self.parents) == 1:
+        if len(self.parents) == 1: 
+            if(self.parents[0] == '/G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM' 
+            if(self.parents[0] == '/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM'
+            if(self.parents[0] == '/G1Jet_LHEGpT-250To400_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-250To400_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM'
+            if(self.parents[0] == '/G1Jet_LHEGpT-675ToInf_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-675ToInf_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM'
+            if(self.parents[0] == '/G1Jet_LHEGpT-675ToInf_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-675ToInf_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM'
+            if(self.parents[0] == '/G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM'
+            if(self.parents[0] == '/G1Jet_LHEGpT-250To400_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-250To400_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM'
+            if(self.parents[0] == '/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2/MINIAODSIM'):
+                self.parents[0] = '/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM'
             return Sample( self.parents[0] )
         else:
             print( 'here is the list of found parents for {0} : {1}'.format( self.ds , self.parents ) )

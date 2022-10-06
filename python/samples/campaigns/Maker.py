@@ -33,7 +33,6 @@ class Maker:
             wgts1 = self.info[ds1]['weights']
             #if wgts1['0']['total'] == 0:
             #    continue
-
             wgts1 = set([ v['name'] for _,v in wgts1.items() ])
             inconsistencymap[ s1.makeUniqueName() ] = []
             for j in range( len(dsnames) ):
@@ -80,6 +79,7 @@ class Maker:
             print('\033[91m the directory for sample {0} does not exist ({1}) \033[0m'.format(das,dir) )
             return {'weights':{'0':{'name':'nominal', 'total':0}} , 'size':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0} , 'submit_datetime':str('')}
         dates = os.listdir(dir) 
+        print(dates)
         if len(dates) == 1:
             D, T = dates[0].split('_')
             date = datetime.datetime( int(D[:2])+2000 , int(D[2:4]) , int(D[4:]) , int(T[:2]) , int(T[2:4]) , int(T[4:]) )
@@ -111,7 +111,7 @@ class Maker:
                     if fo :
                         size = fo.GetSize()
                         ret['files'][f] = {'size':size}
-                        cutflow = fo.Get('cutflow') if s.isData() else fo.Get('wgtSum')
+                        cutflow = fo.Get('cutflow') if s.isData() else fo.Get('wgtSum') #else fo.Get('nwgts')  #fo.Get('wgtSum')
                         if cutflow:
                             if s.isData():
                                 bin_zero = cutflow.FindBin( 0.5 )
@@ -147,7 +147,6 @@ class Maker:
                                     yields = cutflow.GetBinContent( wgt+1 )
                                     ret['files'][f][str(wgt)] = yields
                                     ret['weights'][str(wgt)]['total'] += yields
-
                             ret['size'] += size
                             ret['filestat']['nOkFiles'] += 1
                         else:
@@ -160,7 +159,6 @@ class Maker:
                 else: #Problem: if next file not found, declare previous file as missing !
                     #ret['files'][f] = 'does not exist' #--> wrong index, still refering to previous file, not the current (actually missing) file #Now commented out
                     ret['filestat']['nNotExisting'] += 1
-            print('')
 
             suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
             i = 0

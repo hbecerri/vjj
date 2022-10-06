@@ -42,6 +42,7 @@ def FinalSummary( campaign, sample , outdir , len_parent_files , nfilesperchunk 
                             allfiles.append( fname )
         else:
             allfiles.append(f)
+        print(allfiles)
     for f in allfiles:
         ret['filestat']['nFile'] += 1
         if os.path.exists( f ):

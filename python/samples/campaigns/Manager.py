@@ -21,7 +21,6 @@ class Manager():
             if 'parentcampaign' in self.js['generalInfo']:
                 self.parentcampaign = Manager( self.js['generalInfo']['parentcampaign'] )
                 self.isSkimmedCampaign = True
-            
         isJsonModified = False
 
 #        self.dyjs = {}
@@ -30,17 +29,18 @@ class Manager():
 #                self.dyjs[key]=val
 #        print self.dyjs'''
         self.samples = SampleManager( self.js.keys() , update_html=False )
+#        print(self.samples)
         #self.samples = SampleManager( self.dyjs.keys() , update_html=False )
         self.AllInfo = {}
         self.LinkedSamples = {}
         self.SamplesWithWeightErrors = []
         for ds, year, binval , sname in self.samples.all_datasets(moreinfo=True):
             ds = str(ds)
+#            print(ds)
             s = Sample(ds)
             year = s.year()
             xsection = 0 if s.isData() else 1
             ntotal = 0
-                
             if not self.isSkimmedCampaign:
                 try:
                     parent = str( self.js[ds]['parent'] )
@@ -48,7 +48,6 @@ class Manager():
                     parent = s.GetParent().ds
                     self.js[ds]['parent'] = parent
                     isJsonModified = True
-
                 if s.isData():
                     xsection = 0
                 else:
@@ -56,7 +55,6 @@ class Manager():
                 #ntotal = self.js[ds]['total']
                 
                         
-           
             if year not in self.AllInfo:
                 self.AllInfo[year] = {}
                 #sname:{'weights':{i:vals['name'] for i,vals in self.js[ds]['weights'].items()} , binval:{'xsecs':[] , 'samples':[] , 'nevents':{} }}}
@@ -75,7 +73,6 @@ class Manager():
                         self.AllInfo[year][sname]['weights'][wname] = {str(ds): int(i)}
                         if (year,sname) not in self.SamplesWithWeightErrors:
                             self.SamplesWithWeightErrors.append( (year,sname) )
-
             if binval not in self.AllInfo[year][sname]:
                 self.AllInfo[year][sname][binval] = {'xsecs':[] , 'samples':[] , 'nevents':{vals['name']:[] for _,vals in self.js[ds]['weights'].items() } }
 
@@ -88,15 +85,17 @@ class Manager():
                 else:
                     self.AllInfo[year][sname][binval]['nevents'][wname] = [ vals['total'] ]
             self.LinkedSamples[ ds ] = self.AllInfo[year][sname][binval]
-
+ #           print("ya casi")
         if isJsonModified:
             print('writing json file')
             with open('{0}/{1}'.format( __dir , file) , 'w') as f:
                 json.dump( self.js , f )
-        
+        print("isjson") 
         if len(self.SamplesWithWeightErrors)>0:
             print( 'following samples have some inconsistent weights, please have a look')
             print( self.SamplesWithWeightErrors )
+
+#        print("Aqui: init")
 
     def get_allWeightIndices(self , ds):
         s = Sample(ds)
@@ -153,9 +152,7 @@ class Manager():
                 
 
     def get_dataset_info(self, ds , just_ok_files = True):
-#        print("Hola")
         for year in self.AllInfo:
-#            print(year)
             for sample in self.AllInfo[year]:
 #                print(sample)
                 for binval in self.AllInfo[year][sample]:
@@ -164,11 +161,7 @@ class Manager():
                         continue
                     for ds_ in self.AllInfo[year][sample][binval]['samples']:
                         s = Sample(ds_)
-                        print(ds_)
-#                        print(ds)
-#                        print(s.makeUniqueName())
                         if ds == ds_ or ds == s.makeUniqueName():
-#		            print("Pase")				
                             files = []
                             for f,info in self.js[ds]['files'].items():
                                 if just_ok_files:
@@ -178,7 +171,7 @@ class Manager():
                             return {'color':self.samples.get_sampleColor(sample), 'nTotal':self.get_allNTotals(ds) , 'xsection':self.get_xsection(ds) , 'sample':s , 'sName':sample , 'files':files , 'regions':self.samples.get_sampleRegions(sample)}
         return None
 
-    def get_files_byyear(self , year , just_ok_files = False):
+    def get_files_byyear(self , year , just_ok_files = True):
         for ds,info in self.samples.all_datasets():
             if info['year']==year:
                 for f,info in self.js[ds]['files'].items():
@@ -225,12 +218,23 @@ class Manager():
     def get_lumi_weight(self , ds ):
         s = Sample(ds)
         lumis = self.get_lumis(ds)
+#        print("+++++")
+#        print(lumis)
+#        print("+++++")
         ret = {cat:{0:1} for cat in lumis}
         if not s.isData():
+     
             xsec = self.get_xsection(ds)
             allntotals = self.get_allNTotals(ds)
+#            print(xsec)
+#            print(allntotals)
             for index,ntotal in allntotals.items():
+#		print(index)
+#		print(ntotal)
                 for cat,lumi in lumis.items():
+#		    print(cat)
+#		    print(lumi)
+		    #ntotal = 1
                     ret[cat][index] = lumi*xsec/ntotal
         return ret
 
