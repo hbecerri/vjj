@@ -66,9 +66,8 @@ def make_hadd_fname(outdir, ds, nfilesperchunk, chunkindex, fromevent = None, nE
 
 
 def get_fileNames(campaign, ds, nfilesperchunk, chunkindex, printout=True):
-#    print("I am here")
     all_inputFiles = campaign.get_dataset_info( ds )['files']
-#    print("now")
+    print(all_inputFiles)
     chunks = [ all_inputFiles[a:a+nfilesperchunk] for a in range( 0 , len(all_inputFiles) , nfilesperchunk ) ]
     if printout: print(ds,nfilesperchunk,chunkindex,len(all_inputFiles) , len(chunks) )
     inputFiles = chunks[ chunkindex ]
@@ -77,36 +76,16 @@ def get_fileNames(campaign, ds, nfilesperchunk, chunkindex, printout=True):
 
 
 def defineModules(year, isData, dataset, campaign, finalState, jme_vars):
-    """
-    Configures the modules to be run depending on the year and whether is data or MC
-    Returns a list of modules
-    """
 
     modules = []
 
-    # modules.append(JetSelector(year, _defaultVjjSkimCfg['min_jetPt'], _defaultVjjSkimCfg['max_jetEta'], apply_id=True)) #Not needed
-
     if not isData and jec_sources != '':
 
-        #-- Call NanoAODTools module to compute relevant JEC/JER/MET corrections and pass them to next modules
-
-#        print("no soy data")
-        jmeCorrections = createJMECorrector(isMC=True, dataYear=str(year), runPeriod="B", jesUncert=jec_sources, jetType="AK4PFchs", applySmearing=True, splitJER=False, applyHEMfix=False, saveMETUncs=[]) #saveMETUncs=['T1', 'T1Smear']
+        jmeCorrections = createJMECorrector(isMC=True, dataYear=str(year), runPeriod="B", jesUncert=jec_sources, jetType="AK4PFchs", applySmearing=True, splitJER=False, applyHEMfix=False, saveMETUncs=[])
         modules.append(jmeCorrections())
-  
-#        print("pase jme corrections")
-
-        #-- Run JetSelector for each JEC/JER variation
         for var in jme_vars:
             modules.extend([JetSelector(year, cfg=_defaultObjCfg, apply_id=True, JMEvar=var)])
-
-#        print("pase jme vars")
-
-    #-- Skimmer code (run once for all variations -- recomputes necessary variables)
-#    print("me atoro en append?")
     modules.append(VJJSkimmerJME(dataset, campaign, finalState, _defaultVjjSkimCfg, JMEvars=jme_vars, includeTotalJER=includeTotalJER))
-
-#    print("pase modules append")
 
     return modules
 
@@ -145,6 +124,7 @@ def main():
      
     PrintBanner() #Print banner in terminal
 
+
     s = SampleNameParser()
     _, info = s.parse(opt.dataSet)
     if 'year' in info.keys():
@@ -158,7 +138,7 @@ def main():
     #-- Define keep/drop filepath for nominal scenario (can specific independent keep/drop file for JME variations in VJJSkimmerJME.py)
     keep_drop = '{0}/python/UserCode/VJJSkimmer/postprocessing/etc/skimmer_keep_and_drop.txt'.format( os.getenv('CMSSW_BASE' , '.') )
 
-#    print(opt.isData)
+    print(opt.isData)
 
     #-- Define 'golden json' luminosity mask to be applied for data
     jsonMask = None
@@ -169,11 +149,14 @@ def main():
         elif opt.year == 2018: jsonMask = jsonDir+'Collisions18/13TeV/ReReco/Cert_314472-325175_13TeV_17SeptEarlyReReco2018ABC_PromptEraD_Collisions18_JSON.txt' #2018
     if jsonMask is not None: print(colors.fg.lightblue + '\n== Applying lumi mask: ' + colors.reset); print(jsonMask); print('')
 
+
+    
     campaign = None
     if opt.campaign: campaign = CampaignManager(opt.campaign)
     else: raise ValueError('Please specify campaign name you want to run using -c option')
     print(campaign.AllInfo[opt.year].keys())
-#    print("I am here")
+
+
     #-- Set input files
     inputFiles = get_fileNames(campaign, opt.dataSet, opt.nfilesperchunk, opt.chunkindex)
     print(colors.fg.lightblue + '\n== Processing following files:' + colors.reset)
@@ -191,12 +174,10 @@ def main():
         print(colors.fg.lightblue + '\n== JEC variations: ' + colors.reset); print(jme_vars); print('')
 
 
-#    print("aun no paso modules")
     #-- Set chain of modules to be run
     mymodules = defineModules(opt.year, opt.isData, opt.dataSet, campaign, opt.finalState, jme_vars)
     # print('My modules: ', mymodules)
 
-#    print("pase mymodules")
 
     #-- Set output
     if opt.firstEntry : haddFileName, exists = make_hadd_fname(opt.outdir, opt.dataSet, opt.nfilesperchunk, opt.chunkindex, opt.firstEntry, opt.maxEntries)
@@ -225,8 +206,6 @@ def main():
                     maxEntries=opt.maxEntries,
                     haddFileName=haddFileName) #If not None <-> final outputfile name (after running 'haddnano.py')
 
-#    print("aqui estoy")
-    print("#########")
     print(opt.workingdir)
     p.run() #Run the PostProcessor code
 

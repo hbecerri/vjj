@@ -49,7 +49,6 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         return "mu"
 
     def isGood(self, mu):
-
         if mu.pt < self.selCfg['min_leptonPt']          : return False
         if abs( mu.eta ) > self.selCfg['max_leptonEta'] : return False
         min_dr = self.mindr_toVetoObjs( mu )

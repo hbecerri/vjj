@@ -97,7 +97,7 @@ class VJJEvent:
 
         #reco only
         if not isGen:
-            setattr(self,'photonExtra',['r9','sieie','hoe','pfRelIso03_all','pfRelIso03_chg'])
+            setattr(self,'photonExtra',['mvaID_WP80','mvaID_WP90','cutBased','r9','sieie','hoe','pfRelIso03_all','pfRelIso03_chg'])
             for v in self.photonExtra:
                 outv=self.pfix+'a_'+v
                 self.outvars.append(outv)
@@ -183,14 +183,16 @@ class VJJEvent:
         if hasattr(tagJets[0],'partonFlavour'):
             self.out.fillBranch(self.pfix+'lead_flav',    tagJets[0].partonFlavour)
         self.out.fillBranch(self.pfix+'sublead_pt',   tagJets[1].pt)
+
 ############
-        print(tagJets[1].puId) 
-        loosePuID = tagJets[1].puId > 3
-        if(not loosePuID):
-            self.out.fillBranch(self.pfix+'sublead_isloosePU',   -1.0)
-        if(loosePuID):
-            self.out.fillBranch(self.pfix+'sublead_isloosePU',   1.0)
+        if self.pfix=='vjj_': 
+            loosePuID = tagJets[1].puId > 3
+            if(not loosePuID):
+                self.out.fillBranch(self.pfix+'sublead_isloosePU',   -1.0)
+            if(loosePuID):
+                self.out.fillBranch(self.pfix+'sublead_isloosePU',   1.0)
 ############
+
         self.out.fillBranch(self.pfix+'sublead_eta',  tagJets[1].eta)
         self.out.fillBranch(self.pfix+'sublead_phi',  tagJets[1].phi)
         self.out.fillBranch(self.pfix+'sublead_m',    tagJets[1].mass)

@@ -61,7 +61,9 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
     modules.extend( [MuonSelector( year ) ,
                     ElectronSelector( era = year , **options ),
                     PhotonSelector( year , apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
+                    PhotonSelector( year , apply_id = False , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
                     JetSelector( year , _defaultObjCfg, apply_id=True ),
+                    JetSelector( year , _defaultObjCfg, apply_id=False ),
                     VJJSelector(isData , year , signal=isSignal, finalState = fs)] )
 
     return modules
@@ -139,7 +141,6 @@ def main():
     #-- Set input files
     print(colors.fg.lightblue + '\n== Processing following files:' + colors.reset)
     for i in inputFiles: print(i)
-    print('')
 
     fwkJobReport=False
     haddFileName = None
@@ -152,7 +153,6 @@ def main():
     #-- Define modules to run
     modules=defineModules(opt.year,opt.isData, opt.isSignal, opt.finalState, opt.fpv)
     # print('My modules: ', mymodules)
-    print (opt.keep_and_drop)
     #call post processor
     p=PostProcessor(outputDir=".",
                     inputFiles=inputFiles,

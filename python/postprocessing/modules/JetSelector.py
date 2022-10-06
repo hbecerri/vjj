@@ -112,3 +112,6 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
 jetSelector2016 = lambda apply_id=True : JetSelector(2016,_defaultObjCfg, apply_id=apply_id)
 jetSelector2017 = lambda apply_id=True : JetSelector(2017,_defaultObjCfg, apply_id=apply_id)
 jetSelector2018 = lambda apply_id=True : JetSelector(2018,_defaultObjCfg, apply_id=apply_id)
+loosejetSelector2016 = lambda apply_id=False : JetSelector(2016,_defaultObjCfg, apply_id=apply_id)
+loosejetSelector2017 = lambda apply_id=False : JetSelector(2017,_defaultObjCfg, apply_id=apply_id)
+loosejetSelector2018 = lambda apply_id=False : JetSelector(2018,_defaultObjCfg, apply_id=apply_id)

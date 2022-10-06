@@ -20,7 +20,7 @@ class VJJSelector(Module):
         #self.sampleTag        = sampleTag
         self.vjjEvent         = VJJEvent(_defaultVjjCfg,finalState)
         self.gen_vjjEvent     = None 
-        if not isData and signal:
+        if not isData:# and signal:
             self.gen_vjjEvent=VJJEvent(_defaultGenVjjCfg,finalState)
  
         self.histos={}
@@ -123,7 +123,7 @@ class VJJSelector(Module):
         return None
 
 
-    def isGoodGenParticle(p,pid):
+    def isGoodGenParticle(self,p,pid):
         if abs(p.pdgId)!=pid                   : return False
         if abs(pid) == 22:
             if p.status!=1                                           : return False
@@ -131,11 +131,11 @@ class VJJSelector(Module):
             if p.pt< self.gen_vjjEvent.selCfg['min_photonPt']        : return False
             if abs(p.eta)> self.gen_vjjEvent.selCfg['max_photonEta'] : return False
         else:
-            if p.pt < self.gen_vjjEvent.selCfg['min_leptonPt']       : return False
-            if abs(p.eta) > self.gen_vjjEvent.selCfg['max_leptonEta']: return False
+             if p.pt < self.gen_vjjEvent.selCfg['min_leptonPt']       : return False
+             if abs(p.eta) > self.gen_vjjEvent.selCfg['max_leptonEta']: return False
         return True
 
-    def isGoodGenJet(p,vetoObjs):
+    def isGoodGenJet(self,p,vetoObjs):
         if p.pt < self.gen_vjjEvent.selCfg['min_jetPt']        : return False
         if abs(p.eta) > self.gen_vjjEvent.selCfg['max_jetEta'] : return False
         min_dr = min([obj.DeltaR(p) for obj in vetoObjs] or [2*self.gen_vjjEvent.selCfg['min_jetdr2v']])
@@ -166,8 +166,6 @@ class VJJSelector(Module):
         """generator-level specific analysis"""
 
         if self.isData : return False
-
-        print("estoy aqui")
 
         self.gen_vjjEvent.resetOutVars()
 
@@ -220,6 +218,7 @@ class VJJSelector(Module):
         else:
             pid = 22
             all_obj = Collection(event,'GenPart')
+
         good_obj = [p for p in all_obj if self.isGoodGenParticle(p,pid)]
 
 
@@ -238,7 +237,7 @@ class VJJSelector(Module):
 
         #jet selection
         all_genJets = Collection(event,'GenJet')
-        jets = [ j for j in all_genJets if isGoodGenJet(j,good_obj)]
+        jets = [ j for j in all_genJets if self.isGoodGenJet(j,good_obj)]
 
         #analyze v+2j event candidate
         isGoodV2J =  self.gen_vjjEvent.isGoodVJJ( boson, jets, arbTrigCats, fsCat ) 
@@ -250,7 +249,7 @@ class VJJSelector(Module):
     def reco_analyze(self,event):
         
         """reco-level specific analysis"""
-
+ 
         self.vjjEvent.resetOutVars()
 
         self.histos['cutflow'].Fill(0)
