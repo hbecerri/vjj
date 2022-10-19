@@ -108,6 +108,8 @@ python vjj_postproc.py -i root://cms-xrd-global.cern.ch//store/mc/RunIISummer20U
 #-- SUBMIT
 python vjj_crab.py submit
 
+python vjj_crab.py submit --year 2016 -S 22 --datasetkey SinglePhoton --samplelist ../python/samples/lists/NanoAODv9.lst
+
 #--year X <-> process only samples of year 'X'
 #-d X <-> process only the specific sample 'X'
 #--datasetkey X <-> process only samples whose names contain 'X'
