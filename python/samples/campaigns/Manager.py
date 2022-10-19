@@ -38,6 +38,7 @@ class Manager():
             ds = str(ds)
 #            print(ds)
             s = Sample(ds)
+            print(s)
             year = s.year()
             xsection = 0 if s.isData() else 1
             ntotal = 0
@@ -48,6 +49,7 @@ class Manager():
                     parent = s.GetParent().ds
                     self.js[ds]['parent'] = parent
                     isJsonModified = True
+                print(parent)
                 if s.isData():
                     xsection = 0
                 else:
@@ -235,6 +237,8 @@ class Manager():
 #		    print(cat)
 #		    print(lumi)
 		    #ntotal = 1
+                    print(ntotal)
+                    print(lumi*xsec/ntotal)
                     ret[cat][index] = lumi*xsec/ntotal
         return ret
 

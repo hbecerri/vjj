@@ -26,6 +26,20 @@
         "nevents": "4850200", 
         "unit": "pb", 
         "xsec": 6.275
+    },
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM": {
+        "err": 27.69,
+        "negweightfraction": "0.1643 +- 4.195e-11",
+        "nevents": "90947213",
+        "unit": "pb",
+        "xsec": 6404.0
+    },
+    "/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM":{
+        "err": 27.69,
+        "negweightfraction": "0.1643 +- 4.195e-11",
+        "nevents": "71839442",
+        "unit": "pb",
+        "xsec": 6404.0
     }, 
     "/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM": {
         "err": 0.2749, 
@@ -1224,7 +1238,21 @@
         "unit": "pb", 
         "xsec": 687.1
     }, 
-    "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
+    "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v1/MINIAODSIM":{
+        "err": 0.5174,
+        "negweightfraction": "4.013e-03 +- 6.204e-09",
+        "nevents": "43546000",
+        "unit": "pb",
+        "xsec": 687.1
+    },
+    "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v1/MINIAODSIM":{
+        "err": 0.5174,
+        "negweightfraction": "4.013e-03 +- 6.204e-09",
+        "nevents": "37505000",
+        "unit": "pb",
+        "xsec": 687.1
+    },
+   "/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM": {
         "err": 0.5174, 
         "negweightfraction": "4.026e-03 +- 5.354e-09", 
         "nevents": "9238400", 
@@ -1251,7 +1279,22 @@
         "nevents": "2147532", 
         "unit": "pb", 
         "xsec": 377.1
-    }, 
+    },  
+    "/WJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2/MINIAODSIM":{
+        "err": 286.2,
+        "negweightfraction": "0.000e+00 +- 0.000e+00",
+        "nevents": "28268221",
+        "unit": "pb",
+        "xsec": 67350.0
+    },
+    "/WJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2/MINIAODSIM":{
+        "err": 286.2,
+        "negweightfraction": "0.000e+00 +- 0.000e+00",
+        "nevents": "28268221",
+        "unit": "pb",
+        "xsec": 67350.0
+    },
+
     "/WJetsToLNu_Pt-100To250_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM": {
         "err": 1.535, 
         "negweightfraction": "3.148e-01 +- 3.223e-05", 

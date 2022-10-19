@@ -5,8 +5,10 @@ import numpy
 class Reader():
     def __init__(self , fname , scales ):
         with open(fname) as f:
+            print("aqui") 
             self.values = json.load( f )
         with open(scales) as f:
+            print("aqui") 
             scales_ = json.load(f)
             self.scales = {}
             for sample_name in scales_:

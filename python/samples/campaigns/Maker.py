@@ -72,9 +72,11 @@ class Maker:
     def get_sample_info(self , das):
         s = Sample(das)
         name = s.makeUniqueName()
-        
-        print(self.dir , das , name )
-        dir = os.path.join( self.dir , das.split('/')[1] , 'crab_' + name )
+        ispre = das.find('preVFP') 
+        if ispre !=-1:
+           dir = os.path.join( self.dir , das.split('/')[1] , 'crab_' + name + '_preVFP')
+        else: 
+           dir = os.path.join( self.dir , das.split('/')[1] , 'crab_' + name)
         if not os.path.exists( dir ):
             print('\033[91m the directory for sample {0} does not exist ({1}) \033[0m'.format(das,dir) )
             return {'weights':{'0':{'name':'nominal', 'total':0}} , 'size':0 , 'files':{} , 'filestat':{'nFile':0 ,'nOkFiles':0 ,  'nFilesWithError':0 , 'nFilesWithNoHisto':0 , 'nNoneFiles':0 , 'nNotExisting':0} , 'submit_datetime':str('')}

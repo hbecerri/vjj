@@ -6,7 +6,7 @@ drop ChsMET*
 drop FatJet*
 drop GenJetAK8*
 drop GenVisTau*
-drop RawMET*
+#drop RawMET*
 drop RawPuppiMET*
 drop SV*
 drop SubGenJetAK8*
@@ -16,6 +16,8 @@ drop TkMET*
 drop btagWeight*
 drop HTXS*
 drop genTtbarId*
+drop Muon_correctedDown_pt
+drop Muon_correctedUp_pt
 
 # keep Electron*
 # keep Muon*

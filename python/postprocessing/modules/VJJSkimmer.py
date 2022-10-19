@@ -24,9 +24,6 @@ class VJJSkimmer(Module):
         self.allWeights       = self.campaign.get_allWeightIndices(sample)
         self.nWeights         = len(self.allWeights)
         self.lumiWeights      = self.campaign.get_lumi_weight(sample)
-#        print("&&&&&&&&&&&&")
-#        print(self.lumiWeights)
-#        print("&&&&&&&&&&&&")
         self.xSection         = self.campaign.get_xsection(sample)
 	self.selCfg = copy.deepCopy(cfg)
 	self.fs = finalState
@@ -164,17 +161,14 @@ class VJJSkimmer(Module):
         if self.isData:
             pass
         else:
-            print("HOLAAAAA")
             self.out.fillBranch('vjj_xsection',self.xSection)
             lumiweights = []
             for windex in range(self.nWeights):
                 wid = self.allWeights[windex][1]
                 print(event.genvjj_wgt[ wid ])
 		print(self.lumiWeights[category][windex])
-#aqui estaba el error
                 lumiweights.append( event.genvjj_wgt[ wid ]*self.lumiWeights[category][windex] )
             self.out.fillBranch('vjj_lumiWeights' , lumiweights )
-##aqui termina el error
             wsf = event.vjj_photon_effWgt
             wsf_up = event.vjj_photon_effWgtUp
             wsf_down = event.vjj_photon_effWgtDn

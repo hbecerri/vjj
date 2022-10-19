@@ -449,11 +449,8 @@ class ReadComputeObservables:
             lumiweights = []
             for windex in range(self.nWeights):
                 wid = self.allWeights[windex][1]
-#                lumiweights.append(event.genWeight[wid]*self.lumiWeights[category][windex])
-##error aqui
                 lumiweights.append(event.genvjj_wgt[wid]*self.lumiWeights[category][windex])
             out.fillBranch('vjj_lumiWeights', lumiweights)
-##aqui acaba el error
             wsf = event.vjj_photon_effWgt
             wsf_up = event.vjj_photon_effWgtUp
             wsf_down = event.vjj_photon_effWgtDn

@@ -7,6 +7,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from VJJEvent import VJJEvent,_defaultVjjCfg,_defaultGenVjjCfg,_defaultVjjSkimCfg
 import numpy as np
 from TriggerLists import defineTriggerList
+from PhysicsTools.NanoAODTools.postprocessing.modules.common.muonScaleResProducer import *
 
 class VJJSelector(Module):
 
@@ -273,12 +274,15 @@ class VJJSelector(Module):
 
         if self.fs == 169:
             good_obj  = [all_muo[i] for i in good_muoIdx]       
+            if(len(good_obj)>0):
+                for i in range(0,len(good_obj)):
+                    good_obj[i].pt = good_obj[i].corrected_pt
         elif self.fs == 121:
             good_obj  = [all_ele[i] for i in good_eleIdx]       
         elif abs(self.fs) == 22:
             if len( good_phoIdx) > 0:
                 good_obj  = [all_pho[i] for i in [good_phoIdx[0]]]
-
+        
 
         bosonArbitration = self.BosonSelection(good_obj,self.fs,trig_cats)
 

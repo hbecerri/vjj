@@ -49,7 +49,7 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         return "mu"
 
     def isGood(self, mu):
-        if mu.pt < self.selCfg['min_leptonPt']          : return False
+        if mu.corrected_pt < self.selCfg['min_leptonPt']          : return False
         if abs( mu.eta ) > self.selCfg['max_leptonEta'] : return False
         min_dr = self.mindr_toVetoObjs( mu )
         if min_dr < self.selCfg['min_drVeto']           : return False
@@ -72,15 +72,15 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
             for k in SFs:
                 #average by luminosity in 2016
                 if self.era==2016:
-                    sfVal=self.evalSF(k, objAttrs=[m.eta, m.pt])
+                    sfVal=self.evalSF(k, objAttrs=[m.eta, m.corrected_pt])
 
-                    sfValGH=self.evalSF(k+'_gh', objAttrs=[m.eta,m.pt])
+                    sfValGH=self.evalSF(k+'_gh', objAttrs=[m.eta,m.corrected_pt])
                     w=16551.4/(16551.4+19323.4)
                     sfVal=(w*sfVal[0]+(1-w)*sfValGH[0],
                            np.sqrt( (w*sfVal[1])**2 + ((1-w)*sfValGH[1])**2 ) )
 
                 else:
-                    sfVal=self.evalSF(k, objAttrs=[m.pt,abs(m.eta)])
+                    sfVal=self.evalSF(k, objAttrs=[m.corrected_pt,abs(m.eta)])
 
                 SFs[k].append( sfVal )
 

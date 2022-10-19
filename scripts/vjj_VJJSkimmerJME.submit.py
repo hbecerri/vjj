@@ -38,7 +38,7 @@ MCsamples = ['GJets_SM_5f', #Signal
     'GJets_HT', #GJetsLO
     #'GJets_Pt-20To100','GJets_Pt-100To200','GJets_Pt-200To500','GJets_Pt-500To1000','GJets_Pt-1000To2000','GJets_Pt-2000To5000', #GJetsSherpaHighStat (2016) 
     #'GJets_Mjj', #SignalMGPythia500
-    'ToLL_0J','ToLL_1J','ToLL_2J','DY1JetsToLL','DY2JetsToLL','DY3JetsToLL','DY4JetsToLL','DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX','DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX', #DY
+    'ToLL_0J','ToLL_1J','ToLL_2J','DY1JetsToLL','DY2JetsToLL','DY3JetsToLL','DY4JetsToLL','DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX','DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8', #DY
     'DiPhoton', #DiPhoton
     'WJetsToLNu', 'WJetsToQQ_HT', #WJets
     'QCD_Pt', #QCD

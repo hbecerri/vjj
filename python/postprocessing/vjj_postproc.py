@@ -6,7 +6,9 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 from importlib import import_module
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from UserCode.VJJSkimmer.postprocessing.modules.VJJSelector import *
+#from PhysicsTools.NanoAODTools.postprocessing.modules.common.countHistogramsModule import *
 from PhysicsTools.NanoAODTools.postprocessing.modules.common.puWeightProducer import *
+from PhysicsTools.NanoAODTools.postprocessing.modules.common.muonScaleResProducer import *
 from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultObjCfg
 from UserCode.VJJSkimmer.postprocessing.modules.MuonSelector import *
 from UserCode.VJJSkimmer.postprocessing.modules.ElectronSelector import *
@@ -54,6 +56,7 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
         raise ValueError('isData and isSignal can not be True at the same time')
 
     modules=[]
+    modules.append( {2016:muonScaleRes2016 , 2017:muonScaleRes2017 , 2018:muonScaleRes2018}[year]() )
     if not isData:
         modules.append( {2016:puWeight_UL2016 , 2017:puAutoWeight_2017 , 2018:puAutoWeight_2018}[year]() )
 
