@@ -283,7 +283,6 @@ class VJJSelector(Module):
             if len( good_phoIdx) > 0:
                 good_obj  = [all_pho[i] for i in [good_phoIdx[0]]]
         
-
         bosonArbitration = self.BosonSelection(good_obj,self.fs,trig_cats)
 
         if bosonArbitration is None:
@@ -302,7 +301,6 @@ class VJJSelector(Module):
 
         self.histos['cutflow'].Fill(np.sign(fsCat)*1)
 
-
         #jet selection
         all_jets = Collection(event, "Jet")
         jetsIdx  =  event.vjj_jets
@@ -314,10 +312,10 @@ class VJJSelector(Module):
             if j.DeltaR(boson) < self.vjjEvent.selCfg['min_jetdr2v']: continue
             cleanJets.append(j)
         ####
-        
+         
         #analyze v+2j event candidate
         isGoodV2J =  self.vjjEvent.isGoodVJJ(boson, cleanJets, arbTrigCats, fsCat) 
-
+ 
         #add additional variables
         if abs(fsCat) == 22:
             self.vjjEvent.fillPhotonExtraBranches(good_obj[0])

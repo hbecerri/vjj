@@ -127,7 +127,7 @@ def create_config_files(outdir, fs):
     with open('auto_crab_cfg.py' , 'w') as f:
         f.write('from UserCode.VJJSkimmer.etc import crab_cfg\n')
         f.write('config = crab_cfg.config\n')
-        f.write("config.Data.outLFNDirBase = '/store/group/phys_smp/vbfA/Hugo/{0}'\n".format(outdir)) #USER-SPECIFIC PATH #Verify write permissions, e.g. with: [crab checkwrite --lfn=/store/group/phys_smp/vbfA --site T2_CH_CERN]
+        f.write("config.Data.outLFNDirBase = '/store/group/phys_smp/vbfA/Hugo_test3/{0}'\n".format(outdir)) #USER-SPECIFIC PATH #Verify write permissions, e.g. with: [crab checkwrite --lfn=/store/group/phys_smp/vbfA --site T2_CH_CERN]
         f.write("config.JobType.scriptArgs.append('--finalState={0}')\n".format(fs))
 
 

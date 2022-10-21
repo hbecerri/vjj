@@ -6,7 +6,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 from importlib import import_module
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from UserCode.VJJSkimmer.postprocessing.modules.VJJSelector import *
-#from PhysicsTools.NanoAODTools.postprocessing.modules.common.countHistogramsModule import *
+from PhysicsTools.NanoAODTools.postprocessing.modules.common.countHistogramsModule import *
 from PhysicsTools.NanoAODTools.postprocessing.modules.common.puWeightProducer import *
 from PhysicsTools.NanoAODTools.postprocessing.modules.common.muonScaleResProducer import *
 from UserCode.VJJSkimmer.postprocessing.modules.VJJEvent import _defaultObjCfg
@@ -58,15 +58,16 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
     modules=[]
     modules.append( {2016:muonScaleRes2016 , 2017:muonScaleRes2017 , 2018:muonScaleRes2018}[year]() )
     if not isData:
-        modules.append( {2016:puWeight_UL2016 , 2017:puAutoWeight_2017 , 2018:puAutoWeight_2018}[year]() )
+        modules.append( {2016:puWeight_UL2016 , 2017:puWeight_UL2017 , 2018:puWeight_UL2018}[year]() )
 
     options = { 'vpf' : '' if year != 2016 else 'pre' if preVFP else 'post'   }
-    modules.extend( [MuonSelector( year ) ,
+    modules.extend( [countHistogramsModule(),
+                    MuonSelector( year ) ,
                     ElectronSelector( era = year , **options ),
                     PhotonSelector( year , apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
                     PhotonSelector( year , apply_id = False , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
                     JetSelector( year , _defaultObjCfg, apply_id=True ),
-                    JetSelector( year , _defaultObjCfg, apply_id=False ),
+#                    JetSelector( year , _defaultObjCfg, apply_id=False ),
                     VJJSelector(isData , year , signal=isSignal, finalState = fs)] )
 
     return modules

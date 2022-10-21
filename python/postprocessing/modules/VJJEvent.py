@@ -169,10 +169,13 @@ class VJJEvent:
         #Cleaning wrt other objects is done in VJJSelector
 
         jets.sort(key = lambda x : x.pt, reverse=True)
+  
         tagJets=[j for j in jets if j.pt>self.selCfg['min_tagJetPt'] ]
+
         if len(tagJets)<2 : return False
         if tagJets[0].pt<self.selCfg['min_leadTagJetPt'] : return False
-
+ 
+         
         self.out.fillBranch(self.pfix+'lead_pt',      tagJets[0].pt)
         self.out.fillBranch(self.pfix+'lead_eta',     tagJets[0].eta)
         self.out.fillBranch(self.pfix+'lead_phi',     tagJets[0].phi)
