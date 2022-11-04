@@ -61,7 +61,8 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
         modules.append( {2016:puWeight_UL2016 , 2017:puWeight_UL2017 , 2018:puWeight_UL2018}[year]() )
 
     options = { 'vpf' : '' if year != 2016 else 'pre' if preVFP else 'post'   }
-    modules.extend( [countHistogramsModule(),
+    modules.extend( [
+                    countHistogramsModule(),
                     MuonSelector( year ) ,
                     ElectronSelector( era = year , **options ),
                     PhotonSelector( year , apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),

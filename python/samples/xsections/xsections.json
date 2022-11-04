@@ -1574,5 +1574,33 @@
         "nevents": "10000000",
         "unit": "pb",
         "xsec": 3.781
+    },
+    "/G1Jet_LHEGpT-250To400_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM": {
+        "err": 0.008507,
+        "negweightfraction": "3.022e-01 +- 5.440e-05",
+        "nevents": "10000000",
+        "unit": "pb",
+        "xsec": 3.781
+    },
+    "/G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM": {
+        "err": 0.008507,
+        "negweightfraction": "3.022e-01 +- 5.440e-05",
+        "nevents": "10000000",
+        "unit": "pb",
+        "xsec": 3.781
+    },
+    "/G1Jet_LHEGpT-675ToInf_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM": {
+        "err": 0.008507,
+        "negweightfraction": "3.022e-01 +- 5.440e-05",
+        "nevents": "10000000",
+        "unit": "pb",
+        "xsec": 3.781
+    },
+    "/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM:"{
+        "err": 0.008507,
+        "negweightfraction": "3.022e-01 +- 5.440e-05",
+        "nevents": "10000000",
+        "unit": "pb",
+        "xsec": 3.781
     }
 }

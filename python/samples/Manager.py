@@ -25,8 +25,8 @@ class Manager:
 #        self.all_samples[ '05SignalMGHerwig120' ] = SampleList( 'SignalMGHerwig120' , ['/GJets_SM_5f.*EWK.*herwig.*' , '/GJets_SM_5f.*(?P<interference>_INTERFERENCE_).*herwig.*'] , signal=True , color=4, binning = "interference" , regions=['gamma'])
 #        self.all_samples[ '06SignalNLOPythia' ] = SampleList( 'SignalNLOPythia' , ['/AJJ_EWK.*'] , signal=True, color=4 , regions=['gamma'])
 #        self.all_samples[ '12lljjherwig' ] = SampleList( 'LLJJherwig'  , ['.*LLJJ.*herwig.*' , '.*LLJJ.*(?P<interference>_INT_).*herwig.*' , '.*MLL[-_](?P<mll>[^_]*).*herwig.*' , '.*MJJ-(?P<mjj>[^_]*).*herwig.*' , '.*p[Tt]J-(?P<ptj>[^_]*).*herwig.*'] , 'mll' , color=5 , regions=['mm'])
-#        self.all_samples[ '13lljjpythia' ] = SampleList( 'LLJJPythai'  , ['.*LLJJ.*pythia.*' , '/LLJJ_(?P<interference>_INT_).*pythia.*' , '.*MLL[-_](?P<mll>[^_]*).*pythia.*' , '.*MJJ-(?P<mjj>[^_]*).*pythia.*' , '.*p[Tt]J-(?P<ptj>[^_]*).*pythia.*'] , 'mll' , color=5 , regions=['mm','ee'])
-        self.all_samples[ '11DYJetsNLO' ] = SampleList( 'DYJetsNLO' , [ '/DYJetsToLL_M-(?P<mrange>[^_]*).*amcatnlo.*']  , color=4 , regions=['ee','mm'])
+        self.all_samples[ '13lljjpythia' ] = SampleList( 'LLJJPythai'  , ['.*LLJJ.*pythia.*' , '/LLJJ_(?P<interference>_INT_).*pythia.*' , '.*MLL[-_](?P<mll>[^_]*).*pythia.*' , '.*MJJ-(?P<mjj>[^_]*).*pythia.*' , '.*p[Tt]J-(?P<ptj>[^_]*).*pythia.*'] , 'mll' , color=5 , regions=['mm','ee'])
+        self.all_samples[ '11DYJetsNLO' ] = SampleList( 'DYJetsNLO' , [ '/DYJetsToLL_M-(?P<mrange>[^_]*).*amcatnlo.*']  , color=4 , regions=['ee','mm','gamma','fake'])
         self.all_samples[ '14QCDEMEnriched' ] = SampleList( 'QCDEMEnriched' ,  [ '/QCD_Pt-(?P<ptrange>[^_]*)_EMEnriched.*' ] , 'ptrange' , color=14, regions=['ee','gamma','fake'])        
         self.all_samples[ '08GJetsLODR' ] = SampleList( 'GJetsLODR' , ['/GJets_DR-0p4_HT-(?P<htrange>[^_]*).*' ] , 'htrange' , color=2 , regions=['gamma','fake'])
         self.all_samples[ '21G1JetsNLO' ] = SampleList( 'GJetsNLO' , ['/G1Jet_LHEGpT-(?P<ptrange>[^_]*).*' ] , 'ptrange' , color=2 , regions=['gamma','fake'])
@@ -34,7 +34,7 @@ class Manager:
         self.all_samples[ '16ttg' ] = SampleList('TTG'  , [ '/TTGJets.*' ] , color=30 , regions=['gamma','fake'])
         self.all_samples[ '17wg' ] = SampleList( 'WG'  , ['/WGToLNuG_(?P<nj>..)J.*' ] ,'njets' , color=28 , regions=['gamma','fake'])
         self.all_samples[ '18wjlnu' ] = SampleList( 'WJetsToLNu'  , ['/WJetsToLNu_.*'] ,  color=41 , regions=['ee', 'mm'])
-
+        self.all_samples[ '19gg' ] = SampleList( 'GG'  , ['/DiPhotonJetsBox.*' ] ,'njets' , color=28 , regions=['gamma','fake'])
 #        self.all_samples[ '19wjqq' ] = SampleList( 'WJetsToQQ' , ['/WJetsToQQ_HT[-]{0,1}(?P<htrange>[^_]*).*' ] , 'htrange' , color=43 , regions=['gamma','fake'])
 #        self.all_samples[ '20zgto2lg' ] = SampleList( 'ZG' , ['.*ZGTo2LG.*' ] , color=38 , regions=['gamma','fake'])
 

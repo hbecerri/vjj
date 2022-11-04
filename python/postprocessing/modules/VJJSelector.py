@@ -248,7 +248,8 @@ class VJJSelector(Module):
 
 
     def reco_analyze(self,event):
-        
+       
+
         """reco-level specific analysis"""
  
         self.vjjEvent.resetOutVars()

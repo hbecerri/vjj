@@ -59,7 +59,6 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
         isIso=(mu.pfRelIso04_all<0.15)
         if not isIso : return False
-
         return True
 
     def fillSFs(self,muons,combined=True):

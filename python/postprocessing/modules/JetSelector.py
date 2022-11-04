@@ -46,6 +46,7 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
 
     def isGood(self, jet):
 
+
         """ checks if jet is good for analysis applying a series of standard cuts """
 
         if jet.pt < self.selCfg['min_jetPt']  :  return False
@@ -54,15 +55,16 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         min_dr = self.mindr_toVetoObjs(jet) 
         if min_dr < self.selCfg['min_drVeto'] :  return False
 
-
         #id bits
         #https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookNanoAOD#Jets
         #https://twiki.cern.ch/twiki/bin/view/CMS/PileupJetIDUL
         #pileup id (optional)
+
         if self.applyPUid:
             loosePuID = ((jet.puId > 0) if self.era == 2016 else (jet.puId > 3))
             if not loosePuID: 
                 return False
+
 
         #jet id in UL: only tight and tightLeptonVeto are supported. No loose anymore
         #tightleptonveto is recommended
@@ -70,9 +72,10 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         #https://twiki.cern.ch/twiki/bin/viewauth/CMS/JetID#nanoAOD_Flags
 
         if self.apply_id:
-            tightLeptonVeto=((jet.jetId > 6) if self.era == 2016 else (jet.jetId > 5))
+            tightLeptonVeto=((jet.jetId > 5) if self.era == 2016 else (jet.jetId > 5))
             if not tightLeptonVeto: 
                 return False
+
 
         #era-dependent (optional)
         if self.applyEraAdHocCuts :
