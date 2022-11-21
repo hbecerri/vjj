@@ -263,6 +263,7 @@ class VJJSelector(Module):
         all_pho        = Collection(event, "Photon")
         good_phoIdx    = event.vjj_photons 
         if self.fs == -22:  good_phoIdx  = event.vjj_loosePhotons
+        if self.fs == -22:  jetsIdx  = event.vjj_looseJets
 
         all_muo        = Collection(event, "Muon")
         good_muoIdx    = event.vjj_mus

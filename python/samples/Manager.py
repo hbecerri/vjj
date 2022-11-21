@@ -20,7 +20,8 @@ class Manager:
         self.all_samples[ '01PhotonData' ] = SampleList( "PhotonData"  , ['/SinglePhoton/.*' , '/EGamma/.*'] , 'era' , color=1 , regions=['gamma', 'fake'])
         self.all_samples[ '02DoubleMuData' ] = SampleList( "DoubleMuData"  , [ '/DoubleMuon/.*','/SingleMuon/.*' ] , 'era' , color=1 , regions=['mm'])
 
-#        self.all_samples[ '03SignalMGPythia500' ] = SampleList( 'SignalMGPythia500' , ['/GJets_Mjj-500.*pythia.*' , '/GJets_Mjj-500.*(?P<interference>_INTERFERENCE_).*pythia.*'] , signal=True , color=4 , binning = "interference" , regions=['gamma'])
+        self.all_samples[ '03SignalMGPythia500' ] = SampleList( 'GJets_SM' , ['/GJets_SM*' , '/GJets_SM_.*(?P<interference>_INTERFERENCE_).*pythia.*'] , signal=True , color=4 , binning = "interference" , regions=['gamma','fake'])
+        self.all_samples[ '03SignalMGPythia500' ] = SampleList('GJets_SM'  , [ '/GJets_SM.*' ] , color=30 , regions=['gamma','fake'])
 #        self.all_samples[ '04SignalMGPythia120' ] = SampleList( 'SignalMGPythia120' , ['/GJets_SM_5f.*EWK.*pythia.*' , '/GJets_SM_5f.*(?P<interference>_INTERFERENCE).*pythia.*'] , signal=True , color=4 , binning = "interference" , regions=['gamma'])
 #        self.all_samples[ '05SignalMGHerwig120' ] = SampleList( 'SignalMGHerwig120' , ['/GJets_SM_5f.*EWK.*herwig.*' , '/GJets_SM_5f.*(?P<interference>_INTERFERENCE_).*herwig.*'] , signal=True , color=4, binning = "interference" , regions=['gamma'])
 #        self.all_samples[ '06SignalNLOPythia' ] = SampleList( 'SignalNLOPythia' , ['/AJJ_EWK.*'] , signal=True, color=4 , regions=['gamma'])

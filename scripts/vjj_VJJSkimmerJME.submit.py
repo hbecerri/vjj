@@ -34,6 +34,7 @@ DATAsamples = ['SinglePhoton', 'DoubleEG', 'DoubleMuon', 'EGamma']
 
 #MC samples
 MCsamples = ['GJets_SM_5f', #Signal
+    'GJets_SM_4f',
     'GJets_Pt', #GJetsSherpa (NLO 2016)
     'GJets_HT', #GJetsLO
     #'GJets_Pt-20To100','GJets_Pt-100To200','GJets_Pt-200To500','GJets_Pt-500To1000','GJets_Pt-1000To2000','GJets_Pt-2000To5000', #GJetsSherpaHighStat (2016) 
@@ -96,7 +97,7 @@ def main():
     if opt.year > 0: yearsToProcess = [opt.year]
 
     print(colors.fg.orange + '== Only considering samples containing any of the following keys:' + colors.reset)
-    print(datasetsToProcess)
+    print('$$$$$$$$$$$',datasetsToProcess)
 
     step_par_name = 'Step' if opt.includeexistingfiles else 'chunkid'
     full_outdir = '{2}/{0}/{1}/'.format( opt.campaign , opt.outdir , opt.baseoutdir )
@@ -105,7 +106,7 @@ def main():
     total_jobs_with_no_input = 0
 
     actual_nfilesperchunk = 1 if opt.splitjobs else opt.nfilesperchunk
-    print(actual_nfilesperchunk)
+    print('###########',actual_nfilesperchunk)
 
     condor.append( ('executable' , '{0}/vjj_VJJSkimmerJME.sh'.format(os.getcwd()) ) )
     if opt.neventsperjob > 0 :
@@ -130,16 +131,17 @@ def main():
     condor.append( ('should_transfer_files' , 'YES' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
 
 #//--------------------------------------------
-
+    print(currentSampleList.all_datasets())
     for s,info in currentSampleList.all_datasets():
         n = Sample(s)
-        if opt.dataset != '' and n.makeUniqueName() != opt.dataset: continue
+        print(opt.dataset,' ',n.makeUniqueName())
+        if opt.dataset != '' and n.makeUniqueName().split('-')[0] not in opt.dataset and 'opt.year' not in n.makeUniqueName():
+           continue
         if len(datasetsToProcess)>0 and not any(substring in n.makeUniqueName() for substring in datasetsToProcess): 
-            # print('Ignoring dataset: ', n.makeUniqueName())
+            print('Ignoring dataset: ', n.makeUniqueName())
             continue #Ignore all non-selected datasets
         if len(yearsToProcess)>0 and not any(year == n.year() for year in yearsToProcess): continue #Ignore all non-selected years
-        # print(n.makeUniqueName())
-        # print(s)
+        print('**********',s,' ',campaign.get_dataset_info(s))
         totalFiles = len( campaign.get_dataset_info(s)['files'] )
         nsteps = totalFiles/opt.nfilesperchunk if totalFiles%opt.nfilesperchunk==0 else 1+totalFiles/opt.nfilesperchunk
         if opt.includeexistingfiles:

@@ -1,6 +1,6 @@
 from UserCode.VJJSkimmer.samples.Manager import Manager as SampleManager
 from UserCode.VJJSkimmer.samples.Sample import Sample
-from UserCode.VJJSkimmer.samples.xsections import xsec
+#from UserCode.VJJSkimmer.samples.xsections import xsec
 import os
 import json
 import numpy as np
@@ -42,18 +42,20 @@ class Manager():
             year = s.year()
             xsection = 0 if s.isData() else 1
             ntotal = 0
-            if not self.isSkimmedCampaign:
-                try:
-                    parent = str( self.js[ds]['parent'] )
-                except:
-                    parent = s.GetParent().ds
-                    self.js[ds]['parent'] = parent
-                    isJsonModified = True
-                print(parent)
-                if s.isData():
-                    xsection = 0
-                else:
-                    xsection = xsec[parent]
+            xsection = 0 #add by Ying
+#            if not self.isSkimmedCampaign:
+#                try:
+#                    parent = str( self.js[ds]['parent'] )
+#                except:
+#                    parent = s.GetParent().ds
+#                    self.js[ds]['parent'] = parent
+#                    isJsonModified = True
+#                print(parent)
+#                if s.isData():
+#                    xsection = 0
+#                else:
+#                    xsection = xsec[parent]
+
                 #ntotal = self.js[ds]['total']
                 
                         
@@ -187,10 +189,11 @@ class Manager():
         if s.isData():
             return 0
         else:
-            if 'parent' in self.js[ds]:
-                return xsec[ self.js[ds]['parent'] ]
-            else:
-                return 1
+            return 1 # add by Ying
+#            if 'parent' in self.js[ds]:
+#                return xsec[ self.js[ds]['parent'] ]
+#            else:
+#                return 1
 
     def get_xsection_avg(self, ds):
         try:

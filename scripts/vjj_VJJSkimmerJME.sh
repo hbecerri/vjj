@@ -25,8 +25,8 @@ ls -lart
 pwd;
 ls -lart ${workingdirectory}
 echo "[--> Output dir: ${10}]"
-/afs/cern.ch/user/h/hbecerri/public/Vjj/CMSSW_10_2_13/src/UserCode/VJJSkimmer/python/postprocessing/vjj_VJJSkimmerJME_postproc.py $@ --workingdir ${workingdirectory};
+/afs/cern.ch/user/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/python/postprocessing/vjj_VJJSkimmerJME_postproc.py $@ --workingdir ${workingdirectory};
 ls -lart ${workingdirectory}
-# cp ${workingdirectory}/*.root ${10} #/afs/cern.ch/work/n/ntonon/public/VBFphoton/CMSSW_10_2_27/src/UserCode/VJJSkimmer/scripts/july20w2/TEST/2016/SinglePhoton_2016_B_v2 #Copy output rootfile manually (obsolete)
+cp ${workingdirectory}/*.root ${10} #/afs/cern.ch/work/n/ntonon/public/VBFphoton/CMSSW_10_2_27/src/UserCode/VJJSkimmer/scripts/july20w2/TEST/2016/SinglePhoton_2016_B_v2 #Copy output rootfile manually (obsolete)
 rm -rf ${workingdirectory}/*.root
 ls -lart ${workingdirectory}
