@@ -127,14 +127,15 @@ def main():
     condor.append( ('requirements','( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )'))
     condor.append( ('stream_output' , True ) )
     condor.append( ('stream_error' , True ) )
-    condor.append( ('when_to_transfer_output' , 'ON_SUCCESS' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
     condor.append( ('should_transfer_files' , 'YES' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
+    condor.append( ('when_to_transfer_output' , 'ON_EXIT' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
+    condor.append( ('request_memory' , '30GB' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
 
 #//--------------------------------------------
     print(currentSampleList.all_datasets())
     for s,info in currentSampleList.all_datasets():
         n = Sample(s)
-        print(opt.dataset,' ',n.makeUniqueName())
+#        print(opt.dataset,' ',n.makeUniqueName())
         if opt.dataset != '' and n.makeUniqueName().split('-')[0] not in opt.dataset and 'opt.year' not in n.makeUniqueName():
            continue
         if len(datasetsToProcess)>0 and not any(substring in n.makeUniqueName() for substring in datasetsToProcess): 
@@ -145,12 +146,16 @@ def main():
         totalFiles = len( campaign.get_dataset_info(s)['files'] )
         nsteps = totalFiles/opt.nfilesperchunk if totalFiles%opt.nfilesperchunk==0 else 1+totalFiles/opt.nfilesperchunk
         if opt.includeexistingfiles:
+            print('!!!!!!!!!!','resbmit??????')
             condor.append( ('queue' ,  nsteps , s ) )
+            print(condor[-1][1])
             total_jobs += condor[-1][1]
+            print(total_jobs)
         else:
             filesToRun = []
             for step in range( nsteps ):
                 outfilepath,exists = make_hadd_fname( full_outdir , s , opt.nfilesperchunk , step )
+                print('############ ',outfilepath,exists)
                 if not exists or os.path.getsize(outfilepath)==0: #Will resubmit job if outfile does not exist OR size==0 (changed)
                     if exists: print('... Will resubmit failed job (filesize=0): ' + outfilepath)
                     else: print('... Will submit missing job: ' + outfilepath)
@@ -200,8 +205,10 @@ def main():
                 f.write( '{0:20s}= {1}\n'.format( l[0] , l[1] ) )
         if opt.includeexistingfiles:
             for lqueue in sorted( set(available_nqueues) , reverse=True ):
+                print('############# ',lqueue)
                 f.write( 'queue {0} DATASET from (\n'.format( lqueue ) )
                 for ll in condor:
+		    print('$$$$$$$$$$$ ',ll)
                     if ll[0] == 'queue' and ll[1] == lqueue:
                         if ll[2] in added_samples:
                             continue

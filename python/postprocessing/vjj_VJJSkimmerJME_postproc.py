@@ -61,6 +61,7 @@ def make_hadd_fname(outdir, ds, nfilesperchunk, chunkindex, fromevent = None, nE
 
     if fromevent and nEvents: haddFileName = "{0}/Skimmed_{1}_{2}_f{3}_n{4}.root".format(outdir, nfilesperchunk, chunkindex, fromevent, nEvents)
     else: haddFileName = "{0}/Skimmed_{1}_{2}.root".format(outdir, nfilesperchunk, chunkindex)
+#    else: haddFileName = "{0}/out_{1}_Skim.root".format(outdir, chunkindex+1)
 
     return haddFileName, os.path.exists(haddFileName)
 

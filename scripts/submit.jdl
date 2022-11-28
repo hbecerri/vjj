@@ -9,8 +9,8 @@ requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") 
 stream_output       = True
 stream_error        = True
 should_transfer_files= YES
-#when_to_transfer_output= ON_EXIT
-when_to_transfer_output= ON_SUCCESS
+when_to_transfer_output= ON_EXIT
+#when_to_transfer_output= ON_SUCCESS
 transfer_output_files = out.root
 transfer_output_remaps = "out.root = Skim_$(ClusterId)_$(ProcId).root"
 request_memory      = 30GB
