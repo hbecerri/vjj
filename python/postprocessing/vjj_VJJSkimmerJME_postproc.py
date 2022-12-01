@@ -53,14 +53,14 @@ def PrintBanner():
     return
 
 
-def make_hadd_fname(outdir, ds, nfilesperchunk, chunkindex, fromevent = None, nEvents = None):
+def make_hadd_fname(workingdir,outdir, ds, nfilesperchunk, chunkindex, fromevent = None, nEvents = None):
 
     s = Sample(ds)
     outdir = '{0}/{1}/{2}/'.format(outdir , s.year() , s.makeUniqueName())
     if not os.path.exists(outdir): os.makedirs(outdir)
 
     if fromevent and nEvents: haddFileName = "{0}/Skimmed_{1}_{2}_f{3}_n{4}.root".format(outdir, nfilesperchunk, chunkindex, fromevent, nEvents)
-    else: haddFileName = "{0}/Skimmed_{1}_{2}.root".format(outdir, nfilesperchunk, chunkindex)
+    else: haddFileName = workingdir+"/{0}/Skimmed_{1}_{2}.root".format(outdir, nfilesperchunk, chunkindex)
 #    else: haddFileName = "{0}/out_{1}_Skim.root".format(outdir, chunkindex+1)
 
     return haddFileName, os.path.exists(haddFileName)
@@ -182,15 +182,16 @@ def main():
 
 
     #-- Set output
-    if opt.firstEntry : haddFileName, exists = make_hadd_fname(opt.outdir, opt.dataSet, opt.nfilesperchunk, opt.chunkindex, opt.firstEntry, opt.maxEntries)
-    else: haddFileName, exists = make_hadd_fname(opt.outdir, opt.dataSet, opt.nfilesperchunk, opt.chunkindex)
+    if opt.firstEntry : haddFileName, exists = make_hadd_fname(opt.workingdir,opt.outdir, opt.dataSet, opt.nfilesperchunk, opt.chunkindex, opt.firstEntry, opt.maxEntries)
+    else: haddFileName, exists = make_hadd_fname(opt.workingdir,opt.outdir, opt.dataSet, opt.nfilesperchunk, opt.chunkindex)
+#    haddFileName=opt.workingdir+haddFileName
     print(colors.fg.lightblue + '\n== Creating output file:' + colors.reset)
     print(haddFileName + '\n')
     if exists: print(colors.fg.red + "The output file already exists, it will be overwritten : {0}\n".format(haddFileName) + colors.reset)
 
     #-- Cut formula for event preselection (do not process further uninteresting events) #Do not use, cf. below
     # cut = None
-    cut = 'vjj_njets>=2 && vjj_fs!=0 && vjj_trig>0' #NB: speed up processing
+    cut = 'vjj_njets>=2 && vjj_fs!=0 && vjj_trig>0 && vjj_jj_m>350' #NB: speed up processing
 
     #-- Call post-processor
     p = PostProcessor(outputDir=opt.workingdir, #Dir where to store individual output files

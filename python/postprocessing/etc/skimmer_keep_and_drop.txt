@@ -1,5 +1,6 @@
 drop *
 keep vjj*
-keep LHE*
+keep *LHE*Weight
+keep Generator_weight
 keep event #event number (for debugging)
 #For UL

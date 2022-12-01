@@ -30,13 +30,13 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 #-- Define samples to process #Empty <-> will process all datasets; ['a','b'] <-> will process only datasets whose names contain (a || b)
 
 #Data samples
-DATAsamples = ['SinglePhoton', 'DoubleEG', 'DoubleMuon', 'EGamma']
+DATAsamples = ['SinglePhoton', 'DoubleEG', 'DoubleMuon', 'EGamma',"Photon"]
 
 #MC samples
 MCsamples = ['GJets_SM_5f', #Signal
     'GJets_SM_4f',
     'GJets_Pt', #GJetsSherpa (NLO 2016)
-    'GJets_HT', #GJetsLO
+    'G1Jet_LHEGpT', #GJetsLO
     #'GJets_Pt-20To100','GJets_Pt-100To200','GJets_Pt-200To500','GJets_Pt-500To1000','GJets_Pt-1000To2000','GJets_Pt-2000To5000', #GJetsSherpaHighStat (2016) 
     #'GJets_Mjj', #SignalMGPythia500
     'ToLL_0J','ToLL_1J','ToLL_2J','DY1JetsToLL','DY2JetsToLL','DY3JetsToLL','DY4JetsToLL','DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX','DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8', #DY
@@ -68,7 +68,7 @@ def main():
     parser.add_argument('--baseoutdir' , dest='baseoutdir' , help='the base directory to write output files' , default='/eos/cms/store/group/phys_smp/vbfA/skimmed_ntuples' , type=str) #/eos/cms/store/group/phys_smp/vbfA/skimmed_ntuples #/eos/user/n/ntonon/condor_outputs
     parser.add_argument('-o' , '--outdir',     dest='outdir',   help='output directory name. it will be added at the end of the baseoutdir',  default='outputs_'+current_time, type=str)
     parser.add_argument('-l', '--logdir',     dest='logdir',   help='logdir',  default='condor_'+current_time, type=str)
-    parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='microcentury', choices=['espresso' ,'microcentury','longlunch','workday','tomorrow','testmatch','nextweek'], type=str)
+    parser.add_argument('--flavour', dest='flavour',   help='job-flavour',  default='tomorrow', choices=['espresso' ,'microcentury','longlunch','workday','tomorrow','testmatch','nextweek'], type=str)
     parser.add_argument('--outfilename', dest='outfilename',   help='the name of the submit file',  default='vjj_VJJSkimmerJME.submit' , type=str)
     parser.add_argument('--includeexistingfiles', dest='includeexistingfiles',   help='ignore if an output file exists and resubmit the job',  default=False , action='store_true')
     parser.add_argument('--splitjobs', dest='splitjobs',   help='set nfilesperchunk=1 and run for the remaining jobs',  default=False , action='store_true')
@@ -127,16 +127,22 @@ def main():
     condor.append( ('requirements','( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )'))
     condor.append( ('stream_output' , True ) )
     condor.append( ('stream_error' , True ) )
+    condor.append( ('max_transfer_output_mb' , '4000' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
     condor.append( ('should_transfer_files' , 'YES' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
     condor.append( ('when_to_transfer_output' , 'ON_EXIT' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
-    condor.append( ('request_memory' , '30GB' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
+    condor.append( ('transfer_output_files' , 'out.root' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
+    condor.append( ('transfer_output_remaps' , '"out.root=Skim_$(ClusterId)_$(ProcId).root"' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
+#    condor.append( ('output_destination' , 'root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(ClusterId)/' ) ) 
+#    condor.append( ('MY.XRDCP_CREATE_DIR' , 'True' ) ) 
+    condor.append( ('request_memory' , '30GB' ) ) 
 
 #//--------------------------------------------
     print(currentSampleList.all_datasets())
     for s,info in currentSampleList.all_datasets():
         n = Sample(s)
-#        print(opt.dataset,' ',n.makeUniqueName())
-        if opt.dataset != '' and n.makeUniqueName().split('-')[0] not in opt.dataset and 'opt.year' not in n.makeUniqueName():
+        print(n.makeUniqueName().split('_')[0],' ',n.makeUniqueName().split('_')[1])
+        if opt.dataset != '' and n.makeUniqueName().split('-')[0] not in opt.dataset: #for MC
+#        if opt.dataset != '' and n.makeUniqueName().split('_')[0] not in opt.dataset 'opt.year' not in n.makeUniqueName(): # for data
            continue
         if len(datasetsToProcess)>0 and not any(substring in n.makeUniqueName() for substring in datasetsToProcess): 
             print('Ignoring dataset: ', n.makeUniqueName())
@@ -154,7 +160,7 @@ def main():
         else:
             filesToRun = []
             for step in range( nsteps ):
-                outfilepath,exists = make_hadd_fname( full_outdir , s , opt.nfilesperchunk , step )
+                outfilepath,exists = make_hadd_fname( "./",full_outdir , s , opt.nfilesperchunk , step )
                 print('############ ',outfilepath,exists)
                 if not exists or os.path.getsize(outfilepath)==0: #Will resubmit job if outfile does not exist OR size==0 (changed)
                     if exists: print('... Will resubmit failed job (filesize=0): ' + outfilepath)
@@ -167,7 +173,7 @@ def main():
                                     continue
                                 newjobindex = step*opt.nfilesperchunk+i
                                 if opt.neventsperjob != -1: #Split by nevents
-                                    _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex )
+                                    _,exists1 = make_hadd_fname( "./",full_outdir , s , 1 , newjobindex )
                                     if exists1:
                                         continue
                                     fIn = ROOT.TFile.Open( inputfilenames[i] )
@@ -175,11 +181,11 @@ def main():
                                     ntotalevents = tIn.GetEntries()
                                     fIn.Close()
                                     for start in range(0, ntotalevents , opt.neventsperjob ):
-                                        _,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex , start , opt.neventsperjob )
+                                        _,exists1 = make_hadd_fname( "./",full_outdir , s , 1 , newjobindex , start , opt.neventsperjob )
                                         if not exists1:
                                             filesToRun.append( [newjobindex , start] )
                                 else:
-                                    outpath1,exists1 = make_hadd_fname( full_outdir , s , 1 , newjobindex )
+                                    outpath1,exists1 = make_hadd_fname( "./",full_outdir , s , 1 , newjobindex )
                                     if not exists1 or os.path.getsize(outpath1)==0:
                                         filesToRun.append( newjobindex )
 
