@@ -156,7 +156,7 @@ def main():
 #           print('############TEST###########',opt.dataset,n.makeUniqueName(),' ',str(opt.year))
            if str(opt.year) not in n.makeUniqueName() and opt.year != 2016:
               continue
-           if opt.dataset != '' and n.makeUniqueName().split('-')[0] not in opt.dataset: #for MC
+           if opt.dataset != '' and n.makeUniqueName().split('-')[0] not in opt.dataset : #for MC
                 continue
 
 	if data_flag:
@@ -235,7 +235,7 @@ def main():
         if opt.includeexistingfiles:
             for lqueue in sorted( set(available_nqueues) , reverse=True ):
                 print('############# ',lqueue)
-                f.write( 'queue {0} DATASET from (\n'.format( lqueue ) )
+                f.write( 'queue {0} CAMPAIGN DATASET from (\n'.format( lqueue ) )
                 for ll in condor:
 		    print('$$$$$$$$$$$ ',ll)
                     if ll[0] == 'queue' and ll[1] == lqueue:
@@ -246,13 +246,13 @@ def main():
                 f.write( ")\n" )
         else:
             if opt.neventsperjob < 0 :
-                f.write( 'queue DATASET,{0} from (\n'.format( step_par_name ) )
+                f.write( 'queue CAMPAIGN DATASET,{0} from (\n'.format( step_par_name ) )
                 for l in condor:
                     if l[0] == 'queue_list':
                         for index in l[1]:
                             f.write('\t{0} {1} {2}\n'.format( opt.campaign,l[2] , index ) )
             else:
-                f.write( 'queue DATASET,{0},FIRSTEVENT from (\n'.format( step_par_name ) )
+                f.write( 'queue CAMPAIGN DATASET,{0},FIRSTEVENT from (\n'.format( step_par_name ) )
                 for l in condor:
                     if l[0] == 'queue_list':
                         for index in l[1]:
