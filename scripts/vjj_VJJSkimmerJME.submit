@@ -1,8 +1,8 @@
 executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
 arguments           = -c PhotonData_18 -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o ./PhotonData_18/TEST/
-output              = condor_01Dec2022_18h07m49/$(ClusterId).$(ProcId).out
-error               = condor_01Dec2022_18h07m49/$(ClusterId).$(ProcId).err
-log                 = condor_01Dec2022_18h07m49/$(ClusterId).log
+output              = condor_01Dec2022_18h03m50/$(ClusterId).$(ProcId).out
+error               = condor_01Dec2022_18h03m50/$(ClusterId).$(ProcId).err
+log                 = condor_01Dec2022_18h03m50/$(ClusterId).log
 +JobFlavour         = "tomorrow"
 transfer_executable = False
 requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
