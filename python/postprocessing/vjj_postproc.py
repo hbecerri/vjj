@@ -61,6 +61,7 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
         modules.append( {2016:puWeight_UL2016 , 2017:puWeight_UL2017 , 2018:puWeight_UL2018}[year]() )
 
     options = { 'vpf' : '' if year != 2016 else 'pre' if preVFP else 'post'   }
+    print('options ',options) 
     modules.extend( [
                     countHistogramsModule(),
                     MuonSelector( year ) ,
@@ -68,7 +69,7 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
                     PhotonSelector( year , apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
                     PhotonSelector( year , apply_id = False , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
                     JetSelector( year , _defaultObjCfg, apply_id=True ),
-#                    JetSelector( year , _defaultObjCfg, apply_id=False ),
+                    JetSelector( year , _defaultObjCfg, apply_id=False ),
                     VJJSelector(isData , year , signal=isSignal, finalState = fs)] )
 
     return modules

@@ -34,8 +34,8 @@ _defaultGenVjjCfg={'max_jetEta':4.7,
 
 
 _defaultVjjSkimCfg={
-                'min_subleadTagJetPt':50,
-                'min_leadTagJetPt':50,
+                'min_subleadTagJetPt':30,
+                'min_leadTagJetPt':30,
                 'min_mjj':200,
 		'min_photonPt_HVPt16': 175,
 		'min_photonPt_HVPt': 200,

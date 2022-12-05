@@ -113,13 +113,12 @@ class VJJSkimmerJME(Module):
             self.hTotals.GetXaxis().SetBinLabel( wid + 1 , self.allWeights[wid][0] )
 
         #-- Init BDTReader
-        self.BDTReader = BDTReader()
-        self.BDTReader.Setup()
-        # self.BDTReader = ROOT.BDTReader(False, True, False) #Only consider 'AN2019' BDTs
-        # self.BDTReader.Init(inputTree)
+#        self.BDTReader = BDTReader()
+#        self.BDTReader.Setup()
 
         #-- Create 'ReadComputeObservables' object (used to create/fill branches and compute relevant observables)
-        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.allWeights, self.nWeights, self.lumiWeights, self.xSection, self.BDTReader.outputNames)
+#        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.allWeights, self.nWeights, self.lumiWeights, self.xSection, self.BDTReader.outputNames)
+        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.allWeights, self.nWeights, self.lumiWeights, self.xSection)
 
 
  #####  #####    ##   #    #  ####  #    # ######  ####
@@ -237,7 +236,7 @@ class VJJSkimmerJME(Module):
                 self.obsMaker.FillEventShapeObservables(self.nomOutput, v, tagJets)
 
             #Compute MVA variables
-            self.obsMaker.FillMVAObservables(self.nomOutput, event, self.BDTReader)
+#            self.obsMaker.FillMVAObservables(self.nomOutput, event, self.BDTReader)
 
         #-- Loop on JEC variations
         for ivar, JMEvar in enumerate(self.JMEvars):
@@ -272,7 +271,7 @@ class VJJSkimmerJME(Module):
             self.obsMaker.FillCategory(self.outputs_JMEvars[ivar], category_JMEvar) #Fill category flag branch
 
             #-- Compute MVA variables
-            self.obsMaker.FillMVAObservables(self.outputs_JMEvars[ivar], event, self.BDTReader)
+#            self.obsMaker.FillMVAObservables(self.outputs_JMEvars[ivar], event, self.BDTReader)
 
             #-- Manually fill the JME tree
             self.outputs_JMEvars[ivar].fill()
