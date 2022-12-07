@@ -127,7 +127,6 @@ class VJJSkimmerJME(Module):
  #    # #####  ###### #  # # #      #    # #           #
  #    # #   #  #    # #   ## #    # #    # #      #    #
  #####  #    # #    # #    #  ####  #    # ######  ####
-
         self.inputTree = inputTree #Input tree
 
         #-- Nominal output tree #Fill/Write operations handled internally by NanoAODTools framework

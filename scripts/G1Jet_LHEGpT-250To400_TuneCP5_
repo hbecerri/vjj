@@ -1,0 +1,38 @@
+/pool/condor/dir_148966
+/afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts
+3.10.0-1160.76.1.el7.x86_64
+slc7_amd64_gcc700
+Linux b7s14p9633.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+directory: /pool/condor/dir_148966
+total 28
+drwxr-xr-x. 29 condor condor 4096 Dec  7 19:15 ..
+-rw-r--r--.  1 condor condor 7525 Dec  7 19:15 .machine.ad
+-rw-r--r--.  1 condor condor 7586 Dec  7 19:15 .job.ad
+-rw-------.  1 yian   zh     3048 Dec  7 19:15 yian.cc
+-rwx------.  1 yian   zh       48 Dec  7 19:15 .chirp.config
+drwx------.  3 yian   zh       25 Dec  7 19:15 var
+drwx------.  4 yian   zh      126 Dec  7 19:15 .
+drwx------.  3 yian   zh       30 Dec  7 19:15 tmp
+/pool/condor/dir_148966
+total 28
+drwxr-xr-x. 29 condor condor 4096 Dec  7 19:15 ..
+-rw-r--r--.  1 condor condor 7525 Dec  7 19:15 .machine.ad
+-rw-r--r--.  1 condor condor 7586 Dec  7 19:15 .job.ad
+-rw-------.  1 yian   zh     3048 Dec  7 19:15 yian.cc
+-rwx------.  1 yian   zh       48 Dec  7 19:15 .chirp.config
+drwx------.  3 yian   zh       25 Dec  7 19:15 var
+drwx------.  4 yian   zh      126 Dec  7 19:15 .
+drwx------.  3 yian   zh       30 Dec  7 19:15 tmp
+[--> Output dir: .//GJetsNLO_fake_all/TEST/]
+0: /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+1: -c
+2: GJetsNLO_fake_all
+3: -d
+4: /G1Jet_LHEGpT-250To400_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM
+5: --nfilesperchunk
+6: 1
+7: --chunkindex
+8: 0
+9: -o
+10: .//GJetsNLO_fake_all/TEST/
+11: -S

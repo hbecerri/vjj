@@ -2,5 +2,9 @@ drop *
 keep vjj*
 keep *LHE*Weight
 keep Generator_weight
+keep Photon_vidNestedWPBitmap
+keep Photon_pt
+keep Photon_eta
+keep Photon_phi
 keep event #event number (for debugging)
 #For UL

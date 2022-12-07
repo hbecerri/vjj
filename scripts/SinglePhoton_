@@ -1,0 +1,117 @@
+/pool/condor/dir_65391
+/afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts
+3.10.0-1160.80.1.el7.x86_64
+slc7_amd64_gcc700
+Linux b7s13p3338.cern.ch 3.10.0-1160.80.1.el7.x86_64 #1 SMP Tue Nov 8 15:48:59 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+directory: /pool/condor/dir_65391
+total 28
+drwxr-xr-x. 28 condor condor 4096 Dec  7 21:01 ..
+-rw-r--r--.  1 condor condor 7741 Dec  7 21:01 .machine.ad
+-rw-r--r--.  1 condor condor 6660 Dec  7 21:01 .job.ad
+-rw-------.  1 yian   zh     3048 Dec  7 21:01 yian.cc
+-rwx------.  1 yian   zh       48 Dec  7 21:01 .chirp.config
+drwx------.  3 yian   zh       25 Dec  7 21:01 var
+drwx------.  4 yian   zh      126 Dec  7 21:01 .
+drwx------.  3 yian   zh       30 Dec  7 21:01 tmp
+/pool/condor/dir_65391
+total 28
+drwxr-xr-x. 28 condor condor 4096 Dec  7 21:01 ..
+-rw-r--r--.  1 condor condor 7741 Dec  7 21:01 .machine.ad
+-rw-r--r--.  1 condor condor 6660 Dec  7 21:01 .job.ad
+-rw-------.  1 yian   zh     3048 Dec  7 21:01 yian.cc
+-rwx------.  1 yian   zh       48 Dec  7 21:01 .chirp.config
+drwx------.  3 yian   zh       25 Dec  7 21:01 var
+drwx------.  4 yian   zh      126 Dec  7 21:01 .
+drwx------.  3 yian   zh       30 Dec  7 21:01 tmp
+[--> Output dir: .//PhotonData_fake_16/TEST/]
+0: /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+1: -c
+2: PhotonData_fake_16
+3: -d
+4: /SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD
+5: --nfilesperchunk
+6: 1
+7: --chunkindex
+8: 1
+9: -o
+10: .//PhotonData_fake_16/TEST/
+11: -S
+Adding file/pool/condor/dir_65391/out_9_Skim.root
+MergingTotalNumbers
+MergingEvents
+MergingRuns
+MergingParameterSets
+MergingLuminosityBlocks
+MergingMetaData
+MergingnEventsGenWeighted
+Merginguntagged
+MergingnEvents
+Mergingnwgts
+Mergingcutflow
+
+[43m                                           [0m
+[33m
+--- Running VJJSkimmerJME (via vjj_VJJSkimmerJME_postproc.py) ---[0m
+
+[43m                                           [0m
+
+dataset name is /SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD
+year, isData and isSignal are set from the dataset name to 2016, True and False
+True
+[94m
+== Applying lumi mask: [0m
+/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Legacy_2016/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt
+
+isjson
+['PhotonData']
+('/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD', '/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD', 'SinglePhoton_2016_H_v1')
+('/SinglePhoton/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD', 1, 1, 9, 9)
+[94m
+== Processing following files:[0m
+/eos/cms/store/group/phys_smp/vbfA/Hugo_test/crab/fake/SinglePhoton/crab_SinglePhoton_2016_H_v1/221116_111911/0000/out_9.root
+[94m
+== JEC variations: [0m
+['TotalUp', 'TotalDown', 'JERUp', 'JERDown']
+
+('finale state:', -22)
+[94m
+== Creating output file:[0m
+/pool/condor/dir_65391/.//PhotonData_fake_16/TEST//2016/SinglePhoton_2016_H_v1//Skimmed_1_1.root
+
+('finale state:', -22)
+/pool/condor/dir_65391
+Will write selected trees to /pool/condor/dir_65391
+Pre-select 19668 entries out of 102054 (19.27%)
+Processed    10000/   19668 entries, 50.84% (elapsed time    20.0s, curr speed    0.499 kHz, avg speed    0.499 kHz), accepted     6248/   10001 events (62.47%)
+Processed 19668 preselected entries from /eos/cms/store/group/phys_smp/vbfA/Hugo_test/crab/fake/SinglePhoton/crab_SinglePhoton_2016_H_v1/221116_111911/0000/out_9.root (102054 entries). Finally selected 12596 entries
+Done /pool/condor/dir_65391/out_9_Skim.root
+Total time 50.1 sec. to process 102054 events. Rate = 2035.3 Hz.
+[01m[33m
+... DONE ![0m
+total 15588
+drwxr-xr-x. 28 condor condor     4096 Dec  7 21:01 ..
+-rw-r--r--.  1 condor condor     7741 Dec  7 21:01 .machine.ad
+-rw-r--r--.  1 condor condor     6660 Dec  7 21:01 .job.ad
+-rwx------.  1 yian   zh           48 Dec  7 21:01 .chirp.config
+drwx------.  3 yian   zh           25 Dec  7 21:01 var
+drwx------.  3 yian   zh           30 Dec  7 21:01 tmp
+drwxr-xr-x.  3 yian   zh           26 Dec  7 21:01 PhotonData_fake_16
+-rw-------.  1 yian   zh         5724 Dec  7 21:01 yian.cc
+drwx------.  5 yian   zh          183 Dec  7 21:01 .
+-rw-r--r--.  1 yian   zh     15926167 Dec  7 21:02 out_9_Skim.root
+total 15588
+drwxr-xr-x. 28 condor condor     4096 Dec  7 21:01 ..
+-rw-r--r--.  1 condor condor     7741 Dec  7 21:01 .machine.ad
+-rw-r--r--.  1 condor condor     6660 Dec  7 21:01 .job.ad
+-rwx------.  1 yian   zh           48 Dec  7 21:01 .chirp.config
+drwx------.  3 yian   zh           25 Dec  7 21:01 var
+drwx------.  3 yian   zh           30 Dec  7 21:01 tmp
+drwxr-xr-x.  3 yian   zh           26 Dec  7 21:01 PhotonData_fake_16
+-rw-------.  1 yian   zh         5724 Dec  7 21:01 yian.cc
+-rw-r--r--.  1 yian   zh     15926167 Dec  7 21:02 out.root
+drwx------.  5 yian   zh          176 Dec  7 21:02 .
+directory .//PhotonData_fake_16/TEST/
+total 0
+drwxr-xr-x. 3 yian zh 44 Dec  7 21:01 2016
+drwxr-xr-x. 3 yian zh 26 Dec  7 21:01 ..
+drwxr-xr-x. 3 yian zh 26 Dec  7 21:01 .

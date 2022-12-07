@@ -16,9 +16,9 @@ class Manager:
 
     def __init__(self , lst , update_html=False):
         self.all_samples = {}
-        self.all_samples[ '00DoubleEGData' ] = SampleList( "DoubleEGData"  , ['/SingleElectron/.*', '/DoubleEG/.*' , '/EGamma/.*' ] , 'era' , color=1 , regions=[ 'ee'])
+        self.all_samples[ '00DoubleEGData' ] = SampleList( "DoubleEGData"  , [ '/DoubleEG/.*' , '/EGamma/.*' ] , 'era' , color=1 , regions=[ 'ee'])
         self.all_samples[ '01PhotonData' ] = SampleList( "PhotonData"  , ['/SinglePhoton/.*' , '/EGamma/.*'] , 'era' , color=1 , regions=['gamma', 'fake'])
-        self.all_samples[ '02DoubleMuData' ] = SampleList( "DoubleMuData"  , [ '/DoubleMuon/.*','/SingleMuon/.*' ] , 'era' , color=1 , regions=['mm'])
+        self.all_samples[ '02DoubleMuData' ] = SampleList( "DoubleMuData"  , [ '/DoubleMuon/.*' ] , 'era' , color=1 , regions=['mm'])
 
         self.all_samples[ '03SignalMGPythia' ] = SampleList('GJets_SM'  , [ '/GJets_SM*' ] , color=30 , regions=['gamma','fake'])
 #        self.all_samples[ '03SignalMGPythia16' ] = SampleList( 'GJets_SM_APV' ,  [ '/GJets_SM*/*APV*' ] ,signal=True, color=14, regions=['gamma','fake'])        

@@ -1,0 +1,142 @@
+/pool/condor/dir_22880
+/afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts
+3.10.0-1160.76.1.el7.x86_64
+slc7_amd64_gcc700
+Linux b7s04p1504.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linudidirectory: /pool/condor/dir_22880
+total 40
+-rw-r--r--.  1 condor condor 6665 Dec  6 21:16 .job.ad
+drwxr-xr-x. 36 condor condor 4096 Dec  6 21:16 ..
+-rw-r--r--.  1 condor condor 7821 Dec  6 21:16 .machine.ad
+-rw-------.  1 yian   zh     3048 Dec  6 21:16 yian.cc
+-rwx------.  1 yian   zh       48 Dec  6 21:16 .chirp.config
+drwx------.  3 yian   zh     4096 Dec  6 21:16 var
+drwx------.  4 yian   zh     4096 Dec  6 21:16 .
+drwx------.  3 yian   zh     4096 Dec  6 21:16 tmp
+/pool/condor/dir_22880
+total 40
+-rw-r--r--.  1 condor condor 6665 Dec  6 21:16 .job.ad
+drwxr-xr-x. 36 condor condor 4096 Dec  6 21:16 ..
+-rw-r--r--.  1 condor condor 7821 Dec  6 21:16 .machine.ad
+-rw-------.  1 yian   zh     3048 Dec  6 21:16 yian.cc
+-rwx------.  1 yian   zh       48 Dec  6 21:16 .chirp.config
+drwx------.  3 yian   zh     4096 Dec  6 21:16 var
+drwx------.  4 yian   zh     4096 Dec  6 21:16 .
+drwx------.  3 yian   zh     4096 Dec  6 21:16 tmp
+[--> Output dir: .//GJetsNLO_fake_all/TEST/]
+0: /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+1: -c
+2: GJetsNLO_fake_all
+3: -d
+4: /G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM
+5: --nfilesperchunk
+6: 1
+7: --chunkindex
+8: 3
+9: -o
+10: .//GJetsNLO_fake_all
+[
+[43m                                           [0m
+[33m
+--- Running VJJSkimmerJME (via vjj_VJJSkimmerJME_postproc.py) ---[0m
+
+[43m                                           [0m
+
+dataset name is /G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM
+year, isData and isSignal are set from the dataset name to 2017, False and False
+False
+isjson
+['GJetsNLO']
+('/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM', '/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM', 'G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1')
+('/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM', 1, 4, 6, 6)
+[94m
+== Processing following files:[0m
+/eos/cms/store/group/phys_smp/vbfA/Hugo_test/crab/fake/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/crab_G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1/221116_145048/0000/out_3.root
+[94m
+== JEC variations: [0m
+['TotalUp', 'TotalDown', 'JERUp', 'JERDown']
+
+('finale state:', -22)
+JEC : Fall17_17Nov2017_V32_MC	 JER : Fall17_V3_MC
+MET branch : MET
+[94m
+== Creating output file:[0m
+/pool/condor/dir_48960/.//GJetsNLO_fake_all/TEST//2017/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1//Skimmed_1_4.root
+
+('finale state:', -22)
+/pool/condor/dir_48960
+Will write selected trees to /pool/condor/dir_48960
+Loading jet energy scale (JES) uncertainties from file '/pool/condor/dir_48960/tmp/tmp6kfvba/Fall17_17Nov2017_V32_MC_Uncertainty_AK4PFchs.txt'
+Loading jet energy resolutions (JER) from file '/pool/condor/dir_48960/tmp/tmpesoQ70/Fall17_V3_MC_PtResolution_AK4PFchs.txt'
+Loading JER scale factors and uncertainties from file '/pool/condor/dir_48960/tmp/tmpesoQ70/Fall17_V3_MC_SF_AK4PFchs.txt'
+Pre-select 140941 entries out of 1248674 (11.29%)
+nanoAODv5 or higher: True
+Processed    10000/  140941 entries,  7.10% (elapsed time   255.5s, curr speed    0.039 kHz, avg speed    0.039 kHz), accepted     6933/   10001 events (69.32%)
+Processed    20000/  140941 entries, 14.19% (elapsed time   524.1s, curr speed    0.037 kHz, avg speed    0.038 kHz), accepted    13830/   20001 events (69.15%)
+Processed    30000/  140941 entries, 21.29% (elapsed time   796.8s, curr speed    0.037 kHz, avg speed    0.038 kHz), accepted    20750/   30001 events (69.16%)
+Processed    40000/  140941 entries, 28.38% (elapsed time  1070.1s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    27707/   40001 events (69.27%)
+Processed    50000/  140941 entries, 35.48% (elapsed time  1340.6s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    34650/   50001 events (69.30%)
+Processed    60000/  140941 entries, 42.57% (elapsed time  1610.1s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    41589/   60001 events (69.31%)
+Processed    70000/  140941 entries, 49.67% (elapsed time  1887.4s, curr speed    0.036 kHz, avg speed    0.037 kHz), accepted    48462/   70001 events (69.23%)
+Processed    80000/  140941 entries, 56.76% (elapsed time  2157.7s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    55423/   80001 events (69.28%)
+Processed    90000/  140941 entries, 63.86% (elapsed time  2427.1s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    62364/   90001 events (69.29%)
+Processed   100000/  140941 entries, 70.95% (elapsed time  2697.5s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    69356/  100001 events (69.36%)
+Processed   110000/  140941 entries, 78.05% (elapsed time  2974.6s, curr speed    0.036 kHz, avg speed    0.037 kHz), accepted    76307/  110001 events (69.37%)
+Processed   120000/  140941 entries, 85.14% (elapsed time  3244.6s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    83259/  120001 events (69.38%)
+Processed   130000/  140941 entries, 92.24% (elapsed time  3519.8s, curr speed    0.036 kHz, avg speed    0.037 kHz), accepted    90290/  130001Adding file/pool/condor/dir_48960/out_3_Skim.root
+MergingTotalNumbers
+MergingEvents_TotalUp
+MergingEvents_TotalDown
+MergingEvents_JERUp
+MergingEvents_JERDown
+MergingEvents
+MergingRuns
+MergingParameterSets
+MergingLuminosityBlocks
+MergingMetaData
+MergingnEventsGenWeighted
+MergingwgtSum
+Mergingcutflow
+MergingnEvents
+Merginguntagged
+Mergingnwgts
+ events (69.45%)
+Processed   140000/  140941 entries, 99.33% (elapsed time  3789.2s, curr speed    0.037 kHz, avg speed    0.037 kHz), accepted    97268/  140001 events (69.48%)
+[33m... Writing output Tree: Events_TotalUp ...[0m (92767 entries)
+[33m... Writing output Tree: Events_TotalDown ...[0m (86639 entries)
+[33m... Writing output Tree: Events_JERUp ...[0m (89474 entries)
+[33m... Writing output Tree: Events_JERDown ...[0m (90767 entries)
+Processed 140941 preselected entries from /eos/cms/store/group/phys_smp/vbfA/Hugo_test/crab/fake/G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8/crab_G1Jet_LHEGpT-150To250_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1/221116_145048/0000/out_3.root (1248674 entries). Finally selected 97906 entries
+Done /pool/condor/dir_48960/out_3_Skim.root
+Total time 3937.9 sec. to process 1248674 events. Rate = 317.1 Hz.
+[01m[33m
+... DONE ![0m
+total 1004744
+-rw-r--r--.  1 condor condor       6658 Dec  6 21:15 .job.ad
+-rw-r--r--.  1 condor condor       7728 Dec  6 21:15 .machine.ad
+-rwx------.  1 yian   zh             48 Dec  6 21:15 .chirp.config
+drwx------.  3 yian   zh             25 Dec  6 21:15 var
+drwxr-xr-x.  3 yian   zh             26 Dec  6 21:15 GJetsNLO_fake_all
+-rw-------.  1 yian   zh           5724 Dec  6 21:15 yian.cc
+drwxr-xr-x. 30 condor condor       4096 Dec  6 21:32 ..
+-rw-r--r--.  1 yian   zh           7468 Dec  6 22:18 .update.ad
+drwx------.  5 yian   zh            204 Dec  6 22:18 .
+-rw-r--r--.  1 yian   zh     1028813344 Dec  6 22:21 out_3_Skim.root
+drwx------.  3 yian   zh             30 Dec  6 22:21 tmp
+total 1004744
+-rw-r--r--.  1 condor condor       6658 Dec  6 21:15 .job.ad
+-rw-r--r--.  1 condor condor       7728 Dec  6 21:15 .machine.ad
+-rwx------.  1 yian   zh             48 Dec  6 21:15 .chirp.config
+drwx------.  3 yian   zh             25 Dec  6 21:15 var
+drwxr-xr-x.  3 yian   zh             26 Dec  6 21:15 GJetsNLO_fake_all
+-rw-------.  1 yian   zh           5724 Dec  6 21:15 yian.cc
+drwxr-xr-x. 30 condor condor       4096 Dec  6 21:32 ..
+-rw-r--r--.  1 yian   zh           7468 Dec  6 22:18 .update.ad
+-rw-r--r--.  1 yian   zh     1028813344 Dec  6 22:21 out.root
+drwx------.  3 yian   zh             30 Dec  6 22:21 tmp
+drwx------.  5 yian   zh            197 Dec  6 22:21 .
+directory .//GJetsNLO_fake_all/TEST/
+total 0
+drwxr-xr-x. 3 yian zh 26 Dec  6 21:15 ..
+drwxr-xr-x. 3 yian zh 18 Dec  6 21:15 .
+drwxr-xr-x. 3 yian zh 74 Dec  6 21:15 2017
+1:14 .

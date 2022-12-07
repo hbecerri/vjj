@@ -1,0 +1,127 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c DoubleMuData_all -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//DoubleMuData_all/TEST/ -S 169
+output              = condor_DoubleMuData_all2018_06Dec2022_14h45m16/$(ClusterId).$(ProcId).out
+error               = condor_DoubleMuData_all2018_06Dec2022_14h45m16/$(ClusterId).$(ProcId).err
+log                 = condor_DoubleMuData_all2018_06Dec2022_14h45m16/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)2018_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT DATASET,chunkid from (
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 0
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 1
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 2
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 3
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 4
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 5
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 6
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 7
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 8
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 9
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 10
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 11
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 12
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 13
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 14
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 15
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 16
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 17
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 18
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 19
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 20
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 21
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 22
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 23
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 24
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 25
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 26
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 27
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 28
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 29
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 30
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 31
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 32
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 33
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 34
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 35
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 36
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 37
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 38
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 39
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 40
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 41
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 42
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 43
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 44
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 45
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 46
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 47
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 48
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 49
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 50
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 51
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 52
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 53
+	DoubleMuon_ /DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD 54
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 8
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 9
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 10
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 11
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 12
+	DoubleMuon_ /DoubleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 13
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 8
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 9
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 10
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 11
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 12
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 13
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 14
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 15
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 16
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 17
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 18
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 19
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 20
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 21
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 22
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 23
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 24
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 25
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 26
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 27
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 28
+	DoubleMuon_ /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 29
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 8
+	DoubleMuon_ /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD 9
+)

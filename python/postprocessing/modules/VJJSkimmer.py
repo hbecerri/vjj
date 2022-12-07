@@ -50,7 +50,7 @@ class VJJSkimmer(Module):
         pass
 
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-
+ 
         outputFile.cd()
         self.hTotals = ROOT.TH1D("TotalNumbers" , "" , self.nWeights , 0 , self.nWeights )
         nTotals          = self.campaign.get_allNTotals(self.sample.ds)
@@ -165,8 +165,8 @@ class VJJSkimmer(Module):
             lumiweights = []
             for windex in range(self.nWeights):
                 wid = self.allWeights[windex][1]
-                print(event.genvjj_wgt[ wid ])
-		print(self.lumiWeights[category][windex])
+#               print(event.genvjj_wgt[ wid ])
+#		print(self.lumiWeights[category][windex])
                 lumiweights.append( event.genvjj_wgt[ wid ]*self.lumiWeights[category][windex] )
             self.out.fillBranch('vjj_lumiWeights' , lumiweights )
             wsf = event.vjj_photon_effWgt

@@ -97,8 +97,9 @@ class VJJEvent:
 
         #reco only
         if not isGen:
-            setattr(self,'photonExtra',['mvaID_WP80','mvaID_WP90','cutBased','r9','sieie','hoe','pfRelIso03_all','pfRelIso03_chg'])
+            setattr(self,'photonExtra',['mvaID_WP80','mvaID_WP90','cutBased','r9','sieie','vidNestedWPBitmap','hoe','pfRelIso03_all','pfRelIso03_chg'])
             for v in self.photonExtra:
+                print(v)
                 outv=self.pfix+'a_'+v
                 self.outvars.append(outv)
                 self.out.branch(outv,'F', limitedPrecision=False)
