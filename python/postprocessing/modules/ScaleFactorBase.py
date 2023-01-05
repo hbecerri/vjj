@@ -103,9 +103,12 @@ class ScaleFactorBase(object):
                 xbin = sfObj.GetBin( xbin , ybin )
 
             
+            print('evalSFs',self.sf_dict)
             val = sfObj.GetBinContent(xbin)
-            stat_err = self.sf_dict[tag]['stat'].GetBinContent( xbin )-val if self.sf_dict[tag]['stat'] else sfObj.GetBinError(xbin)
-            syst_err = self.sf_dict[tag]['syst'].GetBinContent( xbin )-val if self.sf_dict[tag]['syst'] else 0.0
+            stat_err = sfObj.GetBinError(xbin)
+            syst_err = 0
+            #stat_err = self.sf_dict[tag]['stat'].GetBinContent( xbin )-val if self.sf_dict[tag]['stat'] else sfObj.GetBinError(xbin)
+            #syst_err = self.sf_dict[tag]['syst'].GetBinContent( xbin )-val if self.sf_dict[tag]['syst'] else 0.0
             sfVal=(val, np.sqrt( stat_err**2 + syst_err**2 ) )
         else:
             sfVal=(sfObj.Eval(*objAttrs),0. )

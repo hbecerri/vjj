@@ -134,7 +134,7 @@ def main():
     condor.append( ('should_transfer_files' , 'YES' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
     condor.append( ('when_to_transfer_output' , 'ON_EXIT' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
     condor.append( ('transfer_output_files' , 'out.root' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
-    condor.append( ('transfer_output_remaps' , '"out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)_$(CAMPAIGN)_{0}_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"'.format(opt.year) ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
+    condor.append( ('transfer_output_remaps' , '"out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_{0}_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"'.format(opt.year) ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
 #    condor.append( ('transfer_output_remaps' , '"out.root=Skim_$(ClusterId)_$(ProcId).root"' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
 #    condor.append( ('output_destination' , 'root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(ClusterId)/' ) ) 
 #    condor.append( ('MY.XRDCP_CREATE_DIR' , 'True' ) ) 

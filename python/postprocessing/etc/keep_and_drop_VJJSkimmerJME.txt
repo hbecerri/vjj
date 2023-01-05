@@ -3,6 +3,13 @@
 drop *
 
 keep vjj*
+keep Flag_*
+keep *Weight*
+keep Generator_weight
+keep Photon_vidNestedWPBitmap
+keep Photon_pt
+keep Photon_eta
+keep Photon_phi
 keep event #event number (for debugging)
 
 #keep LHE*

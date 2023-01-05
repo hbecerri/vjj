@@ -88,12 +88,12 @@ class VJJEvent:
         
         #only for Z
         if abs(self.fs) != 22:
-            self.out.branch('genvjj_leadlep_pt','F')
-            self.out.branch('genvjj_subleadlep_pt','F')
-            self.out.branch('genvjj_leadlep_eta','F')
-            self.out.branch('genvjj_subleadlep_eta','F')
-            self.out.branch('genvjj_leadlep_phi','F')
-            self.out.branch('genvjj_subleadlep_phi','F')
+            self.out.branch(self.pfix+'_leadlep_pt','F')
+            self.out.branch(self.pfix+'_subleadlep_pt','F')
+            self.out.branch(self.pfix+'_leadlep_eta','F')
+            self.out.branch(self.pfix+'_subleadlep_eta','F')
+            self.out.branch(self.pfix+'_leadlep_phi','F')
+            self.out.branch(self.pfix+'_subleadlep_phi','F')
 
         #reco only
         if not isGen:

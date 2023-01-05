@@ -309,7 +309,7 @@ class VJJSelector(Module):
         jets     = [all_jets[i] for i in jetsIdx]
         cleanJets= []
         
-        #### Is this needed?
+        #### make the CR similar with the SR
         for j in jets:
             if j.DeltaR(boson) < self.vjjEvent.selCfg['min_jetdr2v']: continue
             cleanJets.append(j)
@@ -345,9 +345,14 @@ class VJJSelector(Module):
                 wgt_dict['trigHighPtWgtUp'] = trigWgt[0]+trigWgt[1]
                 wgt_dict['trigHighPtWgtDn'] = trigWgt[0]-trigWgt[1]
 
-                wgt_dict['effWgt']   = event.vjj_photon_effWgt
-                wgt_dict['effWgtUp'] = event.vjj_photon_effWgtUp
-                wgt_dict['effWgtDn'] = event.vjj_photon_effWgtDn
+                SFs={'id':[],'pxseed':[]}
+                for k in SFs:
+                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}"+k+"_effWgt".format( 'photon' ) )
+                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}"+k+"_effWgtUp".format( 'photon' ) )
+                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}"+k+"_effWgtDn".format( 'photon' ) )
+#                wgt_dict['effWgt']   = event.vjj_photon_effWgt
+#                wgt_dict['effWgtUp'] = event.vjj_photon_effWgtUp
+#                wgt_dict['effWgtDn'] = event.vjj_photon_effWgtDn
 
             #dilepton efficiency
             if fsCat==121 or fsCat==169:
@@ -358,9 +363,11 @@ class VJJSelector(Module):
                 wgt_dict['trigHighPtWgtUp']=1
                 wgt_dict['trigHighPtWgtDn']=1
 
-                wgt_dict['effWgt']   = getattr( event , "vjj_{0}_effWgt".format( 'mu' if fsCat == 169 else "ele" ) )
-                wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}_effWgtUp".format( 'mu' if fsCat == 169 else "ele" ) )
-                wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}_effWgtDn".format( 'mu' if fsCat == 169 else "ele" ) )
+                SFs={'id':[],'iso':[]} if fsCat==169 else {'id':[],'rec':[]}
+                for k in SFs:
+                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}"+k+"_effWgt".format( 'mu' if fsCat == 169 else "ele" ) )
+                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}"+k+"_effWgtUp".format( 'mu' if fsCat == 169 else "ele" ) )
+                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}"+k+"_effWgtDn".format( 'mu' if fsCat == 169 else "ele" ) )
 
             #quark gluon discriminator weights (tag jets only) #Removed '_jets' suffix (obsolete?)
             wgt_dict['qglgWgt'] = event.vjj_qglgWgt

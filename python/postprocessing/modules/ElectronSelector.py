@@ -73,14 +73,19 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
             SFs['id'].append(
                 self.evalSF('id', objAttrs=[ele.eta,ele.pt])
             )
-
+        print('ele length:',len(electrons),SFs)
         #combine scale factors
         if combined:
             selSFs = []
+            combSFs={}
+            a=[]
             for k in SFs:
-                selSFs.extend( [x for x in SFs[k] if x] )
-            SFs = self.combineScaleFactors(selSFs)
-            ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
+                selSFs=( [x for x in SFs[k] if x] )
+                combSFs[k] = self.combineScaleFactors(selSFs)
+                print(selSFs,combSFs)
+                a.extend([ combSFs[k][0] , combSFs[k][0]+combSFs[k][1] , combSFs[k][0]-combSFs[k][1] ])
+            ret = dict( zip( self.weight_names() , a ) )
+            print(self.weight_names(),ret)
             return ret
 
 

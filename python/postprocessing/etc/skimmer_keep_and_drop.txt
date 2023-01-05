@@ -1,6 +1,7 @@
 drop *
 keep vjj*
-keep *LHE*Weight
+keep Flag_*
+keep *Weight*
 keep Generator_weight
 keep Photon_vidNestedWPBitmap
 keep Photon_pt
