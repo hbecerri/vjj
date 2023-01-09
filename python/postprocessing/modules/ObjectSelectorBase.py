@@ -30,7 +30,7 @@ class ObjectSelectorBase( Module ):
 
     def weight_names(self):
         SFs={'id':[],'iso':[]} if self.obj_name()== 'mu' else {'id':[],'rec':[]}
-        if self.obj_name()=='photon':
+        if 'photon' in self.obj_name() or 'Photon' in self.obj_name():
            SFs={'id':[],'pxseed':[]} 
         a=[]
         for k in SFs:
@@ -45,6 +45,7 @@ class ObjectSelectorBase( Module ):
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
 
+        print('weight branches:',self.weight_names())
         for brnch in self.weight_names():
             self.out.branch( brnch , 'F' , limitedPrecision=False )
 

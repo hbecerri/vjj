@@ -83,7 +83,9 @@ class VJJEvent:
                   'centj_pt', 'centj_eta', 'centj_phi', 'centj_m', 'centj_ystar', 'centj_dr2v',
                   'htsoft','centhtsoft']:            
             outv=self.pfix+v
+            print('test1:',self.outvars)
             self.outvars.append(outv)
+            print('test2:',outv)
             self.out.branch(outv,'F' , limitedPrecision=False)
         
         #only for Z
@@ -99,7 +101,6 @@ class VJJEvent:
         if not isGen:
             setattr(self,'photonExtra',['mvaID_WP80','mvaID_WP90','cutBased','r9','sieie','vidNestedWPBitmap','hoe','pfRelIso03_all','pfRelIso03_chg'])
             for v in self.photonExtra:
-                print(v)
                 outv=self.pfix+'a_'+v
                 self.outvars.append(outv)
                 self.out.branch(outv,'F', limitedPrecision=False)
@@ -123,12 +124,12 @@ class VJJEvent:
             
     def fillZextraBranches(self, leptons):
         """ lepton variables for Z analysis """
-        self.out.fillBranch('genvjj_leadlep_pt',    leptons[0].pt)
-        self.out.fillBranch('genvjj_subleadlep_pt', leptons[1].pt)
-        self.out.fillBranch('genvjj_leadlep_eta',   leptons[0].eta)
-        self.out.fillBranch('genvjj_subleadlep_eta',leptons[1].eta)
-        self.out.fillBranch('genvjj_leadlep_phi',   leptons[0].phi)
-        self.out.fillBranch('genvjj_subleadlep_phi',leptons[1].phi)
+        self.out.fillBranch(self.pfix+'_leadlep_pt',    leptons[0].pt)
+        self.out.fillBranch(self.pfix+'_subleadlep_pt', leptons[1].pt)
+        self.out.fillBranch(self.pfix+'_leadlep_eta',   leptons[0].eta)
+        self.out.fillBranch(self.pfix+'_subleadlep_eta',leptons[1].eta)
+        self.out.fillBranch(self.pfix+'_leadlep_phi',   leptons[0].phi)
+        self.out.fillBranch(self.pfix+'_subleadlep_phi',leptons[1].phi)
 
 
     def fillPhotonExtraBranches(self, photon):

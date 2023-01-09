@@ -1,4 +1,5 @@
 import ROOT
+from abc import ABCMeta, abstractproperty, abstractmethod
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 import os
 import copy
@@ -9,12 +10,12 @@ import numpy as np
 from TriggerLists import defineTriggerList
 from PhysicsTools.NanoAODTools.postprocessing.modules.common.muonScaleResProducer import *
 
+
 class VJJSelector(Module):
 
     """Implements a generic V+2j selection for VBF X studies"""
     """Regions are MM, EE, A, Af"""
     def __init__(self, isData, era, signal=False, finalState = 22):
-
         self.isData           = isData
         self.era              = era
         self.bypassSelFilters = signal
@@ -346,10 +347,16 @@ class VJJSelector(Module):
                 wgt_dict['trigHighPtWgtDn'] = trigWgt[0]-trigWgt[1]
 
                 SFs={'id':[],'pxseed':[]}
+                print('fs:',self.fs)
+                print('id:',good_obj[0].cutBased)
+
                 for k in SFs:
-                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}"+k+"_effWgt".format( 'photon' ) )
-                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}"+k+"_effWgtUp".format( 'photon' ) )
-                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}"+k+"_effWgtDn".format( 'photon' ) )
+                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}{1}_effWgt".format( 'photon',k  ) )
+                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}{1}_effWgtUp".format( 'photon',k  ) )
+                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}{1}_effWgtDn".format( 'photon',k  ) )
+                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}{1}_effWgt".format(   'loosePhoton',k  ) )
+                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}{1}_effWgtUp".format( 'loosePhoton',k  ) )
+                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}{1}_effWgtDn".format( 'loosePhoton',k  ) )
 #                wgt_dict['effWgt']   = event.vjj_photon_effWgt
 #                wgt_dict['effWgtUp'] = event.vjj_photon_effWgtUp
 #                wgt_dict['effWgtDn'] = event.vjj_photon_effWgtDn
@@ -365,9 +372,9 @@ class VJJSelector(Module):
 
                 SFs={'id':[],'iso':[]} if fsCat==169 else {'id':[],'rec':[]}
                 for k in SFs:
-                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}"+k+"_effWgt".format( 'mu' if fsCat == 169 else "ele" ) )
-                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}"+k+"_effWgtUp".format( 'mu' if fsCat == 169 else "ele" ) )
-                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}"+k+"_effWgtDn".format( 'mu' if fsCat == 169 else "ele" ) )
+                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}{1}_effWgt".format( 'mu' if fsCat == 169 else "ele",k ) )
+                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}{1}_effWgtUp".format( 'mu' if fsCat == 169 else "ele",k ) )
+                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}{1}_effWgtDn".format( 'mu' if fsCat == 169 else "ele",k ) )
 
             #quark gluon discriminator weights (tag jets only) #Removed '_jets' suffix (obsolete?)
             wgt_dict['qglgWgt'] = event.vjj_qglgWgt

@@ -80,10 +80,10 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
                 else:
                     sfVal=self.evalSF(k, objAttrs=[m.corrected_pt,abs(m.eta)])
-                print(k,sfVal)
+#                print(k,sfVal)
                 SFs[k].append( sfVal )
 
-        print("mu length",len(muons),SFs)
+#        print("mu length",len(muons),SFs)
         #combine scale factors
         if combined:
             selSFs = []
@@ -92,10 +92,10 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
             for k in SFs:
                 selSFs=([x for x in SFs[k] if x])
                 combSFs[k] = self.combineScaleFactors(selSFs)
-                print(k,selSFs,combSFs)
+#                print(k,selSFs,combSFs)
                 a.extend([ combSFs[k][0] , combSFs[k][0]+combSFs[k][1] , combSFs[k][0]-combSFs[k][1] ])
             ret = dict( zip( self.weight_names() , a ) )
-            print(self.weight_names(),ret)
+#            print(self.weight_names(),ret)
             return ret
 
 

@@ -249,10 +249,22 @@ class ReadComputeObservables:
         out.branch('vjj_xsection' , 'F' )
         out.branch('vjj_lumiWeights' , 'F' , lenVar='vjj_nlumiWeights' )
         out.branch('vjj_weight' , 'F' )
-        out.branch('vjj_sfweight_up' , 'F')
-        out.branch('vjj_sfweight_down' , 'F')
+        out.branch('vjj_puweight_up' , 'F')
+        out.branch('vjj_puweight_down' , 'F')
+        out.branch('vjj_l1weight_up' , 'F')
+        out.branch('vjj_l1weight_down' , 'F')
         out.branch('vjj_eleidsfweight_up' , 'F')
         out.branch('vjj_eleidsfweight_down' , 'F')
+        out.branch('vjj_elerecsfweight_up' , 'F')
+        out.branch('vjj_elerecsfweight_down' , 'F')
+        out.branch('vjj_muidsfweight_up' , 'F')
+        out.branch('vjj_muidsfweight_down' , 'F')
+        out.branch('vjj_muisosfweight_up' , 'F')
+        out.branch('vjj_muisosfweight_down' , 'F')
+        out.branch('vjj_photonidsfweight_up' , 'F')
+        out.branch('vjj_photonidsfweight_down' , 'F')
+        out.branch('vjj_photonpxseedsfweight_up' , 'F')
+        out.branch('vjj_photonpxseedsfweight_down' , 'F')
 
         return
 
@@ -470,8 +482,8 @@ class ReadComputeObservables:
 
             #Object SFs
             out.fillBranch('vjj_weight' , wsf*event.puWeight*prefirew )
-            out.fillBranch('vjj_sfweight_down' , wsf_down/wsf )
-            out.fillBranch('vjj_sfweight_up' , wsf_up/wsf )
+            out.fillBranch('vjj_puweight_down' , wsf_down/wsf )
+            out.fillBranch('vjj_puweight_up' , wsf_up/wsf )
 
             #Gen-level info
             genParts = Collection(event, "GenPart")
