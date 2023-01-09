@@ -251,6 +251,19 @@ class ReadComputeObservables:
         out.branch('vjj_weight' , 'F' )
         out.branch('vjj_sfweight_up' , 'F')
         out.branch('vjj_sfweight_down' , 'F')
+ 
+        out.branch('vjj_pileup' , 'F' )
+        out.branch('vjj_pileup_up' , 'F')
+        out.branch('vjj_pileup_down' , 'F')
+
+        out.branch('vjj_photonID' , 'F' )
+        out.branch('vjj_photonID_up' , 'F')
+        out.branch('vjj_photonID_down' , 'F')
+
+        out.branch('vjj_L1PreFiring' , 'F' )
+        out.branch('vjj_L1PreFiring_up' , 'F')
+        out.branch('vjj_L1PreFiring_down' , 'F')
+
 
         return
 
@@ -465,8 +478,23 @@ class ReadComputeObservables:
 
             #Prefire
             prefirew = event.L1PreFiringWeight_Nom if self.era != 2018 else 1
-
+            prefirew_up = event.L1PreFiringWeight_Up if self.era != 2018 else 1
+            prefirew_down = event.L1PreFiringWeight_Dn if self.era != 2018 else 1
+ 
             #Object SFs
+ 
+            out.fillBranch('vjj_pileup' ,event.puWeight)
+            out.fillBranch('vjj_pileup_up' ,event.puWeightUp)
+            out.fillBranch('vjj_pileup_down' ,event.puWeightDown)             
+
+            out.fillBranch('vjj_photonID' ,wsf)
+            out.fillBranch('vjj_photonID_up' ,wsf_up)
+            out.fillBranch('vjj_photonID_down' ,wsf_down)
+
+            out.fillBranch('vjj_L1PreFiring' ,prefirew)
+            out.fillBranch('vjj_L1PreFiring_up' ,prefirew_up)
+            out.fillBranch('vjj_L1Prefiring_down' ,prefirew_down)
+
             out.fillBranch('vjj_weight' , wsf*event.puWeight*prefirew )
             out.fillBranch('vjj_sfweight_down' , wsf_down/wsf )
             out.fillBranch('vjj_sfweight_up' , wsf_up/wsf )
