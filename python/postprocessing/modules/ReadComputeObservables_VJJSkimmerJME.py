@@ -251,6 +251,8 @@ class ReadComputeObservables:
         out.branch('vjj_weight' , 'F' )
         out.branch('vjj_sfweight_up' , 'F')
         out.branch('vjj_sfweight_down' , 'F')
+        out.branch('vjj_eleidsfweight_up' , 'F')
+        out.branch('vjj_eleidsfweight_down' , 'F')
 
         return
 
