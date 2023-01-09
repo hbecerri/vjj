@@ -1,5 +1,11 @@
 # '**' can be used to match any number of directories.
-
+crab/
+*.pdf
+*.tgz
+*.tar.gz
+*.root
+.__afs*
+.nfs*
 ############
 # Directories #
 ############
