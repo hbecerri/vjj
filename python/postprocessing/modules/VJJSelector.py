@@ -347,16 +347,18 @@ class VJJSelector(Module):
                 wgt_dict['trigHighPtWgtDn'] = trigWgt[0]-trigWgt[1]
 
                 SFs={'id':[],'pxseed':[]}
-                print('fs:',self.fs)
-                print('id:',good_obj[0].cutBased)
+#                print('fs:',self.fs)
+#                print('id:',good_obj[0].cutBased)
 
                 for k in SFs:
-                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}{1}_effWgt".format( 'photon',k  ) )
-                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}{1}_effWgtUp".format( 'photon',k  ) )
-                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}{1}_effWgtDn".format( 'photon',k  ) )
-                    wgt_dict['effWgt']   = getattr( event , "vjj_{0}{1}_effWgt".format(   'loosePhoton',k  ) )
-                    wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}{1}_effWgtUp".format( 'loosePhoton',k  ) )
-                    wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}{1}_effWgtDn".format( 'loosePhoton',k  ) )
+                    if self.fs ==22:
+                       wgt_dict['effWgt']   = getattr( event , "vjj_{0}{1}_effWgt".format( 'photon',k  ) )
+                       wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}{1}_effWgtUp".format( 'photon',k  ) )
+                       wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}{1}_effWgtDn".format( 'photon',k  ) )
+                    elif self.fs==-22:
+                         wgt_dict['effWgt']   = getattr( event , "vjj_{0}{1}_effWgt".format(   'loosePhoton',k  ) )
+                         wgt_dict['effWgtUp'] = getattr( event , "vjj_{0}{1}_effWgtUp".format( 'loosePhoton',k  ) )
+                         wgt_dict['effWgtDn'] = getattr( event , "vjj_{0}{1}_effWgtDn".format( 'loosePhoton',k  ) )
 #                wgt_dict['effWgt']   = event.vjj_photon_effWgt
 #                wgt_dict['effWgtUp'] = event.vjj_photon_effWgtUp
 #                wgt_dict['effWgtDn'] = event.vjj_photon_effWgtDn

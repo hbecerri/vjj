@@ -249,14 +249,10 @@ class ReadComputeObservables:
         out.branch('vjj_xsection' , 'F' )
         out.branch('vjj_lumiWeights' , 'F' , lenVar='vjj_nlumiWeights' )
         out.branch('vjj_weight' , 'F' )
-        out.branch('vjj_pileup_up' , 'F')
-        out.branch('vjj_pileup_down' , 'F')
-        out.branch('vjj_L1PreFiring_up' , 'F')
-        out.branch('vjj_L1PreFiring_down' , 'F')
-        out.branch('vjj_particleid_up' , 'F')
-        out.branch('vjj_particleid_down' , 'F')
-        out.branch('vjj_particlerec_up' , 'F')
-        out.branch('vjj_particlerec_down' , 'F')
+        out.branch('vjj_sfweight_up' , 'F')
+        out.branch('vjj_sfweight_down' , 'F')
+        out.branch('vjj_eleidsfweight_up' , 'F')
+        out.branch('vjj_eleidsfweight_down' , 'F')
 
         return
 
@@ -457,43 +453,25 @@ class ReadComputeObservables:
                 wid = self.allWeights[windex][1]
                 lumiweights.append(event.genvjj_wgt[wid]*self.lumiWeights[category][windex])
             out.fillBranch('vjj_lumiWeights', lumiweights)
-            wsf={'nom':1}
-            SFs={'id':1,'pxseed':1}
-            wsf['nom']=event.vjj_photonid_effWgt*event.vjj_photonpxseed_effWgt
-            for k in SFs:
-                for tag in ['Up','Dn']:
-                    corr_type=k if k=='id' else 'rec'
-                    wsf[corr_type+tag]=wsf['nom']/getattr( event , "vjj_photon{0}_effWgt".format( k ) ) * getattr( event , "vjj_photon{0}_effWgt{1}".format( k,tag ) )
+            wsf = event.vjj_photon_effWgt
+            wsf_up = event.vjj_photon_effWgtUp
+            wsf_down = event.vjj_photon_effWgtDn
             if 'mm' in category:
-                wsf['nom']=event.vjj_muid_effWgt*event.vjj_muiso_effWgt
-                SFs={'id':1,'iso':1}
-                for k in SFs:
-                    corr_type=k if k=='id' else 'rec'
-                    for tag in ['Up','Dn']:
-                        wsf[corr_type+tag]=wsf['nom']/getattr( event , "vjj_mu{0}_effWgt".format( k ) ) * getattr( event , "vjj_mu{0}_effWgt{1}".format( k,tag ) )
+                wsf = event.vjj_mu_effWgt
+                wsf_up = event.vjj_mu_effWgtUp
+                wsf_down = event.vjj_mu_effWgtDn
             elif 'ee' in category:
-                wsf['nom']=event.vjj_eleid_effWgt*event.vjj_elerec_effWgt
-                SFs={'id':1,'rec':1}
-                for k in SFs:
-                    for tag in ['Up','Dn']:
-                        wsf[k+tag]=wsf['nom']/getattr( event , "vjj_ele{0}_effWgt".format( k ) ) * getattr( event , "vjj_ele{0}_effWgt{1}".format( k,tag ) )
+                wsf = event.vjj_ele_effWgt
+                wsf_up = event.vjj_ele_effWgtUp
+                wsf_down = event.vjj_ele_effWgtDn
 
             #Prefire
             prefirew = event.L1PreFiringWeight_Nom if self.era != 2018 else 1
-            prefirew_up = event.L1PreFiringWeight_Up if self.era != 2018 else 1
-            prefirew_down = event.L1PreFiringWeight_Dn if self.era != 2018 else 1
-
-            out.fillBranch('vjj_L1PreFiring_up' ,wsf['nom']*event.puWeight*prefirew_up)
-            out.fillBranch('vjj_L1PreFiring_down' ,wsf['nom']*event.puWeight*prefirew_down)
-            out.fillBranch('vjj_pileup_down' , wsf['nom']*event.puWeightUp*prefirew )
-            out.fillBranch('vjj_pileup_up' , wsf['nom']*event.puWeightDown*prefirew )
 
             #Object SFs
-            out.fillBranch('vjj_weight' , wsf['nom']*event.puWeight*prefirew )
-            out.fillBranch('vjj_particleid_up' , wsf['idUp']*event.puWeight*prefirew)
-            out.fillBranch('vjj_particleid_down' , wsf['idDn']*event.puWeight*prefirew)
-            out.fillBranch('vjj_particlerec_up' , wsf['recUp']*event.puWeight*prefirew)
-            out.fillBranch('vjj_particlerec_down' , wsf['recDn']*event.puWeight*prefirew)
+            out.fillBranch('vjj_weight' , wsf*event.puWeight*prefirew )
+            out.fillBranch('vjj_sfweight_down' , wsf_down/wsf )
+            out.fillBranch('vjj_sfweight_up' , wsf_up/wsf )
 
             #Gen-level info
             genParts = Collection(event, "GenPart")

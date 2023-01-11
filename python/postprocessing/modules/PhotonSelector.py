@@ -88,7 +88,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
             SFs['pxseed'].append(
                 self.evalSF('pxseed',objAttrs=[3.5 if abseta>1.5 else 0.5])
             )
-        print('photon length:',len(photons),SFs)
+#        print('photon length:',len(photons),SFs)
         #combine scale factors
         if combined:
             selSFs = []
@@ -97,10 +97,10 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
             for k in SFs:
                 selSFs=( [x for x in SFs[k] if x] )
                 combSFs[k] = self.combineScaleFactors(selSFs)
-                print(selSFs,combSFs)
+#                print(selSFs,combSFs)
                 a.extend([ combSFs[k][0] , combSFs[k][0]+combSFs[k][1] , combSFs[k][0]-combSFs[k][1] ])
             ret = dict( zip( self.weight_names() , a ) )
-            print(self.weight_names(),ret)
+#            print(self.weight_names(),ret)
             return ret
 
 

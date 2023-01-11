@@ -3,7 +3,6 @@ crab/
 *.pdf
 *.tgz
 *.tar.gz
-*.root
 .__afs*
 .nfs*
 ############
@@ -25,7 +24,6 @@ crab/
 ############
 # Specific #
 ############
-*.root
 *.out
 .nfs*
 

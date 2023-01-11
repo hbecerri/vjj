@@ -103,7 +103,7 @@ class ScaleFactorBase(object):
                 xbin = sfObj.GetBin( xbin , ybin )
 
             
-            print('evalSFs',self.sf_dict)
+#            print('evalSFs',self.sf_dict)
             val = sfObj.GetBinContent(xbin)
             stat_err = sfObj.GetBinError(xbin)
             syst_err = 0

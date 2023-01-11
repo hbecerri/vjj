@@ -83,9 +83,9 @@ class VJJEvent:
                   'centj_pt', 'centj_eta', 'centj_phi', 'centj_m', 'centj_ystar', 'centj_dr2v',
                   'htsoft','centhtsoft']:            
             outv=self.pfix+v
-            print('test1:',self.outvars)
+#            print('test1:',self.outvars)
             self.outvars.append(outv)
-            print('test2:',outv)
+#            print('test2:',outv)
             self.out.branch(outv,'F' , limitedPrecision=False)
         
         #only for Z

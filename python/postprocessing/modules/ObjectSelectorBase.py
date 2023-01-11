@@ -45,7 +45,7 @@ class ObjectSelectorBase( Module ):
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
 
-        print('weight branches:',self.weight_names())
+#        print('weight branches:',self.weight_names())
         for brnch in self.weight_names():
             self.out.branch( brnch , 'F' , limitedPrecision=False )
 

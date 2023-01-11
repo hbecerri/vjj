@@ -6,6 +6,10 @@ config.section_("General")
 config.General.requestName = ''
 config.General.workArea = ''
 config.General.transferLogs=True
+
+#config.section_("JobType")
+#config.JobType.maxMemoryMB = 3000
+
 config.section_("Data")
 config.Data.inputDataset = '/GJets_HT-40To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16NanoAODv6-PUMoriond17_Nano25Oct2019_102X_mcRun2_asymptotic_v7-v1/NANOAODSIM'
 config.Data.inputDBS = 'global'
