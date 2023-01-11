@@ -2,9 +2,9 @@
 drop *
 
 #NANO Branches
-#keep run
-#keep luminosityBlock
-#keep event
+keep run
+keep luminosityBlock
+keep event
 keep Generator_weight
 keep GenPart*
 keep GenJet*
@@ -16,14 +16,18 @@ keep PV*
 keep HLT_Photon*
 keep HLT_PFJet*
 keep HLT_Ele*
-keep HLT_Mu*
+keep HLT_Mu17*
+keep HLT_Iso*Mu*
 keep *Weight*
 keep Flag_*
 
-#Physics obj
+#keep branches for JME corr
 keep MET*
 keep RawMET_*
-keep PuppiMET_*
+keep *CorrT1METJet*
+keep fixedGridRhoFastjetAll
+
+#Physics obj
 keep Electron*
 keep Muon*
 keep Photon*

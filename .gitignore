@@ -5,6 +5,7 @@ crab/
 *.tar.gz
 .__afs*
 .nfs*
+*.root
 ############
 # Directories #
 ############

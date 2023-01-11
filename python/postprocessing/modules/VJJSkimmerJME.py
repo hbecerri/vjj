@@ -27,7 +27,7 @@ from UserCode.VJJSkimmer.samples.Sample import Sample
 from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
 from UserCode.VJJSkimmer.postprocessing.helpers.ColoredPrintout import *
 from UserCode.VJJSkimmer.postprocessing.helpers.Helper import *
-from ReadComputeObservables_VJJSkimmerJME import *
+from ReadComputeObservables_VJJSkimmerJME_syst import *
 from BDTReader import *
 from VJJEvent import _defaultVjjSkimCfg
 
