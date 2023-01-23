@@ -502,7 +502,9 @@ class ReadComputeObservables:
                 photons = Collection(event, "Photon" )
                 selectedPhotonIndex = ord(event.vjj_photons[0])
                 photon_genPartIdx = photons[selectedPhotonIndex].genPartIdx
-                if photon_genPartIdx > -1: out.fillBranch( 'vjj_photonIsMatched' , genParts[photon_genPartIdx].statusFlags & 1 )
+                if photon_genPartIdx > -1 and photons[selectedPhotonIndex].DeltaR(genParts[photon_genPartIdx])<0.3 and abs(genParts[photon_genPartIdx].pdgId) == 22 and ( (genParts[photon_genPartIdx].statusFlags & (1 << 0) == (1 << 0) ) or (genParts[photon_genPartIdx].statusFlags & (1 << 8) == (1 << 8) ) ):
+                   out.fillBranch( 'vjj_photonIsMatched' , 1 )
+#                  out.fillBranch( 'vjj_photonIsMatched' , genParts[photon_genPartIdx].statusFlags & 1 )
                 else: out.fillBranch( 'vjj_photonIsMatched' , -10 )
             else: out.fillBranch( 'vjj_photonIsMatched' , -20 )
 
