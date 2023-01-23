@@ -1,0 +1,115 @@
+/pool/condor/dir_39504
+/afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts
+3.10.0-1160.76.1.el7.x86_64
+slc7_amd64_gcc700
+Linux b7g31p8334.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linuxdirectory: /pool/condor/dir_28059
+total 28
+drwxr-xr-x. 22 condor condor 4096 Jan 20 22:38 ..
+-rw-r--r--.  1 condor condor 5949 Jan 20 22:38 .job.ad
+-rw-r--r--.  1 condor condor 7882 Jan 20 22:38 .machine.ad
+-rwx------.  1 yian   zh       48 Jan 20 22:38 .chirp.config
+-rw-------.  1 yian   zh     3032 Jan 20 22:38 yian.cc
+drwx------.  3 yian   zh       25 Jan 20 22:38 var
+drwx------.  4 yian   zh      126 Jan 20 22:38 .
+drwx------.  3 yian   zh       30 Jan 20 22:38 tmp
+/pool/condor/dir_28059
+total 28
+drwxr-xr-x. 22 condor condor 4096 Jan 20 22:38 ..
+-rw-r--r--.  1 condor condor 5949 Jan 20 22:38 .job.ad
+-rw-r--r--.  1 condor condor 7882 Jan 20 22:38 .machine.ad
+-rwx------.  1 yian   zh       48 Jan 20 22:38 .chirp.config
+-rw-------.  1 yian   zh     3032 Jan 20 22:38 yian.cc
+drwx------.  3 yian   zh       25 Jan 20 22:38 var
+drwx------.  4 yian   zh      126 Jan 20 22:38 .
+drwx------.  3 yian   zh       30 Jan 20 22:38 tmp
+[--> Output dir: .//myCampaign_ee_syst/DoubleEGData_all/TEST/]
+0: /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+1: -c
+2: myCampaign_ee_syst/DoubleEGData_all
+3: -d
+4: /EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD
+5: --nfilesperchunk
+6: 1
+7: --chunkindex
+8: 72
+9: -o
+10: .//myCampaign_ee_syst/DoubleEGData_all/TEST/
+11: AddAdding file/pool/condor/dir_53959/out_36_Skim.root
+MergingTotalNumbers
+MergingEvents
+MergingRuns
+MergingParameterSets
+MergingLuminosityBlocks
+MergingMetaData
+MergingnEventsGenWeighted
+Merginguntagged
+MergingnEvents
+Mergingnwgts
+Mergingcutflow
+
+[43m                                           [0m
+[33m
+--- Running VJJSkimmerJME (via vjj_VJJSkimmerJME_postproc.py) ---[0m
+
+[43m                                           [0m
+
+dataset name is /EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD
+year, isData and isSignal are set from the dataset name to 2018, True and False
+True
+[94m
+== Applying lumi mask: [0m
+/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt
+
+isjson
+['PhotonData', 'DoubleEGData']
+('/EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', '/EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', 'EGamma_2018_B_v1')
+('/EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', 1, 63, 74, 74)
+[94m
+== Processing following files:[0m
+/eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/ee/EGamma/crab_EGamma_2018_B_v1/230111_170949/0000/out_36.root
+[94m
+== JEC variations: [0m
+['TotalUp', 'TotalDown', 'JERUp', 'JERDown']
+
+('finale state:', 121)
+[94m
+== Creating output file:[0m
+/pool/condor/dir_53959/.//myCampaign_ee_syst/DoubleEGData_all/TEST//2018/EGamma_2018_B_v1//Skimmed_1_63.root
+
+('finale state:', 121)
+/pool/condor/dir_53959
+Will write selected trees to /pool/condor/dir_53959
+Pre-select 556 entries out of 1744 (31.88%)
+Processed 556 preselected entries from /eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/ee/EGamma/crab_EGamma_2018_B_v1/230111_170949/0000/out_36.root (1744 entries). Finally selected 82 entries
+Done /pool/condor/dir_53959/out_36_Skim.root
+Total time 13.4 sec. to process 1744 events. Rate = 130.1 Hz.
+[01m[33m
+... DONE ![0m
+total 4928
+-rw-r--r--.  1 condor condor    5944 Jan 20 22:38 .job.ad
+drwxr-xr-x. 24 condor condor    4096 Jan 20 22:38 ..
+-rw-r--r--.  1 condor condor    7864 Jan 20 22:38 .machine.ad
+-rwx------.  1 yian   zh          48 Jan 20 22:38 .chirp.config
+drwx------.  3 yian   zh        4096 Jan 20 22:38 var
+drwx------.  3 yian   zh        4096 Jan 20 22:38 tmp
+drwxr-xr-x.  3 yian   zh        4096 Jan 20 22:38 myCampaign_ee_syst
+-rw-------.  1 yian   zh        5692 Jan 20 22:38 yian.cc
+drwx------.  5 yian   zh        4096 Jan 20 22:38 .
+-rw-r--r--.  1 yian   zh     4994962 Jan 20 22:38 out_36_Skim.root
+total 4928
+-rw-r--r--.  1 condor condor    5944 Jan 20 22:38 .job.ad
+drwxr-xr-x. 24 condor condor    4096 Jan 20 22:38 ..
+-rw-r--r--.  1 condor condor    7864 Jan 20 22:38 .machine.ad
+-rwx------.  1 yian   zh          48 Jan 20 22:38 .chirp.config
+drwx------.  3 yian   zh        4096 Jan 20 22:38 var
+drwx------.  3 yian   zh        4096 Jan 20 22:38 tmp
+drwxr-xr-x.  3 yian   zh        4096 Jan 20 22:38 myCampaign_ee_syst
+-rw-------.  1 yian   zh        5692 Jan 20 22:38 yian.cc
+-rw-r--r--.  1 yian   zh     4994962 Jan 20 22:38 out.root
+drwx------.  5 yian   zh        4096 Jan 20 22:38 .
+directory .//myCampaign_ee_syst/DoubleEGData_all/TEST/
+total 12
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:38 2018
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:38 ..
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:38 .
+:37 .

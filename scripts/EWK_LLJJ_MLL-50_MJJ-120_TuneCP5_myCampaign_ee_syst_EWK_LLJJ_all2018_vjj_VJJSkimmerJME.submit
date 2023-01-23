@@ -1,0 +1,28 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_ee_syst/EWK_LLJJ_all/TEST/ -S 121
+output              = condor_myCampaign_ee_syst_EWK_LLJJ_all2018_16Jan2023_15h34m09/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_ee_syst_EWK_LLJJ_all2018_16Jan2023_15h34m09/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_ee_syst_EWK_LLJJ_all2018_16Jan2023_15h34m09/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2018_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 0
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 1
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 2
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 3
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 4
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 5
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 6
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 7
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 8
+	EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_ myCampaign_ee_syst/EWK_LLJJ_all /EWK_LLJJ_MLL-50_MJJ-120_TuneCP5_13TeV-madgraph-pythia8_dipole/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 9
+)

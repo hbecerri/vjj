@@ -1,0 +1,118 @@
+/pool/condor/dir_41980
+/afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts
+3.10.0-1160.76.1.el7.x86_64
+slc7_amd64_gcc700
+Linux b7g24p6307.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+directory: /pool/condor/dir_41980
+total 28
+-rw-r--r--.  1 condor condor 5961 Jan 20 22:22 .job.ad
+drwxr-xr-x. 23 condor condor 4096 Jan 20 22:22 ..
+-rw-r--r--.  1 condor condor 7891 Jan 20 22:22 .machine.ad
+-rw-------.  1 yian   zh     3032 Jan 20 22:22 yian.cc
+-rwx------.  1 yian   zh       48 Jan 20 22:22 .chirp.config
+drwx------.  3 yian   zh       17 Jan 20 22:22 var
+drwx------.  4 yian   zh       98 Jan 20 22:22 .
+drwx------.  3 yian   zh       22 Jan 20 22:22 tmp
+/pool/condor/dir_41980
+total 28
+-rw-r--r--.  1 condor condor 5961 Jan 20 22:22 .job.ad
+drwxr-xr-x. 23 condor condor 4096 Jan 20 22:22 ..
+-rw-r--r--.  1 condor condor 7891 Jan 20 22:22 .machine.ad
+-rw-------.  1 yian   zh     3032 Jan 20 22:22 yian.cc
+-rwx------.  1 yian   zh       48 Jan 20 22:22 .chirp.config
+drwx------.  3 yian   zh       17 Jan 20 22:22 var
+drwx------.  4 yian   zh       98 Jan 20 22:22 .
+drwx------.  3 yian   zh       22 Jan 20 22:22 tmp
+[--> Output dir: .//myCampaign_mm_syst/DoubleMuData_all/TEST/]
+0: /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+1: -c
+2: myCampaign_mm_syst/DoubleMuData_all
+3: -d
+4: /DoubleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD
+5: --nfilesperchunk
+6: 1
+7: --chunkindex
+8: 19
+9: -o
+10: .//myCampaign_mm_syst/DoubleMuData_all/TEST/
+11:AddAdding file/pool/condor/dir_28658/out_12_Skim.root
+MergingTotalNumbers
+MergingEvents
+MergingRuns
+MergingParameterSets
+MergingLuminosityBlocks
+MergingMetaData
+MergingnEventsGenWeighted
+Merginguntagged
+MergingnEvents
+Mergingnwgts
+Mergingcutflow
+
+[43m                                           [0m
+[33m
+--- Running VJJSkimmerJME (via vjj_VJJSkimmerJME_postproc.py) ---[0m
+
+[43m                                           [0m
+
+dataset name is /DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD
+year, isData and isSignal are set from the dataset name to 2018, True and False
+True
+[94m
+== Applying lumi mask: [0m
+/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt
+
+isjson
+['DoubleMuData']
+('/DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', '/DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', 'DoubleMuon_2018_A_v1')
+('/DoubleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', 1, 52, 54, 54)
+[94m
+== Processing following files:[0m
+/eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/mm/DoubleMuon/crab_DoubleMuon_2018_A_v1/230111_151630/0000/out_12.root
+[94m
+== JEC variations: [0m
+['TotalUp', 'TotalDown', 'JERUp', 'JERDown']
+
+('finale state:', 169)
+[94m
+== Creating output file:[0m
+/pool/condor/dir_28658/.//myCampaign_mm_syst/DoubleMuData_all/TEST//2018/DoubleMuon_2018_A_v1//Skimmed_1_52.root
+
+('finale state:', 169)
+/pool/condor/dir_28658
+Will write selected trees to /pool/condor/dir_28658
+Pre-select 1025 entries out of 3506 (29.24%)
+Processed 1025 preselected entries from /eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/mm/DoubleMuon/crab_DoubleMuon_2018_A_v1/230111_151630/0000/out_12.root (3506 entries). Finally selected 146 entries
+Done /pool/condor/dir_28658/out_12_Skim.root
+Total time 20.2 sec. to process 3506 events. Rate = 173.9 Hz.
+[01m[33m
+... DONE ![0m
+total 6532
+-rw-r--r--.  1 condor condor    5959 Jan 20 22:22 .job.ad
+drwxr-xr-x. 28 condor condor    4096 Jan 20 22:22 ..
+-rw-r--r--.  1 condor condor    7869 Jan 20 22:22 .machine.ad
+-rwx------.  1 yian   zh          48 Jan 20 22:22 .chirp.config
+drwx------.  3 yian   zh        4096 Jan 20 22:22 var
+drwx------.  3 yian   zh        4096 Jan 20 22:22 tmp
+drwxr-xr-x.  3 yian   zh        4096 Jan 20 22:22 myCampaign_mm_syst
+-rw-------.  1 yian   zh        5692 Jan 20 22:22 yian.cc
+drwx------.  5 yian   zh        4096 Jan 20 22:22 .
+-rw-r--r--.  1 yian   zh     6637726 Jan 20 22:22 out_12_Skim.root
+total 6532
+-rw-r--r--.  1 condor condor    5959 Jan 20 22:22 .job.ad
+drwxr-xr-x. 28 condor condor    4096 Jan 20 22:22 ..
+-rw-r--r--.  1 condor condor    7869 Jan 20 22:22 .machine.ad
+-rwx------.  1 yian   zh          48 Jan 20 22:22 .chirp.config
+drwx------.  3 yian   zh        4096 Jan 20 22:22 var
+drwx------.  3 yian   zh        4096 Jan 20 22:22 tmp
+drwxr-xr-x.  3 yian   zh        4096 Jan 20 22:22 myCampaign_mm_syst
+-rw-------.  1 yian   zh        5692 Jan 20 22:22 yian.cc
+-rw-r--r--.  1 yian   zh     6637726 Jan 20 22:22 out.root
+drwx------.  5 yian   zh        4096 Jan 20 22:22 .
+directory .//myCampaign_mm_syst/DoubleMuData_all/TEST/
+total 12
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:22 2018
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:22 ..
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:22 .
+-x. 3 yian zh 4096 Jan 20 22:22 2018
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:22 ..
+drwxr-xr-x. 3 yian zh 4096 Jan 20 22:22 .

@@ -7,3 +7,5 @@ keep *Weight*
 keep Generator_weight
 keep Photon*
 keep event 
+keep GenPart*
+keep HLT*

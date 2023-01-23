@@ -63,7 +63,7 @@ class Sample:
             else:
                uName = "{0}_{1}_{2}".format( uName , self.year() , self.info.get('era') )
         else:
-            if 'G1Jet' in uName and self.year() == 2016: return uName #FIXME #G1Jet big ntuples produced by Davide do not follow the same naming convention
+#            if 'G1Jet' in uName and self.year() == 2016: return uName #FIXME #G1Jet big ntuples produced by Davide do not follow the same naming convention
             uName = "{0}_{1}".format( uName , self.year() )
             if 'pmx' in self.info :
                 uName += "_pmx"

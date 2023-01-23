@@ -1,0 +1,134 @@
+/pool/condor/dir_9633
+/afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts
+3.10.0-1160.80.1.el7.x86_64
+slc7_amd64_gcc700
+Linux b7s05p2718.cern.ch 3.10.0-1160.80.1.el7.x86_64 #1 SMP Tue Nov 8 15:48:59 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+directory: /pool/condor/dir_9633
+total 40
+-rw-r--r--.  1 condor condor 6081 Jan 20 18:04 .job.ad
+drwxr-xr-x. 24 condor condor 4096 Jan 20 18:04 ..
+-rw-r--r--.  1 condor condor 7412 Jan 20 18:04 .machine.ad
+-rwx------.  1 yian   zh       48 Jan 20 18:04 .chirp.config
+-rw-------.  1 yian   zh     3032 Jan 20 18:04 yian.cc
+drwx------.  3 yian   zh     4096 Jan 20 18:04 var
+drwx------.  4 yian   zh     4096 Jan 20 18:04 .
+drwx------.  3 yian   zh     4096 Jan 20 18:04 tmp
+/pool/condor/dir_9633
+total 40
+-rw-r--r--.  1 condor condor 6081 Jan 20 18:04 .job.ad
+drwxr-xr-x. 24 condor condor 4096 Jan 20 18:04 ..
+-rw-r--r--.  1 condor condor 7412 Jan 20 18:04 .machine.ad
+-rwx------.  1 yian   zh       48 Jan 20 18:04 .chirp.config
+-rw-------.  1 yian   zh     3032 Jan 20 18:04 yian.cc
+drwx------.  3 yian   zh     4096 Jan 20 18:04 var
+drwx------.  4 yian   zh     4096 Jan 20 18:04 .
+drwx------.  3 yian   zh     4096 Jan 20 18:04 tmp
+[--> Output dir: .//myCampaign_syst/GJetsNLO_18/TEST/]
+0: /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+1: -c
+2: myCampaign_syst/GJetsNLO_18
+3: -d
+4: /G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM
+5: --nfilesperchunk
+6: 1
+7: --chunkindex
+8: 4
+9: -o
+10: .//myCampaign_syst/GJetsNLO_18/
+[AAdding file/pool/condor/dir_50027/out_2_Skim.root
+MergingTotalNumbers
+MergingEvents_TotalUp
+MergingEvents_TotalDown
+MergingEvents_JERUp
+MergingEvents_JERDown
+MergingEvents
+MergingRuns
+MergingParameterSets
+MergingLuminosityBlocks
+MergingMetaData
+MergingnEventsGenWeighted
+MergingwgtSum
+Mergingcutflow
+MergingnEvents
+Merginguntagged
+Mergingnwgts
+
+[43m                                           [0m
+[33m
+--- Running VJJSkimmerJME (via vjj_VJJSkimmerJME_postproc.py) ---[0m
+
+[43m                                           [0m
+
+dataset name is /G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM
+year, isData and isSignal are set from the dataset name to 2017, False and False
+False
+isjson
+['GJetsNLO']
+('/G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM', '/G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM', 'G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1')
+('/G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM', 1, 1, 9, 9)
+[94m
+== Processing following files:[0m
+/eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/gamma/G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8/crab_G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1/230112_095803/0000/out_2.root
+[94m
+== JEC variations: [0m
+['TotalUp', 'TotalDown', 'JERUp', 'JERDown']
+
+('finale state:', 22)
+JEC : Fall17_17Nov2017_V32_MC	 JER : Fall17_V3_MC
+MET branch : MET
+[94m
+== Creating output file:[0m
+/pool/condor/dir_50027/.//myCampaign_syst/GJetsNLO_17/TEST//2017/G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1//Skimmed_1_1.root
+
+('finale state:', 22)
+/pool/condor/dir_50027
+Will write selected trees to /pool/condor/dir_50027
+Loading jet energy scale (JES) uncertainties from file '/pool/condor/dir_50027/tmp/tmpaim_pr/Fall17_17Nov2017_V32_MC_Uncertainty_AK4PFchs.txt'
+Loading jet energy resolutions (JER) from file '/pool/condor/dir_50027/tmp/tmpjlTvMo/Fall17_V3_MC_PtResolution_AK4PFchs.txt'
+Loading JER scale factors and uncertainties from file '/pool/condor/dir_50027/tmp/tmpjlTvMo/Fall17_V3_MC_SF_AK4PFchs.txt'
+Pre-select 43218 entries out of 754288 (5.73%)
+nanoAODv5 or higher: True
+Processed    10000/   43218 entries, 23.14% (elapsed time   175.9s, curr speed    0.057 kHz, avg speed    0.057 kHz), accepted     5816/   10001 events (58.15%)
+Processed    20000/   43218 entries, 46.28% (elapsed time   367.7s, curr speed    0.052 kHz, avg speed    0.054 kHz), accepted    11576/   20001 events (57.88%)
+Processed    30000/   43218 entries, 69.42% (elapsed time   644.7s, curr speed    0.036 kHz, avg speed    0.047 kHz), accepted    17434/   30001 events (58.11%)
+Processed    40000/   43218 entries, 92.55% (elapsed time   829.6s, curr speed    0.054 kHz, avg speed    0.048 kHz), accepted    23205/   40001 events (58.01%)
+[33m... Writing output Tree: Events_TotalUp ...[0m (24340 entries)
+[33m... Writing output Tree: Events_TotalDown ...[0m (20456 entries)
+[33m... Writing output Tree: Events_JERUp ...[0m (22545 entries)
+[33m... Writing output Tree: Events_JERDown ...[0m (22820 entries)
+Processed 43218 preselected entries from /eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/gamma/G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8/crab_G1Jet_LHEGpT-100To150_TuneCP5_13TeV-amcatnlo-pythia8_2017_v1/230112_095803/0000/out_2.root (754288 entries). Finally selected 25104 entries
+Done /pool/condor/dir_50027/out_2_Skim.root
+Total time 1057.0 sec. to process 754288 events. Rate = 713.6 Hz.
+[01m[33m
+... DONE ![0m
+total 314804
+-rw-r--r--.  1 condor condor      6645 Jan 20 18:01 .job.ad
+-rw-r--r--.  1 condor condor      7974 Jan 20 18:01 .machine.ad
+-rwx------.  1 yian   zh            48 Jan 20 18:01 .chirp.config
+drwx------.  3 yian   zh          4096 Jan 20 18:01 var
+drwxr-xr-x.  3 yian   zh          4096 Jan 20 18:01 myCampaign_syst
+-rw-------.  1 yian   zh          5692 Jan 20 18:01 yian.cc
+-rw-r--r--.  1 yian   zh          7715 Jan 20 18:13 .update.ad
+drwx------.  5 yian   zh          4096 Jan 20 18:13 .
+drwxr-xr-x. 27 condor condor      4096 Jan 20 18:18 ..
+-rw-r--r--.  1 yian   zh     322297509 Jan 20 18:18 out_2_Skim.root
+drwx------.  3 yian   zh          4096 Jan 20 18:18 tmp
+total 314804
+-rw-r--r--.  1 condor condor      6645 Jan 20 18:01 .job.ad
+-rw-r--r--.  1 condor condor      7974 Jan 20 18:01 .machine.ad
+-rwx------.  1 yian   zh            48 Jan 20 18:01 .chirp.config
+drwx------.  3 yian   zh          4096 Jan 20 18:01 var
+drwxr-xr-x.  3 yian   zh          4096 Jan 20 18:01 myCampaign_syst
+-rw-------.  1 yian   zh          5692 Jan 20 18:01 yian.cc
+-rw-r--r--.  1 yian   zh          7715 Jan 20 18:13 .update.ad
+drwxr-xr-x. 27 condor condor      4096 Jan 20 18:18 ..
+-rw-r--r--.  1 yian   zh     322297509 Jan 20 18:18 out.root
+drwx------.  3 yian   zh          4096 Jan 20 18:18 tmp
+drwx------.  5 yian   zh          4096 Jan 20 18:18 .
+directory .//myCampaign_syst/GJetsNLO_17/TEST/
+total 12
+drwxr-xr-x. 3 yian zh 4096 Jan 20 18:01 2017
+drwxr-xr-x. 3 yian zh 4096 Jan 20 18:01 ..
+drwxr-xr-x. 3 yian zh 4096 Jan 20 18:01 .
+rwxr-xr-x. 3 yian zh 26 Jan 20 18:04 .
+18:03 .

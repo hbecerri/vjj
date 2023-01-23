@@ -86,8 +86,8 @@ def main():
     if opt.campaign: campaign = CampaignManager( opt.campaign )
     else: raise ValueError( 'please specify campaign name you want to run using -c option')
 
-    if not os.path.exists( opt.logdir+opt.campaign+str(opt.year)+'_'+current_time ): os.makedirs( opt.logdir+opt.campaign+str(opt.year)+'_'+current_time )
-    opt.logdir=opt.logdir+opt.campaign+str(opt.year)+'_'+current_time 
+    if not os.path.exists( opt.logdir+opt.campaign.replace('/','_')+str(opt.year)+'_'+current_time ): os.makedirs( opt.logdir+opt.campaign.replace('/','_')+str(opt.year)+'_'+current_time )
+    opt.logdir=opt.logdir+opt.campaign.replace('/','_')+str(opt.year)+'_'+current_time 
 
     datasetsToProcess = DATAsamples + MCsamples
     if opt.onlydata and opt.onlymc: print(colors.fg.lightred + 'ERROR: cannot use both options onlydata and opt.onlymc !'); return
@@ -109,12 +109,17 @@ def main():
     actual_nfilesperchunk = 1 if opt.splitjobs else opt.nfilesperchunk
     print('actual_nfilesperchunk:',actual_nfilesperchunk)
 
+    fs=22
+    if 'mm' in opt.campaign:
+       fs=169 
+    elif 'ee' in opt.campaign:
+       fs=121 
     condor.append( ('executable' , '{0}/vjj_VJJSkimmerJME.sh'.format(os.getcwd()) ) )
     if opt.neventsperjob > 0 :
-        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {4} -f $(FIRSTEVENT)'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign , opt.neventsperjob )))
+        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {3} -f $(FIRSTEVENT) -S {4}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.neventsperjob , fs )))
 #        condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {4} -f $(FIRSTEVENT) -S -22'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign , opt.neventsperjob )))
     else:
-        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
+        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -S {3}'.format(actual_nfilesperchunk , step_par_name , full_outdir , fs)))
 #        condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -S -22'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
 
 #//--------------------------------------------
@@ -227,6 +232,8 @@ def main():
     added_samples = []
     outfilename=sample_name+opt.campaign+str(opt.year)+'_'+opt.outfilename
     print(outfilename)
+    outfilename=outfilename.split('/')
+    outfilename=outfilename[0]+'_'+outfilename[1]
     with open( outfilename , 'w') as f:
         available_nqueues = []
         for l in condor:
