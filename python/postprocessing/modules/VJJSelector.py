@@ -19,11 +19,10 @@ class VJJSelector(Module):
         self.isData           = isData
         self.era              = era
         self.bypassSelFilters = signal
-        #self.sampleTag        = sampleTag
-        self.vjjEvent         = VJJEvent(_defaultVjjCfg,finalState)
+        self.vjjEvent         = VJJEvent(era,_defaultVjjCfg,finalState)
         self.gen_vjjEvent     = None 
         if not isData:# and signal:
-            self.gen_vjjEvent=VJJEvent(_defaultGenVjjCfg,finalState)
+            self.gen_vjjEvent=VJJEvent(era,_defaultGenVjjCfg,finalState)
  
         self.histos={}
 
@@ -264,7 +263,6 @@ class VJJSelector(Module):
         all_pho        = Collection(event, "Photon")
         good_phoIdx    = event.vjj_photons 
         if self.fs == -22:  good_phoIdx  = event.vjj_loosePhotons
-        if self.fs == -22:  jetsIdx  = event.vjj_looseJets
 
         all_muo        = Collection(event, "Muon")
         good_muoIdx    = event.vjj_mus
@@ -307,6 +305,7 @@ class VJJSelector(Module):
         #jet selection
         all_jets = Collection(event, "Jet")
         jetsIdx  =  event.vjj_jets
+	if self.fs == -22:  jetsIdx  = event.vjj_looseJets
         jets     = [all_jets[i] for i in jetsIdx]
         cleanJets= []
         

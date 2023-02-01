@@ -88,6 +88,7 @@ def defineModules(year, isData, dataset, campaign, finalState, jme_vars):
         modules.append(jmeCorrections())
         for var in jme_vars:
             modules.extend([JetSelector(year, cfg=_defaultObjCfg, apply_id=True, JMEvar=var)])
+            modules.extend([JetSelector(year, cfg=_defaultObjCfg, apply_id=False, JMEvar=var)])
     modules.append(VJJSkimmerJME(dataset, campaign, finalState, _defaultVjjSkimCfg, JMEvars=jme_vars, includeTotalJER=includeTotalJER))
     return modules
 

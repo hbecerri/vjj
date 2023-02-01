@@ -51,12 +51,13 @@ class VJJEvent:
 
     """A summary of a vector boson + 2 jets event for plotting, stat analysis etc."""
 
-    def __init__(self,cfg=_defaultVjjCfg,finalState = 22):
+    def __init__(self,era,cfg=_defaultVjjCfg,finalState = 22):
         self.selCfg=copy.deepcopy(cfg)
         self.pfix=''
         self.outvars=[]
         self.photonExtra=[]
         self.fs = finalState
+        self.era = era
 
     def makeBranches(self, out, isGen=False):
 
@@ -73,7 +74,7 @@ class VJJEvent:
                   'qglqWgt', 'qglgWgt', 
                   'v_pt', 'v_eta', 'v_phi', 'v_m', 'v_ystar', 
                   'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v','lead_dphiv','lead_detav',
-                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav','sublead_isloosePU',
+                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav','sublead_isloosePU','sublead_puId',
                   'j_maxAbsEta','j_minAbsEta',
                   'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
                   'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi' ,'vjj_deta',
@@ -191,11 +192,12 @@ class VJJEvent:
 
 ############
         if self.pfix=='vjj_': 
-            loosePuID = tagJets[1].puId > 3
-            if(not loosePuID):
-                self.out.fillBranch(self.pfix+'sublead_isloosePU',   -1.0)
-            if(loosePuID):
-                self.out.fillBranch(self.pfix+'sublead_isloosePU',   1.0)
+           self.out.fillBranch(self.pfix+'sublead_puId', tagJets[1].puId)
+           loosePuID = tagJets[1].puId > 0 if self.era == 2016 else tagJets[1].puId > 3
+           if(not loosePuID):
+               self.out.fillBranch(self.pfix+'sublead_isloosePU',   -1.0)
+           if(loosePuID):
+               self.out.fillBranch(self.pfix+'sublead_isloosePU',   1.0)
 ############
 
         self.out.fillBranch(self.pfix+'sublead_eta',  tagJets[1].eta)

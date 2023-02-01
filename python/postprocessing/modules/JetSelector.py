@@ -34,7 +34,8 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         return "Jet"
 
     def obj_name(self):
-        if self.apply_id:
+#        if self.apply_id:
+        if self.applyPUid:
             name = 'jet'
         else:
             name = "looseJet"
