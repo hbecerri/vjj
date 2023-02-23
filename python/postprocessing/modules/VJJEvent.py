@@ -192,6 +192,11 @@ class VJJEvent:
 
 ############
         if self.pfix=='vjj_': 
+#check the lead jet
+	   loosePuID_lead_jet = tagJets[0].puId > 0 if self.era == 2016 else tagJets[0].puId > 3
+           if(not loosePuID_lead_jet): return False
+
+#check the sublead jet and save branches
            self.out.fillBranch(self.pfix+'sublead_puId', tagJets[1].puId)
            loosePuID = tagJets[1].puId > 0 if self.era == 2016 else tagJets[1].puId > 3
            if(not loosePuID):

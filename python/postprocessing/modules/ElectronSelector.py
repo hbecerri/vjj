@@ -32,11 +32,20 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
             2018:{
                 'rec'    : (os.path.join(baseSFDir,'egammaEffi_ptAbove20.txt_EGM2D_UL2018.root'), 'EGamma_SF2D'),
 		'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_SF2D'),
+#                'hlt'    : (os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_EffMC2D',os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_SF2D',os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_EffMC2D',os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_SF2D')
                 }
         }
         for k in eleSFSources[self.era]:
             url,obj=eleSFSources[self.era][k]
             self.addSFFromSource(k,url,obj)
+#        for k in eleSFSources[self.era]:
+#            if 'hlt' not in k:
+#               url=[eleSFSources[self.era][k][0]]
+#               obj=[eleSFSources[self.era][k][1]]
+#               self.addSFFromSource(k,url,obj)
+#            else:
+#               url=[eleSFSources[self.era][k][0],eleSFSources[self.era][k][2],eleSFSources[self.era][k][4],eleSFSources[self.era][k][6]]
+#               obj=[eleSFSources[self.era][k][1],eleSFSources[self.era][k][3],eleSFSources[self.era][k][5],eleSFSources[self.era][k][7]]
 
     def collection_name(self):
         return "Electron"

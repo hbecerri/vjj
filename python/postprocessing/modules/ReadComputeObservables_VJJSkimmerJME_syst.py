@@ -22,7 +22,7 @@ class ReadComputeObservables:
 ##    ## ##          ##    ##     ## ##
  ######  ########    ##     #######  ##
 
-    def __init__(self, sample, isData, era, allWeights, nWeights, lumiWeights, xSection, mva_names=[]):
+    def __init__(self, sample, isData, era,finalState, allWeights, nWeights, lumiWeights, xSection, mva_names=[]):
 
         self.sample = sample
         self.isData = isData
@@ -31,6 +31,7 @@ class ReadComputeObservables:
         self.nWeights = nWeights
         self.lumiWeights = lumiWeights
         self.xSection = xSection
+        self.fs = finalState
 
         self.pfix = 'vjj_' #Prefix define in VJJSelector
         self.categories = []
@@ -497,15 +498,23 @@ class ReadComputeObservables:
 
             #Gen-level info
             genParts = Collection(event, "GenPart")
-            vjjPhotons = Collection(event, "vjj_photons" , 'vjj_nphotons')
-            if event.vjj_nphotons > 0:
-                photons = Collection(event, "Photon" )
-                selectedPhotonIndex = ord(event.vjj_photons[0])
-                photon_genPartIdx = photons[selectedPhotonIndex].genPartIdx
-                if photon_genPartIdx > -1 and photons[selectedPhotonIndex].DeltaR(genParts[photon_genPartIdx])<0.3 and abs(genParts[photon_genPartIdx].pdgId) == 22 and ( (genParts[photon_genPartIdx].statusFlags & (1 << 0) == (1 << 0) ) or (genParts[photon_genPartIdx].statusFlags & (1 << 8) == (1 << 8) ) ):
-                   out.fillBranch( 'vjj_photonIsMatched' , 1 )
-#                  out.fillBranch( 'vjj_photonIsMatched' , genParts[photon_genPartIdx].statusFlags & 1 )
-                else: out.fillBranch( 'vjj_photonIsMatched' , -10 )
+	    photons = Collection(event, "Photon" )
+            if event.vjj_nloosePhotons > 0:
+
+                if self.fs == 22 and event.vjj_nphotons > 0:
+                   selectedPhotonIndex = ord(event.vjj_photons[0])
+                   photon_genPartIdx = photons[selectedPhotonIndex].genPartIdx
+	        elif self.fs == -22:
+                   selectedPhotonIndex = ord(event.vjj_loosePhotons[0])
+                   photon_genPartIdx = photons[selectedPhotonIndex].genPartIdx
+                else:
+                   photon_genPartIdx = -10
+
+                if photon_genPartIdx > -1:
+                   if photons[selectedPhotonIndex].DeltaR(genParts[photon_genPartIdx])<0.3 and abs(genParts[photon_genPartIdx].pdgId) == 22 and ( (genParts[photon_genPartIdx].statusFlags & (1 << 0) == (1 << 0) ) or (genParts[photon_genPartIdx].statusFlags & (1 << 8) == (1 << 8) ) ):
+                      out.fillBranch( 'vjj_photonIsMatched' , 1 )
+                   else: out.fillBranch( 'vjj_photonIsMatched' , -10 )
+                else: out.fillBranch( 'vjj_photonIsMatched' , -15 )
             else: out.fillBranch( 'vjj_photonIsMatched' , -20 )
 
             maxGenPhotonPt = -1

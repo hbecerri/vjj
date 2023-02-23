@@ -118,7 +118,7 @@ class VJJSkimmerJME(Module):
 
         #-- Create 'ReadComputeObservables' object (used to create/fill branches and compute relevant observables)
 #        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.allWeights, self.nWeights, self.lumiWeights, self.xSection, self.BDTReader.outputNames)
-        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.allWeights, self.nWeights, self.lumiWeights, self.xSection)
+        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.fs, self.allWeights, self.nWeights, self.lumiWeights, self.xSection)
 
 
  #####  #####    ##   #    #  ####  #    # ######  ####

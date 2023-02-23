@@ -31,6 +31,7 @@ class Manager:
         self.all_samples[ '17wg' ] = SampleList( 'WG'  , ['/WGToLNuG_(?P<nj>..)J.*' ] ,'njets' , color=28 , regions=['gamma','fake'])
         self.all_samples[ '18wjlnu' ] = SampleList( 'WJetsToLNu'  , ['/WJetsToLNu_.*'] ,  color=41 , regions=['ee', 'mm'])
         self.all_samples[ '19gg' ] = SampleList( 'GG'  , ['/DiPhotonJetsBox.*' ] ,'njets' , color=28 , regions=['gamma','fake'])
+        self.all_samples[ '20ST' ] = SampleList('ST'  , [ '/ST_.*' ] , color=30 , regions=['gamma','fake'])
 #        self.all_samples[ '19wjqq' ] = SampleList( 'WJetsToQQ' , ['/WJetsToQQ_HT[-]{0,1}(?P<htrange>[^_]*).*' ] , 'htrange' , color=43 , regions=['gamma','fake'])
 #        self.all_samples[ '20zgto2lg' ] = SampleList( 'ZG' , ['.*ZGTo2LG.*' ] , color=38 , regions=['gamma','fake'])
 

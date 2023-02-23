@@ -1,5 +1,5 @@
 executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
-arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_fake_syst/GJetsNLO_18/TEST/ -S 22
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_fake_syst/GJetsNLO_18/TEST/ -S -22
 output              = condor_myCampaign_fake_syst_GJetsNLO_182018_26Jan2023_13h55m23/$(ClusterId).$(ProcId).out
 error               = condor_myCampaign_fake_syst_GJetsNLO_182018_26Jan2023_13h55m23/$(ClusterId).$(ProcId).err
 log                 = condor_myCampaign_fake_syst_GJetsNLO_182018_26Jan2023_13h55m23/$(ClusterId).log
