@@ -89,7 +89,7 @@ class Maker:
             all_jobs = {}
             for dd , _ , files in os.walk( os.path.join( dir , dates[0] ) ):
                 for f in files:
-                    #print(dd,f)
+#                    print(dd,f)
                     if f.endswith('.root') :
                         jobid = int( self.regex.match( f ).groupdict()['jobid'] )
                         all_jobs[ jobid ] = os.path.join( dd , f )

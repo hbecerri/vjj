@@ -34,11 +34,11 @@ class JetSelector(ScaleFactorBase, ObjectSelectorBase):
         return "Jet"
 
     def obj_name(self):
-#        if self.apply_id:
-        if self.applyPUid:
-            name = 'jet'
-        else:
-            name = "looseJet"
+        name = 'jet'
+#        if self.applyPUid:
+#            name = 'jet'
+#        else:
+#            name = "looseJet"
         if self.JMEvar != "": name+= "s_{}".format(self.JMEvar) #Ex: 'jets_TotalUp' for JEC variation 'TotalUp'  (NB: add the 's' suffix here, not in ObjectSelectorBase like for other objects, to get correct naming)
         return name
 

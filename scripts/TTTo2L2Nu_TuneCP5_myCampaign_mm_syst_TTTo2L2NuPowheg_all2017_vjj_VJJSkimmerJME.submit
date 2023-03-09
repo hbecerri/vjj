@@ -1,8 +1,8 @@
 executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
 arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_mm_syst/TTTo2L2NuPowheg_all/TEST/ -S 169
-output              = condor_myCampaign_mm_syst_TTTo2L2NuPowheg_all2017_17Jan2023_14h29m05/$(ClusterId).$(ProcId).out
-error               = condor_myCampaign_mm_syst_TTTo2L2NuPowheg_all2017_17Jan2023_14h29m05/$(ClusterId).$(ProcId).err
-log                 = condor_myCampaign_mm_syst_TTTo2L2NuPowheg_all2017_17Jan2023_14h29m05/$(ClusterId).log
+output              = condor_myCampaign_mm_syst_TTTo2L2NuPowheg_all2017_26Feb2023_01h01m23/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_mm_syst_TTTo2L2NuPowheg_all2017_26Feb2023_01h01m23/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_mm_syst_TTTo2L2NuPowheg_all2017_26Feb2023_01h01m23/$(ClusterId).log
 +JobFlavour         = "tomorrow"
 transfer_executable = False
 requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
@@ -113,4 +113,5 @@ queue OUTPUT CAMPAIGN DATASET,chunkid from (
 	TTTo2L2Nu_TuneCP5_ myCampaign_mm_syst/TTTo2L2NuPowheg_all /TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 95
 	TTTo2L2Nu_TuneCP5_ myCampaign_mm_syst/TTTo2L2NuPowheg_all /TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 96
 	TTTo2L2Nu_TuneCP5_ myCampaign_mm_syst/TTTo2L2NuPowheg_all /TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 97
+	TTTo2L2Nu_TuneCP5_ myCampaign_mm_syst/TTTo2L2NuPowheg_all /TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 98
 )

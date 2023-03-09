@@ -1,0 +1,121 @@
+/pool/condor/dir_38947
+/afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts
+3.10.0-1160.81.1.el7.x86_64
+slc7_amd64_gcc700
+Linux b7s05p9425.cern.ch 3.10.0-1160.81.1.el7.x86_64 #1 SMP Fri Dec 16 17:29:43 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+directory: /pool/condor/dir_38947
+total 24
+-rw-r--r--. 1 condor condor 6574 Mar  6 22:11 .job.ad
+-rw-r--r--. 1 condor condor 6946 Mar  6 22:11 .machine.ad
+-rwx------. 1 yian   zh       48 Mar  6 22:11 .chirp.config
+-rw-------. 1 yian   zh     3088 Mar  6 22:11 yian.cc
+drwx------. 3 yian   zh       17 Mar  6 22:11 var
+drwx------. 4 yian   zh       98 Mar  6 22:11 .
+drwxr-xr-x. 5 condor condor   73 Mar  6 22:11 ..
+drwx------. 3 yian   zh       22 Mar  6 22:11 tmp
+/pool/condor/dir_38947
+total 24
+-rw-r--r--. 1 condor condor 6574 Mar  6 22:11 .job.ad
+-rw-r--r--. 1 condor condor 6946 Mar  6 22:11 .machine.ad
+-rwx------. 1 yian   zh       48 Mar  6 22:11 .chirp.config
+-rw-------. 1 yian   zh     3088 Mar  6 22:11 yian.cc
+drwx------. 3 yian   zh       17 Mar  6 22:11 var
+drwx------. 4 yian   zh       98 Mar  6 22:11 .
+drwxr-xr-x. 5 condor condor   73 Mar  6 22:11 ..
+drwx------. 3 yian   zh       22 Mar  6 22:11 tmp
+[--> Output dir: .//myCampaign_noPuId/PhotonData_18/TEST/]
+0: /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+1: -c
+2: myCampaign_noPuId/PhotonData_18
+3: -d
+4: /EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD
+5: --nfilesperchunk
+6: 1
+7: --chunkindex
+8: 73
+9: -o
+10: .//myCampaign_noPuId/PhotonData_18/TEST/
+11: 
+Adding file/pooAAdding file/pool/condor/dir_42741/out_33_Skim.root
+MergingTotalNumbers
+MergingEvents
+MergingRuns
+MergingParameterSets
+MergingLuminosityBlocks
+MergingMetaData
+MergingnEventsGenWeighted
+Merginguntagged
+MergingnEvents
+Mergingnwgts
+Mergingcutflow
+
+[43m                                           [0m
+[33m
+--- Running VJJSkimmerJME (via vjj_VJJSkimmerJME_postproc.py) ---[0m
+
+[43m                                           [0m
+
+dataset name is /EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD
+year, isData and isSignal are set from the dataset name to 2018, True and False
+True
+[94m
+== Applying lumi mask: [0m
+/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt
+
+isjson
+['PhotonData', 'DoubleEGData']
+('/EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', '/EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', 'EGamma_2018_B_v1')
+('/EGamma/Run2018B-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD', 1, 51, 74, 74)
+[94m
+== Processing following files:[0m
+/eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/gamma_copy/EGamma/crab_EGamma_2018_B_v1/230302_212509/0000/out_33.root
+[94m
+== JEC variations: [0m
+['TotalUp', 'TotalDown', 'JERUp', 'JERDown']
+
+('finale state:', 22)
+[94m
+== Creating output file:[0m
+/pool/condor/dir_42741/.//myCampaign_noPuId/PhotonData_18/TEST//2018/EGamma_2018_B_v1//Skimmed_1_51.root
+
+('finale state:', 22)
+/pool/condor/dir_42741
+Will write selected trees to /pool/condor/dir_42741
+Pre-select 4901 entries out of 24309 (20.16%)
+Processed 4901 preselected entries from /eos/cms/store/group/phys_smp/vbfA/yian_test_syst/crab/gamma_copy/EGamma/crab_EGamma_2018_B_v1/230302_212509/0000/out_33.root (24309 entries). Finally selected 3132 entries
+Done /pool/condor/dir_42741/out_33_Skim.root
+Total time 27.5 sec. to process 24309 events. Rate = 884.1 Hz.
+[01m[33m
+... DONE ![0m
+total 5840
+-rw-r--r--.  1 condor condor    5975 Mar  6 22:10 .job.ad
+-rw-r--r--.  1 condor condor    7315 Mar  6 22:10 .machine.ad
+-rwx------.  1 yian   zh          48 Mar  6 22:10 .chirp.config
+drwx------.  3 yian   zh        4096 Mar  6 22:10 var
+drwx------.  3 yian   zh        4096 Mar  6 22:10 tmp
+drwxr-xr-x.  3 yian   zh        4096 Mar  6 22:11 myCampaign_noPuId
+-rw-------.  1 yian   zh        5804 Mar  6 22:11 yian.cc
+drwx------.  5 yian   zh        4096 Mar  6 22:11 .
+-rw-r--r--.  1 yian   zh     5927298 Mar  6 22:11 out_33_Skim.root
+drwxr-xr-x. 21 condor condor    4096 Mar  6 22:11 ..
+total 5840
+-rw-r--r--.  1 condor condor    5975 Mar  6 22:10 .job.ad
+-rw-r--r--.  1 condor condor    7315 Mar  6 22:10 .machine.ad
+-rwx------.  1 yian   zh          48 Mar  6 22:10 .chirp.config
+drwx------.  3 yian   zh        4096 Mar  6 22:10 var
+drwx------.  3 yian   zh        4096 Mar  6 22:10 tmp
+drwxr-xr-x.  3 yian   zh        4096 Mar  6 22:11 myCampaign_noPuId
+-rw-------.  1 yian   zh        5804 Mar  6 22:11 yian.cc
+-rw-r--r--.  1 yian   zh     5927298 Mar  6 22:11 out.root
+drwxr-xr-x. 21 condor condor    4096 Mar  6 22:11 ..
+drwx------.  5 yian   zh        4096 Mar  6 22:11 .
+directory .//myCampaign_noPuId/PhotonData_18/TEST/
+total 12
+drwxr-xr-x. 3 yian zh 4096 Mar  6 22:11 2018
+drwxr-xr-x. 3 yian zh 4096 Mar  6 22:11 ..
+drwxr-xr-x. 3 yian zh 4096 Mar  6 22:11 .
+
+
+x. 3 yian zh 4096 Mar  6 22:10 2018
+drwxr-xr-x. 3 yian zh 4096 Mar  6 22:10 ..
+drwxr-xr-x. 3 yian zh 4096 Mar  6 22:10 .

@@ -1,8 +1,8 @@
 executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
 arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_mm_syst/DYJetsNLO_all/TEST/ -S 169
-output              = condor_myCampaign_mm_syst_DYJetsNLO_all2017_16Jan2023_15h02m08/$(ClusterId).$(ProcId).out
-error               = condor_myCampaign_mm_syst_DYJetsNLO_all2017_16Jan2023_15h02m08/$(ClusterId).$(ProcId).err
-log                 = condor_myCampaign_mm_syst_DYJetsNLO_all2017_16Jan2023_15h02m08/$(ClusterId).log
+output              = condor_myCampaign_mm_syst_DYJetsNLO_all2017_26Feb2023_00h59m35/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_mm_syst_DYJetsNLO_all2017_26Feb2023_00h59m35/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_mm_syst_DYJetsNLO_all2017_26Feb2023_00h59m35/$(ClusterId).log
 +JobFlavour         = "tomorrow"
 transfer_executable = False
 requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
@@ -167,5 +167,4 @@ queue OUTPUT CAMPAIGN DATASET,chunkid from (
 	DYJetsToLL_M-50_TuneCP5_ myCampaign_mm_syst/DYJetsNLO_all /DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v2/NANOAODSIM 149
 	DYJetsToLL_M-50_TuneCP5_ myCampaign_mm_syst/DYJetsNLO_all /DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v2/NANOAODSIM 150
 	DYJetsToLL_M-50_TuneCP5_ myCampaign_mm_syst/DYJetsNLO_all /DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v2/NANOAODSIM 151
-	DYJetsToLL_M-50_TuneCP5_ myCampaign_mm_syst/DYJetsNLO_all /DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v2/NANOAODSIM 152
 )

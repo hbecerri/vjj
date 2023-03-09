@@ -68,7 +68,7 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
                     PhotonSelector( year , apply_id = False , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
 #                    JetSelector( year , _defaultObjCfg, apply_id=True ),
 #                    JetSelector( year , _defaultObjCfg, apply_id=False ),
-                    JetSelector( year , _defaultObjCfg, applyPUid=True ),
+#                    JetSelector( year , _defaultObjCfg, applyPUid=True ),
                     JetSelector( year , _defaultObjCfg, applyPUid=False ),
                     VJJSelector(isData , year , signal=isSignal, finalState = fs)] )
 

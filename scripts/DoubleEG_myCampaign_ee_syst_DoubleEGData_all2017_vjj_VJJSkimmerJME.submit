@@ -1,8 +1,8 @@
 executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
 arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_ee_syst/DoubleEGData_all/TEST/ -S 121
-output              = condor_myCampaign_ee_syst_DoubleEGData_all2017_20Jan2023_17h00m01/$(ClusterId).$(ProcId).out
-error               = condor_myCampaign_ee_syst_DoubleEGData_all2017_20Jan2023_17h00m01/$(ClusterId).$(ProcId).err
-log                 = condor_myCampaign_ee_syst_DoubleEGData_all2017_20Jan2023_17h00m01/$(ClusterId).log
+output              = condor_myCampaign_ee_syst_DoubleEGData_all2017_26Feb2023_01h02m35/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_ee_syst_DoubleEGData_all2017_26Feb2023_01h02m35/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_ee_syst_DoubleEGData_all2017_26Feb2023_01h02m35/$(ClusterId).log
 +JobFlavour         = "tomorrow"
 transfer_executable = False
 requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )

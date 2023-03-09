@@ -1,0 +1,48 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_noPuId/STs_18/TEST/ -S 22
+output              = condor_myCampaign_noPuId_STs_182018_23Feb2023_18h09m45/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_noPuId_STs_182018_23Feb2023_18h09m45/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_noPuId_STs_182018_23Feb2023_18h09m45/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2018_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 0
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 1
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 2
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 3
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 4
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 5
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 6
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 7
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 8
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 9
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 10
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 11
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 12
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 13
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 14
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 15
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 16
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 17
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 18
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 19
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 20
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 21
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 22
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 23
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 24
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 25
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 26
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 27
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 28
+	ST_s-channel_4f_hadronicDecays_TuneCP5_ myCampaign_noPuId/STs_18 /ST_s-channel_4f_hadronicDecays_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 29
+)

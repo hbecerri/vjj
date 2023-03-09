@@ -47,7 +47,10 @@ MCsamples = ['GJets_SM_5f', #Signal
     'TTTo2L2Nu', #ttbar
     'TTGJets', #ttgamma
     'ZGTo2LG',
-    'WGToLNuG'
+    'WGToLNuG',
+    'LNuAJJ',
+    'ST_s',
+    'ST_t'
 ]
 
 #-- Empty <-> will process all years; [a,b] <-> will process only datasets corresponding to years (a || b)
@@ -114,6 +117,8 @@ def main():
        fs=169 
     elif 'ee' in opt.campaign:
        fs=121 
+    elif 'fake' in opt.campaign:
+       fs=-22 
     condor.append( ('executable' , '{0}/vjj_VJJSkimmerJME.sh'.format(os.getcwd()) ) )
     if opt.neventsperjob > 0 :
         condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {3} -f $(FIRSTEVENT) -S {4}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.neventsperjob , fs )))

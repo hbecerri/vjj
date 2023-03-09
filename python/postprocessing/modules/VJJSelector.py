@@ -305,7 +305,7 @@ class VJJSelector(Module):
         #jet selection
         all_jets = Collection(event, "Jet")
         jetsIdx  =  event.vjj_jets
-	if self.fs == -22:  jetsIdx  = event.vjj_looseJets
+#	if self.fs == -22:  jetsIdx  = event.vjj_looseJets
         jets     = [all_jets[i] for i in jetsIdx]
         cleanJets= []
         
