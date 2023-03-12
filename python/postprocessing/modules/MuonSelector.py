@@ -61,7 +61,7 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
         if not isIso : return False
         return True
 
-    def fillSFs(self,muons,combined=True):
+    def fillSFs(self,muons,combined=False):
 
         """evaluates the scale factors for a collection of muons """
 
@@ -80,16 +80,22 @@ class MuonSelector(ScaleFactorBase , ObjectSelectorBase):
 
                 else:
                     sfVal=self.evalSF(k, objAttrs=[m.corrected_pt,abs(m.eta)])
-
+#                print(k,sfVal)
                 SFs[k].append( sfVal )
 
+#        print("mu length",len(muons),SFs)
         #combine scale factors
         if combined:
             selSFs = []
+            combSFs={}
+            a=[]
             for k in SFs:
-                selSFs.extend([x for x in SFs[k] if x])
-            SFs = self.combineScaleFactors(selSFs)
-            ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
+                selSFs=([x for x in SFs[k] if x])
+                combSFs[k] = self.combineScaleFactors(selSFs)
+#                print(k,selSFs,combSFs)
+                a.extend([ combSFs[k][0] , combSFs[k][0]+combSFs[k][1] , combSFs[k][0]-combSFs[k][1] ])
+            ret = dict( zip( self.weight_names() , a ) )
+#            print(self.weight_names(),ret)
             return ret
 
 

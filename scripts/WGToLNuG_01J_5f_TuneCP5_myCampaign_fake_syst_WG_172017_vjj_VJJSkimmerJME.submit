@@ -1,0 +1,72 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_fake_syst/WG_17/TEST/ -S -22
+output              = condor_myCampaign_fake_syst_WG_172017_27Jan2023_16h34m18/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_fake_syst_WG_172017_27Jan2023_16h34m18/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_fake_syst_WG_172017_27Jan2023_16h34m18/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2017_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 0
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 1
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 2
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 3
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 4
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 5
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 6
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 7
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 8
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 9
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 10
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 11
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 12
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 13
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 14
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 15
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 16
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 17
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 18
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 19
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 20
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 21
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 22
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 23
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 24
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 25
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 26
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 27
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 28
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 29
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 30
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 31
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 32
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 33
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 34
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 35
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 36
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 37
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 38
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 39
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 40
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 41
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 42
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 43
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 44
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 45
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 46
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 47
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 48
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 49
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 50
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 51
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 52
+	WGToLNuG_01J_5f_TuneCP5_ myCampaign_fake_syst/WG_17 /WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v9-v1/NANOAODSIM 53
+)

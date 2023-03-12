@@ -6,7 +6,7 @@ _defaultObjCfg={'min_leptonPt':20,
                 'max_leptonEta':2.4,
                 'min_photonPt':70,
                 'max_photonEta':2.4,
-                'min_jetPt':25,
+                'min_jetPt':20,
                 'max_jetEta':4.7,
                 'min_drVeto':0.4,
                 'max_EB': 1.4442,
@@ -51,12 +51,13 @@ class VJJEvent:
 
     """A summary of a vector boson + 2 jets event for plotting, stat analysis etc."""
 
-    def __init__(self,cfg=_defaultVjjCfg,finalState = 22):
+    def __init__(self,era,cfg=_defaultVjjCfg,finalState = 22):
         self.selCfg=copy.deepcopy(cfg)
         self.pfix=''
         self.outvars=[]
         self.photonExtra=[]
         self.fs = finalState
+        self.era = era
 
     def makeBranches(self, out, isGen=False):
 
@@ -73,31 +74,33 @@ class VJJEvent:
                   'qglqWgt', 'qglgWgt', 
                   'v_pt', 'v_eta', 'v_phi', 'v_m', 'v_ystar', 
                   'lead_pt', 'lead_eta', 'lead_phi', 'lead_m', 'lead_qgl', 'lead_dr2v','lead_dphiv','lead_detav',
-                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav','sublead_isloosePU',
+                  'sublead_pt','sublead_eta','sublead_phi', 'sublead_m', 'sublead_qgl', 'sublead_dr2v','sublead_dphiv','sublead_detav','lead_puId','sublead_puId',
                   'j_maxAbsEta','j_minAbsEta',
                   'jj_pt','jj_eta','jj_phi','jj_m','jj_dr2v','jj_scalarht','jj_deta','jj_dphi','jj_sumabseta',
                   'vjj_pt', 'vjj_eta', 'vjj_phi', 'vjj_m', 'vjj_dphi' ,'vjj_deta',
                   'vjj_scalarht', 'vjj_isotropy', 'vjj_circularity', 'vjj_sphericity', 'vjj_aplanarity', 
                   'vjj_C', 'vjj_D',
-                  
-                  'centj_pt', 'centj_eta', 'centj_phi', 'centj_m', 'centj_ystar', 'centj_dr2v',
+                  'centj_pt', 'centj_eta', 'centj_phi', 'centj_m', 'centj_ystar', 'centj_dr2v','centj_puId',
+                  'extraj_pt','extraj_eta','extraj_phi','extraj_m', 'extraj_ystar','extraj_dr2v','extraj_puId',
                   'htsoft','centhtsoft']:            
             outv=self.pfix+v
+#            print('test1:',self.outvars)
             self.outvars.append(outv)
+#            print('test2:',outv)
             self.out.branch(outv,'F' , limitedPrecision=False)
         
         #only for Z
         if abs(self.fs) != 22:
-            self.out.branch('genvjj_leadlep_pt','F')
-            self.out.branch('genvjj_subleadlep_pt','F')
-            self.out.branch('genvjj_leadlep_eta','F')
-            self.out.branch('genvjj_subleadlep_eta','F')
-            self.out.branch('genvjj_leadlep_phi','F')
-            self.out.branch('genvjj_subleadlep_phi','F')
+            self.out.branch(self.pfix+'leadlep_pt','F')
+            self.out.branch(self.pfix+'subleadlep_pt','F')
+            self.out.branch(self.pfix+'leadlep_eta','F')
+            self.out.branch(self.pfix+'subleadlep_eta','F')
+            self.out.branch(self.pfix+'leadlep_phi','F')
+            self.out.branch(self.pfix+'subleadlep_phi','F')
 
         #reco only
         if not isGen:
-            setattr(self,'photonExtra',['mvaID_WP80','mvaID_WP90','cutBased','r9','sieie','hoe','pfRelIso03_all','pfRelIso03_chg'])
+            setattr(self,'photonExtra',['mvaID_WP80','mvaID_WP90','cutBased','r9','sieie','vidNestedWPBitmap','hoe','pfRelIso03_all','pfRelIso03_chg'])
             for v in self.photonExtra:
                 outv=self.pfix+'a_'+v
                 self.outvars.append(outv)
@@ -122,12 +125,12 @@ class VJJEvent:
             
     def fillZextraBranches(self, leptons):
         """ lepton variables for Z analysis """
-        self.out.fillBranch('genvjj_leadlep_pt',    leptons[0].pt)
-        self.out.fillBranch('genvjj_subleadlep_pt', leptons[1].pt)
-        self.out.fillBranch('genvjj_leadlep_eta',   leptons[0].eta)
-        self.out.fillBranch('genvjj_subleadlep_eta',leptons[1].eta)
-        self.out.fillBranch('genvjj_leadlep_phi',   leptons[0].phi)
-        self.out.fillBranch('genvjj_subleadlep_phi',leptons[1].phi)
+        self.out.fillBranch(self.pfix+'leadlep_pt',    leptons[0].pt)
+        self.out.fillBranch(self.pfix+'subleadlep_pt', leptons[1].pt)
+        self.out.fillBranch(self.pfix+'leadlep_eta',   leptons[0].eta)
+        self.out.fillBranch(self.pfix+'subleadlep_eta',leptons[1].eta)
+        self.out.fillBranch(self.pfix+'leadlep_phi',   leptons[0].phi)
+        self.out.fillBranch(self.pfix+'subleadlep_phi',leptons[1].phi)
 
 
     def fillPhotonExtraBranches(self, photon):
@@ -188,12 +191,15 @@ class VJJEvent:
         self.out.fillBranch(self.pfix+'sublead_pt',   tagJets[1].pt)
 
 ############
+#check the lead jet
+#        if self.pfix=='vjj_': 
+#	    loosePuID_lead_jet = tagJets[0].puId > 0 if self.era == 2016 else tagJets[0].puId > 3
+#           if(not loosePuID_lead_jet): return False
+
+#save the puID value of two jets for the later checking
         if self.pfix=='vjj_': 
-            loosePuID = tagJets[1].puId > 3
-            if(not loosePuID):
-                self.out.fillBranch(self.pfix+'sublead_isloosePU',   -1.0)
-            if(loosePuID):
-                self.out.fillBranch(self.pfix+'sublead_isloosePU',   1.0)
+           self.out.fillBranch(self.pfix+'sublead_puId', tagJets[1].puId)
+           self.out.fillBranch(self.pfix+'lead_puId', tagJets[0].puId)
 ############
 
         self.out.fillBranch(self.pfix+'sublead_eta',  tagJets[1].eta)
@@ -263,14 +269,23 @@ class VJJEvent:
         htsoft,centhtsoft=0.,0.
         minEtaStar=minEta+0.2
         maxEtaStar=maxEta-0.2
-        for j in extraJets:
+        for i,j in enumerate(extraJets):
             htsoft+=j.pt
+            if i==0:
+               self.out.fillBranch(self.pfix+'extraj_pt',j.pt)
+               if self.pfix=='vjj_': self.out.fillBranch(self.pfix+'extraj_puId',j.puId)
+               self.out.fillBranch(self.pfix+'extraj_eta',j.eta)
+               self.out.fillBranch(self.pfix+'extraj_phi',j.phi)
+               self.out.fillBranch(self.pfix+'extraj_m',  j.mass)
+               self.out.fillBranch(self.pfix+'extraj_ystar',j.eta-0.5*jj.Eta() )
+               self.out.fillBranch(self.pfix+'extraj_dr2v',j.DeltaR(v))
             if j.eta<minEtaStar : continue
             if j.eta>maxEtaStar : continue
             ncentj+=1
             centhtsoft+=j.pt
             if ncentj>1 : continue
             self.out.fillBranch(self.pfix+'centj_pt',j.pt)
+            if self.pfix=='vjj_': self.out.fillBranch(self.pfix+'centj_puId',j.puId)
             self.out.fillBranch(self.pfix+'centj_eta',j.eta)
             self.out.fillBranch(self.pfix+'centj_phi',j.phi)
             self.out.fillBranch(self.pfix+'centj_m',  j.mass)

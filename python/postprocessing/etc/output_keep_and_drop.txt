@@ -1,0 +1,48 @@
+# drop all at start
+drop *
+
+#NaNo branches
+keep run
+keep luminosityBlock
+keep event
+keep Generator_weight
+keep Pileup*
+keep PV*
+keep HLT_Photon*
+keep HLT_PFJet*
+keep HLT_Ele*
+keep HLT_Mu17*
+keep HLT_Iso*Mu*
+keep *Weight*
+keep Flag_*
+
+# Physics obj from NANO
+keep Electron*
+keep Muon*
+keep Photon*
+keep Jet*
+
+#keep branches for JME corr
+keep MET*
+keep RawMET*
+keep *CorrT1METJet*
+keep GenJet*
+keep nGen*
+keep GenPart*
+keep fixedGridRhoFastjetAll
+
+# gen tree specifics
+keep genvjj*
+drop genvjj_trigWgt*
+drop genvjj_effWgt*
+drop genvjj_qglqWgt*
+drop genvjj_qglgWgt*
+drop genvjj_*_qgl
+
+## reco tree specifics
+keep vjj*
+drop vjj_qglqWgt*
+drop vjj_effWgt*
+drop vjj_nwgt
+drop vjj_wgt
+

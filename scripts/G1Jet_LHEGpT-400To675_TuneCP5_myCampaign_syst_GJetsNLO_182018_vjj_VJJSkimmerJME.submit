@@ -1,0 +1,21 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_noPuId/GJetsNLO_18/TEST/
+output              = condor_myCampaign_syst_GJetsNLO_182018_16Jan2023_14h30m08/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_syst_GJetsNLO_182018_16Jan2023_14h30m08/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_syst_GJetsNLO_182018_16Jan2023_14h30m08/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2018_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	G1Jet_LHEGpT-400To675_TuneCP5_ myCampaign_noPuId/GJetsNLO_18 /G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 0
+	G1Jet_LHEGpT-400To675_TuneCP5_ myCampaign_noPuId/GJetsNLO_18 /G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 1
+	G1Jet_LHEGpT-400To675_TuneCP5_ myCampaign_noPuId/GJetsNLO_18 /G1Jet_LHEGpT-400To675_TuneCP5_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 2
+)

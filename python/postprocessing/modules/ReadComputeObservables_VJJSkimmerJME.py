@@ -251,19 +251,6 @@ class ReadComputeObservables:
         out.branch('vjj_weight' , 'F' )
         out.branch('vjj_sfweight_up' , 'F')
         out.branch('vjj_sfweight_down' , 'F')
- 
-        out.branch('vjj_pileup' , 'F' )
-        out.branch('vjj_pileup_up' , 'F')
-        out.branch('vjj_pileup_down' , 'F')
-
-        out.branch('vjj_photonID' , 'F' )
-        out.branch('vjj_photonID_up' , 'F')
-        out.branch('vjj_photonID_down' , 'F')
-
-        out.branch('vjj_L1PreFiring' , 'F' )
-        out.branch('vjj_L1PreFiring_up' , 'F')
-        out.branch('vjj_L1PreFiring_down' , 'F')
-
 
         return
 

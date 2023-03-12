@@ -29,7 +29,13 @@ class ObjectSelectorBase( Module ):
         pass
 
     def weight_names(self):
-        return [ 'vjj_{0}_effWgt{1}'.format(self.obj_name() , var) for var in [ '' , 'Up' , 'Dn'] ]
+        SFs={'id':[],'iso':[]} if self.obj_name()== 'mu' else {'id':[],'rec':[]}
+        if 'photon' in self.obj_name() or 'Photon' in self.obj_name():
+           SFs={'id':[],'pxseed':[]} 
+        a=[]
+        for k in SFs:
+            a.extend([ 'vjj_'+self.obj_name()+k+'_effWgt{0}'.format(var) for var in [ '' , 'Up' , 'Dn'] ])
+        return a
 
     def mindr_toVetoObjs(self, obj):
         drs = [obj.DeltaR( a ) for a in self.vetoObjs ] or [float('inf')]
@@ -39,6 +45,7 @@ class ObjectSelectorBase( Module ):
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
 
+#        print('weight branches:',self.weight_names())
         for brnch in self.weight_names():
             self.out.branch( brnch , 'F' , limitedPrecision=False )
 

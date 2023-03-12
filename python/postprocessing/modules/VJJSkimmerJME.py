@@ -27,7 +27,7 @@ from UserCode.VJJSkimmer.samples.Sample import Sample
 from UserCode.VJJSkimmer.samples.campaigns.Manager import Manager as CampaignManager
 from UserCode.VJJSkimmer.postprocessing.helpers.ColoredPrintout import *
 from UserCode.VJJSkimmer.postprocessing.helpers.Helper import *
-from ReadComputeObservables_VJJSkimmerJME import *
+from ReadComputeObservables_VJJSkimmerJME_syst import *
 from BDTReader import *
 from VJJEvent import _defaultVjjSkimCfg
 
@@ -118,7 +118,7 @@ class VJJSkimmerJME(Module):
 
         #-- Create 'ReadComputeObservables' object (used to create/fill branches and compute relevant observables)
 #        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.allWeights, self.nWeights, self.lumiWeights, self.xSection, self.BDTReader.outputNames)
-        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.allWeights, self.nWeights, self.lumiWeights, self.xSection)
+        self.obsMaker = ReadComputeObservables(self.sample, self.isData, self.era, self.fs, self.allWeights, self.nWeights, self.lumiWeights, self.xSection)
 
 
  #####  #####    ##   #    #  ####  #    # ######  ####
@@ -127,7 +127,6 @@ class VJJSkimmerJME(Module):
  #    # #####  ###### #  # # #      #    # #           #
  #    # #   #  #    # #   ## #    # #    # #      #    #
  #####  #    # #    # #    #  ####  #    # ######  ####
-
         self.inputTree = inputTree #Input tree
 
         #-- Nominal output tree #Fill/Write operations handled internally by NanoAODTools framework
@@ -267,8 +266,8 @@ class VJJSkimmerJME(Module):
             category_JMEvar = self.Selection(event)
             if category_JMEvar == "":
                 continue
-
             self.obsMaker.FillCategory(self.outputs_JMEvars[ivar], category_JMEvar) #Fill category flag branch
+            self.obsMaker.FillWeights(self.outputs_JMEvars[ivar], event, category_JMEvar)
 
             #-- Compute MVA variables
 #            self.obsMaker.FillMVAObservables(self.outputs_JMEvars[ivar], event, self.BDTReader)
@@ -309,17 +308,17 @@ class VJJSkimmerJME(Module):
         HighVPt_minVpt = self.selCfg['min_photonPt_HVPt16'] if self.era == 2016 else self.selCfg['min_photonPt_HVPt']
 
 	basicSelection  = (event.vjj_isGood and event.vjj_jj_m> self.selCfg['min_mjj'] and event.vjj_lead_pt> self.selCfg['min_leadTagJetPt'] and  event.vjj_sublead_pt> self.selCfg['min_subleadTagJetPt'])
-	lowVPtSelection = (event.vjj_v_pt> self.selCfg['min_photonPt_LVPt'] and abs(event.vjj_v_eta)<self.selCfg['max_photonEta_LVPt'] and abs(event.vjj_jj_deta) > self.selCfg['min_detajj_LVPt'] and event.vjj_jj_m > self.selCfg['min_mjj_LVPt'])
+	lowVPtSelection = (event.vjj_v_pt> self.selCfg['min_photonPt_LVPt'] and event.vjj_v_pt< HighVPt_minVpt and abs(event.vjj_v_eta)<self.selCfg['max_photonEta_LVPt'] and abs(event.vjj_jj_deta) > self.selCfg['min_detajj_LVPt'] and event.vjj_jj_m > self.selCfg['min_mjj_LVPt'])
 
         #-- Assign events to SR/CR categories
 
 	if basicSelection:
             if abs(self.fs) == 22 and abs(event.vjj_fs) == 22:
-                if lowVPtSelection and event.vjj_trig != self.selCfg['HLT_photon']: category = "LowVPt"
-                if category == "" and event.vjj_v_pt > HighVPt_minVpt and event.vjj_trig == self.selCfg['HLT_photon']: category = "HighVPt"
+                if lowVPtSelection: category = "LowVPt"
+                if event.vjj_v_pt > HighVPt_minVpt: category = "HighVPt"
             else:
                 pfx = 'mm' if self.fs == 169 else 'ee'
-                if event.vjj_trig == self.selCfg['HLT_lepton'] and abs(self.fs) == abs(event.vjj_fs):
+                if abs(self.fs) == abs(event.vjj_fs):
                     if lowVPtSelection: category = "LowVPt{0}".format(pfx)
                     if category == "" and event.vjj_v_pt> HighVPt_minVpt: category = "HighVPt{0}".format(pfx)
                     

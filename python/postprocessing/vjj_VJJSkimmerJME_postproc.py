@@ -81,14 +81,15 @@ def defineModules(year, isData, dataset, campaign, finalState, jme_vars):
 
     modules = []
 
+    print('finale state:',finalState)
     if not isData and jec_sources != '':
 
         jmeCorrections = createJMECorrector(isMC=True, dataYear=str(year), runPeriod="B", jesUncert=jec_sources, jetType="AK4PFchs", applySmearing=True, splitJER=False, applyHEMfix=False, saveMETUncs=[])
         modules.append(jmeCorrections())
         for var in jme_vars:
             modules.extend([JetSelector(year, cfg=_defaultObjCfg, apply_id=True, JMEvar=var)])
+            modules.extend([JetSelector(year, cfg=_defaultObjCfg, apply_id=False, JMEvar=var)])
     modules.append(VJJSkimmerJME(dataset, campaign, finalState, _defaultVjjSkimCfg, JMEvars=jme_vars, includeTotalJER=includeTotalJER))
-
     return modules
 
 
@@ -192,6 +193,7 @@ def main():
     #-- Cut formula for event preselection (do not process further uninteresting events) #Do not use, cf. below
     # cut = None
     cut = 'vjj_njets>=2 && vjj_fs!=0 && vjj_trig>0 && vjj_jj_m>350' #NB: speed up processing
+    print('finale state:',opt.finalState)
 
     #-- Call post-processor
     p = PostProcessor(outputDir=opt.workingdir, #Dir where to store individual output files

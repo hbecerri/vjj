@@ -32,11 +32,20 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
             2018:{
                 'rec'    : (os.path.join(baseSFDir,'egammaEffi_ptAbove20.txt_EGM2D_UL2018.root'), 'EGamma_SF2D'),
 		'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_SF2D'),
+#                'hlt'    : (os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_EffMC2D',os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_SF2D',os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_EffMC2D',os.path.join(baseSFDir,'egammaEffi.txt_Ele_wp80iso_EGM2D.root'), 'EGamma_SF2D')
                 }
         }
         for k in eleSFSources[self.era]:
             url,obj=eleSFSources[self.era][k]
             self.addSFFromSource(k,url,obj)
+#        for k in eleSFSources[self.era]:
+#            if 'hlt' not in k:
+#               url=[eleSFSources[self.era][k][0]]
+#               obj=[eleSFSources[self.era][k][1]]
+#               self.addSFFromSource(k,url,obj)
+#            else:
+#               url=[eleSFSources[self.era][k][0],eleSFSources[self.era][k][2],eleSFSources[self.era][k][4],eleSFSources[self.era][k][6]]
+#               obj=[eleSFSources[self.era][k][1],eleSFSources[self.era][k][3],eleSFSources[self.era][k][5],eleSFSources[self.era][k][7]]
 
     def collection_name(self):
         return "Electron"
@@ -73,14 +82,19 @@ class ElectronSelector(ScaleFactorBase, ObjectSelectorBase):
             SFs['id'].append(
                 self.evalSF('id', objAttrs=[ele.eta,ele.pt])
             )
-
+#        print('ele length:',len(electrons),SFs)
         #combine scale factors
         if combined:
             selSFs = []
+            combSFs={}
+            a=[]
             for k in SFs:
-                selSFs.extend( [x for x in SFs[k] if x] )
-            SFs = self.combineScaleFactors(selSFs)
-            ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
+                selSFs=( [x for x in SFs[k] if x] )
+                combSFs[k] = self.combineScaleFactors(selSFs)
+#                print(selSFs,combSFs)
+                a.extend([ combSFs[k][0] , combSFs[k][0]+combSFs[k][1] , combSFs[k][0]-combSFs[k][1] ])
+            ret = dict( zip( self.weight_names() , a ) )
+#            print(self.weight_names(),ret)
             return ret
 
 

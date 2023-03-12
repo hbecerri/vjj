@@ -1,0 +1,122 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_fake_syst/PhotonData_17/TEST/ -S -22
+output              = condor_myCampaign_fake_syst_PhotonData_172017_27Jan2023_16h21m20/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_fake_syst_PhotonData_172017_27Jan2023_16h21m20/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_fake_syst_PhotonData_172017_27Jan2023_16h21m20/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2017_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 8
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 9
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 10
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 11
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 12
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 13
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 14
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 15
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 16
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 17
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 18
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 19
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 20
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 21
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 22
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 23
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 24
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 25
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 26
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 27
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 28
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 29
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 30
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 31
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 32
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 33
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017D-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017D-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017D-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017D-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017D-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017D-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017D-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 8
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 9
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 10
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 11
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 12
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 13
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 14
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 15
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 16
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 17
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 18
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 19
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 20
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 21
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 22
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 23
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 24
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 25
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 26
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 27
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 28
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 29
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017F-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 30
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 8
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 9
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 10
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 11
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 12
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 13
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 14
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 15
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 16
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 17
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 18
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 19
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 20
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017E-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 21
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 0
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 1
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 2
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 3
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 4
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 5
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 6
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 7
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 8
+	SinglePhoton_ myCampaign_fake_syst/PhotonData_17 /SinglePhoton/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 9
+)

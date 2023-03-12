@@ -54,9 +54,16 @@ class Sample:
     def makeUniqueName(self):
         uName = self.ds.split('/')[1]
         if self.isData():
-            uName = "{0}_{1}_{2}".format( uName , self.year() , self.info.get('era') )
+#             print('************',self.info.get('era'))
+#             uName = "{0}_{1}_{2}".format( uName , self.year() , self.info.get('era') )
+            if self.year()==2016 and 'B-ver1' in self.ds.split('/')[2]:
+               uName = "{0}_{1}_{2}".format( uName , self.year() , self.info.get('era')+'_ver1' )
+            elif self.year()==2016 and 'B-ver2' in self.ds.split('/')[2]:
+               uName = "{0}_{1}_{2}".format( uName , self.year() , self.info.get('era')+'_ver2' )
+            else:
+               uName = "{0}_{1}_{2}".format( uName , self.year() , self.info.get('era') )
         else:
-            if 'G1Jet' in uName and self.year() == 2016: return uName #FIXME #G1Jet big ntuples produced by Davide do not follow the same naming convention
+#            if 'G1Jet' in uName and self.year() == 2016: return uName #FIXME #G1Jet big ntuples produced by Davide do not follow the same naming convention
             uName = "{0}_{1}".format( uName , self.year() )
             if 'pmx' in self.info :
                 uName += "_pmx"

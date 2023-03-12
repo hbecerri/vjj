@@ -36,9 +36,7 @@ class Manager():
         self.SamplesWithWeightErrors = []
         for ds, year, binval , sname in self.samples.all_datasets(moreinfo=True):
             ds = str(ds)
-#            print(ds)
             s = Sample(ds)
-            print(s)
             year = s.year()
             xsection = 0 if s.isData() else 1
             ntotal = 0
@@ -136,7 +134,7 @@ class Manager():
                 windex = nameIndice[wname]
                 wnewname = ret[ windex ][0]
                 if wnewname != wname :
-                    print( wname , wnewname )
+                    print(wname , wnewname )
                 ret[windex] = ( wnewname, info[ds] )
         return ret
 
@@ -166,6 +164,7 @@ class Manager():
                     for ds_ in self.AllInfo[year][sample][binval]['samples']:
                         s = Sample(ds_)
                         if ds == ds_ or ds == s.makeUniqueName():
+                            print(ds,ds_,s.makeUniqueName())
                             files = []
                             for f,info in self.js[ds]['files'].items():
                                 if just_ok_files:
@@ -240,8 +239,8 @@ class Manager():
 #		    print(cat)
 #		    print(lumi)
 		    #ntotal = 1
-                    print(ntotal)
-                    print(lumi*xsec/ntotal)
+#                    print(ntotal)
+#                    print(lumi*xsec/ntotal)
                     ret[cat][index] = lumi*xsec/ntotal
         return ret
 

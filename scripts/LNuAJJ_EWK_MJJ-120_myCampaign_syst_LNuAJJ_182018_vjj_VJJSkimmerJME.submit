@@ -1,0 +1,68 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_syst/LNuAJJ_18/TEST/ -S 22
+output              = condor_myCampaign_syst_LNuAJJ_182018_08Mar2023_17h21m54/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_syst_LNuAJJ_182018_08Mar2023_17h21m54/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_syst_LNuAJJ_182018_08Mar2023_17h21m54/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2018_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 0
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 1
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 2
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 3
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 4
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 5
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 6
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 7
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 8
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 9
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 10
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 11
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 12
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 13
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 14
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 15
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 16
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 17
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 18
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 19
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 20
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 21
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 22
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 23
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 24
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 25
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 26
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 27
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 28
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 29
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 30
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 31
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 32
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 33
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 34
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 35
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 36
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 37
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 38
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 39
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 40
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 41
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 42
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 43
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 44
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 45
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 46
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 47
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 48
+	LNuAJJ_EWK_MJJ-120_ myCampaign_syst/LNuAJJ_18 /LNuAJJ_EWK_MJJ-120_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 49
+)

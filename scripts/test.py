@@ -111,9 +111,11 @@ def main():
 
     condor.append( ('executable' , '{0}/vjj_VJJSkimmerJME.sh'.format(os.getcwd()) ) )
     if opt.neventsperjob > 0 :
-        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {4} -f $(FIRSTEVENT)'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign , opt.neventsperjob )))
+#        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {4} -f $(FIRSTEVENT)'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign , opt.neventsperjob )))
+        condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2} -N {4} -f $(FIRSTEVENT)'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign , opt.neventsperjob )))
     else:
-        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
+#        condor.append( ('arguments','-c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
+        condor.append( ('arguments','-c {3} -d $(DATASET) --nfilesperchunk {0} --chunkindex $({1}) -o {2}'.format(actual_nfilesperchunk , step_par_name , full_outdir , opt.campaign)))
 
 #//--------------------------------------------
 
@@ -132,7 +134,7 @@ def main():
     condor.append( ('should_transfer_files' , 'YES' ) ) #Must use 'IF_NEEDED' to write output directly to /eos
     condor.append( ('when_to_transfer_output' , 'ON_EXIT' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
     condor.append( ('transfer_output_files' , 'out.root' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
-    condor.append( ('transfer_output_remaps' , '"out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(CAMPAIGN){0}_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"'.format(opt.year) ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
+    condor.append( ('transfer_output_remaps' , '"out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT){0}_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"'.format(opt.year) ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
 #    condor.append( ('transfer_output_remaps' , '"out.root=Skim_$(ClusterId)_$(ProcId).root"' ) ) #ON_SUCCESS/ON_EXIT_OR_EVICT
 #    condor.append( ('output_destination' , 'root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(ClusterId)/' ) ) 
 #    condor.append( ('MY.XRDCP_CREATE_DIR' , 'True' ) ) 
@@ -150,19 +152,21 @@ def main():
 
 #        print('data flag: ',data_flag)
 	if data_flag:
-           if opt.dataset != '' and n.makeUniqueName().split('_')[0] not in opt.dataset and 'opt.year' not in n.makeUniqueName():
+           if str(opt.year) not in n.makeUniqueName():
+              continue
+           if opt.dataset != '' and n.makeUniqueName().split('_')[0] not in opt.dataset:
               continue
 	else:
 #           print('############TEST###########',opt.dataset,n.makeUniqueName(),' ',str(opt.year))
            if str(opt.year) not in n.makeUniqueName() and opt.year != 2016:
               continue
-           if opt.dataset != '' and n.makeUniqueName().split('-')[0] not in opt.dataset : #for MC
+           if opt.dataset != '' and n.makeUniqueName().split('13TeV')[0] not in opt.dataset : #for MC
                 continue
 
 	if data_flag:
             sample_name=n.makeUniqueName().split('_')[0]+'_'
         else:
-	    sample_name=n.makeUniqueName().split('-')[0]+'_'
+	    sample_name=n.makeUniqueName().split('13TeV')[0]
         print('***************TEST*************',opt.dataset,n.makeUniqueName(),' ',str(opt.year))
 
         if len(datasetsToProcess)>0 and not any(substring in n.makeUniqueName() for substring in datasetsToProcess): 
@@ -235,24 +239,24 @@ def main():
         if opt.includeexistingfiles:
             for lqueue in sorted( set(available_nqueues) , reverse=True ):
                 print('############# ',lqueue)
-                f.write( 'queue {0} CAMPAIGN DATASET from (\n'.format( lqueue ) )
+                f.write( 'queue {0} OUTPUT DATASET from (\n'.format( lqueue ) )
                 for ll in condor:
 		    print('$$$$$$$$$$$ ',ll)
                     if ll[0] == 'queue' and ll[1] == lqueue:
                         if ll[2] in added_samples:
                             continue
-                        f.write( '\t{0} {1}\n'.format( ll[2],opt.campaign ) )
+                        f.write( '\t{0} {1}\n'.format( ll[2],sample_name ) )
                         added_samples.append( ll[2] )
                 f.write( ")\n" )
         else:
             if opt.neventsperjob < 0 :
-                f.write( 'queue CAMPAIGN DATASET,{0} from (\n'.format( step_par_name ) )
+                f.write( 'queue OUTPUT DATASET,{0} from (\n'.format( step_par_name ) )
                 for l in condor:
                     if l[0] == 'queue_list':
                         for index in l[1]:
-                            f.write('\t{0} {1} {2}\n'.format( opt.campaign,l[2] , index ) )
+                            f.write('\t{0} {1} {2}\n'.format( sample_name,l[2] , index ) )
             else:
-                f.write( 'queue CAMPAIGN DATASET,{0},FIRSTEVENT from (\n'.format( step_par_name ) )
+                f.write( 'queue OUTPUT DATASET,{0},FIRSTEVENT from (\n'.format( step_par_name ) )
                 for l in condor:
                     if l[0] == 'queue_list':
                         for index in l[1]:

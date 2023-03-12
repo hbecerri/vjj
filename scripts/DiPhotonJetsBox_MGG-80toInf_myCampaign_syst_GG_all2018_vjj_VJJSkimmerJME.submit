@@ -1,0 +1,68 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_noPuId/GG_18/TEST/
+output              = condor_myCampaign_syst_GG_all2018_16Jan2023_14h17m48/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_syst_GG_all2018_16Jan2023_14h17m48/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_syst_GG_all2018_16Jan2023_14h17m48/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2018_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 0
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 1
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 2
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 3
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 4
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 5
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 6
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 7
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 8
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 9
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 10
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 11
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 12
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 13
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 14
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 15
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 16
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 17
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 18
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 19
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 20
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 21
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 22
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 23
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 24
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 25
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 26
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 27
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 28
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 29
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 30
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 31
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 32
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 33
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 34
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 35
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 36
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 37
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 38
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 39
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 40
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 41
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 42
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 43
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 44
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 45
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 46
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 47
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 48
+	DiPhotonJetsBox_MGG-80toInf_ myCampaign_noPuId/GG_18 /DiPhotonJetsBox_MGG-80toInf_13TeV-sherpa/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM 49
+)

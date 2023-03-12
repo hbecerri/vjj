@@ -1,43 +1,34 @@
 # drop all at start
+drop *
 
-keep *
-drop CaloMET*
-drop ChsMET*
-drop FatJet*
-drop GenJetAK8*
-drop GenVisTau*
-#drop RawMET*
-drop RawPuppiMET*
-drop SV*
-drop SubGenJetAK8*
-drop SubJet*
-drop Tau*
-drop TkMET*
-drop btagWeight*
-drop HTXS*
-drop genTtbarId*
-drop Muon_correctedDown_pt
-drop Muon_correctedUp_pt
+#NANO Branches
+keep run
+keep luminosityBlock
+keep event
+keep Generator_weight
+keep GenPart*
+keep GenJet*
+keep GenDressedLepton*
+keep GenIsolatedPhoton*
+keep nGen*
+keep Pileup*
+keep PV*
+keep HLT_Photon*
+keep HLT_PFJet*
+keep HLT_Ele*
+keep HLT_Mu17*
+keep HLT_Iso*Mu*
+keep *Weight*
+keep Flag_*
 
-# keep Electron*
-# keep Muon*
-# keep Photon*
-# keep Jet* 
-## pileup weights
-# keep puWeight*
-## L1 prefire
-# keep PrefireWeight*
-## gen tree specifics
-# keep genvjj*
+#keep branches for JME corr
+keep MET*
+keep RawMET_*
+keep *CorrT1METJet*
+keep fixedGridRhoFastjetAll
 
-drop genvjj_trigWgt*
-drop genvjj_effWgt*
-drop genvjj_qglqWgt*
-drop genvjj_qglgWgt*
-drop genvjj_*_qgl
-
-## reco tree specifics
-# keep vjj*
-drop vjj_nwgt
-drop vjj_wgt
-
+#Physics obj
+keep Electron*
+keep Muon*
+keep Photon*
+keep Jet*

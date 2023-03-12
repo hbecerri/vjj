@@ -1,0 +1,19 @@
+executable          = /afs/cern.ch/work/y/yian/work/ewk_ajj/CMSSW_10_6_29/src/UserCode/VJJSkimmer/scripts/vjj_VJJSkimmerJME.sh
+arguments           = -c $(CAMPAIGN) -d $(DATASET) --nfilesperchunk 1 --chunkindex $(chunkid) -o .//myCampaign_ee_syst/DoubleEGData_all/TEST/ -S 121
+output              = condor_myCampaign_ee_syst_DoubleEGData_all2017_26Feb2023_01h02m35/$(ClusterId).$(ProcId).out
+error               = condor_myCampaign_ee_syst_DoubleEGData_all2017_26Feb2023_01h02m35/$(ClusterId).$(ProcId).err
+log                 = condor_myCampaign_ee_syst_DoubleEGData_all2017_26Feb2023_01h02m35/$(ClusterId).log
++JobFlavour         = "tomorrow"
+transfer_executable = False
+requirements        = ( (OpSysAndVer =?= "CentOS7") || (OpSysAndVer =?= "SLC6") )
+stream_output       = True
+stream_error        = True
+max_transfer_output_mb= 4000
+should_transfer_files= YES
+when_to_transfer_output= ON_EXIT
+transfer_output_files= out.root
+transfer_output_remaps= "out.root=root://eosuser.cern.ch//eos/user/y/yian/AJJ_analysis/$(OUTPUT)$(CAMPAIGN)_2017_$(ClusterId)/Skim_$(ClusterId)_$(ProcId).root"
+request_memory      = 30GB
+queue OUTPUT CAMPAIGN DATASET,chunkid from (
+	DoubleEG_ myCampaign_ee_syst/DoubleEGData_all /DoubleEG/Run2017C-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD 19
+)

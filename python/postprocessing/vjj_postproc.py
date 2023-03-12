@@ -57,8 +57,6 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
 
     modules=[]
     modules.append( {2016:muonScaleRes2016 , 2017:muonScaleRes2017 , 2018:muonScaleRes2018}[year]() )
-    if not isData:
-        modules.append( {2016:puWeight_UL2016 , 2017:puWeight_UL2017 , 2018:puWeight_UL2018}[year]() )
 
     options = { 'vpf' : '' if year != 2016 else 'pre' if preVFP else 'post'   }
     print('options ',options) 
@@ -68,9 +66,14 @@ def defineModules(year, isData, isSignal, fs, preVFP=False):
                     ElectronSelector( era = year , **options ),
                     PhotonSelector( year , apply_id = True , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
                     PhotonSelector( year , apply_id = False , cfg=_defaultObjCfg, vetoObjs = [("Muon", "mu"), ("Electron", "ele")] , **options ),
-                    JetSelector( year , _defaultObjCfg, apply_id=True ),
-                    JetSelector( year , _defaultObjCfg, apply_id=False ),
+#                    JetSelector( year , _defaultObjCfg, apply_id=True ),
+#                    JetSelector( year , _defaultObjCfg, apply_id=False ),
+#                    JetSelector( year , _defaultObjCfg, applyPUid=True ),
+                    JetSelector( year , _defaultObjCfg, applyPUid=False ),
                     VJJSelector(isData , year , signal=isSignal, finalState = fs)] )
+
+    if not isData:
+        modules.append( {2016:puWeight_UL2016 , 2017:puWeight_UL2017 , 2018:puWeight_UL2018}[year]() )
 
     return modules
 
@@ -101,6 +104,8 @@ def main():
                         default='auto')
     parser.add_argument('-k', '--keep_and_drop', dest='keep_and_drop',   help='keep and drop', type=str,
                         default='{0}/python/UserCode/VJJSkimmer/postprocessing/etc/keep_and_drop.txt'.format( os.getenv('CMSSW_BASE' , '.') ) )
+    parser.add_argument('-ok', '--output_keep_and_drop', dest='output_keep_and_drop',   help='output keep and drop', type=str,
+                        default='{0}/python/UserCode/VJJSkimmer/postprocessing/etc/output_keep_and_drop.txt'.format( os.getenv('CMSSW_BASE' , '.') ) )
     parser.add_argument('-N', '--maxEntries', dest='maxEntries',   help='max. entries to process', type=int,
                         default=None)
     parser.add_argument('-f', '--firstEntry', dest='firstEntry',   help='first entry to process', type=int,
@@ -163,13 +168,13 @@ def main():
     p=PostProcessor(outputDir=".",
                     inputFiles=inputFiles,
                     cut=None,
-                    branchsel=None,
+                    branchsel=opt.keep_and_drop,
                     modules=modules,
                     provenance=True,
                     justcount=False,
                     fwkJobReport=fwkJobReport,
                     noOut=False,
-                    outputbranchsel = opt.keep_and_drop,
+                    outputbranchsel = opt.output_keep_and_drop,
                     maxEntries=opt.maxEntries,
                     firstEntry=opt.firstEntry,
                     haddFileName = haddFileName)

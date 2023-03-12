@@ -26,7 +26,7 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
         # if vpf=='post': PixelSeed2016 = 'HasPix_SummaryPlot_UL16_postVFP.root'
         photonSFSources={
             2016:{ 
-                'id'     : (os.path.join(baseSFDir,'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root'),          'EGamma_SF2D'),
+                'id' : (os.path.join(baseSFDir, 'egammaEffi.txt_EGM2D_Pho_Tight_UL16.root' if vpf=='pre' else 'egammaEffi.txt_EGM2D_Pho_Tight_UL16_postVFP.root'), 'EGamma_SF2D'),
                 'pxseed' : (os.path.join(baseSFDir, 'HasPix_SummaryPlot_UL16_preVFP.root' if vpf=='pre' else 'HasPix_SummaryPlot_UL16_postVFP.root'), 'TightID/SF_HasPix_TightID'),
               },
             2017:{
@@ -88,14 +88,19 @@ class PhotonSelector(ScaleFactorBase , ObjectSelectorBase):
             SFs['pxseed'].append(
                 self.evalSF('pxseed',objAttrs=[3.5 if abseta>1.5 else 0.5])
             )
-
+#        print('photon length:',len(photons),SFs)
         #combine scale factors
         if combined:
             selSFs = []
+            combSFs={}
+            a=[]
             for k in SFs:
-                selSFs.extend( [x for x in SFs[k] if x] )
-            SFs = self.combineScaleFactors(selSFs)
-            ret = dict( zip( self.weight_names() , [SFs[0] , SFs[0]+SFs[1] , SFs[0] -SFs[1] ] ) )
+                selSFs=( [x for x in SFs[k] if x] )
+                combSFs[k] = self.combineScaleFactors(selSFs)
+#                print(selSFs,combSFs)
+                a.extend([ combSFs[k][0] , combSFs[k][0]+combSFs[k][1] , combSFs[k][0]-combSFs[k][1] ])
+            ret = dict( zip( self.weight_names() , a ) )
+#            print(self.weight_names(),ret)
             return ret
 
 

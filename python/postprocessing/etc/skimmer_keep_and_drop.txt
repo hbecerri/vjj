@@ -1,6 +1,11 @@
 drop *
+
 keep vjj*
-keep *LHE*Weight
+keep genvjj*
+keep Flag_*
+keep *Weight*
 keep Generator_weight
-keep event #event number (for debugging)
-#For UL
+keep Photon*
+keep event 
+keep GenPart*
+keep HLT*
